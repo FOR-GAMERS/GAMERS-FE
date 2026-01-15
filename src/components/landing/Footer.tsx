@@ -7,10 +7,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           
           <div className="flex items-center gap-2">
-            <div className="p-2 bg-primary rounded-lg text-white">
-              <Gamepad2 size={24} />
-            </div>
-            <span className="text-xl font-bold tracking-tight">GAMERS</span>
+            <img src="/logo.png" alt="GAMERS Logo" className="h-8 w-auto" loading="lazy" />
           </div>
 
           <p className="text-sm text-muted-foreground">
