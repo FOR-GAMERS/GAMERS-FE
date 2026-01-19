@@ -1,7 +1,6 @@
 "use client";
 
-import { ChevronLeft, Image as ImageIcon, Trash2, Upload, Hash, Server, Edit3, Eye } from "lucide-react";
-import Link from "next/link";
+import { ChevronLeft, Image as ImageIcon, Trash2, Upload, Hash, Server, Edit3, Eye, Calendar, Plus, X, Clock, Settings, Trophy, Users } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
@@ -31,7 +30,17 @@ export default function CreateContestPage() {
   const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
   const [selectedGuild, setSelectedGuild] = useState("");
   const [selectedChannel, setSelectedChannel] = useState("");
+  
+  // DTO State
+  const [gameType, setGameType] = useState("VALORANT");
+  const [contestType, setContestType] = useState("TEAM");
+  const [maxTeamCount, setMaxTeamCount] = useState(16);
+  const [totalTeamMember, setTotalTeamMember] = useState(5);
+  const [autoStart, setAutoStart] = useState(false);
   const [tierPoints, setTierPoints] = useState<Record<string, number>>({});
+  
+  // Games State
+  const [games, setGames] = useState<{ id: number; startTime: string }[]>([]);
   
   // Mobile Tab State for Editor
   const [editorTab, setEditorTab] = useState<'write' | 'preview'>('write');
@@ -56,23 +65,29 @@ export default function CreateContestPage() {
       title.length > 0 && 
       thumbnailPreview !== null && 
       description.length > 0 && 
-      selectedChannel !== "";
+      selectedChannel !== "" &&
+      games.length > 0; // Check if at least one game is added
 
   // Submit Handler
   const handleSubmit = () => {
     if (!isValid) return;
 
-    // Construct CreateContestRequest (mocking optional fields for now)
+    // Construct CreateContestRequest
     const requestData = {
         title,
-        description, // In real app, might want to append tierPoints table to this
-        contest_type: "TEAM",
+        description,
+        contest_type: contestType,
+        game_type: gameType,
+        max_team_count: maxTeamCount,
+        total_team_member: totalTeamMember,
+        auto_start: autoStart,
         discord_guild_id: selectedGuild,
         discord_text_channel_id: selectedChannel,
-        _metadata: {
-            thumbnail: "file_blob_would_go_here",
-            tier_points: tierPoints
-        }
+        games: games.map(g => ({ start_time: new Date(g.startTime).toISOString() })),
+        score_table: gameType === "VALORANT" ? {
+            table_name: `${title} - Score Table`,
+            ...tierPoints
+        } : undefined
     };
 
     console.log("🚀 [CreateContestRequest] Final Payload:", requestData);
@@ -316,46 +331,105 @@ export default function CreateContestPage() {
             </div>
         </div>
 
-        {/* 5. Option Section (Tier Point Table) */}
+
+
+        {/* 5. Games Schedule Section */}
         <div className="animate-section space-y-4">
-            <h3 className="text-lg font-bold border-b border-white/5 pb-4">
-                Option: 티어별 포인트 설정
-            </h3>
-            
-            <div className="bg-[#0f172a]/50 border border-white/5 rounded-xl overflow-hidden">
-                <div className="overflow-x-auto">
-                    <table className="w-full text-sm min-w-[300px]">
-                        <thead>
-                            <tr className="bg-white/5 border-b border-white/5">
-                                <th className="px-6 py-4 text-left font-medium text-muted-foreground">Tier</th>
-                                <th className="px-6 py-4 text-left font-medium text-muted-foreground">Point Allocation</th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-white/5">
-                            {["Iron", "Bronze", "Silver", "Gold", "Platinum", "Diamond"].map((tier) => (
-                                <tr key={tier} className="hover:bg-white/5 transition-colors">
-                                    <td className="px-6 py-4 font-bold text-white">{tier}</td>
-                                    <td className="px-6 py-4">
-                                        <div className="relative max-w-[120px]">
-                                            <input 
-                                                type="number" 
-                                                placeholder="0"
-                                                className="w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-right focus:outline-none focus:border-neon-purple transition-all font-mono"
-                                                onChange={(e) => {
-                                                    const val = parseInt(e.target.value) || 0;
-                                                    setTierPoints(prev => ({ ...prev, [tier]: val }));
-                                                }}
-                                            />
-                                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground">Pt</span>
-                                        </div>
-                                    </td>
+             <div className="flex items-center justify-between border-b border-white/5 pb-4">
+                <h3 className="text-lg font-bold flex items-center gap-2">
+                    <Calendar className="text-neon-cyan" size={20} />
+                    Games Schedule
+                </h3>
+                <button 
+                    onClick={() => {
+                        if (games.length < 5) {
+                            setGames([...games, { id: Date.now(), startTime: "" }]);
+                        }
+                    }}
+                    disabled={games.length >= 5}
+                    className="text-xs bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1 disabled:opacity-50"
+                >
+                    <Plus size={14} /> Add Game ({games.length}/5)
+                </button>
+             </div>
+
+             <div className="space-y-3">
+                {games.length === 0 && (
+                    <div className="text-center py-8 border border-dashed border-white/10 rounded-xl text-muted-foreground text-sm">
+                        No games scheduled. Add at least one game.
+                    </div>
+                )}
+                {games.map((game, index) => (
+                    <div key={game.id} className="bg-white/5 border border-white/5 rounded-xl p-4 flex items-center gap-4">
+                        <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-sm font-bold">
+                            {index + 1}
+                        </div>
+                        <div className="flex-1">
+                            <label className="text-xs text-muted-foreground block mb-1">Start Time</label>
+                            <input 
+                                type="datetime-local" 
+                                value={game.startTime}
+                                onChange={(e) => {
+                                    const newGames = [...games];
+                                    newGames[index].startTime = e.target.value;
+                                    setGames(newGames);
+                                }}
+                                className="bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-neon-cyan outline-none w-full max-w-[300px]"
+                            />
+                        </div>
+                        <button 
+                            onClick={() => setGames(games.filter(g => g.id !== game.id))}
+                            className="p-2 hover:bg-red-500/20 text-muted-foreground hover:text-red-500 rounded-lg transition-colors"
+                        >
+                            <Trash2 size={18} />
+                        </button>
+                    </div>
+                ))}
+             </div>
+        </div>
+
+        {/* 6. Option Section (Tier Point Table) - Conditional */}
+        {gameType === "VALORANT" && (
+            <div className="animate-section space-y-4">
+                <h3 className="text-lg font-bold border-b border-white/5 pb-4">
+                    Settings: Valorant Rank Points
+                </h3>
+                
+                <div className="bg-[#0f172a]/50 border border-white/5 rounded-xl overflow-hidden">
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-sm min-w-[300px]">
+                            <thead>
+                                <tr className="bg-white/5 border-b border-white/5">
+                                    <th className="px-6 py-4 text-left font-medium text-muted-foreground">Rank Tier</th>
+                                    <th className="px-6 py-4 text-left font-medium text-muted-foreground">Points</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody className="divide-y divide-white/5">
+                                {["Iron", "Bronze", "Silver", "Gold", "Platinum", "Diamond", "Ascendant", "Immortal", "Radiant"].map((tier) => (
+                                    <tr key={tier} className="hover:bg-white/5 transition-colors">
+                                        <td className="px-6 py-4 font-bold text-white">{tier}</td>
+                                        <td className="px-6 py-4">
+                                            <div className="relative max-w-[120px]">
+                                                <input 
+                                                    type="number" 
+                                                    placeholder="0"
+                                                    className="w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-right focus:outline-none focus:border-neon-purple transition-all font-mono"
+                                                    onChange={(e) => {
+                                                        const val = parseInt(e.target.value) || 0;
+                                                        setTierPoints(prev => ({ ...prev, [tier]: val }));
+                                                    }}
+                                                />
+                                                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground">Pt</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
+        )}
         
         {/* Sticky Upload Footer */}
         <div className="fixed bottom-0 left-0 right-0 p-4 bg-deep-black/90 backdrop-blur-xl border-t border-white/5 z-[60]">

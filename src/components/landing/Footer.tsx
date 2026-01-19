@@ -11,7 +11,7 @@ export default function Footer() {
           </div>
 
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Gamers Inc. All rights reserved.
+            © {new Date().getFullYear()} Gamers Inc. 無断転載を禁じます。
           </p>
 
           <div className="flex items-center gap-4">

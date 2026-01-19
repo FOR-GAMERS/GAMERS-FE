@@ -67,7 +67,7 @@ export default function Problem() {
       <div className="container px-4 mx-auto">
         <div ref={headerRef} className="container mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            GAMING SHOULDN'T BE <span className="text-destructive">FRUSTRATING</span>
+             <span className="text-destructive">ゲーミング</span>をもっと快適に
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             快適なゲーミング環境を取り戻しましょう。

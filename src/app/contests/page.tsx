@@ -13,8 +13,8 @@ import { useGSAP } from "@gsap/react";
 const generateMockContests = (count: number): ContestResponse[] => {
   return Array.from({ length: count }).map((_, i) => ({
     contest_id: i + 1,
-    title: `Community Valorant Cup #${i + 1}`,
-    description: "Join the ultimate competitive experience. High rewards and fast servers.",
+    title: `コミュニティ Valorant Cup #${i + 1}`,
+    description: "究極の競争体験に参加しよう。高額賞金と高速サーバー。",
     max_team_count: (i % 3 === 0) ? 16 : 32,
     total_point: (i + 1) * 100,
     contest_type: (i % 2 === 0) ? "TEAM" : "INDIVIDUAL",
@@ -117,7 +117,7 @@ export default function Contests() {
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
             <h1 className="text-3xl md:text-4xl font-black tracking-tight flex items-center gap-3">
                 <Trophy className="text-primary w-8 h-8 md:w-10 md:h-10" />
-                Active Contests
+                開催中の大会
             </h1>
             
             <div className="flex items-center gap-3">
@@ -131,8 +131,8 @@ export default function Contests() {
                         }}
                         className="w-full md:w-auto appearance-none bg-[#0f172a] border border-white/10 rounded-full pl-10 pr-8 py-2 text-sm font-bold focus:outline-none focus:border-primary/50 cursor-pointer hover:bg-white/5 transition-colors"
                     >
-                        <option value="LATEST">Sort by: Created Date</option>
-                        <option value="STATUS">Sort by: Ongoing/Recruiting</option>
+                        <option value="LATEST">並び替え: 作成日</option>
+                        <option value="STATUS">並び替え: ステータス</option>
                     </select>
                 </div>
             </div>

@@ -3,10 +3,14 @@
 import { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { Search, Bell, Menu, LogOut, User, Settings, FileText } from "lucide-react";
+import { Search, Bell, Menu, LogOut, User, Settings, FileText, Trophy } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { checkAuth } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 
 export default function Header() {
+  const router = useRouter();
   const headerRef = useRef<HTMLElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Demo State
@@ -59,17 +63,25 @@ export default function Header() {
                 <img src="/logo.png" alt="GAMERS Logo" className="h-8 w-auto" loading="lazy" />
                 {/* Debug Toggle */}
                 <span className="text-[10px] bg-white/10 px-1 rounded text-muted-foreground font-normal border border-white/10">
-                    {isLoggedIn ? "USER" : "GUEST"}
+                    {isLoggedIn ? "ユーザー" : "ゲスト"}
                 </span>
             </div>
         </div>
+
+        {/* NAVIGATION */}
+        <nav className="hidden md:flex items-center gap-6 mx-6">
+            <Link href="/contests" className="text-sm font-bold text-muted-foreground hover:text-white transition-colors flex items-center gap-2">
+                <Trophy size={16} />
+                <span>大会</span>
+            </Link>
+        </nav>
 
         {/* SEARCH BAR */}
         <div className="hidden md:flex items-center flex-1 max-w-sm mx-8 relative group transition-all duration-300 focus-within:max-w-md focus-within:shadow-[0_0_20px_rgba(34,211,238,0.3)] rounded-full">
             <Search className="absolute left-3 text-muted-foreground w-4 h-4 group-focus-within:text-primary transition-colors" />
             <input 
                 type="text" 
-                placeholder="Search..." 
+                placeholder="検索..." 
                 maxLength={64}
                 className="w-full bg-secondary/50 border border-white/5 rounded-full pl-10 pr-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary/50 transition-all placeholder:text-muted-foreground/50"
             />
@@ -101,7 +113,7 @@ export default function Header() {
                         >
                             <div className="px-3 py-2 border-b border-white/5 mb-2">
                                 <p className="text-sm font-bold text-white">Sunwoo</p>
-                                <p className="text-xs text-muted-foreground">Premium Member</p>
+                                <p className="text-xs text-muted-foreground">プレミアムメンバー</p>
                             </div>
                             
                             <DropdownItem icon={User} label="マイページ" />
@@ -114,7 +126,15 @@ export default function Header() {
                 </>
             ) : (
                 <button 
-                    onClick={() => setIsLoggedIn(true)}
+                    onClick={() => {
+                        // Check for tokens
+                        if (checkAuth()) {
+                            setIsLoggedIn(true);
+                        } else {
+                            // Redirect to login page
+                            router.push("/login");
+                        }
+                    }}
                     className="px-5 py-2 bg-[#5865F2] hover:bg-[#4752c4] text-white text-sm font-bold rounded-lg transition-colors flex items-center gap-2 shadow-lg hover:shadow-[#5865F2]/25"
                 >
                     Discordでログイン

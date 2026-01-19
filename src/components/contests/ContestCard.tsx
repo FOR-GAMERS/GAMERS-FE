@@ -10,6 +10,18 @@ interface ContestCardProps {
 export default function ContestCard({ contest }: ContestCardProps) {
   const isRecruiting = contest.contest_status === 'RECRUITING';
   
+  const statusMap: Record<string, string> = {
+    RECRUITING: "募集中",
+    ONGOING: "開催中",
+    FINISHED: "終了",
+    PREPARING: "準備中",
+  };
+
+  const typeMap: Record<string, string> = {
+    TEAM: "チーム戦",
+    INDIVIDUAL: "個人戦",
+  };
+  
   return (
     <Link href={`/contests/${contest.contest_id}`} className="block group">
       <div className="relative bg-[#0f172a] rounded-2xl overflow-hidden border border-white/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] hover:border-purple-500/50 will-change-transform">
@@ -21,16 +33,16 @@ export default function ContestCard({ contest }: ContestCardProps) {
                    "px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider",
                    isRecruiting ? "bg-green-500/20 text-green-400 border border-green-500/50" : "bg-white/10 text-muted-foreground"
                )}>
-                   {contest.contest_status}
+                   {statusMap[contest.contest_status] || contest.contest_status}
                </span>
                <span className="flex items-center gap-1 text-xs font-bold text-white bg-black/40 px-2 py-1 rounded-full backdrop-blur">
-                   <Users size={12} /> {contest.max_team_count ? `${contest.max_team_count} Teams` : 'Unlimited'}
+                   <Users size={12} /> {contest.max_team_count ? `${contest.max_team_count} チーム` : '無制限'}
                </span>
             </div>
             
             <div className="flex justify-between items-end">
                 <span className="text-xs font-mono text-white/70 bg-black/20 px-2 py-1 rounded">
-                    {contest.contest_type}
+                    {typeMap[contest.contest_type] || contest.contest_type}
                 </span>
             </div>
         </div>
@@ -41,7 +53,7 @@ export default function ContestCard({ contest }: ContestCardProps) {
                {contest.title}
            </h3>
            <p className="text-sm text-muted-foreground line-clamp-2 mb-4 h-10">
-               {contest.description || "No description provided."}
+               {contest.description || "説明がありません。"}
            </p>
            
            <div className="flex items-center justify-between text-xs text-muted-foreground border-t border-white/5 pt-4">
@@ -51,7 +63,7 @@ export default function ContestCard({ contest }: ContestCardProps) {
               </div>
               <div className="flex items-center gap-1.5 text-yellow-500 font-bold">
                   <Trophy size={14} />
-                  <span>{contest.total_point} Pts</span>
+                  <span>{contest.total_point} Pt</span>
               </div>
            </div>
         </div>

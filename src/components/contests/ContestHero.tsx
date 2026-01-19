@@ -58,10 +58,10 @@ export default function ContestHero() {
       {/* Text Overlay */}
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
         <h1 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-100 to-cyan-400 drop-shadow-[0_0_15px_rgba(6,182,212,0.5)] animate-fade-in-up">
-          GAMERS Contest
+          GAMERS 大会
         </h1>
         <p className="mt-4 text-lg md:text-xl text-cyan-50/80 font-medium tracking-wide max-w-2xl animate-fade-in-up delay-100">
-          Compete with the best. Rise to the top. Claim your glory.
+          最強を目指せ。頂点へ登り詰めろ。栄光を掴み取れ。
         </p>
         
         {/* Slide Indicators */}

@@ -8,26 +8,26 @@ import { cn } from "@/lib/utils";
 
 const features = [
   {
-    title: "Zero Latency",
-    description: "Our edge network ensures <10ms ping worldwide.",
+    title: "ゼロレイテンシー",
+    description: "エッジネットワークにより、世界中で10ms以下のPingを実現。",
     icon: Zap,
     className: "md:col-span-2",
   },
   {
-    title: "Anti-Cheat Plus",
-    description: "AI-driven detection for fair play.",
+    title: "アンチチート・プラス",
+    description: "AIによる検知で、公平なプレイを保証。",
     icon: ShieldCheck,
     className: "md:col-span-1",
   },
   {
-    title: "Cross-Platform",
-    description: "Play with friends on any device, anywhere.",
+    title: "クロスプラットフォーム",
+    description: "いつでも、どこでも、どのデバイスでも友達とプレイ。",
     icon: MonitorPlay,
     className: "md:col-span-1",
   },
   {
-    title: "Instant Replays",
-    description: "Share your best moments automatically.",
+    title: "インスタントリプレイ",
+    description: "最高の瞬間を自動的にシェア。",
     icon: Crosshair,
     className: "md:col-span-2",
   },
@@ -57,10 +57,10 @@ export default function Features() {
     <section ref={containerRef} className="py-24 container mx-auto px-4">
       <div className="text-center mb-20">
         <h2 className="text-3xl md:text-5xl font-bold mb-6">
-          ENGINEERED FOR <span className="text-primary">VICTORY</span>
+          <span className="text-primary">勝利</span>のための設計
         </h2>
         <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          Everything you need to dominate the leaderboard, built directly into the platform.
+          リーダーボードを制覇するために必要なすべてが、ここにあります。
         </p>
       </div>
 

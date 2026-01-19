@@ -22,8 +22,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(inter.className, "antialiased bg-background text-foreground overflow-x-hidden")}>
         <SmoothScroll>
-          <Banner />
-          <Header />
           {children}
         </SmoothScroll>
       </body>

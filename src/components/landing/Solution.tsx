@@ -70,7 +70,7 @@ export default function Solution() {
         {/* === MOBILE LAYOUT (Stacked) === */}
         <div className="md:hidden flex flex-col gap-12 w-full">
             <h2 className="text-3xl font-bold text-center mb-8">
-              <span className="text-primary">SIMPLE</span> 3 STEPS
+              <span className="text-primary">カンタン</span> 3ステップ
             </h2>
 
             {/* Step 1 */}
@@ -165,7 +165,7 @@ export default function Solution() {
                 <div className="relative z-10 p-10 bg-green-500/20 border border-green-500/50 rounded-full mb-6 shadow-[0_0_50px_rgba(34,197,94,0.3)]">
                     <CheckCircle2 className="w-20 h-20 text-green-400" />
                 </div>
-                <h3 className="text-4xl font-black text-white tracking-widest uppercase drop-shadow-lg">COMPLETED</h3>
+                <h3 className="text-4xl font-black text-white tracking-widest uppercase drop-shadow-lg">完了</h3>
             </div>
 
             </div>
@@ -198,7 +198,7 @@ export default function Solution() {
 
              {/* Scroll Indicator */}
             <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-muted-foreground text-sm animate-bounce">
-                Scroll to Experience
+                スクロールして体験
             </div>
         </div>
 
