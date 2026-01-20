@@ -8,6 +8,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { checkAuth } from "@/lib/auth";
 import { cn } from "@/lib/utils";
+import { Koulen } from "next/font/google";
+
+const koulen = Koulen({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export default function Header() {
   const router = useRouter();
@@ -59,13 +65,9 @@ export default function Header() {
         
         {/* LOGO */}
         <div className="flex items-center gap-4">
-            <div className="text-2xl font-black tracking-tighter cursor-pointer flex items-center gap-2" onClick={() => setIsLoggedIn(!isLoggedIn)}>
-                <img src="/logo.png" alt="GAMERS Logo" className="h-8 w-auto" loading="lazy" />
-                {/* Debug Toggle */}
-                <span className="text-[10px] bg-white/10 px-1 rounded text-muted-foreground font-normal border border-white/10">
-                    {isLoggedIn ? "ユーザー" : "ゲスト"}
-                </span>
-            </div>
+            <Link href="/" className={cn("text-3xl tracking-wider text-white hover:opacity-80 transition-opacity", koulen.className)}>
+                GAMERS
+            </Link>
         </div>
 
         {/* NAVIGATION */}
@@ -116,7 +118,7 @@ export default function Header() {
                                 <p className="text-xs text-muted-foreground">プレミアムメンバー</p>
                             </div>
                             
-                            <DropdownItem icon={User} label="マイページ" />
+                            <DropdownItem icon={User} label="マイページ" onClick={() => { setIsDropdownOpen(false); router.push("/my"); }} />
                             <DropdownItem icon={FileText} label="レポート" />
                             <DropdownItem icon={Settings} label="設定" />
                             <div className="h-px bg-white/5 my-1" />
@@ -125,20 +127,12 @@ export default function Header() {
                     </div>
                 </>
             ) : (
-                <button 
-                    onClick={() => {
-                        // Check for tokens
-                        if (checkAuth()) {
-                            setIsLoggedIn(true);
-                        } else {
-                            // Redirect to login page
-                            router.push("/login");
-                        }
-                    }}
+                <Link 
+                    href="/login"
                     className="px-5 py-2 bg-[#5865F2] hover:bg-[#4752c4] text-white text-sm font-bold rounded-lg transition-colors flex items-center gap-2 shadow-lg hover:shadow-[#5865F2]/25"
                 >
                     Discordでログイン
-                </button>
+                </Link>
             )}
             
             {/* Mobile Menu Trigger (Visual Only) */}
