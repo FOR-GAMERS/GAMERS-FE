@@ -10,6 +10,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "GAMERS | Premium Gaming Experience",
   description: "Level up your gaming journey with GAMERS.",
+  icons: {
+    icon: '/icon.svg',
+  },
 };
 
 import { ToastProvider } from "@/context/ToastContext";
