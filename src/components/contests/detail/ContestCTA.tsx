@@ -11,6 +11,9 @@ interface ContestCTAProps {
   deadline: string;
   onJoin: () => void;
   isLoggedIn: boolean;
+  buttonLabel?: string;
+  variant?: 'primary' | 'destructive' | 'secondary';
+  isLoading?: boolean;
 }
 
 export default function ContestCTA({
@@ -20,7 +23,10 @@ export default function ContestCTA({
   prizePool,
   deadline,
   onJoin,
-  isLoggedIn
+  isLoggedIn,
+  buttonLabel = "참가 신청하기",
+  variant = 'primary',
+  isLoading = false
 }: ContestCTAProps) {
   const isFull = currentParticipants >= maxParticipants;
   const progressPercent = Math.min((currentParticipants / maxParticipants) * 100, 100);
@@ -75,24 +81,30 @@ export default function ContestCTA({
 
       <button
         onClick={onJoin}
-        disabled={isFull}
+        disabled={(isFull && variant === 'primary') || isLoading}
         className={cn(
             "w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all duration-300 group relative overflow-hidden",
-            isFull 
+            (isFull && variant === 'primary') || isLoading
                 ? "bg-white/10 text-muted-foreground cursor-not-allowed" 
-                : "bg-neon-cyan text-black hover:bg-[#00f3ff] hover:shadow-[0_0_30px_rgba(0,243,255,0.6)] hover:scale-[1.02]"
+                : variant === 'destructive'
+                    ? "bg-red-500/10 text-red-500 hover:bg-red-500/20 border border-red-500/30"
+                    : variant === 'secondary'
+                        ? "bg-white/10 text-white hover:bg-white/20 border border-white/10"
+                        : "bg-neon-cyan text-black hover:bg-[#00f3ff] hover:shadow-[0_0_30px_rgba(0,243,255,0.6)] hover:scale-[1.02]"
         )}
       >
         <span className="relative z-10 flex items-center gap-2">
-            {isFull ? (
-                "모집 마감"
+            {isLoading ? (
+                "処理中..."
+            ) : (isFull && variant === 'primary') ? (
+                "募集終了"
             ) : (
                 <>
-                    참가 신청하기 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                    {buttonLabel} {variant === 'primary' && <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />}
                 </>
             )}
         </span>
-        {!isFull && (
+        {(!isFull || variant !== 'primary') && !isLoading && variant === 'primary' && (
             <div className="absolute inset-0 bg-white/20 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300" />
         )}
       </button>

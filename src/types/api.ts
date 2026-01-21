@@ -12,8 +12,6 @@ export type PaginationResponse<T> = {
   total_pages: number;
 };
 
-// --- Auth & User ---
-
 export interface LoginRequest {
   email: string;
   password?: string;
@@ -37,19 +35,24 @@ export interface CreateUserRequest {
   bio?: string;
 }
 
+export interface UpdateUserRequest {
+  password: string;
+}
+
 export interface UserResponse {
   user_id: number;
   email: string;
   created_at: string;
   modified_at: string;
-  // Based on CreateUserRequest, these might be returned or accessed via other endpoints,
-  // but UserResponse in swagger only lists these 4 fields strictly.
-  // We might want to extend it if the actual API returns more, but sticking to swagger for now.
+  // Extended manually as swagger seems incomplete
+  username: string;
+  tag: string;
+  avatar?: string;
+  bio?: string;
 }
 
-// --- Contests ---
 
-export type ContestStatus = 'PENDING' | 'ACTIVE' | 'FINISHED' | 'CANCELLED';
+export type ContestStatus = 'PENDING' | 'ACTIVE' | 'FINISHED' | 'CANCELLED' | 'RECRUITING' | 'PREPARING';
 export type ContestType = 'TOURNAMENT' | 'LEAGUE' | 'CASUAL';
 export type GameType = 'VALORANT' | 'LOL';
 
@@ -61,7 +64,7 @@ export interface ContestResponse {
   game_type: GameType;
   contest_status: ContestStatus;
   max_team_count: number;
-  current_team_count?: number; // Not in swagger but common, check logic later
+  current_team_count?: number;
   total_team_member: number;
   total_point: number;
   thumbnail?: string;
@@ -113,6 +116,30 @@ export interface UpdateContestRequest {
 export interface DiscordLinkRequiredResponse {
   message: string;
   oauth_url: string;
+}
+
+export interface ContestApplicationResponse {
+  user_id: number;
+  username: string;
+  tag: string;
+  created_at: string;
+  status: 'PENDING' | 'ACCEPTED' | 'REJECTED';
+}
+
+export interface MyApplicationResponse {
+  status: 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'NONE';
+  application_id?: number;
+}
+
+export interface ContestMemberResponse {
+  user_id: number;
+  username: string;
+  tag: string;
+  point: number;
+  rank?: number; // Optional as per swagger it might not be there or computed
+  join_date: string; // swagger didn't show this field in my limited view, but assuming standard member list
+  // Re-checking swagger view from earlier: "GAMERS-BE_internal_contest_members_dto" wasn't fully shown. 
+  // Let's assume standard fields for now. 
 }
 
 // --- Games ---

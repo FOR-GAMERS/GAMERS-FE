@@ -4,73 +4,71 @@ import { useState, useRef } from "react";
 import Footer from "@/components/landing/Footer";
 import ContestCard from "@/components/contests/ContestCard";
 import ContestHero from "@/components/contests/ContestHero";
-import { ContestResponse, ContestStatus } from "@/types/contest";
-import { Trophy, Filter, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
+import { Trophy, Filter, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Loader2 } from "lucide-react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-
-// MOCK DATA GENERATOR
-const generateMockContests = (count: number): ContestResponse[] => {
-  return Array.from({ length: count }).map((_, i) => ({
-    contest_id: i + 1,
-    title: `コミュニティ Valorant Cup #${i + 1}`,
-    description: "究極の競争体験に参加しよう。高額賞金と高速サーバー。",
-    max_team_count: (i % 3 === 0) ? 16 : 32,
-    total_point: (i + 1) * 100,
-    contest_type: (i % 2 === 0) ? "TEAM" : "INDIVIDUAL",
-    contest_status: (i % 5 === 0) ? "RECRUITING" : (i % 5 === 1) ? "ONGOING" : "FINISHED",
-    created_at: new Date(Date.now() - i * 86400000).toISOString(), // Days ago
-  }));
-};
-
-const MOCK_DATA = generateMockContests(500);
+import { useContests } from "@/hooks/use-contests";
 
 export default function Contests() {
   const [filter, setFilter] = useState<"LATEST" | "STATUS">("LATEST");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 15;
 
-  // Sorting Logic
-  const sortedData = [...MOCK_DATA].sort((a, b) => {
-    if (filter === "LATEST") {
-        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-    } else {
-        const priority: Record<ContestStatus, number> = { 
-            "RECRUITING": 0, "ONGOING": 1, "PREPARING": 2, "FINISHED": 3 
-        };
-        return priority[a.contest_status] - priority[b.contest_status];
-    }
+  const { data, isLoading, error } = useContests({
+    page: currentPage,
+    page_size: itemsPerPage,
+    sort_by: "created_at",
+    order: "desc"
   });
+  
+  const contests = data?.data || [];
+  const pagination = data;
+  
+  const contestList = data?.data?.data || [];
+  const totalPages = data?.data?.total_pages || 1;
 
-  // Pagination Logic
-  const totalPages = Math.ceil(sortedData.length / itemsPerPage);
-  const currentData = sortedData.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  // Animation Ref
+  const gridRef = useRef<HTMLDivElement>(null);
 
-  // Generate Page Numbers (1~9 ... Last)
+  useGSAP(() => {
+    if (!gridRef.current || isLoading) return;
+    
+    // Clear any existing inline styles (important for responsiveness/updates)
+    gsap.set(gridRef.current.children, { clearProps: "all" });
+
+    gsap.fromTo(gridRef.current.children, 
+        { y: 30, opacity: 0 },
+        { 
+            y: 0, 
+            opacity: 1, 
+            duration: 0.4, 
+            stagger: 0.05, 
+            ease: "power2.out",
+            clearProps: "all", // Ensure clean state after animation
+            scrollTrigger: {
+                trigger: gridRef.current,
+                start: "top bottom-=100", 
+                toggleActions: "play none none reverse"
+            }
+        }
+    );
+  }, [contestList, isLoading]); 
+
+  // Generate Page Numbers
   const getPageNumbers = () => {
     const pages = [];
-    const maxVisible = 9;
-
     if (totalPages <= 10) {
-        // Show all if small count
         for (let i = 1; i <= totalPages; i++) pages.push(i);
     } else {
-        // Complex logic for large counts
         if (currentPage <= 6) {
-            // Early pages: Show 1 to 9 ... Last
             for (let i = 1; i <= 9; i++) pages.push(i);
             pages.push("...");
             pages.push(totalPages);
         } else if (currentPage >= totalPages - 5) {
-            // End pages: Show 1 ... Last-8 to Last
             pages.push(1);
             pages.push("...");
             for (let i = totalPages - 8; i <= totalPages; i++) pages.push(i);
         } else {
-            // Middle pages: 1 ... Cur-3 to Cur+3 ... Last
             pages.push(1);
             pages.push("...");
             for (let i = currentPage - 3; i <= currentPage + 3; i++) pages.push(i);
@@ -81,33 +79,8 @@ export default function Contests() {
     return pages;
   };
 
-  // Animation Ref
-  const gridRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    // Kill previous ScrollTriggers to prevent duplicates on re-render/filter change
-    // Using a simple from animation with batch or stagger
-    if (!gridRef.current) return;
-    
-    gsap.fromTo(gridRef.current.children, 
-        { y: 30, opacity: 0 },
-        { 
-            y: 0, 
-            opacity: 1, 
-            duration: 0.4, 
-            stagger: 0.05, 
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: gridRef.current,
-                start: "top bottom-=100", // Start when top of grid hits bottom-100px
-                toggleActions: "play none none reverse"
-            }
-        }
-    );
-  }, [currentData]); // Re-run when data changes (pagination/filter)
-
   return (
-    <main className="min-h-screen pb-20 bg-background text-foreground">
+    <main className="relative min-h-screen pb-20 bg-background text-foreground">
       {/* Hero Banner (Full Width) */}
       <ContestHero />
       
@@ -140,9 +113,21 @@ export default function Contests() {
 
         {/* Contest Grid */}
         <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[600px]">
-          {currentData.map((contest) => (
-            <ContestCard key={contest.contest_id} contest={contest} />
-          ))}
+          {isLoading ? (
+             // Simple Loading State (or skeletons could be better but sticking to minimal change first)
+             <div className="col-span-full h-96 flex items-center justify-center">
+                <Loader2 className="w-12 h-12 text-neon-cyan animate-spin" />
+             </div>
+          ) : contestList.length > 0 ? (
+            contestList.map((contest: any) => ( // contest type should be inferred but adding explicit check if needed, 'any' for quick fix or ContestResponse
+                <ContestCard key={contest.contest_id} contest={contest} />
+            ))
+          ) : (
+             <div className="col-span-full h-96 flex flex-col items-center justify-center text-muted-foreground">
+                <Trophy className="w-16 h-16 mb-4 opacity-20" />
+                <p>No contests found.</p>
+             </div>
+          )}
         </div>
 
         {/* Pagination */}

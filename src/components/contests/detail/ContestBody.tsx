@@ -10,9 +10,7 @@ export default function ContestBody({ description, ctaProps }: ContestBodyProps)
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="flex flex-col lg:flex-row gap-12">
-        {/* Details Column (Left) */}
         <div className="flex-1">
-            {/* Description Tab / Content */}
             <div className="prose prose-invert prose-lg max-w-none 
                 prose-headings:font-bold prose-headings:text-white prose-headings:tracking-tight
                 prose-h1:text-4xl prose-h1:border-b prose-h1:border-white/10 prose-h1:pb-4 prose-h1:mb-8
@@ -26,8 +24,6 @@ export default function ContestBody({ description, ctaProps }: ContestBodyProps)
                 <ReactMarkdown>{description}</ReactMarkdown>
             </div>
         </div>
-
-        {/* Sticky Sidebar (Right) */}
         <div className="lg:w-[380px] flex-shrink-0">
             <ContestCTA {...ctaProps} />
         </div>

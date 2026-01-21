@@ -1,116 +1,156 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
+import { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import ContestHero from "@/components/contests/detail/ContestHero";
 import ContestBody from "@/components/contests/detail/ContestBody";
-import ContestComments from "@/components/contests/detail/ContestComments";
+import { contestService } from "@/services/contest-service";
+import { Loader2, AlertCircle } from "lucide-react";
+import { ContestStatus } from "@/types/api";
+import { useMe } from "@/hooks/use-user";
 
-// Mock Data (Simulate API Response)
-const MOCK_CONTEST = {
-  id: "1",
-  title: "VALORANT CHAMPS 2024",
-  thumbnailUrl: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2940&auto=format&fit=crop",
-  status: "모집중",
-  gameType: "VALORANT",
-  description: `
-# VALORANT 2024 CHAMPIONSHIP
-
-최고의 팀을 가리기 위한 여정이 시작됩니다.
-
-## 📅 대회 일정
-- **모집 기간**: 2024.03.01 ~ 2024.03.14
-- **예선**: 2024.03.16 (토) 13:00 ~
-- **본선**: 2024.03.23 (토) 15:00 ~
-
-## 🏆 상금 규모
-- 1위: 10,000 VP + 우승 뱃지
-- 2위: 5,000 VP
-- 3위: 2,000 VP
-
-## 📝 참가 규칙
-1. 본인 명의의 한국 서버 계정 소유자
-2. 티어 제한 없음 (아이언 ~ 레디언트 모두 참여 가능)
-3. 디스코드 채널 입장 필수
-
-## ⚠️ 주의사항
-대회 당일 불참 시 향후 참가에 불이익이 있을 수 있습니다.
-  `,
-  currentParticipants: 12,
-  maxParticipants: 16,
-  entryFee: 0,
-  prizePool: "17,000 VP",
-  deadline: "D-3",
-  comments: [
-    {
-      id: "c1",
-      authorId: "user-123", // Match current user for demo
-      author: "GamersKing",
-      content: "이번 대회 우승은 우리 팀이 가져갑니다!",
-      createdAt: "3시간 전",
-      avatarUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
-    },
-    {
-      id: "c2",
-      authorId: "user-999",
-      author: "NewbiePlayer",
-      content: "티어 제한 진짜 없나요? 브론즈도 참여 가능한지 궁금합니다.",
-      createdAt: "1일 전"
+const getStatusLabel = (status: ContestStatus) => {
+    switch (status) {
+        case 'PENDING': return '準備中';
+        case 'RECRUITING': return '募集中';
+        case 'ACTIVE': return '進行中';
+        case 'FINISHED': return '終了';
+        case 'CANCELLED': return '中止';
+        case 'PREPARING': return '準備中';
+        default: return status;
     }
-  ]
-};
-
-// Mock Current User
-const MOCK_CURRENT_USER = {
-    id: "user-123",
-    name: "GamersKing",
-    avatarUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
 };
 
 export default function ContestDetailPage() {
-  const params = useParams(); // Get contest ID
-  // In a real app, fetch data using params.id
+  const router = useRouter();
+  const params = useParams(); 
+  const contestId = Number(params?.id);
+  const queryClient = useQueryClient();
   
-  const [data, setData] = useState(MOCK_CONTEST);
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // Toggle for demo
+  // Auth & User
+  const { data: userResponse, isLoading: isUserLoading } = useMe();
+  const isLoggedIn = !!userResponse?.data;
+
+  // Contest Data
+  const { data: response, isLoading: isContestLoading, error } = useQuery({
+      queryKey: ['contest', contestId],
+      queryFn: () => contestService.getContest(contestId),
+      enabled: !!contestId && !isNaN(contestId)
+  });
+
+  // Application Status
+  const { data: appStatusResponse, isLoading: isAppStatusLoading } = useQuery({
+      queryKey: ['contest-application', contestId],
+      queryFn: () => contestService.getMyApplicationStatus(contestId),
+      enabled: isLoggedIn && !!contestId && !isNaN(contestId),
+      retry: false
+  });
+
+  const contest = response?.data;
+  const applicationStatus = appStatusResponse?.data?.status || 'NONE'; 
+
+  // Mutations
+  const applyMutation = useMutation({
+      mutationFn: () => contestService.applyContest(contestId),
+      onSuccess: () => {
+          alert('参加申請が完了しました。');
+          queryClient.invalidateQueries({ queryKey: ['contest-application', contestId] });
+          queryClient.invalidateQueries({ queryKey: ['contest', contestId] });
+      },
+      onError: (error: any) => {
+          alert(error.response?.data?.message || '参加申請に失敗しました。');
+      }
+  });
+
+  const cancelMutation = useMutation({
+      mutationFn: () => contestService.cancelApplication(contestId),
+      onSuccess: () => {
+          alert('申請をキャンセルしました。');
+          queryClient.invalidateQueries({ queryKey: ['contest-application', contestId] });
+          queryClient.invalidateQueries({ queryKey: ['contest', contestId] });
+      },
+      onError: (error: any) => {
+           alert(error.response?.data?.message || 'キャンセルに失敗しました。');
+      }
+  });
+
+  const isLoading = isContestLoading || (isLoggedIn && isAppStatusLoading);
+  const isActionLoading = applyMutation.isPending || cancelMutation.isPending;
 
   const handleJoin = () => {
-    alert("참가 신청이 완료되었습니다! (Demo)");
-    setData(prev => ({
-        ...prev,
-        currentParticipants: prev.currentParticipants + 1
-    }));
+    if (!isLoggedIn) {
+        if (confirm("ログインが必要です。ログインページへ移動しますか？")) {
+             router.push('/login');
+        }
+        return;
+    }
+    
+    if (applicationStatus === 'NONE' || applicationStatus === 'REJECTED') {
+         if (confirm("この大会に参加申請しますか？")) {
+            applyMutation.mutate();
+         }
+    } else if (applicationStatus === 'PENDING') {
+         if (confirm("参加申請をキャンセルしますか？")) {
+            cancelMutation.mutate();
+         }
+    } else if (applicationStatus === 'ACCEPTED') {
+         alert("既に参加が確定しています。");
+    }
   };
+
+  // Determine Button Props
+  let buttonLabel = "参加申請する";
+  let variant: 'primary' | 'destructive' | 'secondary' = 'primary';
+  
+  if (applicationStatus === 'PENDING') {
+      buttonLabel = "申請キャンセル";
+      variant = 'destructive';
+  } else if (applicationStatus === 'ACCEPTED') {
+      buttonLabel = "参加確定済み";
+      variant = 'secondary';
+  }
+
+  if (isLoading) {
+      return (
+          <div className="min-h-screen bg-deep-black flex items-center justify-center">
+              <Loader2 className="w-10 h-10 text-neon-cyan animate-spin" />
+          </div>
+      );
+  }
+
+  if (error || !contest) {
+      return (
+          <div className="min-h-screen bg-deep-black flex flex-col items-center justify-center text-white gap-4">
+               <AlertCircle className="w-12 h-12 text-red-500" />
+               <p className="text-xl">大会情報の読み込みに失敗しました。</p>
+          </div>
+      );
+  }
 
   return (
     <main className="min-h-screen bg-deep-black text-white pb-32">
-      {/* 1. Hero Section */}
       <ContestHero 
-        title={data.title}
-        thumbnailUrl={data.thumbnailUrl}
-        status={data.status}
-        gameType={data.gameType}
+        title={contest.title}
+        thumbnailUrl={contest.thumbnail || "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2940&auto=format&fit=crop"} 
+        status={getStatusLabel(contest.contest_status)}
+        gameType={contest.game_type || "GAME"}
       />
 
-      {/* 2. Body Section (Content + Sticky CTA) */}
       <ContestBody 
-        description={data.description}
+        description={contest.description || "詳細情報はありません。"}
         ctaProps={{
-            currentParticipants: data.currentParticipants,
-            maxParticipants: data.maxParticipants,
-            entryFee: data.entryFee,
-            prizePool: data.prizePool,
-            deadline: data.deadline,
+            currentParticipants: contest.current_team_count || 0,
+            maxParticipants: contest.max_team_count || 0,
+            entryFee: 0, 
+            prizePool: contest.total_point ? `${contest.total_point.toLocaleString()} PT` : "0 PT",
+            deadline: contest.ended_at ? new Date(contest.ended_at).toLocaleDateString() : "TBD",
             onJoin: handleJoin,
-            isLoggedIn: isLoggedIn
+            isLoggedIn: isLoggedIn,
+            buttonLabel: buttonLabel,
+            variant: variant,
+            isLoading: isActionLoading
         }}
-      />
-
-      {/* 3. Comments Section */}
-      <ContestComments 
-        comments={data.comments} 
-        isLoggedIn={isLoggedIn}
-        currentUser={MOCK_CURRENT_USER}
       />
     </main>
   );
