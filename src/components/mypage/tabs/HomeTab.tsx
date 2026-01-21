@@ -35,7 +35,7 @@ export default function HomeTab({ history }: HomeTabProps) {
         {history.map((item) => (
           <div 
             key={item.id} 
-            className="history-card bg-white/5 border border-white/5 hover:border-neon-cyan/50 rounded-xl p-5 transition-all duration-300 hover:bg-white/10 group cursor-pointer"
+            className="history-card bg-white/5 border border-white/5 hover:border-neon-cyan/50 rounded-xl p-4 md:p-5 transition-all duration-300 hover:bg-white/10 group cursor-pointer"
           >
             <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
               {/* Server Icon */}
@@ -44,8 +44,8 @@ export default function HomeTab({ history }: HomeTabProps) {
               </div>
               
               {/* Info */}
-              <div className="flex-1">
-                 <h3 className="text-lg font-bold text-white group-hover:text-neon-cyan transition-colors">{item.title}</h3>
+              <div className="flex-1 w-full md:w-auto">
+                 <h3 className="text-lg font-bold text-white group-hover:text-neon-cyan transition-colors truncate">{item.title}</h3>
                  <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mt-1 text-sm text-white/50">
                     <span className="flex items-center gap-1"><Calendar size={14} /> {item.date}</span>
                     <span className="flex items-center gap-1"><Target size={14} /> {item.serverName}</span>
@@ -53,18 +53,18 @@ export default function HomeTab({ history }: HomeTabProps) {
               </div>
 
               {/* Stats */}
-              <div className="flex items-center gap-6 shrink-0 mt-4 md:mt-0">
+              <div className="flex items-center justify-around w-full md:w-auto gap-4 md:gap-6 shrink-0 mt-4 md:mt-0 pt-4 md:pt-0 border-t border-white/5 md:border-t-0">
                  <div className="text-center">
-                    <p className="text-xs text-white/40 uppercase font-bold">Tier</p>
-                    <p className="text-neon-purple font-bold font-mono">{item.tier}</p>
+                    <p className="text-[10px] md:text-xs text-white/40 uppercase font-bold">Tier</p>
+                    <p className="text-neon-purple font-bold font-mono text-sm md:text-base">{item.tier}</p>
                  </div>
                  <div className="text-center">
-                    <p className="text-xs text-white/40 uppercase font-bold">Score</p>
-                    <p className="text-white font-bold font-mono">{item.score}</p>
+                    <p className="text-[10px] md:text-xs text-white/40 uppercase font-bold">Score</p>
+                    <p className="text-white font-bold font-mono text-sm md:text-base">{item.score}</p>
                  </div>
                  <div className="text-center">
-                    <p className="text-xs text-white/40 uppercase font-bold">Rank</p>
-                    <p className="text-neon-cyan font-black text-xl flex items-center justify-center gap-1">
+                    <p className="text-[10px] md:text-xs text-white/40 uppercase font-bold">Rank</p>
+                    <p className="text-neon-cyan font-black text-lg md:text-xl flex items-center justify-center gap-1">
                         {item.rank ? `#${item.rank}` : '-'}
                         {item.rank === 1 && <Trophy size={16} className="text-yellow-400" />}
                     </p>
