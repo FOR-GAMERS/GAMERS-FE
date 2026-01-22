@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import ContestHero from "@/components/contests/detail/ContestHero";
 import ContestBody from "@/components/contests/detail/ContestBody";
+import ContestApplicationModal from "@/components/contests/detail/ContestApplicationModal";
 import { contestService } from "@/services/contest-service";
 import { Loader2, AlertCircle } from "lucide-react";
 import { ContestStatus } from "@/types/api";
@@ -78,6 +79,9 @@ export default function ContestDetailPage() {
   const isLoading = isContestLoading || (isLoggedIn && isAppStatusLoading);
   const isActionLoading = applyMutation.isPending || cancelMutation.isPending;
 
+  // Modal State
+  const [isApplicationModalOpen, setIsApplicationModalOpen] = useState(false);
+
   const handleJoin = () => {
     if (!isLoggedIn) {
         if (confirm("ログインが必要です。ログインページへ移動しますか？")) {
@@ -87,9 +91,7 @@ export default function ContestDetailPage() {
     }
     
     if (applicationStatus === 'NONE' || applicationStatus === 'REJECTED') {
-         if (confirm("この大会に参加申請しますか？")) {
-            applyMutation.mutate();
-         }
+         setIsApplicationModalOpen(true);
     } else if (applicationStatus === 'PENDING') {
          if (confirm("参加申請をキャンセルしますか？")) {
             cancelMutation.mutate();
@@ -151,6 +153,18 @@ export default function ContestDetailPage() {
             variant: variant,
             isLoading: isActionLoading
         }}
+      />
+      
+      <ContestApplicationModal 
+        isOpen={isApplicationModalOpen}
+        onClose={() => setIsApplicationModalOpen(false)}
+        onConfirm={() => {
+            applyMutation.mutate();
+            setIsApplicationModalOpen(false);
+        }}
+        contestId={contestId}
+        scoreTableId={contest.game_point_table_id}
+        isApplying={applyMutation.isPending}
       />
     </main>
   );

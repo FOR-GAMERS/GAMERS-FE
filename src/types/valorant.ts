@@ -30,3 +30,35 @@ export interface ContestPointResponse {
   riot_tag: string;
   user_id: number;
 }
+
+export interface CreateValorantScoreTableDto {
+  iron_1: number;
+  iron_2: number;
+  iron_3: number;
+  bronze_1: number;
+  bronze_2: number;
+  bronze_3: number;
+  silver_1: number;
+  silver_2: number;
+  silver_3: number;
+  gold_1: number;
+  gold_2: number;
+  gold_3: number;
+  platinum_1: number;
+  platinum_2: number;
+  platinum_3: number;
+  diamond_1: number;
+  diamond_2: number;
+  diamond_3: number;
+  ascendant_1: number;
+  ascendant_2: number;
+  ascendant_3: number;
+  immortal_1: number;
+  immortal_2: number;
+  immortal_3: number;
+  radiant: number;
+}
+
+export interface ValorantScoreTableResponse extends CreateValorantScoreTableDto {
+  score_table_id: number;
+}

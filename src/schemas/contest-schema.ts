@@ -16,6 +16,7 @@ export const createContestSchema = z.object({
   discord_guild_id: z.string().min(1, "Discord Server is required"),
   discord_text_channel_id: z.string().min(1, "Discord Channel is required"),
   thumbnail: z.string().optional(),
+  game_point_table_id: z.number().optional(),
   games: z.array(z.object({
       id: z.number(), 
       startTime: z.string().min(1, "Start time is required")
@@ -25,4 +26,33 @@ export const createContestSchema = z.object({
   path: ["ended_at"],
 });
 
+export const valorantScoreTableSchema = z.object({
+  iron_1: z.coerce.number().min(0, "Required"),
+  iron_2: z.coerce.number().min(0, "Required"),
+  iron_3: z.coerce.number().min(0, "Required"),
+  bronze_1: z.coerce.number().min(0, "Required"),
+  bronze_2: z.coerce.number().min(0, "Required"),
+  bronze_3: z.coerce.number().min(0, "Required"),
+  silver_1: z.coerce.number().min(0, "Required"),
+  silver_2: z.coerce.number().min(0, "Required"),
+  silver_3: z.coerce.number().min(0, "Required"),
+  gold_1: z.coerce.number().min(0, "Required"),
+  gold_2: z.coerce.number().min(0, "Required"),
+  gold_3: z.coerce.number().min(0, "Required"),
+  platinum_1: z.coerce.number().min(0, "Required"),
+  platinum_2: z.coerce.number().min(0, "Required"),
+  platinum_3: z.coerce.number().min(0, "Required"),
+  diamond_1: z.coerce.number().min(0, "Required"),
+  diamond_2: z.coerce.number().min(0, "Required"),
+  diamond_3: z.coerce.number().min(0, "Required"),
+  ascendant_1: z.coerce.number().min(0, "Required"),
+  ascendant_2: z.coerce.number().min(0, "Required"),
+  ascendant_3: z.coerce.number().min(0, "Required"),
+  immortal_1: z.coerce.number().min(0, "Required"),
+  immortal_2: z.coerce.number().min(0, "Required"),
+  immortal_3: z.coerce.number().min(0, "Required"),
+  radiant: z.coerce.number().min(0, "Required"),
+});
+
 export type CreateContestFormValues = z.infer<typeof createContestSchema>;
+export type ValorantScoreTableFormValues = z.infer<typeof valorantScoreTableSchema>;

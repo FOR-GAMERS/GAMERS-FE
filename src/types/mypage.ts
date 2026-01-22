@@ -4,9 +4,10 @@ export interface UserProfile {
   discriminator: string; // e.g. #1234
   avatarUrl: string;
   bannerUrl: string;
+  email?: string; // Optional for now as not all profiles might have it, but MyPage will pass it
   bio: string;
   joinDate: string;
-  tier: 'Bronze' | 'Silver' | 'Gold' | 'Platinum' | 'Diamond' | 'Ascendant' | 'Immortal' | 'Radiant';
+  tier: 'Bronze' | 'Silver' | 'Gold' | 'Platinum' | 'Diamond' | 'Ascendant' | 'Immortal' | 'Radiant' | 'ADMIN' | 'MEMBER';
 }
 
 export interface ContestHistoryItem {

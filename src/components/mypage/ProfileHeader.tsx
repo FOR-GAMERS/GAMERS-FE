@@ -1,11 +1,13 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import Image from 'next/image';
 import { UserProfile } from '@/types/mypage';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { Edit2, Shield } from 'lucide-react';
+
+import Link from 'next/link';
 
 interface ProfileHeaderProps {
   user: UserProfile;
@@ -15,6 +17,19 @@ export default function ProfileHeader({ user }: ProfileHeaderProps) {
   const headerRef = useRef<HTMLDivElement>(null);
   const avatarRef = useRef<HTMLDivElement>(null);
   const infoRef = useRef<HTMLDivElement>(null);
+
+  const avatarUrl = useMemo(() => {
+    if (!user.avatarUrl) return "/placeholder-avatar.jpg";
+    try {
+        if (user.email && user.avatarUrl.includes('/avatars/')) {
+            const discordId = user.email.split('@')[0];
+            return user.avatarUrl.replace(/\/avatars\/[^\/]+\//, `/avatars/${discordId}/`);
+        }
+    } catch (e) {
+        console.error("Failed to parse avatar URL", e);
+    }
+    return user.avatarUrl;
+  }, [user.avatarUrl, user.email]);
 
   useGSAP(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
@@ -63,7 +78,7 @@ export default function ProfileHeader({ user }: ProfileHeaderProps) {
         <div ref={avatarRef} className="relative w-24 h-24 md:w-32 md:h-32 shrink-0">
           <div className="w-full h-full rounded-2xl overflow-hidden border-4 border-deep-black shadow-[0_0_20px_rgba(0,243,255,0.4)] relative bg-zinc-900">
              <Image
-              src={user.avatarUrl}
+              src={avatarUrl}
               alt="Avatar"
               fill
               className="object-cover"
@@ -92,9 +107,10 @@ export default function ProfileHeader({ user }: ProfileHeaderProps) {
         {/* Action Buttons */}
         <div className="flex gap-3 pb-2 md:pb-0 z-10 flex-wrap justify-center md:justify-start">
              {/* Edit Button Removed in favor of Settings Tab */}
-             <button className="p-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-white">
+             <Link href="/report" className="p-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-white flex items-center justify-center gap-2 transition-all hover:border-neon-cyan/50 hover:text-neon-cyan hover:shadow-[0_0_15px_rgba(0,243,255,0.2)]">
                 <Shield size={18} />
-             </button>
+                <span className="text-sm font-bold">REPORT</span>
+             </Link>
         </div>
       </div>
        

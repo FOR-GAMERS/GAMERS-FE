@@ -52,9 +52,10 @@ function MyPageContent() {
     discriminator: user.tag ? `#${user.tag}` : '#0000',
     avatarUrl: getDiscordAvatarUrl(String(user.user_id), user.avatar) || '/images/avatars/default.png',
     bannerUrl: '/images/banners/default.png', 
+    email: user.email,
     bio: user.bio || 'No bio yet.',
     joinDate: user.created_at,
-    tier: 'Bronze' as const, // Placeholder
+    tier: (user.role === "ADMIN" ? "ADMIN" : "MEMBER") as any, // Cast or update type
   } : null;
 
   if (isLoading) {

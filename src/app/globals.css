@@ -64,4 +64,15 @@
   }
 }
 
-/* Utilities not covered by Tailwind v4 automatically if needed */
+/* Custom Utilities */
+.dark-calendar {
+  color-scheme: dark;
+}
+.dark-calendar::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.6;
+    cursor: pointer;
+}
+.dark-calendar::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}

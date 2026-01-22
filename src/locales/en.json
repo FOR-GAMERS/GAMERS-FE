@@ -1,0 +1,12 @@
+{
+  "navbar": {
+    "contests": "Contests",
+    "search": "Search...",
+    "login": "Login with Discord",
+    "myPage": "My Page",
+    "createContest": "Create Contest",
+    "report": "Report",
+    "settings": "Settings",
+    "logout": "Logout"
+  }
+}

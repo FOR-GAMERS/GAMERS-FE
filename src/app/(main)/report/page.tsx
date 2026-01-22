@@ -6,7 +6,7 @@ import ValorantSection from '@/components/mypage/ValorantSection';
 import { useMe } from '@/hooks/use-user';
 import { Loader2 } from 'lucide-react';
 
-function MyPageContent() {
+function ReportPageContent() {
   const { data: userResponse, isLoading, error } = useMe();
   const user = userResponse?.data;
 
@@ -56,11 +56,11 @@ function MyPageContent() {
   );
 }
 
-export default function MyPage() {
+export default function ReportPage() {
   return (
     <main className="min-h-screen bg-deep-black text-white bg-[url('/images/bg-grid.png')] bg-fixed">
       <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><Loader2 className="animate-spin text-neon-cyan"/></div>}>
-         <MyPageContent />
+         <ReportPageContent />
       </Suspense>
     </main>
   );

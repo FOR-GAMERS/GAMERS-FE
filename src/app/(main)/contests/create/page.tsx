@@ -14,19 +14,27 @@ import {
   ChevronLeft, 
   Image as ImageIcon, 
   Upload, 
+  Loader2
 } from "lucide-react";
 import DiscordServerSelector from "@/components/contest/DiscordServerSelector";
+import ValorantPointTableForm, { ValorantPointTableFormHandle } from "@/components/contest/ValorantPointTableForm";
 import { addDays, format } from "date-fns";
 import { useContestMutations } from "@/hooks/use-contests";
 import { useToast } from "@/context/ToastContext";
 import { GameType, ContestType } from "@/types/api";
+import { storageService } from "@/services/storage-service";
+import AnimatedSelect from "@/components/ui/AnimatedSelect";
 
 export default function CreateContestPage() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const valorantTableRef = useRef<ValorantPointTableFormHandle>(null);
+
   const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
+  const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
   const [editorTab, setEditorTab] = useState<'write' | 'preview'>('write');
+  const [isUploading, setIsUploading] = useState(false);
 
   // React Hook Form Setup
   const { 
@@ -52,7 +60,9 @@ export default function CreateContestPage() {
           auto_start: false,
           discord_guild_id: "",
           discord_text_channel_id: "",
-          games: [{ id: Date.now(), startTime: "" }]
+          // games is required by schema but not used in mutation/UI currently. 
+          // Providing valid default to pass validation.
+          games: [{ id: Date.now(), startTime: new Date().toISOString() }]
       }
   });
 
@@ -63,6 +73,8 @@ export default function CreateContestPage() {
 
   const watchedDescription = watch("description");
   const games = watch("games");
+  const gameType = watch("game_type");
+  const gamePointTableId = watch("game_point_table_id");
 
   // GSAP Animation
   useGSAP(() => {
@@ -81,6 +93,50 @@ export default function CreateContestPage() {
 
   const onSubmit = async (data: CreateContestFormValues) => {
     try {
+        setIsUploading(true);
+
+        // 1. Process Point Table for Valorant sequentially
+        let pointTableId = data.game_point_table_id;
+        if (data.game_type === "VALORANT" && !pointTableId) {
+             // If not created yet, try to submit the embedded form
+             if (valorantTableRef.current) {
+                try {
+                    const createdId = await valorantTableRef.current.submit();
+                    if (createdId) {
+                        pointTableId = createdId;
+                    } else {
+                        // Submission failed or returned null
+                        setIsUploading(false);
+                        return;
+                    }
+                } catch (err) {
+                    setIsUploading(false);
+                    return; // Error handled in the child component already (toast)
+                }
+             } else {
+                 addToast("Point table configuration is missing.", "error");
+                 setIsUploading(false);
+                 return;
+             }
+        }
+
+        // 2. Upload Banner if exists
+        let bannerUrl = data.thumbnail; // Default to existing string if no new file
+        if (thumbnailFile) {
+            try {
+                const uploadRes = await storageService.uploadContestBanner(thumbnailFile);
+                if (uploadRes.data) {
+                    bannerUrl = uploadRes.data.url;
+                }
+            } catch (error) {
+                console.error("Banner upload failed", error);
+                addToast("Failed to upload banner image", "error");
+                setIsUploading(false);
+                return;
+            }
+        }
+
+        // 3. Create Contest
         await createContest.mutateAsync({
             title: data.title,
             description: data.description,
@@ -94,23 +150,32 @@ export default function CreateContestPage() {
             discord_guild_id: data.discord_guild_id,
             discord_text_channel_id: data.discord_text_channel_id,
             auto_start: data.auto_start,
-            thumbnail: data.thumbnail
+            thumbnail: bannerUrl,
+            game_point_table_id: pointTableId
         });
-        addToast("Contest created successfully!", "success");
-        // Navigation is handled in the mutation onSuccess
+        
+        // 4. Redirect
+        router.push("/contests/create/success");
     } catch (error: any) {
         console.error(error);
         addToast(error.message || "Failed to create contest", "error");
+    } finally {
+        setIsUploading(false);
     }
   };
 
   const handleThumbnailUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setThumbnailFile(file); // Store file for upload
       const reader = new FileReader();
       reader.onloadend = () => {
         setThumbnailPreview(reader.result as string);
-        setValue("thumbnail", reader.result as string); // Set string in form
+        // We set a temporary string to satisfy "required" validation if needed, 
+        // though actual upload happens on submit. 
+        // If the schema requires a valid URL format, this might fail, so we might need to adjust schema or use a dummy URL.
+        // Assuming schema just checks minLength(1).
+        setValue("thumbnail", reader.result as string); 
       };
       reader.readAsDataURL(file);
     }
@@ -147,7 +212,6 @@ export default function CreateContestPage() {
             </section>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
-                {/* Left: Thumbnail (4 cols) */}
                 <section className="animate-section lg:col-span-4 space-y-4">
                     <div className="aspect-[4/3] rounded-2xl border-2 border-dashed border-white/20 hover:border-neon-purple hover:bg-white/5 flex flex-col items-center justify-center cursor-pointer transition-all relative overflow-hidden group"
                          onClick={() => fileInputRef.current?.click()}
@@ -162,47 +226,86 @@ export default function CreateContestPage() {
                             </div>
                         )}
                     </div>
+                    <input type="hidden" {...register("thumbnail")} />
+                    {errors.thumbnail && <p className="text-red-500 text-xs text-center">{errors.thumbnail.message}</p>}
                 </section>
 
-                {/* Right: Settings (8 cols) */}
                 <section className="lg:col-span-8 space-y-8">
-                    {/* General Settings */}
                     <div className="animate-section grid grid-cols-1 md:grid-cols-2 gap-6 p-6 rounded-2xl bg-white/5 border border-white/10">
-                         <div className="space-y-2">
-                            <label className="text-xs font-bold uppercase text-muted-foreground">Max Teams</label>
-                            <select {...register("max_team_count", { valueAsNumber: true })} className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-neon-cyan outline-none">
-                                <option value="4">4 Teams</option>
-                                <option value="8">8 Teams</option>
-                                <option value="16">16 Teams</option>
-                                <option value="32">32 Teams</option>
-                            </select>
+                         <div className="space-y-0">
+                            <Controller
+                                control={control}
+                                name="max_team_count"
+                                render={({ field }) => (
+                                    <AnimatedSelect
+                                        label="Max Teams"
+                                        options={[
+                                            { value: 4, label: "4 Teams" },
+                                            { value: 8, label: "8 Teams" },
+                                            { value: 16, label: "16 Teams" },
+                                            { value: 32, label: "32 Teams" }
+                                        ]}
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                )}
+                            />
                          </div>
                          <div className="space-y-2">
-                            <label className="text-xs font-bold uppercase text-muted-foreground">Team Size</label>
-                            <input 
-                                type="number" 
-                                {...register("total_team_member")} 
-                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-neon-cyan outline-none text-white"
-                                min={1}
-                                max={6} 
+                            <label className="text-xs font-bold uppercase text-muted-foreground ml-1">Team Size</label>
+                            <Controller
+                                control={control}
+                                name="total_team_member"
+                                render={({ field }) => (
+                                    <input 
+                                        type="text" 
+                                        value={field.value}
+                                        onChange={(e) => {
+                                            const val = e.target.value.replace(/[^0-9]/g, '');
+                                            field.onChange(val === '' ? 0 : Number(val));
+                                        }}
+                                        className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-neon-cyan outline-none text-white transition-all focus:shadow-[0_0_10px_rgba(34,211,238,0.2)] font-mono"
+                                        placeholder="0"
+                                    />
+                                )}
                             />
                             {errors.total_team_member && <p className="text-red-500 text-xs">{errors.total_team_member.message}</p>}
                          </div>
-                         <div className="space-y-2">
-                            <label className="text-xs font-bold uppercase text-muted-foreground">Contest Type</label>
-                            <select {...register("contest_type")} className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-neon-cyan outline-none text-white">
-                                <option value="TOURNAMENT">Tournament</option>
-                                <option value="LEAGUE">League</option>
-                            </select>
+                         <div className="space-y-0">
+                             <Controller
+                                control={control}
+                                name="contest_type"
+                                render={({ field }) => (
+                                    <AnimatedSelect
+                                        label="Contest Type"
+                                        options={[
+                                            { value: "TOURNAMENT", label: "Tournament" },
+                                            { value: "LEAGUE", label: "League" }
+                                        ]}
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                )}
+                            />
                          </div>
-                         <div className="space-y-2">
-                            <label className="text-xs font-bold uppercase text-muted-foreground">Game Type</label>
-                            <select {...register("game_type")} className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-neon-cyan outline-none text-white">
-                                <option value="VALORANT">Valorant</option>
-                                <option value="LOL">League of Legends</option>
-                                <option value="OVERWATCH_2">Overwatch 2</option>
-                                <option value="FC_ONLINE">FC Online</option>
-                            </select>
+                         <div className="space-y-0">
+                            <Controller
+                                control={control}
+                                name="game_type"
+                                render={({ field }) => (
+                                    <AnimatedSelect
+                                        label="Game Type"
+                                        options={[
+                                            { value: "VALORANT", label: "Valorant" },
+                                            { value: "LOL", label: "League of Legends" },
+                                            { value: "OVERWATCH_2", label: "Overwatch 2" },
+                                            { value: "FC_ONLINE", label: "FC Online" }
+                                        ]}
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                )}
+                            />
                          </div>
                          <div className="space-y-2">
                             <label className="text-xs font-bold uppercase text-muted-foreground">Start Date</label>
@@ -216,29 +319,52 @@ export default function CreateContestPage() {
                          </div>
                          <div className="space-y-2">
                             <label className="text-xs font-bold uppercase text-muted-foreground">Total Points</label>
-                            <input 
-                                type="number" 
-                                {...register("total_point", { valueAsNumber: true })} 
-                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-neon-cyan outline-none text-white"
-                                min={0}
-                                placeholder="0"
+                            <Controller
+                                control={control}
+                                name="total_point"
+                                render={({ field }) => (
+                                    <input 
+                                        type="text" 
+                                        value={field.value}
+                                        onChange={(e) => {
+                                            const val = e.target.value.replace(/[^0-9]/g, '');
+                                            field.onChange(val === '' ? 0 : Number(val));
+                                        }}
+                                        className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-neon-cyan outline-none text-white transition-all focus:shadow-[0_0_10px_rgba(34,211,238,0.2)] font-mono"
+                                        placeholder="0"
+                                    />
+                                )}
                             />
                          </div>
-                         <div className="flex items-center gap-3 pt-6">
-                            <input 
-                                type="checkbox" 
-                                id="auto_start"
-                                {...register("auto_start")} 
-                                className="w-5 h-5 rounded border-gray-600 text-neon-cyan focus:ring-neon-cyan bg-black/40"
-                            />
-                            <label htmlFor="auto_start" className="text-sm font-medium text-white cursor-pointer select-none">
-                                Auto Start when full?
-                            </label>
-                         </div>
+                            <div className="flex items-center gap-3 pt-6">
+                                <label className="relative inline-flex items-center cursor-pointer">
+                                    <input 
+                                        type="checkbox" 
+                                        id="auto_start"
+                                        {...register("auto_start")} 
+                                        className="sr-only peer"
+                                    />
+                                    <div className="w-11 h-6 bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white/50 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-neon-cyan peer-checked:after:bg-white peer-checked:after:shadow-[0_0_5px_rgba(255,255,255,0.5)] transition-colors"></div>
+                                </label>
+                                <label htmlFor="auto_start" className="text-sm font-bold text-white cursor-pointer select-none hover:text-neon-cyan transition-colors">
+                                    Auto Start when full?
+                                </label>
+                             </div>
                     </div>
 
                     {/* Discord Selector */}
                     <DiscordServerSelector control={control} setValue={setValue} watch={watch} />
+
+                    {/* Point Table Configuration (Only for Valorant) */}
+                    {watch("game_type") === "VALORANT" && (
+                         <section className="animate-section">
+                            <ValorantPointTableForm 
+                                ref={valorantTableRef}
+                                onSuccess={(id) => setValue("game_point_table_id", id)} 
+                                mode="embedded"
+                            />
+                         </section>
+                    )}
                 </section>
             </div>
 
@@ -256,7 +382,7 @@ export default function CreateContestPage() {
                         <textarea 
                             {...register("description")} 
                             placeholder="# Enter contest details..." 
-                            className="w-full h-full bg-[#0f172a] border border-white/10 rounded-xl p-4 font-mono text-sm leading-relaxed resize-none focus:border-neon-cyan outline-none" 
+                            className="w-full h-full bg-[#0f172a] border border-white/10 rounded-xl p-4 font-mono text-sm leading-relaxed resize-none focus:border-neon-cyan outline-none text-white" 
                         />
                     </div>
                     <div className={cn("h-full bg-black/40 border border-white/5 rounded-xl p-6 overflow-y-auto", editorTab === 'write' && "hidden lg:block")}>
@@ -275,10 +401,19 @@ export default function CreateContestPage() {
                     </div>
                     <button 
                         type="submit" 
-                        disabled={!isValid || isSubmitting}
+                        disabled={!isValid || isSubmitting || isUploading}
                         className={cn("px-8 py-3 rounded-full font-bold transition-all flex items-center gap-2", isValid ? "bg-neon-cyan text-black hover:bg-cyan-300 hover:shadow-[0_0_20px_rgba(0,243,255,0.5)]" : "bg-white/10 text-white/30 cursor-not-allowed")}
                     >
-                        {isSubmitting ? "Creating..." : "Create Contest"} <Upload size={18} />
+                        {(isSubmitting || isUploading) ? (
+                            <>
+                                <Loader2 className="animate-spin" size={18} />
+                                Creating...
+                            </>
+                        ) : (
+                            <>
+                                Create Contest <Upload size={18} />
+                            </>
+                        )}
                     </button>
                 </div>
             </div>

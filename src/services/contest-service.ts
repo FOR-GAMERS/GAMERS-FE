@@ -11,6 +11,7 @@ import {
   ContestMemberResponse,
   GameResponse
 } from '@/types/api';
+import { ContestPointResponse } from '@/types/valorant';
 
 export const contestService = {
   async getContests(params?: { 
@@ -100,5 +101,12 @@ export const contestService = {
   // Games
   async getContestGames(contestId: number) {
       return api.get<ApiResponse<GameResponse[]>>(`/contests/${contestId}/games`);
+  },
+
+  // Valorant Points
+  async getContestPoint(contestId: number, scoreTableId: number) {
+      return api.get<ApiResponse<ContestPointResponse>>(`/contests/${contestId}/valorant-point`, {
+        params: { scoreTableId }
+      });
   }
 };

@@ -4,7 +4,8 @@ import {
   CreateUserRequest, 
   ApiResponse, 
   UserResponse, 
-  LogoutRequest 
+  LogoutRequest,
+  MyUserResponse
 } from '@/types/api';
 import Cookies from 'js-cookie';
 
@@ -64,21 +65,8 @@ export const authService = {
   },
 
   async getMe() {
-    const response = await fetch('/api/auth/me', { credentials: 'include' });
-    
-    if (!response.ok) {
-        let errorMessage = 'Authentication processing failed';
-        try {
-            const errorBody = await response.json();
-            errorMessage = errorBody.message || errorMessage;
-        } catch (e) {
-            
-        }
-        const error: any = new Error(errorMessage);
-        error.status = response.status;
-        throw error;
-    }
-    
-    return response.json();
+    // Guest users should be able to view the page, so don't redirect on 401
+    const response = await api.get<ApiResponse<MyUserResponse>>('/users/my', { requiresAuth: false }); 
+    return response.data;
   }
 };

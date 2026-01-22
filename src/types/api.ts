@@ -44,11 +44,23 @@ export interface UserResponse {
   email: string;
   created_at: string;
   modified_at: string;
-  // Extended manually as swagger seems incomplete
   username: string;
   tag: string;
   avatar?: string;
   bio?: string;
+}
+
+export interface MyUserResponse {
+  avatar: string;
+  bio: string;
+  created_at: string;
+  email: string;
+  modified_at: string;
+  tag: string;
+  user_id: number;
+  username: string;
+  role: string | "ADMIN" | "USER"; 
+  profile_key?: string; // Likely the Discord ID or external ID
 }
 
 

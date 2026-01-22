@@ -1,0 +1,12 @@
+{
+  "navbar": {
+    "contests": "大会",
+    "search": "検索...",
+    "login": "Discordでログイン",
+    "myPage": "マイページ",
+    "createContest": "大会作成",
+    "report": "報告",
+    "settings": "設定",
+    "logout": "ログアウト"
+  }
+}

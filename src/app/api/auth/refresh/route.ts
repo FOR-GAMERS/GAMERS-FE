@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+// Align default with proxy route to handle NEXT_PUBLIC_API_URL consistently
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
 
 export async function POST() {
   const cookieStore = await cookies();
@@ -12,7 +13,22 @@ export async function POST() {
   }
 
   try {
-    const response = await fetch(`${API_URL}/api/auth/refresh`, {
+    // Construct URL preventing double /api if API_URL already ends with it
+    const baseUrl = API_URL.endsWith('/') ? API_URL.slice(0, -1) : API_URL;
+    // If baseUrl ends with '/api', we append '/auth/refresh'. 
+    // If it doesn't (root host), we might need '/api/auth/refresh'.
+    // Given the Proxy logic assumes API_URL includes '/api', we treat API_URL as the base for API endpoints.
+    // So we append '/auth/refresh' (stripping leading 'api/' if intended, but let's be safe).
+    
+    // Logic: If API_URL ends in '/api', use it directly with '/auth/refresh'.
+    // If API_URL is just host, add '/api/auth/refresh'.
+    // However, simplest is to follow Proxy's pattern: API_URL IS the prefix.
+    const targetPath = '/auth/refresh'; 
+    const targetUrl = `${baseUrl}${targetPath}`;
+    
+    console.log(`[Refresh] Attempting refresh at ${targetUrl}`);
+
+    const response = await fetch(targetUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -21,7 +37,7 @@ export async function POST() {
     });
 
     if (!response.ok) {
-        // If refresh fails, clear cookies
+        console.error(`[Refresh] Failed with status ${response.status}`);
         const errorRes = NextResponse.json({ message: 'Refresh failed' }, { status: 401 });
         errorRes.cookies.delete('access_token');
         errorRes.cookies.delete('refresh_token');
@@ -29,17 +45,20 @@ export async function POST() {
     }
 
     const data = await response.json();
-    // Assuming data.data.access_token exists
-    // Adjust based on your actual Refresh Response structure (verified in previous steps)
-    // Previous step showed usage: refreshData.data?.access_token
+    
+    // Robustly handle response structure (wrapped in data or direct)
     const newAccessToken = data.data?.access_token || data.access_token;
-    const newRefreshToken = data.data?.refresh_token || data.refresh_token || refreshToken; // Use old if not rotated
+    const newRefreshToken = data.data?.refresh_token || data.refresh_token || refreshToken;
 
     if (!newAccessToken) {
+        console.error('[Refresh] Invalid response structure:', data);
         return NextResponse.json({ message: 'Invalid refresh response' }, { status: 401 });
     }
 
-    const successRes = NextResponse.json({ message: 'Refreshed' }, { status: 200 });
+    const successRes = NextResponse.json({ 
+        message: 'Refreshed',
+        // Optional: return tokens in body if client needs them immediately, though cookies are preferred
+    }, { status: 200 });
 
     // Set new cookies
     successRes.cookies.set('access_token', newAccessToken, {
@@ -61,9 +80,9 @@ export async function POST() {
     return successRes;
 
   } catch (error) {
-    console.error('Refresh Proxy Error:', error);
+    console.error('[Refresh Proxy Error]', error);
     return NextResponse.json(
-      { message: 'Internal Server Error', status: 500 },
+      { message: 'Internal Server Error' },
       { status: 500 }
     );
   }

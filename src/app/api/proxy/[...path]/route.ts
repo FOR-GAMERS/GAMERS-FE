@@ -33,7 +33,8 @@ async function handleProxy(
       method: request.method,
       headers: headers,
       body: request.body, // Pass the body stream directly
-      // duplex: 'half' // required for streaming bodies in some fetch implementations
+      // @ts-expect-error - duplex is required for streaming bodies in Next.js/Node fetch
+      duplex: 'half' 
     });
 
     // Handle response

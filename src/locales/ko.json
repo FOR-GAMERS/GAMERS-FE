@@ -1,0 +1,12 @@
+{
+  "navbar": {
+    "contests": "대회",
+    "search": "검색...",
+    "login": "디스코드로 로그인",
+    "myPage": "마이페이지",
+    "createContest": "대회 생성",
+    "report": "신고하기",
+    "settings": "설정",
+    "logout": "로그아웃"
+  }
+}

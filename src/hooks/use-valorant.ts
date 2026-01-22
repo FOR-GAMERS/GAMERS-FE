@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { valorantService } from '@/services/valorant-service';
-import { RegisterValorantRequest } from '@/types/valorant';
+import { RegisterValorantRequest, CreateValorantScoreTableDto } from '@/types/valorant';
 
 export const VALORANT_KEYS = {
   all: ['valorant'] as const,
@@ -45,9 +45,14 @@ export function useValorantMutations() {
     },
   });
 
+  const createScoreTable = useMutation({
+    mutationFn: (data: CreateValorantScoreTableDto) => valorantService.createScoreTable(data),
+  });
+
   return {
     registerValorant,
     unlinkValorant,
     refreshValorant,
+    createScoreTable,
   };
 }
