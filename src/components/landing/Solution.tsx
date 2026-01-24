@@ -5,10 +5,12 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Bot, CheckCircle2, LayoutDashboard, ArrowRightLeft } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Solution() {
+  const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -70,7 +72,7 @@ export default function Solution() {
         {/* === MOBILE LAYOUT (Stacked) === */}
         <div className="md:hidden flex flex-col gap-12 w-full">
             <h2 className="text-3xl font-bold text-center mb-8">
-              <span className="text-primary">カンタン</span> 3ステップ
+              <span className="text-primary">{t('landing.solution.mobileHeadline').split(' ')[0]}</span> {t('landing.solution.mobileHeadline').split(' ').slice(1).join(' ')}
             </h2>
 
             {/* Step 1 */}
@@ -79,9 +81,9 @@ export default function Solution() {
                     <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
                         <LayoutDashboard size={24} />
                     </div>
-                    <h3 className="text-xl font-bold">1. ウェブ管理</h3>
+                    <h3 className="text-xl font-bold">1. {t('landing.solution.steps.web.title')}</h3>
                 </div>
-                <p className="text-muted-foreground">ウェブダッシュボードでの直感的な管理</p>
+                <p className="text-muted-foreground">{t('landing.solution.steps.web.description')}</p>
             </div>
 
             {/* Step 2 */}
@@ -90,9 +92,9 @@ export default function Solution() {
                     <div className="w-12 h-12 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400">
                         <ArrowRightLeft size={24} />
                     </div>
-                    <h3 className="text-xl font-bold">2. ボット連携</h3>
+                    <h3 className="text-xl font-bold">2. {t('landing.solution.steps.bot.title')}</h3>
                 </div>
-                 <p className="text-muted-foreground">ディスコードボットとのリアルタイム接続</p>
+                 <p className="text-muted-foreground">{t('landing.solution.steps.bot.description')}</p>
             </div>
 
             {/* Step 3 */}
@@ -101,9 +103,9 @@ export default function Solution() {
                     <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">
                         <CheckCircle2 size={24} />
                     </div>
-                    <h3 className="text-xl font-bold">3. 完了</h3>
+                    <h3 className="text-xl font-bold">3. {t('landing.solution.steps.complete.title')}</h3>
                 </div>
-                 <p className="text-muted-foreground">大会開催完了！</p>
+                 <p className="text-muted-foreground">{t('landing.solution.steps.complete.description')}</p>
             </div>
         </div>
 
@@ -165,7 +167,7 @@ export default function Solution() {
                 <div className="relative z-10 p-10 bg-green-500/20 border border-green-500/50 rounded-full mb-6 shadow-[0_0_50px_rgba(34,197,94,0.3)]">
                     <CheckCircle2 className="w-20 h-20 text-green-400" />
                 </div>
-                <h3 className="text-4xl font-black text-white tracking-widest uppercase drop-shadow-lg">完了</h3>
+                <h3 className="text-4xl font-black text-white tracking-widest uppercase drop-shadow-lg">{t('landing.solution.desktop.phase3')}</h3>
             </div>
 
             </div>
@@ -176,21 +178,21 @@ export default function Solution() {
                 {/* Phase 1 Text */}
                 <div className="phase-1 absolute inset-0 flex flex-col items-center justify-center will-change-transform">
                     <h2 className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-300">
-                        ウェブダッシュボードでの<br/>直感的な管理
+                        {t('landing.solution.desktop.phase1')}
                     </h2>
                 </div>
 
                 {/* Phase 2 Text */}
                 <div className="phase-2 absolute inset-0 flex flex-col items-center justify-center opacity-0 will-change-transform">
                     <h2 className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-300">
-                        ディスコードボットとの<br/>リアルタイム接続
+                        {t('landing.solution.desktop.phase2')}
                     </h2>
                 </div>
 
                 {/* Phase 3 Text */}
                 <div className="phase-3 absolute inset-0 flex flex-col items-center justify-center opacity-0 will-change-transform">
                     <h2 className="text-3xl md:text-5xl font-bold text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
-                        大会開催完了
+                        {t('landing.solution.desktop.phase3')}
                     </h2>
                 </div>
 
@@ -198,7 +200,7 @@ export default function Solution() {
 
              {/* Scroll Indicator */}
             <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-muted-foreground text-sm animate-bounce">
-                スクロールして体験
+                {t('landing.solution.scroll')}
             </div>
         </div>
 

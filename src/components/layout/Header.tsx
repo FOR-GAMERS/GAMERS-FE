@@ -18,6 +18,7 @@ const koulen = Koulen({
 
 import { useTranslation } from "react-i18next";
 import { Globe } from "lucide-react";
+import NotificationDropdown from "./NotificationDropdown";
 
 // ... (existing imports)
 
@@ -31,6 +32,7 @@ export default function Header() {
   const [user, setUser] = useState<MyUserResponse | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [imgError, setImgError] = useState(false);
 
   // Reset image error state when user/avatar changes
@@ -41,10 +43,12 @@ export default function Header() {
   const avatarUrl = useMemo(() => {
     if (!user?.avatar) return null;
     try {
-        if (user.email) {
-            const discordId = user.email.split('@')[0];
-            return user.avatar.replace(/\/avatars\/[^\/]+\//, `/avatars/${discordId}/`);
-        }
+    if (!user?.avatar) return null;
+    if (user.avatar.startsWith('http') || user.avatar.startsWith('/')) {
+        return user.avatar;
+    }
+    // Assume it's a Discord avatar hash
+    return `https://cdn.discordapp.com/avatars/${user.user_id}/${user.avatar}.png`;
     } catch (e) {
         console.error("Failed to parse avatar URL", e);
     }
@@ -192,10 +196,11 @@ export default function Header() {
 
             {isLoggedIn && user ? (
                 <>
-                    <button className="p-2 hover:bg-white/5 rounded-full transition-colors relative">
-                        <Bell className="w-5 h-5 text-muted-foreground" />
-                        <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />
-                    </button>
+                    <NotificationDropdown 
+                        isOpen={isNotificationOpen} 
+                        setIsOpen={setIsNotificationOpen} 
+                        isLoggedIn={isLoggedIn}
+                    />
                     
                     <div className="relative">
                         <button 

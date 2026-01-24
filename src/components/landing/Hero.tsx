@@ -5,8 +5,10 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ArrowRight, Gamepad2, Sparkles, Trophy } from "lucide-react";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 export default function Hero() {
+  const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
@@ -58,7 +60,7 @@ export default function Hero() {
       );
   }, { scope: containerRef });
 
-  const headlineText = "ディスコードカスタムマッチ, ウェブでブタンタッチ一回で.";
+  const headlineText = t('landing.hero.headline');
 
   return (
     <section
@@ -85,7 +87,7 @@ export default function Hero() {
       <div className="container px-4 mx-auto text-center z-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 mb-8 text-sm font-medium rounded-full bg-secondary/50 text-accent animate-pulse border border-accent/20">
            <Sparkles size={16} />
-           <span>次世代のゲーミング体験</span>
+           <span>{t('landing.hero.badge')}</span>
         </div>
         
         <h1
@@ -103,17 +105,17 @@ export default function Hero() {
           ref={subtitleRef}
           className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-medium"
         >
-          複雑なコマンドはいらない！簡単にウェブで操作してみましょう！
+          {t('landing.hero.subtitle')}
         </p>
 
         <div ref={btnGroupRef} className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a href="https://discord.com/oauth2/authorize?client_id=1430981444431511563" target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(124,58,237,0.5)] hover:shadow-[0_0_40px_rgba(124,58,237,0.7)] group">
-            GAMERSボット招待 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            {t('landing.hero.inviteBot')} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
           </a>
           
           <Link href="/contests" className="px-8 py-4 bg-secondary/20 hover:bg-secondary/40 text-white font-bold rounded-lg transition-all flex items-center gap-2 border border-white/10 backdrop-blur-sm">
             <Trophy size={20} />
-            大会を探す
+            {t('landing.hero.findContest')}
           </Link>
         </div>
       </div>

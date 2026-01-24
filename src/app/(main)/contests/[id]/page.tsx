@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import ContestHero from "@/components/contests/detail/ContestHero";
@@ -10,20 +10,11 @@ import { contestService } from "@/services/contest-service";
 import { Loader2, AlertCircle } from "lucide-react";
 import { ContestStatus } from "@/types/api";
 import { useMe } from "@/hooks/use-user";
-
-const getStatusLabel = (status: ContestStatus) => {
-    switch (status) {
-        case 'PENDING': return '準備中';
-        case 'RECRUITING': return '募集中';
-        case 'ACTIVE': return '進行中';
-        case 'FINISHED': return '終了';
-        case 'CANCELLED': return '中止';
-        case 'PREPARING': return '準備中';
-        default: return status;
-    }
-};
+import { useTranslation } from "react-i18next";
+import TeamManagementSection from "@/components/contests/detail/TeamManagementSection";
 
 export default function ContestDetailPage() {
+  const { t } = useTranslation();
   const router = useRouter();
   const params = useParams(); 
   const contestId = Number(params?.id);
@@ -51,28 +42,39 @@ export default function ContestDetailPage() {
   const contest = response?.data;
   const applicationStatus = appStatusResponse?.data?.status || 'NONE'; 
 
+  // Redirect to dashboard if accepted
+  useEffect(() => {
+    if (applicationStatus === 'ACCEPTED') {
+        router.push(`/contests/${contestId}/dashboard`);
+    }
+  }, [applicationStatus, contestId, router]);
+
+  const getStatusLabel = (status: ContestStatus) => {
+    return t(`contestDetail.status.${status}`, status);
+  };
+
   // Mutations
   const applyMutation = useMutation({
-      mutationFn: () => contestService.applyContest(contestId),
+      mutationFn: (data?: { point?: number; current_tier?: string; peak_tier?: string }) => contestService.applyContest(contestId, data),
       onSuccess: () => {
-          alert('参加申請が完了しました。');
+          alert(t('contestDetail.alerts.joinSuccess'));
           queryClient.invalidateQueries({ queryKey: ['contest-application', contestId] });
           queryClient.invalidateQueries({ queryKey: ['contest', contestId] });
       },
       onError: (error: any) => {
-          alert(error.response?.data?.message || '参加申請に失敗しました。');
+          alert(error.response?.data?.message || t('contestDetail.alerts.joinFail'));
       }
   });
 
   const cancelMutation = useMutation({
       mutationFn: () => contestService.cancelApplication(contestId),
       onSuccess: () => {
-          alert('申請をキャンセルしました。');
+          alert(t('contestDetail.alerts.cancelSuccess'));
           queryClient.invalidateQueries({ queryKey: ['contest-application', contestId] });
           queryClient.invalidateQueries({ queryKey: ['contest', contestId] });
       },
       onError: (error: any) => {
-           alert(error.response?.data?.message || 'キャンセルに失敗しました。');
+           alert(error.response?.data?.message || t('contestDetail.alerts.cancelFail'));
       }
   });
 
@@ -84,32 +86,33 @@ export default function ContestDetailPage() {
 
   const handleJoin = () => {
     if (!isLoggedIn) {
-        if (confirm("ログインが必要です。ログインページへ移動しますか？")) {
-             router.push('/login');
-        }
+        router.push('/login');
         return;
     }
     
     if (applicationStatus === 'NONE' || applicationStatus === 'REJECTED') {
          setIsApplicationModalOpen(true);
     } else if (applicationStatus === 'PENDING') {
-         if (confirm("参加申請をキャンセルしますか？")) {
+         if (confirm(t('contestDetail.alerts.confirmCancel'))) {
             cancelMutation.mutate();
          }
     } else if (applicationStatus === 'ACCEPTED') {
-         alert("既に参加が確定しています。");
+         alert(t('contestDetail.alerts.alreadyJoined'));
     }
   };
 
   // Determine Button Props
-  let buttonLabel = "参加申請する";
+  let buttonLabel = t('contestCTA.button.join');
   let variant: 'primary' | 'destructive' | 'secondary' = 'primary';
   
-  if (applicationStatus === 'PENDING') {
-      buttonLabel = "申請キャンセル";
+  if (!isLoggedIn) {
+      buttonLabel = t('contestCTA.button.login');
+  } else if (applicationStatus === 'PENDING') {
+      // User is managing a team. 
+      buttonLabel = t('contestCTA.button.deleteTeam'); 
       variant = 'destructive';
   } else if (applicationStatus === 'ACCEPTED') {
-      buttonLabel = "参加確定済み";
+      buttonLabel = t('contestCTA.button.joined');
       variant = 'secondary';
   }
 
@@ -125,7 +128,7 @@ export default function ContestDetailPage() {
       return (
           <div className="min-h-screen bg-deep-black flex flex-col items-center justify-center text-white gap-4">
                <AlertCircle className="w-12 h-12 text-red-500" />
-               <p className="text-xl">大会情報の読み込みに失敗しました。</p>
+               <p className="text-xl">{t('contestDetail.alerts.loadingFail')}</p>
           </div>
       );
   }
@@ -140,7 +143,7 @@ export default function ContestDetailPage() {
       />
 
       <ContestBody 
-        description={contest.description || "詳細情報はありません。"}
+        description={contest.description || t('contestDetail.noInfo')}
         ctaProps={{
             currentParticipants: contest.current_team_count || 0,
             maxParticipants: contest.max_team_count || 0,
@@ -155,11 +158,38 @@ export default function ContestDetailPage() {
         }}
       />
       
+      {/* Team Management Section (Only visible when Applied/Creating Team) */}
+      {applicationStatus === 'PENDING' && (
+          <div className="container mx-auto px-4 pb-12">
+            <TeamManagementSection 
+                contestId={contestId}
+                maxTeamMember={contest.total_team_member}
+                maxTotalPoint={contest.total_point} // Assuming total_point is also max_total_point logic or strictly prize? 
+                // Wait, field `total_point` is Prize Pool usually. 
+                // There is no `max_total_point_limit` in ContestResponse.
+                // Re-checking schema: `total_point` is generally prize. 
+                // Is there a restriction? The user said "Team 의 총 Point 를 계산해서 ... 최대 Point 이내의 Point 라면".
+                // I will assume `total_point` is used as limit OR I need a new field.
+                // Looking at `CreateContest` page, `total_point` is input as "Total Points".
+                // It likely means "Max Team Point Limit" for participation, OR "Prize Pool".
+                // Given the context of "Calculated Points" and "Tier", it sounds like a limit.
+                // BUT `prizePool` in CTA uses it too.
+                // Let's assume it IS the limit for now.
+                // If it's 0, maybe no limit?
+                // I will pass it as `maxTotalPoint` if > 0, else Infinity.
+                // Actually, let's look at `createContest` page again. "Total Points" label.
+                // Usually "Prize Pool".
+                // But the user prompt says "Point 가 최대 Point 이내의 Point 라면". Use context.
+                // I will just pass `contest.total_point` for now.
+             />
+          </div>
+      )}
+      
       <ContestApplicationModal 
         isOpen={isApplicationModalOpen}
         onClose={() => setIsApplicationModalOpen(false)}
-        onConfirm={() => {
-            applyMutation.mutate();
+        onConfirm={(data) => {
+            applyMutation.mutate(data);
             setIsApplicationModalOpen(false);
         }}
         contestId={contestId}

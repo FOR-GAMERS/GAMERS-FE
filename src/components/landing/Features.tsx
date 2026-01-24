@@ -6,34 +6,37 @@ import { useGSAP } from "@gsap/react";
 import { Zap, ShieldCheck, MonitorPlay, Crosshair } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+import { useTranslation } from "react-i18next";
+
 const features = [
   {
-    title: "ゼロレイテンシー",
-    description: "エッジネットワークにより、世界中で10ms以下のPingを実現。",
+    titleKey: "landing.features.zeroLatency.title",
+    descriptionKey: "landing.features.zeroLatency.description",
     icon: Zap,
     className: "md:col-span-2",
   },
   {
-    title: "アンチチート・プラス",
-    description: "AIによる検知で、公平なプレイを保証。",
+    titleKey: "landing.features.antiCheat.title",
+    descriptionKey: "landing.features.antiCheat.description",
     icon: ShieldCheck,
     className: "md:col-span-1",
   },
   {
-    title: "クロスプラットフォーム",
-    description: "いつでも、どこでも、どのデバイスでも友達とプレイ。",
+    titleKey: "landing.features.crossPlatform.title",
+    descriptionKey: "landing.features.crossPlatform.description",
     icon: MonitorPlay,
     className: "md:col-span-1",
   },
   {
-    title: "インスタントリプレイ",
-    description: "最高の瞬間を自動的にシェア。",
+    titleKey: "landing.features.instantReplay.title",
+    descriptionKey: "landing.features.instantReplay.description",
     icon: Crosshair,
     className: "md:col-span-2",
   },
 ];
 
 export default function Features() {
+  const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -57,10 +60,10 @@ export default function Features() {
     <section ref={containerRef} className="py-24 container mx-auto px-4">
       <div className="text-center mb-20">
         <h2 className="text-3xl md:text-5xl font-bold mb-6">
-          <span className="text-primary">勝利</span>のための設計
+          {t('landing.features.headline')}
         </h2>
         <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          リーダーボードを制覇するために必要なすべてが、ここにあります。
+          {t('landing.features.description')}
         </p>
       </div>
 
@@ -77,9 +80,9 @@ export default function Features() {
               <feature.icon size={24} />
             </div>
             <h3 className="mb-2 text-2xl font-bold text-foreground">
-              {feature.title}
+              {t(feature.titleKey)}
             </h3>
-            <p className="text-muted-foreground">{feature.description}</p>
+            <p className="text-muted-foreground">{t(feature.descriptionKey)}</p>
             
             {/* Hover Gradient */}
             <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />

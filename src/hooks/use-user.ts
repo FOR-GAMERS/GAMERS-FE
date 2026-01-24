@@ -12,7 +12,7 @@ export function useMe() {
   return useQuery({
     queryKey: USER_KEYS.me(),
     queryFn: async () => {
-        return await api.get<ApiResponse<UserResponse>>('/users/my');
+        return await api.get<ApiResponse<UserResponse>>('/users/my', { requiresAuth: false });
     },
     retry: false,
   });

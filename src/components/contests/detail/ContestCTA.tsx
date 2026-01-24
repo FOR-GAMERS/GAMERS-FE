@@ -3,6 +3,8 @@
 import { Users, Coins, Trophy, Clock, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+import { useTranslation } from "react-i18next";
+
 interface ContestCTAProps {
   currentParticipants: number;
   maxParticipants: number;
@@ -24,25 +26,31 @@ export default function ContestCTA({
   deadline,
   onJoin,
   isLoggedIn,
-  buttonLabel = "참가 신청하기",
+  buttonLabel, // Pre-translated label might be passed, but we should try to use keys if possible. Actually page.tsx passes translated label.
   variant = 'primary',
   isLoading = false
 }: ContestCTAProps) {
+  const { t } = useTranslation();
   const isFull = currentParticipants >= maxParticipants;
   const progressPercent = Math.min((currentParticipants / maxParticipants) * 100, 100);
+
+  // If buttonLabel is not provided, we won't default here because page.tsx controls logic.
+  // But for fallback "참가 신청하기" -> we use t('contestCTA.button.join') as default if needed.
+  // However, the prop `buttonLabel` comes from parent. Parent `page.tsx` needs to be updated to pass translated strings.
+  // I will assume `buttonLabel` passed from parent IS translated.
 
   return (
     <div className="sticky top-24 w-full bg-[#0f172a]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl space-y-6 animate-fade-in-up">
       <div className="space-y-4">
         <h3 className="text-lg font-bold text-white flex items-center gap-2">
             <Trophy className="text-neon-cyan" size={20} />
-            참가 신청
+            {t('contestCTA.title')}
         </h3>
         
         {/* Progress Bar */}
         <div className="flex justify-between text-xs text-muted-foreground mb-1">
-            <span>모집 현황</span>
-            <span>{currentParticipants} / {maxParticipants} 팀</span>
+            <span>{t('contestCTA.status')}</span>
+            <span>{currentParticipants} / {maxParticipants} {t('contestCTA.teams')}</span>
         </div>
         <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
             <div 
@@ -55,15 +63,15 @@ export default function ContestCTA({
       <div className="space-y-4 py-4 border-t border-white/10 border-b border-white/10">
         <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                <Coins size={16} /> 참가비
+                <Coins size={16} /> {t('contestCTA.entryFee')}
             </div>
             <div className="font-bold text-lg text-white font-mono">
-                {entryFee === 0 ? "무료" : `${entryFee.toLocaleString()} VP`}
+                {entryFee === 0 ? t('contestCTA.free') : `${entryFee.toLocaleString()} VP`}
             </div>
         </div>
         <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                <Trophy size={16} /> 총 상금
+                <Trophy size={16} /> {t('contestCTA.prizePool')}
             </div>
             <div className="font-bold text-lg text-neon-purple font-mono">
                 {prizePool}
@@ -71,7 +79,7 @@ export default function ContestCTA({
         </div>
         <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                <Clock size={16} /> 신청 마감
+                <Clock size={16} /> {t('contestCTA.deadline')}
             </div>
             <div className="font-bold text-sm text-white">
                 {deadline}
@@ -95,12 +103,12 @@ export default function ContestCTA({
       >
         <span className="relative z-10 flex items-center gap-2">
             {isLoading ? (
-                "処理中..."
+                t('contestCTA.button.processing')
             ) : (isFull && variant === 'primary') ? (
-                "募集終了"
+                t('contestCTA.button.closed')
             ) : (
                 <>
-                    {buttonLabel} {variant === 'primary' && <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />}
+                    {buttonLabel || t('contestCTA.button.join')} {variant === 'primary' && <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />}
                 </>
             )}
         </span>
@@ -111,7 +119,7 @@ export default function ContestCTA({
 
       {!isLoggedIn && (
         <p className="text-xs text-center text-muted-foreground">
-            참가하려면 <span className="text-white underline cursor-pointer">로그인</span>이 필요합니다.
+            {t('contestCTA.loginRequired')}
         </p>
       )}
     </div>

@@ -1,31 +1,13 @@
-import { api } from '@/lib/api-client';
-import { ApiResponse } from '@/types/api';
-
-export interface UploadResponse {
-  url: string;
-  uploaded_at: string;
-}
+import { api } from "@/lib/api-client";
 
 export const storageService = {
   uploadContestBanner: async (file: File) => {
     const formData = new FormData();
-    formData.append('file', file);
-
-    return api.post<ApiResponse<UploadResponse>>('/v1/storage/contest-banner', formData, {
+    formData.append("file", file);
+    return api.post<{ data: { image_key: string; url: string } }>("/storage/contest-banner", formData, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
       },
-    });
-  },
-
-  uploadUserProfile: async (file: File) => {
-    const formData = new FormData();
-    formData.append('file', file);
-
-    return api.post<ApiResponse<UploadResponse>>('/v1/storage/user-profile', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
     });
   }
 };

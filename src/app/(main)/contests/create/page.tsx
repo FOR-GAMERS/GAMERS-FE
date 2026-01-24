@@ -24,8 +24,10 @@ import { useToast } from "@/context/ToastContext";
 import { GameType, ContestType } from "@/types/api";
 import { storageService } from "@/services/storage-service";
 import AnimatedSelect from "@/components/ui/AnimatedSelect";
+import { useTranslation } from "react-i18next";
 
 export default function CreateContestPage() {
+  const { t } = useTranslation();
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -76,7 +78,6 @@ export default function CreateContestPage() {
   const gameType = watch("game_type");
   const gamePointTableId = watch("game_point_table_id");
 
-  // GSAP Animation
   useGSAP(() => {
     gsap.from(".animate-section", {
         y: 30,
@@ -192,7 +193,7 @@ export default function CreateContestPage() {
             <Link href="/contests" className="p-2 hover:bg-white/10 rounded-full transition-colors text-muted-foreground hover:text-white">
                 <ChevronLeft size={24} />
             </Link>
-            <h1 className="text-lg font-bold tracking-tight">Create Contest</h1>
+            <h1 className="text-lg font-bold tracking-tight">{t('contestCreate.title')}</h1>
         </div>
       </header>
 
@@ -201,10 +202,10 @@ export default function CreateContestPage() {
             
             {/* 1. Title */}
             <section className="animate-section space-y-2">
-                <label className="text-sm font-medium text-muted-foreground ml-1">Contest Title</label>
+                <label className="text-sm font-medium text-muted-foreground ml-1">{t('contestCreate.form.titleLabel')}</label>
                 <input 
                     {...register("title")}
-                    placeholder="Enter contest title (e.g. 2026 Cyber League)"
+                    placeholder={t('contestCreate.form.titlePlaceholder')}
                     className="w-full bg-transparent text-3xl md:text-5xl font-black placeholder:text-white/10 border-b-2 border-white/10 focus:border-neon-cyan focus:outline-none py-4 transition-colors"
                     maxLength={64}
                 />
@@ -222,7 +223,7 @@ export default function CreateContestPage() {
                         ) : (
                             <div className="text-center p-6 space-y-2">
                                 <ImageIcon className="w-12 h-12 mx-auto text-white/30 group-hover:text-neon-purple transition-colors" />
-                                <p className="text-sm font-bold text-white/50">Upload Thumbnail</p>
+                                <p className="text-sm font-bold text-white/50">{t('contestCreate.form.thumbnail')}</p>
                             </div>
                         )}
                     </div>
@@ -238,7 +239,7 @@ export default function CreateContestPage() {
                                 name="max_team_count"
                                 render={({ field }) => (
                                     <AnimatedSelect
-                                        label="Max Teams"
+                                        label={t('contestCreate.form.maxTeams')}
                                         options={[
                                             { value: 4, label: "4 Teams" },
                                             { value: 8, label: "8 Teams" },
@@ -252,7 +253,7 @@ export default function CreateContestPage() {
                             />
                          </div>
                          <div className="space-y-2">
-                            <label className="text-xs font-bold uppercase text-muted-foreground ml-1">Team Size</label>
+                            <label className="text-xs font-bold uppercase text-muted-foreground ml-1">{t('contestCreate.form.teamSize')}</label>
                             <Controller
                                 control={control}
                                 name="total_team_member"
@@ -277,10 +278,10 @@ export default function CreateContestPage() {
                                 name="contest_type"
                                 render={({ field }) => (
                                     <AnimatedSelect
-                                        label="Contest Type"
+                                        label={t('contestCreate.form.contestType')}
                                         options={[
-                                            { value: "TOURNAMENT", label: "Tournament" },
-                                            { value: "LEAGUE", label: "League" }
+                                            { value: "TOURNAMENT", label: t('contestCreate.options.tournament') },
+                                            { value: "LEAGUE", label: t('contestCreate.options.league') }
                                         ]}
                                         value={field.value}
                                         onChange={field.onChange}
@@ -294,7 +295,7 @@ export default function CreateContestPage() {
                                 name="game_type"
                                 render={({ field }) => (
                                     <AnimatedSelect
-                                        label="Game Type"
+                                        label={t('contestCreate.form.gameType')}
                                         options={[
                                             { value: "VALORANT", label: "Valorant" },
                                             { value: "LOL", label: "League of Legends" },
@@ -308,17 +309,17 @@ export default function CreateContestPage() {
                             />
                          </div>
                          <div className="space-y-2">
-                            <label className="text-xs font-bold uppercase text-muted-foreground">Start Date</label>
+                            <label className="text-xs font-bold uppercase text-muted-foreground">{t('contestCreate.form.startDate')}</label>
                             <input type="datetime-local" {...register("started_at")} className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-neon-cyan outline-none dark-calendar" />
                             {errors.started_at && <p className="text-red-500 text-xs">{errors.started_at.message}</p>}
                          </div>
                          <div className="space-y-2">
-                            <label className="text-xs font-bold uppercase text-muted-foreground">End Date</label>
+                            <label className="text-xs font-bold uppercase text-muted-foreground">{t('contestCreate.form.endDate')}</label>
                             <input type="datetime-local" {...register("ended_at")} className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-neon-cyan outline-none dark-calendar" />
                             {errors.ended_at && <p className="text-red-500 text-xs">{errors.ended_at.message}</p>}
                          </div>
                          <div className="space-y-2">
-                            <label className="text-xs font-bold uppercase text-muted-foreground">Total Points</label>
+                            <label className="text-xs font-bold uppercase text-muted-foreground">{t('contestCreate.form.totalPoints')}</label>
                             <Controller
                                 control={control}
                                 name="total_point"
@@ -347,7 +348,7 @@ export default function CreateContestPage() {
                                     <div className="w-11 h-6 bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white/50 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-neon-cyan peer-checked:after:bg-white peer-checked:after:shadow-[0_0_5px_rgba(255,255,255,0.5)] transition-colors"></div>
                                 </label>
                                 <label htmlFor="auto_start" className="text-sm font-bold text-white cursor-pointer select-none hover:text-neon-cyan transition-colors">
-                                    Auto Start when full?
+                                    {t('contestCreate.form.autoStart')}
                                 </label>
                              </div>
                     </div>
@@ -371,10 +372,10 @@ export default function CreateContestPage() {
             {/* Markdown Editor */}
             <section className="animate-section space-y-4">
                 <div className="flex items-center justify-between">
-                    <label className="text-sm font-medium text-muted-foreground ml-1">Description (Markdown)</label>
+                    <label className="text-sm font-medium text-muted-foreground ml-1">{t('contestCreate.form.description')}</label>
                     <div className="flex lg:hidden bg-white/5 rounded-lg p-1 gap-1">
-                        <button type="button" onClick={() => setEditorTab('write')} className={cn("px-3 py-1 text-xs rounded-md transition-all", editorTab === 'write' ? "bg-white/10 text-white font-bold" : "text-muted-foreground")}>Edit</button>
-                        <button type="button" onClick={() => setEditorTab('preview')} className={cn("px-3 py-1 text-xs rounded-md transition-all", editorTab === 'preview' ? "bg-white/10 text-white font-bold" : "text-muted-foreground")}>Preview</button>
+                        <button type="button" onClick={() => setEditorTab('write')} className={cn("px-3 py-1 text-xs rounded-md transition-all", editorTab === 'write' ? "bg-white/10 text-white font-bold" : "text-muted-foreground")}>{t('contestCreate.actions.edit')}</button>
+                        <button type="button" onClick={() => setEditorTab('preview')} className={cn("px-3 py-1 text-xs rounded-md transition-all", editorTab === 'preview' ? "bg-white/10 text-white font-bold" : "text-muted-foreground")}>{t('contestCreate.actions.preview')}</button>
                     </div>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-[400px]">
@@ -397,7 +398,7 @@ export default function CreateContestPage() {
             <div className="fixed bottom-0 left-0 right-0 p-4 bg-deep-black/90 backdrop-blur-xl border-t border-white/5 z-[60]">
                 <div className="container mx-auto max-w-5xl flex items-center justify-between">
                     <div className="text-sm text-muted-foreground">
-                        {isValid ? <span className="text-neon-cyan font-bold">Ready to Launch 🚀</span> : <span>Please fill in all required fields</span>}
+                        {isValid ? <span className="text-neon-cyan font-bold">{t('contestCreate.status.ready')}</span> : <span>{t('contestCreate.status.fillRequired')}</span>}
                     </div>
                     <button 
                         type="submit" 
@@ -407,11 +408,11 @@ export default function CreateContestPage() {
                         {(isSubmitting || isUploading) ? (
                             <>
                                 <Loader2 className="animate-spin" size={18} />
-                                Creating...
+                                {t('contestCreate.actions.creating')}
                             </>
                         ) : (
                             <>
-                                Create Contest <Upload size={18} />
+                                {t('contestCreate.actions.submit')} <Upload size={18} />
                             </>
                         )}
                     </button>

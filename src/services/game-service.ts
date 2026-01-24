@@ -3,35 +3,81 @@ import {
   ApiResponse, 
   GameResponse, 
   CreateGameRequest, 
-  UpdateGameRequest 
+  UpdateGameRequest,
+  PaginationResponse,
+  ContestMemberResponse
 } from '@/types/api';
 
 export const gameService = {
-  // Get all games for a specific contest
-  async getContestGames(contestId: number) {
-    // According to swagger: /api/contests/{contestId}/games
-    // Check swagger path in earlier step if needed, but this is standard pattern.
-    // Wait, step 29 shows: "/api/contests/{contestId}/games"
-    return api.get<ApiResponse<GameResponse[]>>(`/contests/${contestId}/games`);
+  // Game Lifecycle
+  async getGame(id: number) {
+    return api.get<ApiResponse<GameResponse>>(`/games/${id}`);
   },
 
-  // Create a new game
   async createGame(data: CreateGameRequest) {
-    // /api/games
     return api.post<ApiResponse<GameResponse>>('/games', data);
   },
 
-  // Update a game
-  // Need to find /api/games/{id} - I didn't see explicit Update Game path in previous snippets for /api/games/{id}, 
-  // but let's assume standard REST or check if I need to look it up.
-  // Step 29 shows "/api/games/{gameId}/game-teams".
-  // Step 15 shows "GAMERS-BE_internal_game_application_dto.UpdateGameRequest".
-  // Let's assume PATCH /api/games/{id} exists.
-  async updateGame(gameId: number, data: UpdateGameRequest) {
-     // I'll assume standard path. If it fails I'll check.
-    return api.patch<ApiResponse<GameResponse>>(`/games/${gameId}`, data);
+  async updateGame(id: number, data: UpdateGameRequest) {
+    return api.patch<ApiResponse<GameResponse>>(`/games/${id}`, data);
+  },
+
+  async deleteGame(id: number) {
+    return api.delete<void>(`/games/${id}`);
+  },
+
+  async startGame(id: number) {
+    return api.post<ApiResponse<GameResponse>>(`/games/${id}/start`);
+  },
+
+  async finishGame(id: number) {
+    return api.post<ApiResponse<GameResponse>>(`/games/${id}/finish`);
+  },
+
+  async cancelGame(id: number) {
+    return api.delete<ApiResponse<GameResponse>>(`/games/${id}/cancel`);
+  },
+
+  // Contest Games (Short-cut if not in contest-service, but usually handled there)
+  async getContestGames(contestId: number) {
+      return api.get<ApiResponse<GameResponse[]>>(`/contests/${contestId}/games`);
+  },
+
+  // Team Management within Game
+  async getGameMembers(id: number) {
+    return api.get<ApiResponse<ContestMemberResponse[]>>(`/games/${id}/members`);
+  },
+
+  async createGameTeam(id: number, data: { name?: string }) {
+      return api.post<ApiResponse<any>>(`/games/${id}/team`, data);
+  },
+
+  async inviteToTeam(id: number, userId: number) {
+      return api.post<ApiResponse<void>>(`/games/${id}/team/invite`, { userId });
+  },
+
+  async acceptInvitation(id: number) {
+      return api.post<ApiResponse<void>>(`/games/${id}/team/invite/accept`);
+  },
+
+  async rejectInvitation(id: number) {
+      return api.post<ApiResponse<void>>(`/games/${id}/team/invite/reject`);
+  },
+
+  async kickMember(id: number, userId: number) {
+      return api.post<ApiResponse<void>>(`/games/${id}/team/kick`, { userId });
+  },
+
+  async leaveTeam(id: number) {
+      return api.post<ApiResponse<void>>(`/games/${id}/team/leave`);
+  },
+
+  async finalizeTeams(id: number) {
+      return api.post<ApiResponse<void>>(`/games/${id}/team/finalize`);
   },
   
-  // Delete a game?
-  // Not explicitly asked for panel, but good to have.
+  // Game Teams
+  async getGameTeams(id: number) {
+      return api.get<ApiResponse<any>>(`/games/${id}/game-teams`);
+  }
 };

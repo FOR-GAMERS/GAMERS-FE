@@ -5,25 +5,28 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { AlertTriangle, Clock, EyeOff } from "lucide-react";
 
+import { useTranslation } from "react-i18next";
+
 const problems = [
   {
     icon: AlertTriangle,
-    title: "数十人のメンバー管理、難しくないですか？",
-    description: "手動での管理は限界があります。自動化でストレスフリーに。",
+    titleKey: "landing.problem.management.title",
+    descriptionKey: "landing.problem.management.description",
   },
   {
     icon: Clock,
-    title: "毎回振替される設定ミスや試合遅延",
-    description: "設定ミスで試合が台無し...そんな経験はもう終わりです。",
+    titleKey: "landing.problem.settings.title",
+    descriptionKey: "landing.problem.settings.description",
   },
   {
     icon: EyeOff,
-    title: "誰が参加してるのか一瞬で分かりづらい！",
-    description: "可視化されたロビーで、参加状況をリアルタイムに把握。",
+    titleKey: "landing.problem.status.title",
+    descriptionKey: "landing.problem.status.description",
   },
 ];
 
 export default function Problem() {
+  const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
@@ -67,10 +70,12 @@ export default function Problem() {
       <div className="container px-4 mx-auto">
         <div ref={headerRef} className="container mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-             <span className="text-destructive">ゲーミング</span>をもっと快適に
+             {t('landing.problem.headlinePrefix')}
+             <span className="text-destructive">{t('landing.problem.headlineHighlight')}</span>
+             {t('landing.problem.headlineSuffix')}
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            快適なゲーミング環境を取り戻しましょう。
+            {t('landing.problem.subheadline')}
           </p>
         </div>
 
@@ -86,9 +91,9 @@ export default function Problem() {
               <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <problem.icon className="w-7 h-7 text-destructive" />
               </div>
-              <h3 className="text-xl font-bold mb-3">{problem.title}</h3>
+              <h3 className="text-xl font-bold mb-3">{t(problem.titleKey)}</h3>
               <p className="text-muted-foreground leading-relaxed">
-                {problem.description}
+                {t(problem.descriptionKey)}
               </p>
             </div>
           ))}

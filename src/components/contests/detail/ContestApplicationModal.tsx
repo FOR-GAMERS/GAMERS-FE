@@ -7,10 +7,12 @@ import { contestService } from "@/services/contest-service";
 import { Loader2, ShieldCheck, AlertTriangle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+import { useTranslation } from "react-i18next";
+
 interface ContestApplicationModalProps {
     isOpen: boolean;
     onClose: () => void;
-    onConfirm: () => void;
+    onConfirm: (data?: any) => void;
     contestId: number;
     scoreTableId?: number;
     isApplying: boolean;
@@ -24,6 +26,7 @@ export default function ContestApplicationModal({
     scoreTableId,
     isApplying
 }: ContestApplicationModalProps) {
+    const { t } = useTranslation();
     const [shouldFetchPoints, setShouldFetchPoints] = useState(false);
 
     // Fetch Points Query
@@ -41,7 +44,15 @@ export default function ContestApplicationModal({
     };
 
     const handleConfirm = () => {
-        onConfirm();
+        if (pointData) {
+            onConfirm({
+                point: pointData.final_point,
+                current_tier: pointData.current_tier_patched,
+                peak_tier: pointData.peak_tier_patched
+            });
+        } else {
+            onConfirm();
+        }
     };
 
     return (
@@ -51,17 +62,16 @@ export default function ContestApplicationModal({
                 setShouldFetchPoints(false);
                 onClose();
             }} 
-            title="Contest Application"
+            title={t('contestModal.title')}
         >
             <div className="space-y-6">
                 <div className="bg-white/5 p-4 rounded-xl border border-white/10">
                     <h3 className="text-sm font-bold text-muted-foreground mb-2 flex items-center gap-2">
                         <ShieldCheck size={16} className="text-neon-cyan" />
-                        Qualification Check
+                        {t('contestModal.qualification')}
                     </h3>
                     <p className="text-sm text-white/80 leading-relaxed">
-                        To participate in this contest, we need to verify your Valorant rank and calculate your contest points.
-                        Please click the button below to calculate your points.
+                        {t('contestModal.description')}
                     </p>
                 </div>
 
@@ -78,7 +88,7 @@ export default function ContestApplicationModal({
                                     : "bg-white/5 border-white/5 text-white/30 cursor-not-allowed"
                             )}
                         >
-                            {scoreTableId ? "Calculate My Points" : "Point Table Not Configured"}
+                            {scoreTableId ? t('contestModal.calculate') : t('contestModal.notConfigured')}
                         </button>
                     ) : (
                         <div className={cn(
@@ -90,14 +100,14 @@ export default function ContestApplicationModal({
                             {isLoading && (
                                 <>
                                     <Loader2 className="w-8 h-8 text-neon-cyan animate-spin" />
-                                    <p className="text-sm text-muted-foreground">Calculating points...</p>
+                                    <p className="text-sm text-muted-foreground">{t('contestModal.calculating')}</p>
                                 </>
                             )}
                             
                             {error && (
                                 <>
                                     <AlertTriangle className="w-8 h-8 text-red-500" />
-                                    <p className="text-sm text-red-400 font-bold">Failed to calculate points</p>
+                                    <p className="text-sm text-red-400 font-bold">{t('contestModal.failed')}</p>
                                     <p className="text-xs text-muted-foreground text-center">
                                         {(error as any).response?.data?.message || "Please make sure your Valorant account is linked."}
                                     </p>
@@ -105,20 +115,26 @@ export default function ContestApplicationModal({
                                         onClick={() => window.open('/my', '_blank')}
                                         className="text-xs text-white underline mt-2"
                                     >
-                                        Check Profile Settings
+                                        {t('contestModal.checkProfile')}
                                     </button>
                                 </>
                             )}
 
                             {isSuccess && pointData && (
                                 <>
-                                    <div className="text-center space-y-1">
-                                        <p className="text-xs text-muted-foreground uppercase font-bold">Current Tier</p>
-                                        <p className="text-lg font-bold text-white">{pointData.current_tier_patched}</p>
+                                    <div className="grid grid-cols-2 gap-4 w-full">
+                                        <div className="text-center space-y-1">
+                                            <p className="text-xs text-muted-foreground uppercase font-bold">{t('contestModal.currentTier')}</p>
+                                            <p className="text-lg font-bold text-white">{pointData.current_tier_patched}</p>
+                                        </div>
+                                        <div className="text-center space-y-1">
+                                            <p className="text-xs text-muted-foreground uppercase font-bold">{t('contestModal.peakTier')}</p>
+                                            <p className="text-lg font-bold text-white">{pointData.peak_tier_patched}</p>
+                                        </div>
                                     </div>
                                     <div className="w-full h-px bg-white/10 my-1" />
                                     <div className="text-center space-y-1">
-                                        <p className="text-xs text-neon-cyan uppercase font-bold">Calculated Points</p>
+                                        <p className="text-xs text-neon-cyan uppercase font-bold">{t('contestModal.calculatedPoints')}</p>
                                         <p className="text-3xl font-black text-neon-cyan drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]">
                                             {pointData.final_point} PT
                                         </p>
@@ -135,7 +151,7 @@ export default function ContestApplicationModal({
                         onClick={onClose}
                         className="flex-1 py-3 bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-white rounded-xl font-bold transition-colors"
                     >
-                        Cancel
+                        {t('contestModal.cancel')}
                     </button>
                     <button 
                         onClick={handleConfirm}
@@ -149,7 +165,7 @@ export default function ContestApplicationModal({
                                 : "bg-neon-cyan text-black hover:bg-cyan-300 hover:shadow-[0_0_20px_rgba(34,211,238,0.5)]"
                         )}
                     >
-                        {isApplying ? <Loader2 className="w-4 h-4 animate-spin" /> : "Apply Contest"}
+                        {isApplying ? <Loader2 className="w-4 h-4 animate-spin" /> : t('contestModal.createTeam')}
                     </button>
                 </div>
             </div>

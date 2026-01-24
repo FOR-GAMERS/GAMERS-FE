@@ -62,8 +62,8 @@ export const contestService = {
     return api.get<ApiResponse<ContestApplicationResponse[]>>(`/contests/${contestId}/applications`);
   },
 
-  async applyContest(contestId: number) {
-    return api.post<ApiResponse<void>>(`/contests/${contestId}/applications`);
+  async applyContest(contestId: number, data?: { point?: number; current_tier?: string; peak_tier?: string }) {
+    return api.post<ApiResponse<void>>(`/contests/${contestId}/applications`, data);
   },
 
   async cancelApplication(contestId: number) {
@@ -94,13 +94,43 @@ export const contestService = {
   },
 
   // Members
-  async getContestMembers(contestId: number, params?: { page?: number; page_size?: number }) {
+  async getContestMembers(contestId: number, params?: { 
+    page?: number; 
+    page_size?: number;
+    sort_by?: string;
+    order?: 'asc' | 'desc';
+  }) {
     return api.get<ApiResponse<PaginationResponse<ContestMemberResponse>>>(`/contests/${contestId}/members`, { params });
   },
 
-  // Games
+  // Games & Teams
   async getContestGames(contestId: number) {
       return api.get<ApiResponse<GameResponse[]>>(`/contests/${contestId}/games`);
+  },
+
+  async getGameMembers(gameId: number) {
+      return api.get<ApiResponse<{
+          discord_id: string;
+          game_id: number;
+          member_type: string;
+          tag: string;
+          team_id: number;
+          user_id: number;
+          username: string;
+          avatar?: string; // Assuming based on other responses
+      }[]>>(`/games/${gameId}/members`);
+  },
+
+  async inviteUserToTeam(gameId: number, userId: number) {
+      return api.post<ApiResponse<void>>(`/games/${gameId}/team/invite`, { user_id: userId });
+  },
+
+  async deleteTeam(gameId: number) {
+      return api.delete<ApiResponse<void>>(`/games/${gameId}/team`);
+  },
+
+  async leaveTeam(gameId: number) {
+      return api.post<ApiResponse<void>>(`/games/${gameId}/team/leave`);
   },
 
   // Valorant Points
@@ -108,5 +138,16 @@ export const contestService = {
       return api.get<ApiResponse<ContestPointResponse>>(`/contests/${contestId}/valorant-point`, {
         params: { scoreTableId }
       });
-  }
+  },
+  // Status
+  async getMyContestStatus(contestId: number) {
+    return api.get<ApiResponse<{
+        is_leader: boolean;
+        is_member: boolean;
+        has_applied: boolean;
+        application_status: string;
+        member_type: 'NORMAL' | 'STAFF' | 'LEADER';
+    }>>(`/contests/${contestId}/status/me`);
+  },
 };
+

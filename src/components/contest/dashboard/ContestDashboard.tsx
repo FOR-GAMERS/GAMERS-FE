@@ -1,0 +1,189 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { Play, Square, Settings, Users, Trophy, Calendar, CheckCircle2, AlertTriangle, Loader2, Trash2 } from "lucide-react";
+import { api } from "@/lib/api-client";
+import { ContestResponse, ContestStatus } from "@/types/api";
+import { contestService } from "@/services/contest-service";
+import { useToast } from "@/context/ToastContext";
+import { BracketGenerator } from "./BracketGenerator";
+import { cn } from "@/lib/utils";
+import ReceivedApplicationsSection from "@/components/mypage/ReceivedApplicationsSection";
+
+interface ContestDashboardProps {
+    contestId: number;
+}
+
+import { useTranslation } from "react-i18next";
+// Other imports remain...
+
+export function ContestDashboard({ contestId }: ContestDashboardProps) {
+  const { t } = useTranslation();
+  // ... existing hooks
+  const router = useRouter();
+  const { addToast } = useToast();
+  const [contest, setContest] = useState<ContestResponse | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<'overview' | 'bracket' | 'settings' | 'applications'>('overview');
+  const [participants, setParticipants] = useState<any[]>([]); 
+
+  // ... fetchContest logic remains
+
+  // ... handlers remain
+
+  if (loading) {
+     // ...
+       return (
+        <div className="flex h-64 items-center justify-center">
+            <Loader2 className="w-8 h-8 text-neon-cyan animate-spin" />
+        </div>
+      );
+  }
+
+  if (!contest) return <div>Contest not found</div>;
+
+  const isActive = contest.contest_status !== 'FINISHED' && contest.contest_status !== 'CANCELLED'; 
+
+  return (
+    <div className="space-y-6">
+        {/* Top Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+             <div className="bg-neutral-900/50 border border-white/10 rounded-xl p-4 flex items-center gap-4">
+                 <div className="w-12 h-12 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-500">
+                     <Users size={24} />
+                 </div>
+                 <div>
+                     <div className="text-2xl font-bold text-white">{participants.length}</div>
+                     <div className="text-xs text-neutral-400 uppercase tracking-wide">{t('contestDashboard.stats.participants')}</div>
+                 </div>
+             </div>
+             
+             <div className="bg-neutral-900/50 border border-white/10 rounded-xl p-4 flex items-center gap-4">
+                 <div className="w-12 h-12 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500">
+                     <CheckCircle2 size={24} />
+                 </div>
+                 <div>
+                     <div className="text-lg font-bold text-white font-mono">{contest.contest_status}</div>
+                     <div className="text-xs text-neutral-400 uppercase tracking-wide">{t('contestDashboard.stats.status')}</div>
+                 </div>
+             </div>
+
+             {/* Actions */}
+             <div className="md:col-span-2 flex gap-3">
+                 {contest.contest_status === 'RECRUITING' || contest.contest_status === 'PREPARING' ? (
+                     <button 
+                        onClick={handleStartContest}
+                        className="flex-1 bg-neon-cyan hover:bg-neon-cyan/80 text-black font-bold rounded-xl flex flex-col items-center justify-center gap-1 transition-all shadow-[0_0_15px_rgba(0,243,255,0.2)]"
+                     >
+                         <Play size={20} />
+                         <span>{t('contestDashboard.actions.start')}</span>
+                     </button>
+                 ) : (
+                    <button disabled className="flex-1 bg-neutral-800 text-neutral-500 font-bold rounded-xl flex flex-col items-center justify-center gap-1 cursor-not-allowed border border-white/5">
+                        <Play size={20} />
+                         <span>{t('contestDashboard.actions.started')}</span>
+                    </button>
+                 )}
+
+                <button 
+                    onClick={handleStopContest}
+                    disabled={!isActive}
+                    className="flex-1 bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 font-bold rounded-xl flex flex-col items-center justify-center gap-1 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                    <Square size={20} fill="currentColor" />
+                    <span>{t('contestDashboard.actions.stop')}</span>
+                </button>
+
+                <button 
+                    onClick={handleDeleteContest}
+                    className="flex-1 bg-red-500 hover:bg-red-600 text-white font-bold rounded-xl flex flex-col items-center justify-center gap-1 transition-all shadow-[0_0_15px_rgba(239,68,68,0.2)]"
+                >
+                     <Trash2 size={20} />
+                    <span>{t('contestDashboard.actions.delete')}</span>
+                </button>
+             </div>
+        </div>
+
+        {/* Tabs */}
+        <div className="border-b border-white/10 flex gap-6">
+            <TabButton active={activeTab === 'overview'} onClick={() => setActiveTab('overview')} label={t('contestDashboard.tabs.overview')} icon={Trophy} />
+            <TabButton active={activeTab === 'applications'} onClick={() => setActiveTab('applications')} label={t('contestDashboard.tabs.applications')} icon={Users} />
+            <TabButton active={activeTab === 'bracket'} onClick={() => setActiveTab('bracket')} label={t('contestDashboard.tabs.bracket')} icon={Users} />
+            <TabButton active={activeTab === 'settings'} onClick={() => setActiveTab('settings')} label={t('contestDashboard.tabs.settings')} icon={Settings} />
+        </div>
+
+        {/* Content */}
+        <div className="min-h-[400px]">
+            {activeTab === 'overview' && (
+                <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                     <div className="bg-neutral-900/30 border border-white/5 p-6 rounded-xl">
+                         <h3 className="text-xl font-bold text-white mb-4">Contest Details</h3>
+                         <div className="grid grid-cols-2 gap-y-4 text-sm">
+                             <div>
+                                 <div className="text-neutral-500">Title</div>
+                                 <div className="text-white font-bold">{contest.title}</div>
+                             </div>
+                             <div>
+                                 <div className="text-neutral-500">Maximum Teams</div>
+                                 <div className="text-white font-bold">{contest.max_team_count || 'Unlimited'}</div>
+                             </div>
+                             <div>
+                                 <div className="text-neutral-500">Start Date</div>
+                                 <div className="text-white font-bold">{contest.started_at ? new Date(contest.started_at).toLocaleDateString() : 'Not set'}</div>
+                             </div>
+                             <div>
+                                 <div className="text-neutral-500">End Date</div>
+                                 <div className="text-white font-bold">{contest.ended_at ? new Date(contest.ended_at).toLocaleDateString() : 'Not set'}</div>
+                             </div>
+                         </div>
+                     </div>
+                     
+                     <div className="bg-amber-500/5 border border-amber-500/20 p-4 rounded-xl flex gap-3 text-amber-500 text-sm">
+                         <AlertTriangle className="shrink-0" />
+                         <p>Please ensure all teams are shuffled and brackets are generated before starting the contest. Once started, applications are closed and data is finalized.</p>
+                     </div>
+                </div>
+            )}
+
+            {activeTab === 'applications' && (
+                <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    <ReceivedApplicationsSection contestId={contestId} />
+                </div>
+            )}
+
+            {activeTab === 'bracket' && (
+                <div className="h-[600px] animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    <BracketGenerator participants={participants} />
+                </div>
+            )}
+
+            {activeTab === 'settings' && (
+                <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    <div className="p-10 text-center text-neutral-500 border border-dashed border-white/10 rounded-xl">
+                        Settings panel under construction
+                    </div>
+                </div>
+            )}
+        </div>
+    </div>
+  );
+}
+
+function TabButton({ active, onClick, label, icon: Icon }: any) {
+    return (
+        <button 
+            onClick={onClick}
+            className={cn(
+                "flex items-center gap-2 pb-4 text-sm font-bold uppercase tracking-wider transition-colors relative",
+                active ? "text-neon-cyan" : "text-neutral-500 hover:text-white"
+            )}
+        >
+            <Icon size={16} />
+            {label}
+            {active && (
+                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-neon-cyan shadow-[0_0_10px_rgba(0,243,255,0.5)]" />
+            )}
+        </button>
+    );
+}

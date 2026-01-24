@@ -8,8 +8,11 @@ import { Trophy, Filter, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight,
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useContests } from "@/hooks/use-contests";
+import AnimatedSelect from "@/components/ui/AnimatedSelect";
+import { useTranslation } from "react-i18next";
 
 export default function Contests() {
+  const { t } = useTranslation();
   const [filter, setFilter] = useState<"LATEST" | "STATUS">("LATEST");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 15;
@@ -90,24 +93,23 @@ export default function Contests() {
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
             <h1 className="text-3xl md:text-4xl font-black tracking-tight flex items-center gap-3">
                 <Trophy className="text-primary w-8 h-8 md:w-10 md:h-10" />
-                開催中の大会
+                {t('contestsList.title')}
             </h1>
             
-            <div className="flex items-center gap-3">
-                <div className="relative w-full md:w-auto">
-                    <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <select 
-                        value={filter}
-                        onChange={(e) => {
-                            setFilter(e.target.value as "LATEST" | "STATUS");
-                            setCurrentPage(1);
-                        }}
-                        className="w-full md:w-auto appearance-none bg-[#0f172a] border border-white/10 rounded-full pl-10 pr-8 py-2 text-sm font-bold focus:outline-none focus:border-primary/50 cursor-pointer hover:bg-white/5 transition-colors"
-                    >
-                        <option value="LATEST">並び替え: 作成日</option>
-                        <option value="STATUS">並び替え: ステータス</option>
-                    </select>
-                </div>
+            <div className="flex items-center gap-3 w-full md:w-auto">
+                <AnimatedSelect
+                    value={filter}
+                    onChange={(val) => {
+                        setFilter(val as "LATEST" | "STATUS");
+                        setCurrentPage(1);
+                    }}
+                    options={[
+                        { value: "LATEST", label: t('contestsList.filter.latest') },
+                        { value: "STATUS", label: t('contestsList.filter.status') }
+                    ]}
+                    startIcon={<Filter className="w-4 h-4" />}
+                    className="w-full md:w-56"
+                />
             </div>
         </div>
 
@@ -125,7 +127,7 @@ export default function Contests() {
           ) : (
              <div className="col-span-full h-96 flex flex-col items-center justify-center text-muted-foreground">
                 <Trophy className="w-16 h-16 mb-4 opacity-20" />
-                <p>No contests found.</p>
+                <p>{t('contestsList.noContests')}</p>
              </div>
           )}
         </div>

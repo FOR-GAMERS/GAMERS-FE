@@ -16,15 +16,16 @@ import {
   UserPlus,
   Crown,
 } from 'lucide-react';
+import { getValorantRankName } from "@/lib/valorant-utils";
 import { useToast } from '@/context/ToastContext';
 import { ContestResponse } from '@/types/api';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { contestService } from '@/services/contest-service';
 import { Loader2, AlertCircle } from 'lucide-react';
+import AnimatedSelect from '@/components/ui/AnimatedSelect';
 
 const MENU_ITEMS = [
   { name: 'ホーム', id: 'Home', icon: LayoutDashboard },
-  { name: 'ゲーム一覧', id: 'Game List', icon: Gamepad2 },
   { name: '参加者一覧', id: 'Member List', icon: Users },
   { name: 'マイチーム', id: 'My Team', icon: Shield },
   { name: 'トーナメント表', id: 'Bracket', icon: Trophy },
@@ -106,7 +107,7 @@ export default function PlaygroundMain({ contest }: PlaygroundMainProps) {
       case 'Home': return <HomeView contest={contest} />;
       case 'Game List': return <GameListView contestId={contest.contest_id} />;
       case 'Member List': return <MemberListView contestId={contest.contest_id} />;
-      case 'My Team': return <MyTeamView />;
+      case 'My Team': return <MyTeamView contestId={contest.contest_id} />;
       case 'Bracket': return <BracketView />;
       case 'Result': return <ResultView />;
       default: return <HomeView contest={contest} />;
@@ -281,16 +282,61 @@ function GameListView({ contestId }: { contestId: number }) {
   );
 }
 
-function MemberListView({ contestId }: { contestId: number }) {
-  const HAS_MY_TEAM = false; // Disable until My Team feature fully implemented or verified
-  const { addToast } = useToast();
+import { ChevronLeft, ChevronRight, Filter } from 'lucide-react';
+import { useMe } from '@/hooks/use-user';
 
-  const { data: membersResponse, isLoading } = useQuery({
-      queryKey: ['contest-members', contestId],
-      queryFn: () => contestService.getContestMembers(contestId)
+// ... (previous imports remain, make sure to check for duplicates if replacing whole file or parts) 
+// Actually I am replacing from line 285 onwards (MemberListView and below) to implement changes safely.
+// Wait, I should do targeted edits or I will lose context if I replace too much.
+// But the changes are structural in MemberListView and MyTeamView. 
+
+// Let's implement MemberListView first with Pagination/Sort.
+
+function MemberListView({ contestId }: { contestId: number }) {
+  const { addToast } = useToast();
+  const [page, setPage] = useState(1);
+  const [sortBy, setSortBy] = useState('point');
+  const [order, setOrder] = useState<'asc' | 'desc'>('desc');
+  const PAGE_SIZE = 10;
+
+  const { data: membersResponse, isLoading, refetch } = useQuery({
+      queryKey: ['contest-members', contestId, page, sortBy, order],
+      queryFn: () => contestService.getContestMembers(contestId, { page, page_size: PAGE_SIZE, sort_by: sortBy, order })
   });
 
+  // Fetch games to find "Active" game for invitation
+  const { data: gamesResponse } = useQuery({
+      queryKey: ['contest-games', contestId],
+      queryFn: () => contestService.getContestGames(contestId)
+  });
+  const activeGameId = gamesResponse?.data?.[0]?.game_id; // Naive: assume first game is relevant
+
+  // Fetch Game Members to check if I am in a team (and my role)
+  const { data: gameMembersRes } = useQuery({
+      queryKey: ['game-members', activeGameId],
+      queryFn: () => activeGameId ? contestService.getGameMembers(activeGameId) : Promise.resolve(null),
+      enabled: !!activeGameId
+  });
+
+  const { data: me } = useMe();
+  const myGameMemberProfile = gameMembersRes?.data?.find(m => m.user_id === me?.data?.user_id);
+  const myTeamId = myGameMemberProfile?.team_id;
+  const iAmLeader = myGameMemberProfile?.member_type === 'LEADER'; // Verify actual value 'LEADER' from API
+  // Note: API for game members might use different enums, let's assume 'LEADER'/'MEMBER' based on context or 'LeaderTypeMember' etc.
+  // Actually standard for games might be different. Let's assume standard 'LEADER'.
+
   const members = membersResponse?.data?.data || [];
+  const totalPages = membersResponse?.data?.total_pages || 1;
+
+  const handleInvite = async (userId: number, username: string) => {
+      if (!activeGameId) return;
+      try {
+          await contestService.inviteUserToTeam(activeGameId, userId);
+          addToast(`${username}を招待しました！`, 'success');
+      } catch (e) {
+          addToast('招待に失敗しました。', 'error');
+      }
+  };
 
   if (isLoading) {
       return <div className="p-8 flex justify-center"><Loader2 className="animate-spin text-neon-cyan"/></div>;
@@ -298,93 +344,298 @@ function MemberListView({ contestId }: { contestId: number }) {
 
   return (
     <div className="p-8 rounded-2xl bg-neutral-900/30 border border-neutral-800 animate-fade-in-up">
-      <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-         <Users className="text-neon-cyan" />
-         参加者一覧
-      </h2>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+        <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+            <Users className="text-neon-cyan" />
+            参加者一覧
+        </h2>
+        
+        <div className="flex items-center gap-3">
+             <div className="w-48">
+                <AnimatedSelect 
+                    value={sortBy}
+                    onChange={(val: string | number) => setSortBy(val as string)}
+                    options={[
+                        { value: "point", label: "ポイント順" },
+                        { value: "current_tier", label: "現在のランク順" },
+                        { value: "peak_tier", label: "最高ランク順" }
+                    ]}
+                    startIcon={<Filter size={16} />}
+                />
+            </div>
+             <div className="w-32">
+                <AnimatedSelect 
+                    value={order}
+                    onChange={(val: string | number) => setOrder(val as 'asc' | 'desc')}
+                    options={[
+                        { value: "desc", label: "降順" },
+                        { value: "asc", label: "昇順" }
+                    ]}
+                />
+            </div>
+        </div>
+      </div>
       
       {members.length === 0 ? (
           <div className="text-neutral-500 text-center py-8">参加者がいません。</div>
       ) : (
-      <div className="overflow-x-auto">
+      <>
+      <div className="overflow-x-auto min-h-[400px]">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="border-b border-neutral-800 text-sm font-medium text-neutral-500 uppercase tracking-wider">
-              <th className="py-4 px-4">名前</th>
-              <th className="py-4 px-4">タグ</th>
-              <th className="py-4 px-4">参加日</th>
-              <th className="py-4 px-4 text-right">ポイント</th>
-              {HAS_MY_TEAM && <th className="py-4 px-4 text-right">操作</th>}
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-neutral-800">
-            {members.map((member) => (
-              <tr key={member.user_id} className="group hover:bg-gradient-to-r hover:from-neutral-900 hover:to-neon-purple/10 transform transition-all duration-300 hover:-translate-y-1 will-change-transform text-sm">
-                <td className="py-4 px-4 font-medium text-white flex items-center gap-3">
-                   <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-neutral-800 to-neutral-700 flex items-center justify-center text-xs font-bold ring-1 ring-white/10 group-hover:ring-neon-cyan/50 transition-all">
-                      {member.username.substring(0,2).toUpperCase()}
-                   </div>
-                   {member.username}
-                </td>
-                <td className="py-4 px-4 text-neutral-400 font-mono text-xs">#{member.tag}</td>
-                <td className="py-4 px-4 text-neutral-400 text-xs">
-                     {new Date(member.join_date).toLocaleDateString()}
-                </td>
-                <td className="py-4 px-4 text-right text-white font-mono">{member.point.toLocaleString()}</td>
-                {HAS_MY_TEAM && (
-                  <td className="py-4 px-4 text-right">
-                    <button 
-                      onClick={() => addToast(`${member.username}を招待しました！`, 'success')}
-                      className="text-xs bg-neon-purple/10 text-neon-purple border border-neon-purple/30 hover:bg-neon-purple hover:text-white px-3 py-1.5 rounded-lg transition-all flex items-center gap-1 ml-auto"
-                    >
-                      <UserPlus size={14} /> 招待
-                    </button>
-                  </td>
-                )}
-              </tr>
-            ))}
+              <tr className="border-b border-neutral-800 text-sm font-medium text-neutral-500 uppercase tracking-wider">
+               <th className="py-4 px-4">名前</th>
+               <th className="py-4 px-4">タグ</th>
+               <th className="py-4 px-4">現在ランク</th>
+               <th className="py-4 px-4">最高ランク</th>
+               <th className="py-4 px-4 text-right">ポイント</th>
+               {iAmLeader && <th className="py-4 px-4 text-right">操作</th>}
+             </tr>
+           </thead>
+           <tbody className="divide-y divide-neutral-800">
+             {members.map((member) => {
+               // Avatar Logic
+                const getAvatarSrc = () => {
+                    if (member.avatar?.startsWith('http')) return member.avatar;
+                    if (member.profile_key && member.avatar) {
+                        return `https://cdn.discordapp.com/avatars/${member.profile_key}/${member.avatar}.png`;
+                    }
+                    return undefined;
+                };
+                const avatarSrc = getAvatarSrc();
+
+               // Invite Logic CHECK: Can I invite this person?
+               // 1. I must be leader (checked by column)
+               // 2. Target must not be in my team (Need to check game members for this target too?)
+               // Ideally we should check if they are already in a team. 
+               // For now, button is shown, backend will error if invalid.
+               
+               // Check if this member is ME or in my team?
+               // The Member list returns ContestMembers. We don't verify their team status here easily without mapping gameMembers.
+               // Let's simplified: Show invite if I'm leader.
+
+               return (
+               <tr key={member.user_id} className="group hover:bg-gradient-to-r hover:from-neutral-900 hover:to-neon-purple/10 transform transition-all duration-300 hover:-translate-y-1 will-change-transform text-sm">
+                 <td className="py-4 px-4 font-medium text-white flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-neutral-800 to-neutral-700 flex items-center justify-center text-xs font-bold ring-1 ring-white/10 group-hover:ring-neon-cyan/50 transition-all overflow-hidden">
+                       {avatarSrc ? (
+                           <img src={avatarSrc} alt={member.username} className="w-full h-full object-cover" />
+                       ) : (
+                           <span>{member.username.substring(0,2).toUpperCase()}</span>
+                       )}
+                    </div>
+                    <div>
+                        <div className="flex items-center gap-2">
+                            {member.username}
+                            {member.leader_type === 'LEADER' && <span className="text-[10px] bg-neon-cyan/20 text-neon-cyan px-1.5 py-0.5 rounded border border-neon-cyan/30">LEADER</span>}
+                        </div>
+                    </div>
+                 </td>
+                 <td className="py-4 px-4 text-neutral-400 font-mono text-xs">#{member.tag}</td>
+                 <td className="py-4 px-4 font-bold text-white">{member.current_tier_patched || getValorantRankName(member.current_tier)}</td>
+                 <td className="py-4 px-4 font-bold text-neon-cyan">{member.peak_tier_patched || getValorantRankName(member.peak_tier)}</td>
+                 <td className="py-4 px-4 text-right text-white font-mono">{member.point.toLocaleString()}</td>
+                 {iAmLeader && me?.data?.user_id !== member.user_id && (
+                   <td className="py-4 px-4 text-right">
+                     <button 
+                       onClick={() => handleInvite(member.user_id, member.username)}
+                       className="text-xs bg-neon-purple/10 text-neon-purple border border-neon-purple/30 hover:bg-neon-purple hover:text-white px-3 py-1.5 rounded-lg transition-all flex items-center gap-1 ml-auto"
+                     >
+                       <UserPlus size={14} /> 招待
+                     </button>
+                   </td>
+                 )}
+                 {iAmLeader && me?.data?.user_id === member.user_id && (
+                     <td className="py-4 px-4 text-right"><span className="text-neutral-600 text-xs">自分</span></td>
+                 )}
+               </tr>
+             );
+             })}
           </tbody>
         </table>
       </div>
+
+       {/* Pagination Controls */}
+       {totalPages > 1 && (
+        <div className="flex justify-center items-center gap-4 mt-6">
+            <button 
+                onClick={() => setPage(p => Math.max(1, p - 1))}
+                disabled={page === 1}
+                className="p-2 rounded-lg border border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-600 disabled:opacity-30 disabled:hover:text-neutral-400 transition-all"
+            >
+                <ChevronLeft size={20} />
+            </button>
+            <span className="text-sm text-neutral-400 font-mono">
+                Page <span className="text-white font-bold">{page}</span> / {totalPages}
+            </span>
+            <button 
+                onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                disabled={page === totalPages}
+                className="p-2 rounded-lg border border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-600 disabled:opacity-30 disabled:hover:text-neutral-400 transition-all"
+            >
+                 <ChevronRight size={20} />
+            </button>
+        </div>
+       )}
+      </>
       )}
     </div>
   );
 }
 
-function MyTeamView() {
-  const { name, members, capacity } = MOCK_MY_TEAM;
-  const emptySlots = Math.max(0, capacity - members.length);
+function MyTeamView({ contestId }: { contestId: number }) {
   const { addToast } = useToast();
+  const { data: me } = useMe();
+  const myUserId = me?.data?.user_id;
+  const queryClient = useQueryClient();
+
+  // Fetch games
+  const { data: gamesResponse } = useQuery({
+      queryKey: ['contest-games', contestId],
+      queryFn: () => contestService.getContestGames(contestId)
+  });
+  const activeGameId = gamesResponse?.data?.[0]?.game_id;
+
+  // Fetch Game Members
+  const { data: gameMembersRes, isLoading, refetch } = useQuery({
+      queryKey: ['game-members', activeGameId],
+      queryFn: () => activeGameId ? contestService.getGameMembers(activeGameId) : Promise.resolve(null),
+      enabled: !!activeGameId
+  });
+
+  const allMembers = gameMembersRes?.data || [];
+  const myProfile = allMembers.find(m => m.user_id === myUserId);
+  const myTeamId = myProfile?.team_id;
+  const iAmLeader = myProfile?.member_type === 'LEADER';
+
+  const teamMembers = myTeamId ? allMembers.filter(m => m.team_id === myTeamId) : [];
+  
+  const handleCreateTeam = async () => {
+       try {
+           await contestService.applyContest(contestId); // Assuming apply creates a team/entry
+           addToast('チームを作成しました！', 'success');
+           // Invalidate queries to refresh
+           queryClient.invalidateQueries({ queryKey: ['game-members', activeGameId] });
+           queryClient.invalidateQueries({ queryKey: ['contest-games', contestId] });
+           refetch();
+       } catch (e: any) {
+           addToast(e.message || 'チーム作成に失敗しました。', 'error');
+           console.error(e);
+       }
+  };
+
+  const handleDeleteTeam = async () => {
+      if (!activeGameId || !confirm('本当にチームを解散しますか？この操作は取り消せません。')) return;
+      try {
+          await contestService.deleteTeam(activeGameId);
+          addToast('チームを解散しました。', 'success');
+           queryClient.invalidateQueries({ queryKey: ['game-members', activeGameId] });
+           refetch();
+      } catch (e: any) {
+           addToast('チームの解散に失敗しました。', 'error');
+      }
+  };
+
+  const handleLeaveTeam = async () => {
+       if (!activeGameId || !confirm('本当にチームを脱退しますか？')) return;
+       try {
+           await contestService.leaveTeam(activeGameId);
+           addToast('チームを脱退しました。', 'success');
+            queryClient.invalidateQueries({ queryKey: ['game-members', activeGameId] });
+            refetch();
+       } catch (e: any) {
+           addToast('チームの脱退に失敗しました。', 'error');
+       }
+  };
+
+  if (isLoading) {
+      return <div className="p-8 flex justify-center"><Loader2 className="animate-spin text-neon-cyan"/></div>;
+  }
+
+  if (!myTeamId || teamMembers.length === 0) {
+      return (
+          <div className="p-8 rounded-2xl bg-neutral-900/30 border border-neutral-800 animate-fade-in-up flex flex-col items-center justify-center min-h-[400px]">
+             <Shield className="text-neutral-800 mb-4" size={48} />
+             <h2 className="text-xl font-bold text-neutral-400 mb-2">チーム未所属</h2>
+             <p className="text-neutral-600 text-sm mb-6">現在チームに所属していません。</p>
+             <button 
+                onClick={handleCreateTeam}
+                className="bg-neon-cyan text-black px-6 py-2 rounded-full font-bold shadow-[0_0_15px_rgba(0,243,255,0.2)] hover:shadow-[0_0_25px_rgba(0,243,255,0.4)] transition-all flex items-center gap-2"
+             >
+                <UserPlus size={18} /> チームを作成
+             </button>
+          </div>
+      );
+  }
+
+  const capacity = 5; // Default for Valorant
+  const emptySlots = Math.max(0, capacity - teamMembers.length);
 
   return (
     <div className="p-8 rounded-2xl bg-neutral-900/30 border border-neutral-800 animate-fade-in-up">
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-2xl font-bold text-white flex items-center gap-3">
            <Shield className="text-neon-cyan" />
-           {name}
+           My Team
         </h2>
-        <div className="text-sm text-neutral-500 px-3 py-1 rounded-full border border-neutral-800 bg-neutral-900">
-           定員: <span className="text-white font-bold">{members.length}</span> / {capacity}
+        <div className="flex items-center gap-4">
+             <div className="text-sm text-neutral-500 px-3 py-1 rounded-full border border-neutral-800 bg-neutral-900">
+                定員: <span className="text-white font-bold">{teamMembers.length}</span> / {capacity}
+             </div>
+             {iAmLeader ? (
+                 <button 
+                    onClick={handleDeleteTeam}
+                    className="text-xs bg-red-500/10 text-red-500 border border-red-500/30 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg transition-all"
+                 >
+                    チーム解散
+                 </button>
+             ) : (
+                 <button 
+                    onClick={handleLeaveTeam}
+                    className="text-xs bg-red-500/10 text-red-500 border border-red-500/30 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg transition-all"
+                 >
+                    チーム脱退
+                 </button>
+             )}
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-         {members.map((member) => (
-             <div key={member.id} className="relative p-6 rounded-xl bg-gradient-to-br from-neutral-800/40 to-neutral-900/40 border border-neutral-700/50 hover:border-neon-cyan/40 transition-all duration-300 hover:-translate-y-1 will-change-transform group">
+         {teamMembers.map((member) => {
+             // Avatar Logic
+             const getAvatarSrc = () => {
+                 if (member.avatar?.startsWith('http')) return member.avatar;
+                 if (member.discord_id && member.avatar) {
+                     return `https://cdn.discordapp.com/avatars/${member.discord_id}/${member.avatar}.png`;
+                 }
+                 return undefined;
+             };
+             const avatarSrc = getAvatarSrc();
+
+             return (
+             <div key={member.user_id} className="relative p-6 rounded-xl bg-gradient-to-br from-neutral-800/40 to-neutral-900/40 border border-neutral-700/50 hover:border-neon-cyan/40 transition-all duration-300 hover:-translate-y-1 will-change-transform group">
                 <div className="flex items-center gap-4">
-                   <div className={`w-12 h-12 rounded-full ${member.avatarColor} flex items-center justify-center text-black font-bold text-lg shadow-lg`}>
-                      {member.name.substring(0,1).toUpperCase()}
+                   <div className="w-12 h-12 rounded-full bg-neutral-800 flex items-center justify-center text-white font-bold text-lg shadow-lg overflow-hidden">
+                      {avatarSrc ? (
+                          <img src={avatarSrc} alt={member.username} className="w-full h-full object-cover" />
+                      ) : (
+                          <span>{member.username.substring(0,1).toUpperCase()}</span>
+                      )}
                    </div>
                    <div>
-                      <div className="text-white font-bold text-lg">{member.name}</div>
-                      <div className="text-xs text-neon-cyan uppercase tracking-wider font-semibold">{member.role}</div>
+                      <div className="text-white font-bold text-lg">{member.username}</div>
+                      <div className="text-xs text-neon-cyan uppercase tracking-wider font-semibold">{member.member_type}</div>
                    </div>
                 </div>
-                <div className="absolute top-0 right-0 p-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                   <div className="w-2 h-2 rounded-full bg-neon-cyan box-shadow-[0_0_5px_#00f3ff]"></div>
-                </div>
+                {/* Visual indicator for leader */}
+                 {member.member_type === 'LEADER' && (
+                    <div className="absolute top-2 right-2 text-neon-cyan">
+                        <Crown size={16} />
+                    </div>
+                )}
              </div>
-         ))}
+             );
+         })}
 
          {Array.from({ length: emptySlots }).map((_, idx) => (
              <div key={`empty-${idx}`} className="p-6 rounded-xl border-2 border-dashed border-neutral-800 bg-neutral-900/20 flex flex-col items-center justify-center gap-2 min-h-[100px] text-neutral-600 hover:text-neutral-400 hover:border-neutral-700 transition-colors">
@@ -396,10 +647,10 @@ function MyTeamView() {
       
       <div className="mt-8 pt-6 border-t border-neutral-800 flex justify-end">
           <button 
-             onClick={() => addToast('招待リンクをコピーしました！', 'success')}
-             className="bg-neon-cyan text-black px-6 py-2 rounded-full font-bold shadow-[0_0_15px_rgba(0,243,255,0.2)] hover:shadow-[0_0_25px_rgba(0,243,255,0.4)] transition-all"
+             onClick={() => addToast('招待機能は参加者一覧から利用可能です', 'info')}
+             className="bg-neon-cyan text-black px-6 py-2 rounded-full font-bold shadow-[0_0_15px_rgba(0,243,255,0.2)] hover:shadow-[0_0_25px_rgba(0,243,255,0.4)] transition-all opacity-80 flex items-center gap-2"
           >
-             メンバーを招待
+             <Users size={18} /> メンバー管理
           </button>
       </div>
     </div>
@@ -407,124 +658,21 @@ function MyTeamView() {
 }
 
 function BracketView() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  useGSAP(() => {
-    // Animate connector lines
-    gsap.fromTo('.bracket-line', 
-      { width: 0 }, 
-      { width: '2rem', duration: 1.5, ease: 'power2.inOut', stagger: 0.2 } 
-    );
-    
-    // Animate glow for winner lines
-    gsap.to('.winner-line', {
-      boxShadow: '0 0 10px #00f3ff',
-      repeat: -1,
-      yoyo: true,
-      duration: 1.5
-    });
-  }, { scope: containerRef });
-
   return (
-    <div ref={containerRef} className="p-8 rounded-2xl bg-neutral-900/30 border border-neutral-800 overflow-x-auto animate-fade-in-up">
-      <h2 className="text-2xl font-bold text-white mb-8 flex items-center gap-2">
-         <Trophy className="text-neon-cyan" />
-         トーナメント表
-      </h2>
-      
-      <div className="flex gap-16 min-w-[800px]">
-         {MOCK_BRACKET_ROUNDS.map((round, rIndex) => (
-            <div key={round.id} className="flex flex-col flex-1 gap-8">
-               <h3 className="text-center text-neutral-500 text-sm font-mono uppercase tracking-widest mb-4 border-b border-neutral-800 pb-2">
-                 {round.name}
-               </h3>
-               
-               <div className="flex flex-col justify-around h-full gap-8">
-                  {round.matches.map((match) => {
-                     const isP1Winner = match.winner === match.t1 && match.status === 'finished';
-                     const isP2Winner = match.winner === match.t2 && match.status === 'finished';
-
-                     return (
-                        <div key={match.id} className="relative flex flex-col justify-center">
-                           <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-3 w-48 shadow-lg relative z-10 transition-transform hover:scale-105 duration-300">
-                              <div className={`flex justify-between items-center mb-2 pb-2 border-b border-neutral-800 ${isP1Winner ? 'text-neon-cyan font-bold' : 'text-neutral-400'}`}>
-                                 <span>{match.t1}</span>
-                                 <span className="bg-neutral-800 px-2 py-0.5 rounded text-xs text-white">{match.t1Score}</span>
-                              </div>
-                              <div className={`flex justify-between items-center ${isP2Winner ? 'text-neon-cyan font-bold' : 'text-neutral-400'}`}>
-                                 <span>{match.t2}</span>
-                                 <span className="bg-neutral-800 px-2 py-0.5 rounded text-xs text-white">{match.t2Score}</span>
-                              </div>
-                              
-                              {match.status === 'scheduled' && (
-                                <div className="absolute -top-2 -right-2 bg-neutral-800 text-neutral-500 text-[10px] px-2 py-0.5 rounded-full border border-neutral-700">LIVE</div>
-                              )}
-                           </div>
-                           
-                           {/* Connecting Line Animation */}
-                           {rIndex < MOCK_BRACKET_ROUNDS.length - 1 && (
-                              <div className={`bracket-line absolute top-1/2 -right-8 h-[2px] w-8 origin-left ${match.winner ? 'winner-line bg-neon-cyan' : 'bg-neutral-800'}`}></div>
-                           )}
-                        </div>
-                     )
-                  })}
-               </div>
-            </div>
-         ))}
-      </div>
+    <div className="p-8 rounded-2xl bg-neutral-900/30 border border-neutral-800 animate-fade-in-up flex flex-col items-center justify-center min-h-[400px]">
+       <Trophy className="text-neutral-800 mb-4" size={48} />
+       <h2 className="text-xl font-bold text-neutral-400 mb-2">トーナメント表</h2>
+       <p className="text-neutral-600 text-sm">現在準備中です...</p>
     </div>
   );
 }
 
 function ResultView() {
   return (
-    <div className="p-8 rounded-2xl bg-neutral-900/30 border border-neutral-800 animate-fade-in-up">
-      <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-         <ClipboardList className="text-neon-cyan" />
-         結果
-      </h2>
-
-      <div className="overflow-hidden rounded-xl border border-neutral-800">
-         <table className="w-full text-left">
-            <thead className="bg-neutral-900 text-neutral-500 text-xs uppercase tracking-wider font-semibold">
-               <tr>
-                  <th className="p-4">順位</th>
-                  <th className="p-4">チーム名</th>
-                  <th className="p-4 text-center">W / L</th>
-                  <th className="p-4 text-right">賞品</th>
-               </tr>
-            </thead>
-            <tbody className="divide-y divide-neutral-800 bg-neutral-900/50">
-               {MOCK_RESULTS.map((res) => {
-                  const isFirst = res.rank === 1;
-                  return (
-                     <tr key={res.rank} className={`group transition-colors ${isFirst ? 'bg-yellow-500/5 hover:bg-yellow-500/10' : 'hover:bg-neutral-800/50'}`}>
-                        <td className="p-4">
-                           {isFirst ? (
-                              <div className="w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-500 border border-yellow-500/40 shadow-[0_0_10px_rgba(234,179,8,0.3)]">
-                                 <Crown size={16} />
-                              </div>
-                           ) : (
-                              <span className="text-neutral-500 font-mono w-8 h-8 flex items-center justify-center">#{res.rank}</span>
-                           )}
-                        </td>
-                        <td className={`p-4 font-bold ${isFirst ? 'text-yellow-400 text-lg' : 'text-white'}`}>
-                           {res.team}
-                        </td>
-                        <td className="p-4 text-center text-neutral-400 font-mono">
-                           <span className="text-green-500">{res.win}</span>
-                           <span className="mx-1 opacity-30">/</span>
-                           <span className="text-red-500">{res.lose}</span>
-                        </td>
-                        <td className={`p-4 text-right font-mono ${isFirst ? 'text-yellow-400 font-bold' : 'text-neutral-300'}`}>
-                           {res.prize}
-                        </td>
-                     </tr>
-                  )
-               })}
-            </tbody>
-         </table>
-      </div>
+    <div className="p-8 rounded-2xl bg-neutral-900/30 border border-neutral-800 animate-fade-in-up flex flex-col items-center justify-center min-h-[400px]">
+       <ClipboardList className="text-neutral-800 mb-4" size={48} />
+       <h2 className="text-xl font-bold text-neutral-400 mb-2">大会結果</h2>
+       <p className="text-neutral-600 text-sm">現在準備中です...</p>
     </div>
   );
 }

@@ -11,7 +11,12 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/context/ToastContext';
 
+import { useTranslation } from "react-i18next";
+
+// ... (imports)
+
 export default function ValorantSection() {
+  const { t } = useTranslation();
   const { data: infoResponse, isLoading } = useValorantInfo();
   const { registerValorant, unlinkValorant, refreshValorant } = useValorantMutations();
   const { addToast } = useToast();
@@ -21,32 +26,27 @@ export default function ValorantSection() {
 
   const valorantInfo = infoResponse?.data;
 
-  // Refresh Logic
   const lastUpdated = valorantInfo?.updated_at ? new Date(valorantInfo.updated_at) : null;
   const hoursSinceUpdate = lastUpdated ? differenceInHours(new Date(), lastUpdated) : 24;
   const canRefresh = hoursSinceUpdate >= 24;
-  
-  // Or rely on backend 'refresh_needed' if it strictly follows the logic, 
-  // but user asked for specific "24h check" on frontend too for immediate feedback or if backend logic differs.
-  // The user requirement: "24시간 이내에 갱신이 완료되어있으면, 갱신이 불가능하다고 뜨고"
-  
+
   const onRegister = async (data: RegisterValorantRequest) => {
     try {
       await registerValorant.mutateAsync(data);
-      addToast('Valorant 계정이 연동되었습니다.', 'success');
+      addToast(t("mypage.valorant.toast.linked"), 'success');
     } catch (error: any) {
-      addToast(error.message || '연동 실패', 'error');
+      addToast(error.message || t("mypage.valorant.toast.linkFailed"), 'error');
     }
   };
 
   const onUnlink = async () => {
-    if (!confirm('정말로 연동을 해제하시겠습니까?')) return;
+    if (!confirm(t("mypage.valorant.confirmUnlink"))) return;
     setIsUnlinking(true);
     try {
       await unlinkValorant.mutateAsync();
-      addToast('Valorant 계정 연동이 해제되었습니다.', 'success');
+      addToast(t("mypage.valorant.toast.unlinked"), 'success');
     } catch (error: any) {
-      addToast(error.message || '해제 실패', 'error');
+      addToast(error.message || t("mypage.valorant.toast.unlinkFailed"), 'error');
     } finally {
       setIsUnlinking(false);
     }
@@ -56,9 +56,9 @@ export default function ValorantSection() {
     if (!canRefresh) return;
     try {
       await refreshValorant.mutateAsync();
-      addToast('Valorant 정보가 갱신되었습니다.', 'success');
+      addToast(t("mypage.valorant.toast.refreshed"), 'success');
     } catch (error: any) {
-      addToast(error.message || '갱신 실패', 'error');
+      addToast(error.message || t("mypage.valorant.toast.refreshFailed"), 'error');
     }
   };
 
@@ -69,26 +69,32 @@ export default function ValorantSection() {
   return (
     <div className="w-full bg-deep-black/50 border border-white/10 rounded-2xl p-6 md:p-8 space-y-6">
       <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-        <Image src="/images/games/valorant-logo.png" alt="Valorant" width={32} height={32} className="object-contain" /> 
-        {/* Placeholder image path, might need adjustment or use icon */}
-        <h2 className="text-xl font-bold text-white">Valorant Integration</h2>
+        <Image 
+          src={valorantInfo ? "/images/valorant/V_Logomark_Red.png" : "/images/valorant/V_Logomark_Grey.png"} 
+          alt="Valorant" 
+          width={0} 
+          height={0} 
+          sizes="100vw"
+          className="w-auto h-16 object-contain" 
+        />
+        <h2 className="text-xl font-bold text-white">{t("mypage.valorant.title")}</h2>
       </div>
 
       {!valorantInfo ? (
         // Not Linked State
         <form onSubmit={handleSubmit(onRegister)} className="space-y-4 max-w-md">
           <div className="space-y-2">
-             <label className="text-sm font-medium text-muted-foreground">Region</label>
+             <label className="text-sm font-medium text-muted-foreground">{t("mypage.valorant.region")}</label>
              <select {...register('region')} className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-neon-cyan outline-none text-white">
-                <option value="kr">Korea (KR)</option>
-                <option value="ap">Asia Pacific (AP)</option>
-                <option value="na">North America (NA)</option>
-                <option value="eu">Europe (EU)</option>
+                <option value="kr">{t('mypage.valorant.regions.kr')}</option>
+                <option value="ap">{t('mypage.valorant.regions.ap')}</option>
+                <option value="na">{t('mypage.valorant.regions.na')}</option>
+                <option value="eu">{t('mypage.valorant.regions.eu')}</option>
              </select>
           </div>
           <div className="grid grid-cols-3 gap-4">
              <div className="col-span-2 space-y-2">
-                <label className="text-sm font-medium text-muted-foreground">Riot Name</label>
+                <label className="text-sm font-medium text-muted-foreground">{t("mypage.valorant.riotName")}</label>
                 <input 
                   {...register('riot_name', { required: true })} 
                   placeholder="Name"
@@ -96,10 +102,10 @@ export default function ValorantSection() {
                 />
              </div>
              <div className="space-y-2">
-                <label className="text-sm font-medium text-muted-foreground">Tag</label>
+                <label className="text-sm font-medium text-muted-foreground">{t("mypage.valorant.tag")}</label>
                 <input 
                   {...register('riot_tag', { required: true })} 
-                  placeholder="#KR1"
+                  placeholder="#0000"
                   className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-neon-cyan outline-none text-white" 
                 />
              </div>
@@ -110,7 +116,7 @@ export default function ValorantSection() {
             className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-neon-cyan/20 hover:bg-neon-cyan/30 border border-neon-cyan/50 rounded-xl text-neon-cyan font-bold transition-all"
           >
             {isSubmitting ? <Loader2 className="animate-spin" /> : <Link2 size={18} />}
-            Valorant 계정 연동하기
+            {t("mypage.valorant.linkButton")}
           </button>
         </form>
       ) : (
@@ -134,11 +140,11 @@ export default function ValorantSection() {
 
               <div className="flex flex-col gap-3 min-w-[200px]">
                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">ELO Rating</span>
+                    <span className="text-muted-foreground">{t("mypage.valorant.elo")}</span>
                     <span className="font-mono font-bold text-neon-cyan">{valorantInfo.elo}</span>
                  </div>
                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">Peak Rank</span>
+                    <span className="text-muted-foreground">{t("mypage.valorant.peakRank")}</span>
                     <span className="text-white">{valorantInfo.peak_tier_patched}</span>
                  </div>
               </div>
@@ -146,7 +152,7 @@ export default function ValorantSection() {
 
            <div className="flex items-center justify-between gap-4">
               <div className="text-sm text-muted-foreground">
-                 {lastUpdated && <>최근 갱신: {formatDistanceToNow(lastUpdated, { addSuffix: true, locale: ko })}</>}
+                 {lastUpdated && <>{t("mypage.valorant.lastUpdated")}: {formatDistanceToNow(lastUpdated, { addSuffix: true, locale: ko })}</>}
               </div>
               <div className="flex gap-3">
                  <button 
@@ -155,7 +161,7 @@ export default function ValorantSection() {
                    className="px-4 py-2 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-500 rounded-lg text-sm font-medium transition-all flex items-center gap-2"
                  >
                     {isUnlinking ? <Loader2 className="animate-spin w-4 h-4" /> : <Unlink size={16} />}
-                    연동 해제
+                    {t("mypage.valorant.unlinkButton")}
                  </button>
                  
                  <button
@@ -173,12 +179,12 @@ export default function ValorantSection() {
                     ) : !canRefresh ? (
                         <>
                            <AlertCircle size={16} /> 
-                           갱신 불가능 (24시간 이내)
+                           {t("mypage.valorant.cantRefresh")}
                         </>
                     ) : (
                         <>
                            <RefreshCw size={16} />
-                           정보 갱신
+                           {t("mypage.valorant.refreshButton")}
                         </>
                     )}
                  </button>

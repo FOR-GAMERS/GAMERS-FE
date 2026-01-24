@@ -48,6 +48,7 @@ export interface UserResponse {
   tag: string;
   avatar?: string;
   bio?: string;
+  role?: string | "ADMIN" | "USER"; 
 }
 
 export interface MyUserResponse {
@@ -132,10 +133,16 @@ export interface DiscordLinkRequiredResponse {
 
 export interface ContestApplicationResponse {
   user_id: number;
-  username: string;
-  tag: string;
-  created_at: string;
+  contest_id?: number;
   status: 'PENDING' | 'ACCEPTED' | 'REJECTED';
+  requested_at: string;
+  sender: {
+      user_id: number;
+      username: string;
+      tag: string;
+      avatar?: string;
+  };
+  created_at?: string; // Kept optional for backward compatibility if needed, but requested_at is primary
 }
 
 export interface MyApplicationResponse {
@@ -145,13 +152,19 @@ export interface MyApplicationResponse {
 
 export interface ContestMemberResponse {
   user_id: number;
+  contest_id: number;
+  member_type: 'STAFF' | 'NORMAL' | 'LEADER';
+  leader_type: 'LEADER' | 'MEMBER';
   username: string;
   tag: string;
   point: number;
-  rank?: number; // Optional as per swagger it might not be there or computed
-  join_date: string; // swagger didn't show this field in my limited view, but assuming standard member list
-  // Re-checking swagger view from earlier: "GAMERS-BE_internal_contest_members_dto" wasn't fully shown. 
-  // Let's assume standard fields for now. 
+  avatar?: string;
+  current_tier: number;
+  current_tier_patched?: string;
+  peak_tier: number;
+  peak_tier_patched?: string;
+  join_date?: string; // Optional as it was missing in the sample
+  profile_key?: string;
 }
 
 // --- Games ---
@@ -182,4 +195,29 @@ export interface UpdateGameRequest {
   game_team_type?: GameTeamType;
   started_at?: string;
   ended_at?: string;
+}
+
+// Notifications
+export enum NotificationType {
+  TEAM_INVITE_RECEIVED = 'TEAM_INVITE_RECEIVED',
+  TEAM_INVITE_ACCEPTED = 'TEAM_INVITE_ACCEPTED',
+  TEAM_INVITE_REJECTED = 'TEAM_INVITE_REJECTED',
+  APPLICATION_ACCEPTED = 'APPLICATION_ACCEPTED',
+  APPLICATION_REJECTED = 'APPLICATION_REJECTED'
+}
+
+export interface NotificationResponse {
+  id: number;
+  title: string;
+  message: string;
+  is_read: boolean;
+  type: NotificationType;
+  created_at: string;
+  data: Record<string, any>; // Flexible data payload
+}
+
+export interface NotificationListResponse {
+  notifications: NotificationResponse[];
+  total: number;
+  unread_count: number;
 }

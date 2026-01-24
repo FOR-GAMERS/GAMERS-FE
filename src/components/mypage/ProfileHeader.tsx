@@ -13,7 +13,12 @@ interface ProfileHeaderProps {
   user: UserProfile;
 }
 
+import { useTranslation } from 'react-i18next';
+
+// ... (imports)
+
 export default function ProfileHeader({ user }: ProfileHeaderProps) {
+  const { t } = useTranslation();
   const headerRef = useRef<HTMLDivElement>(null);
   const avatarRef = useRef<HTMLDivElement>(null);
   const infoRef = useRef<HTMLDivElement>(null);
@@ -21,10 +26,15 @@ export default function ProfileHeader({ user }: ProfileHeaderProps) {
   const avatarUrl = useMemo(() => {
     if (!user.avatarUrl) return "/placeholder-avatar.jpg";
     try {
+    if (user.avatarUrl.startsWith('http') || user.avatarUrl.startsWith('/')) {
         if (user.email && user.avatarUrl.includes('/avatars/')) {
             const discordId = user.email.split('@')[0];
             return user.avatarUrl.replace(/\/avatars\/[^\/]+\//, `/avatars/${discordId}/`);
         }
+        return user.avatarUrl;
+    }
+    // Check if it's a raw hash
+    return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatarUrl}.png`;
     } catch (e) {
         console.error("Failed to parse avatar URL", e);
     }
@@ -109,7 +119,7 @@ export default function ProfileHeader({ user }: ProfileHeaderProps) {
              {/* Edit Button Removed in favor of Settings Tab */}
              <Link href="/report" className="p-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-white flex items-center justify-center gap-2 transition-all hover:border-neon-cyan/50 hover:text-neon-cyan hover:shadow-[0_0_15px_rgba(0,243,255,0.2)]">
                 <Shield size={18} />
-                <span className="text-sm font-bold">REPORT</span>
+                <span className="text-sm font-bold">{t('mypage.profile.report')}</span>
              </Link>
         </div>
       </div>

@@ -2,46 +2,36 @@
 
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-
-const SLIDES = [
-  {
-    id: 1,
-    color: "from-blue-900 to-indigo-900", // Placeholder gradient 1
-    image: null // Using CSS gradients for now as requested
-  },
-  {
-    id: 2,
-    color: "from-purple-900 to-fuchsia-900", // Placeholder gradient 2
-    image: null
-  },
-  {
-    id: 3,
-    color: "from-emerald-900 to-teal-900", // Placeholder gradient 3
-    image: null
-  },
-  {
-    id: 4,
-    color: "from-rose-900 to-red-900", // Placeholder gradient 4
-    image: null
-  }
-];
+import { bannerConfigService, BannerConfig } from "@/services/banner-config-service";
 
 export default function ContestHero() {
+  const [activeConfig, setActiveConfig] = useState<BannerConfig>(bannerConfigService.getBannerConfig());
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
+    // Initial load
+    setActiveConfig(bannerConfigService.getBannerConfig());
+
+    // Subscribe to updates
+    const unsubscribe = bannerConfigService.subscribeToBanner(() => {
+        setActiveConfig(bannerConfigService.getBannerConfig());
+    });
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
+      setCurrentSlide((prev) => (prev + 1) % activeConfig.slides.length);
     }, 4000); // 4 seconds interval
 
     return () => clearInterval(interval);
-  }, []);
+  }, [activeConfig.slides.length]);
 
   return (
     <div className="relative w-full h-[300px] md:h-[400px] overflow-hidden bg-black">
       
       {/* Slides */}
-      {SLIDES.map((slide, index) => (
+      {activeConfig.slides.map((slide, index) => (
         <div
           key={slide.id}
           className={cn(
@@ -58,15 +48,15 @@ export default function ContestHero() {
       {/* Text Overlay */}
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
         <h1 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-100 to-cyan-400 drop-shadow-[0_0_15px_rgba(6,182,212,0.5)] animate-fade-in-up">
-          GAMERS 大会
+          {activeConfig.title}
         </h1>
         <p className="mt-4 text-lg md:text-xl text-cyan-50/80 font-medium tracking-wide max-w-2xl animate-fade-in-up delay-100">
-          最強を目指せ。頂点へ登り詰めろ。栄光を掴み取れ。
+          {activeConfig.subtitle}
         </p>
         
         {/* Slide Indicators */}
         <div className="absolute bottom-8 flex gap-3 z-30">
-            {SLIDES.map((_, i) => (
+            {activeConfig.slides.map((_, i) => (
                 <button 
                     key={i}
                     onClick={() => setCurrentSlide(i)}

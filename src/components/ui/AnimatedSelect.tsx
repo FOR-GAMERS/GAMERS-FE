@@ -19,6 +19,7 @@ interface AnimatedSelectProps {
   label?: string;
   disabled?: boolean;
   className?: string;
+  startIcon?: React.ReactNode;
 }
 
 export default function AnimatedSelect({
@@ -28,7 +29,8 @@ export default function AnimatedSelect({
   placeholder = "Select option",
   label,
   disabled = false,
-  className
+  className,
+  startIcon
 }: AnimatedSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -74,9 +76,12 @@ export default function AnimatedSelect({
             disabled && "opacity-50 cursor-not-allowed"
           )}
         >
-          <span className={cn("font-medium truncate", !selectedOption && "text-muted-foreground")}>
-            {selectedOption ? selectedOption.label : placeholder}
-          </span>
+          <div className="flex items-center gap-2 truncate">
+              {startIcon && <span className="text-muted-foreground">{startIcon}</span>}
+              <span className={cn("font-medium truncate", !selectedOption && "text-muted-foreground")}>
+                {selectedOption ? selectedOption.label : placeholder}
+              </span>
+          </div>
           <motion.div
             animate={{ rotate: isOpen ? 180 : 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}

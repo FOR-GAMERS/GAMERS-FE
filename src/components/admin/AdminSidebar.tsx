@@ -1,6 +1,7 @@
-import { ChevronLeft, LayoutDashboard, Users, Trophy, Settings, LogOut } from "lucide-react";
+import { ChevronLeft, LayoutDashboard, Users, Trophy, Settings, LogOut, Image } from "lucide-react";
 import { Koulen } from "next/font/google"; // Import Koulen
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const koulen = Koulen({
   weight: "400",
@@ -12,11 +13,18 @@ interface AdminSidebarProps {
 }
 
 export function AdminSidebar({ mode = "contest" }: AdminSidebarProps) {
+  const pathname = usePathname();
+
+  const isActive = (path: string) => {
+    if (path === '/admin/dashboard') return pathname === path;
+    return pathname?.startsWith(path);
+  };
+
   return (
-    <aside className="w-16 md:w-64 bg-black border-r border-white/10 flex flex-col h-screen sticky top-0">
+    <aside className={`w-16 md:w-64 bg-black border-r border-white/10 flex flex-col sticky transition-all ${mode === 'system' ? 'top-0 h-screen' : 'top-16 h-[calc(100vh-4rem)]'}`}>
       <div className="p-4 h-16 flex items-center border-b border-white/10">
         {mode === "system" ? (
-             <Link href="/admin/system/dashboard" className={`text-2xl tracking-wider text-white hover:opacity-80 transition-opacity ${koulen.className}`}>
+             <Link href="/admin/dashboard" className={`text-2xl tracking-wider text-white hover:opacity-80 transition-opacity ${koulen.className}`}>
                 GAMERS
              </Link>
         ) : (
@@ -28,10 +36,11 @@ export function AdminSidebar({ mode = "contest" }: AdminSidebarProps) {
       </div>
 
       <nav className="flex-1 p-2 space-y-1">
-        <NavItem icon={LayoutDashboard} label="Dashboard" href="#" active />
-        <NavItem icon={Users} label="Participants" href="#" />
-        <NavItem icon={Trophy} label="Brackets" href="#" />
-        <NavItem icon={Settings} label="Settings" href="#" />
+        <NavItem icon={LayoutDashboard} label="Dashboard" href="/admin/dashboard" active={isActive('/admin/dashboard')} />
+        <NavItem icon={Users} label="Users" href="/admin/users" active={isActive('/admin/users')} />
+        <NavItem icon={Trophy} label="Contests" href="/admin/contests-manage" active={isActive('/admin/contests-manage')} />
+        <NavItem icon={Image} label="Banner" href="/admin/banners" active={isActive('/admin/banners')} />
+        <NavItem icon={Settings} label="Settings" href="/admin/settings" active={isActive('/admin/settings')} />
       </nav>
 
       <div className="p-2 border-t border-white/10">
@@ -53,6 +62,9 @@ function NavItem({ icon: Icon, label, href, active, variant = "default" }: { ico
         <Link href={href} className={`${baseClasses} ${variantClasses}`}>
             <Icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
             <span className="font-medium hidden md:block">{label}</span>
+            {active && (
+                <div className="ml-auto w-1.5 h-1.5 rounded-full bg-neon-cyan shadow-[0_0_8px_rgba(0,243,255,0.8)]" />
+            )}
         </Link>
     )
 }
