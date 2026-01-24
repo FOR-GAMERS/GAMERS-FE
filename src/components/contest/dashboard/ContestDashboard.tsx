@@ -28,9 +28,60 @@ export function ContestDashboard({ contestId }: ContestDashboardProps) {
   const [activeTab, setActiveTab] = useState<'overview' | 'bracket' | 'settings' | 'applications'>('overview');
   const [participants, setParticipants] = useState<any[]>([]); 
 
-  // ... fetchContest logic remains
+  const fetchContest = async () => {
+    try {
+      setLoading(true);
+      const res = await contestService.getContest(contestId);
+      setContest(res.data);
+      
+      // Also fetch participants for stats
+      const membersRes = await contestService.getContestMembers(contestId, { page: 1, page_size: 1000 });
+      setParticipants(membersRes.data.data);
+      
+    } catch (error) {
+      console.error("Failed to fetch contest", error);
+      addToast("Failed to load contest data", "error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  // ... handlers remain
+  useEffect(() => {
+      if (contestId) {
+          fetchContest();
+      }
+  }, [contestId]);
+
+  const handleStartContest = async () => {
+    try {
+        await contestService.startContest(contestId);
+        addToast(t('contestDashboard.toast.startSuccess'), "success");
+        fetchContest();
+    } catch (error: any) {
+        addToast(error.response?.data?.message || t('contestDashboard.toast.startFail'), "error");
+    }
+  };
+
+  const handleStopContest = async () => {
+       try {
+        await contestService.stopContest(contestId);
+        addToast(t('contestDashboard.toast.stopSuccess'), "success");
+        fetchContest();
+    } catch (error: any) {
+        addToast(error.response?.data?.message || t('contestDashboard.toast.stopFail'), "error");
+    }
+  };
+
+  const handleDeleteContest = async () => {
+      if (!confirm(t('contestDashboard.confirmDelete'))) return;
+       try {
+        await contestService.deleteContest(contestId);
+        addToast(t('contestDashboard.toast.deleteSuccess'), "success");
+        router.push('/contests');
+    } catch (error: any) {
+        addToast(error.response?.data?.message || t('contestDashboard.toast.deleteFail'), "error");
+    }
+  };
 
   if (loading) {
      // ...
