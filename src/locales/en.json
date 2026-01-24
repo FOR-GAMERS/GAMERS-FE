@@ -1,0 +1,282 @@
+{
+  "navbar": {
+    "contests": "Contests",
+    "search": "Search...",
+    "login": "Login with Discord",
+    "myPage": "My Page",
+    "createContest": "Create Contest",
+    "report": "Report",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "landing": {
+    "hero": {
+      "badge": "Next Gen Gaming Experience",
+      "headline": "Discord Custom Matches, just one touch on the web.",
+      "subtitle": "No complex commands needed! Easily control it on the web!",
+      "inviteBot": "Invite GAMERS Bot",
+      "findContest": "Find Contests"
+    },
+    "features": {
+      "headline": "Design for Victory",
+      "description": "Everything you need to dominate the leaderboard is here.",
+      "zeroLatency": { "title": "Zero Latency", "description": "Sub-10ms Ping globally via edge network." },
+      "antiCheat": { "title": "Anti-Cheat Plus", "description": "AI-powered detection ensures fair play." },
+      "crossPlatform": { "title": "Cross Platform", "description": "Play with friends anytime, anywhere, on any device." },
+      "instantReplay": { "title": "Instant Replay", "description": "Automatically share your best moments." }
+    },
+    "problem": {
+      "headlinePrefix": "Make ",
+      "headlineHighlight": "Gaming",
+      "headlineSuffix": " More Comfortable",
+      "subheadline": "Get back your comfortable gaming environment.",
+      "management": { "title": "Managing dozens of members, isn't it hard?", "description": "Manual management has limits. Stress-free with automation." },
+      "settings": { "title": "Mistakes in settings and match delays every time", "description": "Game ruined by setting mistakes... End those experiences." },
+      "status": { "title": "Hard to tell who is participating at a glance!", "description": "Real-time status in visualized lobby." }
+    },
+    "solution": {
+      "mobileHeadline": "Easy 3 Steps",
+      "steps": {
+        "web": { "title": "Web Mgmt", "description": "Intuitive management via web dashboard" },
+        "bot": { "title": "Bot Sync", "description": "Real-time connection with Discord bot" },
+        "complete": { "title": "Complete", "description": "Tournament hosting complete!" }
+      },
+      "desktop": {
+        "phase1": "Intuitive management via web dashboard",
+        "phase2": "Real-time connection with Discord bot",
+        "phase3": "Tournament Hosting Complete"
+      },
+      "scroll": "Scroll to Experience"
+    },
+    "cta": {
+      "headline": "Install GAMERS in your Discord server now!",
+      "description": "Experience the tool loved by thousands of communities now.",
+      "button": "Start for Free",
+      "noCard": "No credit card required"
+    },
+    "footer": {
+      "copyright": "All rights reserved."
+    }
+  },
+  "mypage": {
+    "tabs": {
+      "overview": "Overview",
+      "manage": "Manage",
+      "settings": "Settings"
+    },
+    "sections": {
+      "gameIntegration": "Game Integration",
+      "manageApplications": "Manage Applications",
+      "accountSettings": "Account Settings"
+    },
+    "profile": {
+      "report": "REPORT"
+    },
+    "valorant": {
+      "title": "Valorant Integration",
+      "region": "Region",
+      "riotName": "Riot Name",
+      "tag": "Tag",
+      "linkButton": "Link Valorant Account",
+      "unlinkButton": "Unlink",
+      "refreshButton": "Refresh Info",
+      "elo": "ELO Rating",
+      "peakRank": "Peak Rank",
+      "lastUpdated": "Last Updated",
+      "cantRefresh": "Refresh Unavailable (Limit 24h)",
+      "confirmUnlink": "Are you sure you want to unlink?",
+      "toast": {
+        "linked": "Valorant account linked.",
+        "linkFailed": "Link failed.",
+        "unlinked": "Valorant account unlinked.",
+        "unlinkFailed": "Unlink failed.",
+        "refreshed": "Valorant info refreshed.",
+        "refreshFailed": "Refresh failed."
+      },
+      "regions": {
+        "kr": "Korea (KR)",
+        "ap": "Asia Pacific (AP)",
+        "na": "North America (NA)",
+        "eu": "Europe (EU)"
+      }
+    },
+    "managed": {
+      "title": "Managed Contests",
+      "description": "Quick access to contest dashboards for contests you organize.",
+      "button": "Manage Dashboard"
+    },
+    "applications": {
+      "title": "Manage Applications",
+      "description": "Manage and approve/reject applications.",
+      "noContest": "No contests hosted",
+      "noContestDesc": "Host a contest to receive applications.",
+      "applicant": "Applicant",
+      "tag": "Tag",
+      "appliedAt": "Applied At",
+      "status": "Status",
+      "actions": "Actions",
+      "created": "Created",
+      "currentTeams": "Current Teams",
+      "noApps": "No applications yet.",
+      "unknownUser": "Unknown User",
+      "processed": "Processed",
+      "toast": {
+        "accepted": "Application accepted.",
+        "rejected": "Application rejected.",
+        "acceptFailed": "Failed to accept application.",
+        "rejectFailed": "Failed to reject application."
+      }
+    },
+    "edit": {
+      "title": "Profile Settings",
+      "username": "Username",
+      "tag": "Tag",
+      "bio": "Bio",
+      "changePassword": "Change Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password",
+      "save": "Save Changes",
+      "toast": {
+        "passwordMismatch": "Passwords do not match.",
+        "passwordChanged": "Password changed.",
+        "updateNotSupported": "Profile update not supported yet (except password).",
+        "failed": "Profile update failed."
+      }
+    }
+  },
+  "contestDetail": {
+      "status": {
+        "PENDING": "Pending",
+        "RECRUITING": "Recruiting",
+        "ACTIVE": "Active",
+        "FINISHED": "Finished",
+        "CANCELLED": "Cancelled",
+        "PREPARING": "Preparing"
+      },
+      "cta": {
+        "join": "Join Contest",
+        "loginToJoin": "Login to Join",
+        "cancelJoin": "Cancel Application",
+        "joined": "Joined",
+        "goToDashboard": "Go to Dashboard"
+      },
+      "alerts": {
+        "joinSuccess": "Application submitted successfully.",
+        "joinFail": "Failed to submit application.",
+        "cancelSuccess": "Application cancelled.",
+        "cancelFail": "Failed to cancel application.",
+        "confirmCancel": "Are you sure you want to cancel your application?",
+        "alreadyJoined": "You have already joined this contest.",
+        "loadingFail": "Failed to load contest information."
+      },
+      "noInfo": "No details available."
+    },
+    "contestsList": {
+      "title": "Current Contests",
+      "filter": {
+        "latest": "Sort by: Date",
+        "status": "Sort by: Status"
+      },
+      "noContests": "No contests found."
+    },
+    "contestCreate": {
+      "title": "Create Contest",
+      "form": {
+        "titleLabel": "Contest Title",
+        "titlePlaceholder": "Enter contest title (e.g. 2026 Cyber League)",
+        "thumbnail": "Upload Thumbnail",
+        "maxTeams": "Max Teams",
+        "teamSize": "Team Size",
+        "contestType": "Contest Type",
+        "gameType": "Game Type",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "totalPoints": "Total Points",
+        "autoStart": "Auto Start when full?",
+        "description": "Description (Markdown)",
+        "discord": "Discord Server"
+      },
+      "actions": {
+        "edit": "Write",
+        "preview": "Preview",
+        "creating": "Creating...",
+        "submit": "Create Contest"
+      },
+      "status": {
+        "ready": "Ready to Launch 🚀",
+        "fillRequired": "Please fill in all required fields"
+      },
+      "options": {
+        "tournament": "Tournament",
+        "league": "League"
+      }
+    },
+    "teamManagement": {
+      "title": "Team Management",
+      "members": "Members",
+      "points": "Points",
+      "invite": "Invite Member",
+      "searchPlaceholder": "Search username#tag...",
+      "search": "Search",
+      "inviteAction": "Invite",
+      "ready": "Team is ready! You are set to join.",
+      "notReady": "Team is not ready.",
+      "leaderOnly": "Only the leader can manage members.",
+      "toast": {
+        "inviteSuccess": "Invitation sent!",
+        "inviteFail": "Failed to invite."
+      }
+    },
+    "contestCTA": {
+      "title": "Join Contest",
+      "status": "Status",
+      "teams": "Teams",
+      "entryFee": "Entry Fee",
+      "free": "Free",
+      "prizePool": "Prize Pool",
+      "deadline": "Deadline",
+      "button": {
+        "join": "Join Contest",
+        "processing": "Processing...",
+        "closed": "Closed",
+        "login": "Login to Join",
+        "cancel": "Cancel Join",
+        "joined": "Joined",
+        "deleteTeam": "Delete Team"
+      },
+      "loginRequired": "Login is required to join."
+    },
+    "contestModal": {
+      "title": "Create Team",
+      "qualification": "Qualification Check",
+      "description": "To participate in this contest, you need to create a team. We need to verify your Valorant rank first.",
+      "calculate": "Calculate My Points",
+      "notConfigured": "Point Table Not Configured",
+      "calculating": "Calculating points...",
+      "failed": "Failed to calculate points",
+      "checkProfile": "Check Profile Settings",
+      "currentTier": "Current Tier",
+      "peakTier": "Peak Tier",
+      "calculatedPoints": "Calculated Points",
+      "cancel": "Cancel",
+      "createTeam": "Create Team"
+    },
+    "contestDashboard": {
+      "tabs": {
+        "overview": "Overview",
+        "applications": "Applications",
+        "bracket": "Bracket & Teams",
+        "settings": "Settings"
+      },
+      "stats": {
+        "participants": "Participants",
+        "status": "Status"
+      },
+      "actions": {
+        "start": "START CONTEST",
+        "started": "STARTED",
+        "stop": "STOP CONTEST",
+        "delete": "DELETE"
+      }
+    }
+}

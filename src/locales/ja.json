@@ -1,0 +1,282 @@
+{
+  "navbar": {
+    "contests": "大会",
+    "search": "検索...",
+    "login": "Discordでログイン",
+    "myPage": "マイページ",
+    "createContest": "大会作成",
+    "report": "報告",
+    "settings": "設定",
+    "logout": "ログアウト"
+  },
+  "landing": {
+    "hero": {
+      "badge": "次世代のゲーミング体験",
+      "headline": "ディスコードカスタムマッチ, ウェブでブタンタッチ一回で.",
+      "subtitle": "複雑なコマンドはいらない！簡単にウェブで操作してみましょう！",
+      "inviteBot": "GAMERSボット招待",
+      "findContest": "大会を探す"
+    },
+    "features": {
+      "headline": "勝利のための設計",
+      "description": "リーダーボードを制覇するために必要なすべてが、ここにあります。",
+      "zeroLatency": { "title": "ゼロレイテンシー", "description": "エッジネットワークにより、世界中で10ms以下のPingを実現。" },
+      "antiCheat": { "title": "アンチチート・プラス", "description": "AIによる検知で、公平なプレイを保証。" },
+      "crossPlatform": { "title": "クロスプラットフォーム", "description": "いつでも、どこでも、どのデバイスでも友達とプレイ。" },
+      "instantReplay": { "title": "インスタントリプレイ", "description": "最高の瞬間を自動的にシェア。" }
+    },
+    "problem": {
+      "headlinePrefix": "",
+      "headlineHighlight": "ゲーミング",
+      "headlineSuffix": "をもっと快適に",
+      "subheadline": "快適なゲーミング環境を取り戻しましょう。",
+      "management": { "title": "数十人のメンバー管理、難しくないですか？", "description": "手動での管理は限界があります。自動化でストレスフリーに。" },
+      "settings": { "title": "毎回振替される設定ミスや試合遅延", "description": "設定ミスで試合が台無し...そんな経験はもう終わりです。" },
+      "status": { "title": "誰が参加してるのか一瞬で分かりづらい！", "description": "可視化されたロビーで、参加状況をリアルタイムに把握。" }
+    },
+    "solution": {
+      "mobileHeadline": "カンタン 3ステップ",
+      "steps": {
+        "web": { "title": "ウェブ管理", "description": "ウェブダッシュボードでの直感的な管理" },
+        "bot": { "title": "ボット連携", "description": "ディスコードボットとのリアルタイム接続" },
+        "complete": { "title": "完了", "description": "大会開催完了！" }
+      },
+      "desktop": {
+        "phase1": "ウェブダッシュボードでの直感的な管理",
+        "phase2": "ディスコードボットとのリアルタイム接続",
+        "phase3": "大会開催完了"
+      },
+      "scroll": "スクロールして体験"
+    },
+    "cta": {
+      "headline": "今すぐディスコードサーバーにGAMERSを入れてみて下さい！",
+      "description": "数千のコミュニティが愛用するツールを、今すぐ体験しましょう。",
+      "button": "無料で始める",
+      "noCard": "クレジットカード登録不要"
+    },
+    "footer": {
+      "copyright": "Gamers Inc. 無断転載を禁じます。"
+    }
+  },
+  "mypage": {
+    "tabs": {
+      "overview": "概要",
+      "manage": "管理",
+      "settings": "設定"
+    },
+    "sections": {
+      "gameIntegration": "ゲーム連携",
+      "manageApplications": "参加申請管理",
+      "accountSettings": "アカウント設定"
+    },
+    "profile": {
+      "report": "通報"
+    },
+    "valorant": {
+      "title": "Valorant連携",
+      "region": "地域",
+      "riotName": "Riot ID",
+      "tag": "タグ",
+      "linkButton": "Valorantアカウントを連携",
+      "unlinkButton": "連携解除",
+      "refreshButton": "情報更新",
+      "elo": "ELOレート",
+      "peakRank": "最高ランク",
+      "lastUpdated": "最終更新",
+      "cantRefresh": "更新不可 (24時間以内)",
+      "confirmUnlink": "本当に連携を解除しますか？",
+      "toast": {
+        "linked": "Valorantアカウントが連携されました。",
+        "linkFailed": "連携失敗",
+        "unlinked": "Valorantアカウントの連携が解除されました。",
+        "unlinkFailed": "解除失敗",
+        "refreshed": "Valorant情報が更新されました。",
+        "refreshFailed": "更新失敗"
+      },
+      "regions": {
+        "kr": "韓国 (KR)",
+        "ap": "アジア太平洋 (AP)",
+        "na": "北米 (NA)",
+        "eu": "ヨーロッパ (EU)"
+      }
+    },
+    "managed": {
+      "title": "管理中の大会",
+      "description": "運営している大会のダッシュボードへ素早くアクセス。",
+      "button": "ダッシュボード管理"
+    },
+    "applications": {
+      "title": "参加申請管理",
+      "description": "参加申請を管理し、承認/拒否を行います。",
+      "noContest": "開催した大会がありません",
+      "noContestDesc": "大会を開催して参加申請を受け付けましょう。",
+      "applicant": "申請者",
+      "tag": "タグ",
+      "appliedAt": "申請日",
+      "status": "ステータス",
+      "actions": "操作",
+      "created": "作成日",
+      "currentTeams": "現在のチーム",
+      "noApps": "まだ申請したチームはありません。",
+      "unknownUser": "不明なユーザー",
+      "processed": "処理済み",
+      "toast": {
+        "accepted": "申請を承認しました。",
+        "rejected": "申請を拒否しました。",
+        "acceptFailed": "申請の承認に失敗しました。",
+        "rejectFailed": "申請の拒否に失敗しました。"
+      }
+    },
+    "edit": {
+      "title": "プロフィール設定",
+      "username": "ユーザー名",
+      "tag": "タグ",
+      "bio": "自己紹介",
+      "changePassword": "パスワード変更",
+      "newPassword": "新しいパスワード",
+      "confirmPassword": "パスワード確認",
+      "save": "変更を保存",
+      "toast": {
+        "passwordMismatch": "パスワードが一致しません。",
+        "passwordChanged": "パスワードが変更されました。",
+        "updateNotSupported": "プロフィール情報の修正はまだサポートされていません（パスワードを除く）。",
+        "failed": "プロフィール修正失敗"
+      }
+    }
+  },
+  "contestDetail": {
+      "status": {
+        "PENDING": "準備中",
+        "RECRUITING": "募集中",
+        "ACTIVE": "進行中",
+        "FINISHED": "終了",
+        "CANCELLED": "中止",
+        "PREPARING": "準備中"
+      },
+      "cta": {
+        "join": "参加申請する",
+        "loginToJoin": "ログインして申請",
+        "cancelJoin": "申請キャンセル",
+        "joined": "参加確定済み",
+        "goToDashboard": "ダッシュボードへ移動"
+      },
+      "alerts": {
+        "joinSuccess": "参加申請が完了しました。",
+        "joinFail": "参加申請に失敗しました。",
+        "cancelSuccess": "申請をキャンセルしました。",
+        "cancelFail": "キャンセルに失敗しました。",
+        "confirmCancel": "参加申請をキャンセルしますか？",
+        "alreadyJoined": "既に参加が確定しています。",
+        "loadingFail": "大会情報の読み込みに失敗しました。"
+      },
+      "noInfo": "詳細情報はありません。"
+    },
+    "contestsList": {
+      "title": "開催中の大会",
+      "filter": {
+        "latest": "並び替え: 日付順",
+        "status": "並び替え: ステータス順"
+      },
+      "noContests": "大会が見つかりません。"
+    },
+    "contestCreate": {
+      "title": "大会作成",
+      "form": {
+        "titleLabel": "大会タイトル",
+        "titlePlaceholder": "大会タイトルを入力（例：2026 サイバーリーグ）",
+        "thumbnail": "サムネイルアップロード",
+        "maxTeams": "最大チーム数",
+        "teamSize": "チーム人数",
+        "contestType": "大会タイプ",
+        "gameType": "ゲームタイトル",
+        "startDate": "開始日時",
+        "endDate": "終了日時",
+        "totalPoints": "賞金総額ポイント",
+        "autoStart": "満員時に自動開始？",
+        "description": "詳細説明 (Markdown)",
+        "discord": "Discordサーバー"
+      },
+      "actions": {
+        "edit": "編集",
+        "preview": "プレビュー",
+        "creating": "作成中...",
+        "submit": "大会を作成"
+      },
+      "status": {
+        "ready": "作成準備完了 🚀",
+        "fillRequired": "必須項目をすべて入力してください"
+      },
+      "options": {
+        "tournament": "トーナメント",
+        "league": "リーグ"
+      }
+    },
+    "teamManagement": {
+      "title": "チーム管理",
+      "members": "メンバー",
+      "points": "ポイント",
+      "invite": "メンバー招待",
+      "searchPlaceholder": "ユーザー名#タグ 検索...",
+      "search": "検索",
+      "inviteAction": "招待",
+      "ready": "チーム構成完了！参加準備ができました。",
+      "notReady": "チーム構成が完了していません。",
+      "leaderOnly": "チームリーダーのみがメンバーを管理できます。",
+      "toast": {
+        "inviteSuccess": "招待を送信しました！",
+        "inviteFail": "招待に失敗しました。"
+      }
+    },
+    "contestCTA": {
+      "title": "参加申請",
+      "status": "募集中",
+      "teams": "チーム",
+      "entryFee": "参加費",
+      "free": "無料",
+      "prizePool": "総賞金",
+      "deadline": "申請締切",
+      "button": {
+        "join": "参加申請する",
+        "processing": "処理中...",
+        "closed": "募集終了",
+        "login": "ログインして申請",
+        "cancel": "申請キャンセル",
+        "joined": "参加確定",
+        "deleteTeam": "チーム削除"
+      },
+      "loginRequired": "参加申請をするにはログインが必要です。"
+    },
+    "contestModal": {
+      "title": "チーム作成",
+      "qualification": "資格確認",
+      "description": "この大会に参加するにはチームを作成する必要があります。まずValorantのランクを確認します。",
+      "calculate": "ポイント計算",
+      "notConfigured": "ポイントテーブル未設定",
+      "calculating": "ポイント計算中...",
+      "failed": "ポイント計算失敗",
+      "checkProfile": "プロフィール設定確認",
+      "currentTier": "現在のティア",
+      "peakTier": "最高ティア",
+      "calculatedPoints": "計算されたポイント",
+      "cancel": "キャンセル",
+      "createTeam": "チーム作成"
+    },
+    "contestDashboard": {
+      "tabs": {
+        "overview": "概要",
+        "applications": "参加申請",
+        "bracket": "対戦表 & チーム",
+        "settings": "設定"
+      },
+      "stats": {
+        "participants": "参加者",
+        "status": "ステータス"
+      },
+      "actions": {
+        "start": "大会開始",
+        "started": "進行中",
+        "stop": "大会停止",
+        "delete": "大会削除"
+      }
+    }
+}

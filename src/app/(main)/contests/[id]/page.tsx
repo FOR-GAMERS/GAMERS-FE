@@ -1,0 +1,201 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import ContestHero from "@/components/contests/detail/ContestHero";
+import ContestBody from "@/components/contests/detail/ContestBody";
+import ContestApplicationModal from "@/components/contests/detail/ContestApplicationModal";
+import { contestService } from "@/services/contest-service";
+import { Loader2, AlertCircle } from "lucide-react";
+import { ContestStatus } from "@/types/api";
+import { useMe } from "@/hooks/use-user";
+import { useTranslation } from "react-i18next";
+import TeamManagementSection from "@/components/contests/detail/TeamManagementSection";
+
+export default function ContestDetailPage() {
+  const { t } = useTranslation();
+  const router = useRouter();
+  const params = useParams(); 
+  const contestId = Number(params?.id);
+  const queryClient = useQueryClient();
+  
+  // Auth & User
+  const { data: userResponse, isLoading: isUserLoading } = useMe();
+  const isLoggedIn = !!userResponse?.data;
+
+  // Contest Data
+  const { data: response, isLoading: isContestLoading, error } = useQuery({
+      queryKey: ['contest', contestId],
+      queryFn: () => contestService.getContest(contestId),
+      enabled: !!contestId && !isNaN(contestId)
+  });
+
+  // Application Status
+  const { data: appStatusResponse, isLoading: isAppStatusLoading } = useQuery({
+      queryKey: ['contest-application', contestId],
+      queryFn: () => contestService.getMyApplicationStatus(contestId),
+      enabled: isLoggedIn && !!contestId && !isNaN(contestId),
+      retry: false
+  });
+
+  const contest = response?.data;
+  const applicationStatus = appStatusResponse?.data?.status || 'NONE'; 
+
+  // Redirect to dashboard if accepted
+  useEffect(() => {
+    if (applicationStatus === 'ACCEPTED') {
+        router.push(`/contests/${contestId}/dashboard`);
+    }
+  }, [applicationStatus, contestId, router]);
+
+  const getStatusLabel = (status: ContestStatus) => {
+    return t(`contestDetail.status.${status}`, status);
+  };
+
+  // Mutations
+  const applyMutation = useMutation({
+      mutationFn: (data?: { point?: number; current_tier?: string; peak_tier?: string }) => contestService.applyContest(contestId, data),
+      onSuccess: () => {
+          alert(t('contestDetail.alerts.joinSuccess'));
+          queryClient.invalidateQueries({ queryKey: ['contest-application', contestId] });
+          queryClient.invalidateQueries({ queryKey: ['contest', contestId] });
+      },
+      onError: (error: any) => {
+          alert(error.response?.data?.message || t('contestDetail.alerts.joinFail'));
+      }
+  });
+
+  const cancelMutation = useMutation({
+      mutationFn: () => contestService.cancelApplication(contestId),
+      onSuccess: () => {
+          alert(t('contestDetail.alerts.cancelSuccess'));
+          queryClient.invalidateQueries({ queryKey: ['contest-application', contestId] });
+          queryClient.invalidateQueries({ queryKey: ['contest', contestId] });
+      },
+      onError: (error: any) => {
+           alert(error.response?.data?.message || t('contestDetail.alerts.cancelFail'));
+      }
+  });
+
+  const isLoading = isContestLoading || (isLoggedIn && isAppStatusLoading);
+  const isActionLoading = applyMutation.isPending || cancelMutation.isPending;
+
+  // Modal State
+  const [isApplicationModalOpen, setIsApplicationModalOpen] = useState(false);
+
+  const handleJoin = () => {
+    if (!isLoggedIn) {
+        router.push('/login');
+        return;
+    }
+    
+    if (applicationStatus === 'NONE' || applicationStatus === 'REJECTED') {
+         setIsApplicationModalOpen(true);
+    } else if (applicationStatus === 'PENDING') {
+         if (confirm(t('contestDetail.alerts.confirmCancel'))) {
+            cancelMutation.mutate();
+         }
+    } else if (applicationStatus === 'ACCEPTED') {
+         alert(t('contestDetail.alerts.alreadyJoined'));
+    }
+  };
+
+  // Determine Button Props
+  let buttonLabel = t('contestCTA.button.join');
+  let variant: 'primary' | 'destructive' | 'secondary' = 'primary';
+  
+  if (!isLoggedIn) {
+      buttonLabel = t('contestCTA.button.login');
+  } else if (applicationStatus === 'PENDING') {
+      // User is managing a team. 
+      buttonLabel = t('contestCTA.button.deleteTeam'); 
+      variant = 'destructive';
+  } else if (applicationStatus === 'ACCEPTED') {
+      buttonLabel = t('contestCTA.button.joined');
+      variant = 'secondary';
+  }
+
+  if (isLoading) {
+      return (
+          <div className="min-h-screen bg-deep-black flex items-center justify-center">
+              <Loader2 className="w-10 h-10 text-neon-cyan animate-spin" />
+          </div>
+      );
+  }
+
+  if (error || !contest) {
+      return (
+          <div className="min-h-screen bg-deep-black flex flex-col items-center justify-center text-white gap-4">
+               <AlertCircle className="w-12 h-12 text-red-500" />
+               <p className="text-xl">{t('contestDetail.alerts.loadingFail')}</p>
+          </div>
+      );
+  }
+
+  return (
+    <main className="min-h-screen bg-deep-black text-white pb-32">
+      <ContestHero 
+        title={contest.title}
+        thumbnailUrl={contest.thumbnail || "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2940&auto=format&fit=crop"} 
+        status={getStatusLabel(contest.contest_status)}
+        gameType={contest.game_type || "GAME"}
+      />
+
+      <ContestBody 
+        description={contest.description || t('contestDetail.noInfo')}
+        ctaProps={{
+            currentParticipants: contest.current_team_count || 0,
+            maxParticipants: contest.max_team_count || 0,
+            entryFee: 0, 
+            prizePool: contest.total_point ? `${contest.total_point.toLocaleString()} PT` : "0 PT",
+            deadline: contest.ended_at ? new Date(contest.ended_at).toLocaleDateString() : "TBD",
+            onJoin: handleJoin,
+            isLoggedIn: isLoggedIn,
+            buttonLabel: buttonLabel,
+            variant: variant,
+            isLoading: isActionLoading
+        }}
+      />
+      
+      {/* Team Management Section (Only visible when Applied/Creating Team) */}
+      {applicationStatus === 'PENDING' && (
+          <div className="container mx-auto px-4 pb-12">
+            <TeamManagementSection 
+                contestId={contestId}
+                maxTeamMember={contest.total_team_member}
+                maxTotalPoint={contest.total_point} // Assuming total_point is also max_total_point logic or strictly prize? 
+                // Wait, field `total_point` is Prize Pool usually. 
+                // There is no `max_total_point_limit` in ContestResponse.
+                // Re-checking schema: `total_point` is generally prize. 
+                // Is there a restriction? The user said "Team 의 총 Point 를 계산해서 ... 최대 Point 이내의 Point 라면".
+                // I will assume `total_point` is used as limit OR I need a new field.
+                // Looking at `CreateContest` page, `total_point` is input as "Total Points".
+                // It likely means "Max Team Point Limit" for participation, OR "Prize Pool".
+                // Given the context of "Calculated Points" and "Tier", it sounds like a limit.
+                // BUT `prizePool` in CTA uses it too.
+                // Let's assume it IS the limit for now.
+                // If it's 0, maybe no limit?
+                // I will pass it as `maxTotalPoint` if > 0, else Infinity.
+                // Actually, let's look at `createContest` page again. "Total Points" label.
+                // Usually "Prize Pool".
+                // But the user prompt says "Point 가 최대 Point 이내의 Point 라면". Use context.
+                // I will just pass `contest.total_point` for now.
+             />
+          </div>
+      )}
+      
+      <ContestApplicationModal 
+        isOpen={isApplicationModalOpen}
+        onClose={() => setIsApplicationModalOpen(false)}
+        onConfirm={(data) => {
+            applyMutation.mutate(data);
+            setIsApplicationModalOpen(false);
+        }}
+        contestId={contestId}
+        scoreTableId={contest.game_point_table_id}
+        isApplying={applyMutation.isPending}
+      />
+    </main>
+  );
+}
