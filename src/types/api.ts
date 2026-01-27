@@ -216,6 +216,38 @@ export interface NotificationResponse {
   data: Record<string, any>; // Flexible data payload
 }
 
+export interface TeamMember {
+  user_id: number;
+  username: string;
+  tag: string;
+  avatar?: string;
+  member_type: 'LEADER' | 'MEMBER';
+  grade?: number;
+  point?: number; // Added for point calculation
+  discord_id?: string;
+}
+
+export interface TeamResponse {
+  team_id?: number; // Added based on context, might be needed
+  game_id: number; // Keeping for legacy/compatibility if returned
+  contest_id: number;
+  name: string; // Team Name
+  invite_code: string; // Invite Code
+  leader_id: number; // Leader ID
+  game_status?: GameStatus;
+  game_team_type?: GameTeamType;
+  members: TeamMember[];
+  created_at: string;
+}
+
+export interface CreateTeamRequest {
+  team_name?: string; // Optional based on swagger
+}
+
+export interface InviteTeamMemberRequest {
+  user_id: number;
+}
+
 export interface NotificationListResponse {
   notifications: NotificationResponse[];
   total: number;
