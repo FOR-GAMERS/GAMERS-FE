@@ -483,40 +483,160 @@ function MemberListView({ contestId }: { contestId: number }) {
   );
 }
 
+interface InviteUserViewProps {
+  contestId: number;
+  activeGameId?: number; // Needed for verify if active game is required for invite api
+  existingMemberIds: number[];
+  iAmLeader: boolean;
+}
+
+function InviteUserView({ contestId, existingMemberIds, iAmLeader }: InviteUserViewProps) {
+    const { addToast } = useToast();
+    const [page, setPage] = useState(1);
+    const PAGE_SIZE = 5;
+
+    // We can reuse getContestMembers to find people to invite
+    const { data: membersResponse, isLoading } = useQuery({
+        queryKey: ['contest-members-invite', contestId, page],
+        queryFn: () => contestService.getContestMembers(contestId, { page, page_size: PAGE_SIZE })
+    });
+
+    const members = membersResponse?.data?.data || [];
+    const totalPages = membersResponse?.data?.total_pages || 1;
+
+    // Filter out existing team members
+    // Note: This only filters current page. Ideally backend supports exclusion, but client-side visual filter is OK for now.
+    // Or we show them as "Already in team" disabled button.
+    
+    const handleInvite = async (userId: number, username: string) => {
+        try {
+            await contestService.inviteMember(contestId, userId);
+            addToast(`${username}を招待しました！`, 'success');
+        } catch (e: any) {
+            addToast(e.message || '招待に失敗しました。', 'error');
+        }
+    };
+
+    if (!iAmLeader) return null;
+
+    return (
+        <div className="mt-8 pt-8 border-t border-neutral-800 animate-fade-in-up">
+            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <UserPlus className="text-neon-cyan" size={24} />
+                メンバーを招待
+            </h3>
+            
+            {isLoading ? (
+                <div className="flex justify-center p-4"><Loader2 className="animate-spin text-neon-cyan" /></div>
+            ) : (
+                <div className="space-y-3">
+                    {members.map(member => {
+                        const isAlreadyMember = existingMemberIds.includes(member.user_id);
+                         const getAvatarSrc = () => {
+                            if (member.avatar?.startsWith('http')) return member.avatar;
+                            if (member.profile_key && member.avatar) {
+                                return `https://cdn.discordapp.com/avatars/${member.profile_key}/${member.avatar}.png`;
+                            }
+                            return undefined;
+                        };
+                        const avatarSrc = getAvatarSrc();
+
+                        return (
+                            <div key={member.user_id} className="flex items-center justify-between p-3 rounded-xl bg-neutral-900/50 border border-neutral-800 hover:border-neutral-700 transition-colors">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center text-sm font-bold overflow-hidden">
+                                        {avatarSrc ? <img src={avatarSrc} alt={member.username} className="w-full h-full object-cover"/> : member.username.substring(0, 1).toUpperCase()}
+                                    </div>
+                                    <div>
+                                        <div className="text-sm font-bold text-white">{member.username}</div>
+                                        <div className="text-xs text-neutral-500 font-mono">#{member.tag}</div>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-4">
+                                     <div className="text-sm font-mono text-neon-cyan">{member.point}pt</div>
+                                     <button
+                                        onClick={() => handleInvite(member.user_id, member.username)}
+                                        disabled={isAlreadyMember}
+                                        className="px-3 py-1.5 text-xs rounded-lg bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/20 hover:bg-neon-cyan hover:text-black disabled:opacity-30 disabled:hover:bg-neon-cyan/10 disabled:hover:text-neon-cyan transition-all"
+                                     >
+                                        {isAlreadyMember ? '参加済み' : '招待'}
+                                     </button>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
+
+             {/* Simple Pagination for Invite List */}
+             {totalPages > 1 && (
+                <div className="flex justify-center items-center gap-4 mt-4">
+                    <button 
+                        onClick={() => setPage(p => Math.max(1, p - 1))}
+                        disabled={page === 1}
+                        className="p-1.5 rounded-lg border border-neutral-800 text-neutral-400 hover:text-white disabled:opacity-30"
+                    >
+                        <ChevronLeft size={16} />
+                    </button>
+                    <span className="text-xs text-neutral-500 font-mono">
+                        Page {page} / {totalPages}
+                    </span>
+                    <button 
+                        onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                        disabled={page === totalPages}
+                        className="p-1.5 rounded-lg border border-neutral-800 text-neutral-400 hover:text-white disabled:opacity-30"
+                    >
+                        <ChevronRight size={16} />
+                    </button>
+                </div>
+             )}
+        </div>
+    );
+}
+
 function MyTeamView({ contestId }: { contestId: number }) {
   const { addToast } = useToast();
   const { data: me } = useMe();
   const myUserId = me?.data?.user_id;
   const queryClient = useQueryClient();
 
-  // Fetch games
-  const { data: gamesResponse } = useQuery({
-      queryKey: ['contest-games', contestId],
-      queryFn: () => contestService.getContestGames(contestId)
+  // Need contest info for total point limit
+  const { data: contestResponse } = useQuery({
+      queryKey: ['contest-detail', contestId], // Ensure this key matches other components
+      queryFn: () => contestService.getContest(contestId)
   });
-  const activeGameId = gamesResponse?.data?.[0]?.game_id;
+  const contest = contestResponse?.data;
+  const maxTotalPoint = contest?.total_point || 0;
 
-  // Fetch Game Members
-  const { data: gameMembersRes, isLoading, refetch } = useQuery({
-      queryKey: ['game-members', activeGameId],
-      queryFn: () => activeGameId ? contestService.getGameMembers(activeGameId) : Promise.resolve(null),
-      enabled: !!activeGameId
+  // Fetch Team Info using new API
+  const { data: teamResponse, isLoading, refetch } = useQuery({
+      queryKey: ['contest-team', contestId],
+      queryFn: async () => {
+          try {
+              return await contestService.getTeam(contestId);
+          } catch (error: any) {
+              if (error.status === 404) return null; // No team found
+              throw error;
+          }
+      },
+      retry: false
   });
 
-  const allMembers = gameMembersRes?.data || [];
-  const myProfile = allMembers.find(m => m.user_id === myUserId);
-  const myTeamId = myProfile?.team_id;
-  const iAmLeader = myProfile?.member_type === 'LEADER';
+  const team = teamResponse?.data;
+  const teamMembers = team?.members || [];
+  const existingMemberIds = teamMembers.map(m => m.user_id);
+  const myProfile = teamMembers.find(m => m.user_id === myUserId);
+  const iAmLeader = team?.leader_id === myUserId; // Fixed to use leader_id from TeamResponse
 
-  const teamMembers = myTeamId ? allMembers.filter(m => m.team_id === myTeamId) : [];
+  // Point Calculation
+  const currentTotalPoint = teamMembers.reduce((sum, member) => sum + (member.point || 0), 0);
+  const isPointOver = maxTotalPoint > 0 && currentTotalPoint > maxTotalPoint;
   
   const handleCreateTeam = async () => {
        try {
-           await contestService.applyContest(contestId); // Assuming apply creates a team/entry
+           await contestService.createTeam(contestId);
            addToast('チームを作成しました！', 'success');
-           // Invalidate queries to refresh
-           queryClient.invalidateQueries({ queryKey: ['game-members', activeGameId] });
-           queryClient.invalidateQueries({ queryKey: ['contest-games', contestId] });
+           queryClient.invalidateQueries({ queryKey: ['contest-team', contestId] });
            refetch();
        } catch (e: any) {
            addToast(e.message || 'チーム作成に失敗しました。', 'error');
@@ -525,11 +645,11 @@ function MyTeamView({ contestId }: { contestId: number }) {
   };
 
   const handleDeleteTeam = async () => {
-      if (!activeGameId || !confirm('本当にチームを解散しますか？この操作は取り消せません。')) return;
+      if (!confirm('本当にチームを解散しますか？この操作は取り消せません。')) return;
       try {
-          await contestService.deleteTeam(activeGameId);
+          await contestService.deleteTeam(contestId);
           addToast('チームを解散しました。', 'success');
-           queryClient.invalidateQueries({ queryKey: ['game-members', activeGameId] });
+           queryClient.invalidateQueries({ queryKey: ['contest-team', contestId] });
            refetch();
       } catch (e: any) {
            addToast('チームの解散に失敗しました。', 'error');
@@ -537,11 +657,11 @@ function MyTeamView({ contestId }: { contestId: number }) {
   };
 
   const handleLeaveTeam = async () => {
-       if (!activeGameId || !confirm('本当にチームを脱退しますか？')) return;
+       if (!confirm('本当にチームを脱退しますか？')) return;
        try {
-           await contestService.leaveTeam(activeGameId);
+           await contestService.deleteTeam(contestId); 
            addToast('チームを脱退しました。', 'success');
-            queryClient.invalidateQueries({ queryKey: ['game-members', activeGameId] });
+            queryClient.invalidateQueries({ queryKey: ['contest-team', contestId] });
             refetch();
        } catch (e: any) {
            addToast('チームの脱退に失敗しました。', 'error');
@@ -552,7 +672,7 @@ function MyTeamView({ contestId }: { contestId: number }) {
       return <div className="p-8 flex justify-center"><Loader2 className="animate-spin text-neon-cyan"/></div>;
   }
 
-  if (!myTeamId || teamMembers.length === 0) {
+  if (!team) {
       return (
           <div className="p-8 rounded-2xl bg-neutral-900/30 border border-neutral-800 animate-fade-in-up flex flex-col items-center justify-center min-h-[400px]">
              <Shield className="text-neutral-800 mb-4" size={48} />
@@ -573,12 +693,32 @@ function MyTeamView({ contestId }: { contestId: number }) {
 
   return (
     <div className="p-8 rounded-2xl bg-neutral-900/30 border border-neutral-800 animate-fade-in-up">
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-2xl font-bold text-white flex items-center gap-3">
-           <Shield className="text-neon-cyan" />
-           My Team
-        </h2>
-        <div className="flex items-center gap-4">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
+        <div>
+            <h2 className="text-2xl font-bold text-white flex items-center gap-3">
+            <Shield className="text-neon-cyan" />
+            {team.name || 'My Team'} 
+            </h2>
+             {/* Point Display with Alert Logic */}
+             <div className="mt-2 flex items-center gap-2">
+                <span className="text-sm text-gray-400">Total Points:</span>
+                <div className={`text-lg font-mono font-bold ${isPointOver ? 'text-nasu-red' : 'text-neon-blue'} flex items-center gap-2`}>
+                    {currentTotalPoint.toLocaleString()} 
+                    <span className="text-neutral-600 text-sm">/ {maxTotalPoint.toLocaleString()}</span>
+                </div>
+                {isPointOver && (
+                    <div className="flex items-center gap-1 text-nasu-red text-xs bg-nasu-red/10 px-2 py-0.5 rounded border border-nasu-red/20">
+                        <AlertCircle size={12} />
+                        <span>ポイント超過</span>
+                    </div>
+                )}
+            </div>
+        </div>
+
+        <div className="flex items-center gap-4 flex-wrap">
+             <div className="text-sm text-neutral-500 px-3 py-1 rounded-full border border-neutral-800 bg-neutral-900">
+                コード: <span className="text-white font-bold select-all">{team.invite_code}</span>
+             </div>
              <div className="text-sm text-neutral-500 px-3 py-1 rounded-full border border-neutral-800 bg-neutral-900">
                 定員: <span className="text-white font-bold">{teamMembers.length}</span> / {capacity}
              </div>
@@ -624,7 +764,12 @@ function MyTeamView({ contestId }: { contestId: number }) {
                    </div>
                    <div>
                       <div className="text-white font-bold text-lg">{member.username}</div>
-                      <div className="text-xs text-neon-cyan uppercase tracking-wider font-semibold">{member.member_type}</div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-neon-cyan uppercase tracking-wider font-semibold">{member.member_type}</span>
+                        {member.point !== undefined && (
+                             <span className="text-xs text-neutral-500 font-mono bg-neutral-950 px-1.5 rounded border border-neutral-800">{member.point}pt</span>
+                        )}
+                      </div>
                    </div>
                 </div>
                 {/* Visual indicator for leader */}
@@ -645,14 +790,12 @@ function MyTeamView({ contestId }: { contestId: number }) {
          ))}
       </div>
       
-      <div className="mt-8 pt-6 border-t border-neutral-800 flex justify-end">
-          <button 
-             onClick={() => addToast('招待機能は参加者一覧から利用可能です', 'info')}
-             className="bg-neon-cyan text-black px-6 py-2 rounded-full font-bold shadow-[0_0_15px_rgba(0,243,255,0.2)] hover:shadow-[0_0_25px_rgba(0,243,255,0.4)] transition-all opacity-80 flex items-center gap-2"
-          >
-             <Users size={18} /> メンバー管理
-          </button>
-      </div>
+      {/* Invitation Section */}
+      <InviteUserView 
+        contestId={contestId} 
+        existingMemberIds={existingMemberIds} 
+        iAmLeader={!!iAmLeader} 
+      />
     </div>
   );
 }

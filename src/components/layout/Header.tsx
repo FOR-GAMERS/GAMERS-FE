@@ -81,6 +81,28 @@ export default function Header() {
       router.push("/login");
   };
 
+  const profileContainerRef = useRef<HTMLDivElement>(null);
+  const languageContainerRef = useRef<HTMLDivElement>(null);
+
+  // Click Outside Handler
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      // Profile Dropdown
+      if (isDropdownOpen && profileContainerRef.current && !profileContainerRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+      // Language Dropdown
+      if (isLanguageOpen && languageContainerRef.current && !languageContainerRef.current.contains(event.target as Node)) {
+        setIsLanguageOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownOpen, isLanguageOpen]);
+
   useGSAP(() => {
     gsap.fromTo(headerRef.current, 
       { borderBottomColor: "transparent", borderBottomWidth: "1px" }, 
@@ -166,7 +188,7 @@ export default function Header() {
 
         <div className="flex items-center gap-4">
             {/* Language Switcher */}
-            <div className="relative">
+            <div className="relative" ref={languageContainerRef}>
                 <button 
                     onClick={() => setIsLanguageOpen(!isLanguageOpen)}
                     className="p-2 hover:bg-white/5 rounded-full transition-colors text-muted-foreground hover:text-white"
@@ -202,7 +224,7 @@ export default function Header() {
                         isLoggedIn={isLoggedIn}
                     />
                     
-                    <div className="relative">
+                    <div className="relative" ref={profileContainerRef}>
                         <button 
                             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                             className="w-9 h-9 rounded-full bg-gradient-to-tr from-cyan-400 to-blue-500 p-[2px] cursor-pointer hover:shadow-[0_0_15px_rgba(6,182,212,0.5)] transition-shadow"

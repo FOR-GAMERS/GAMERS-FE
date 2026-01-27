@@ -224,8 +224,19 @@
       "leaderOnly": "팀장만 멤버를 관리할 수 있습니다.",
       "toast": {
         "inviteSuccess": "초대가 전송되었습니다!",
-        "inviteFail": "초대에 실패했습니다."
-      }
+        "inviteFail": "초대에 실패했습니다.",
+        "createSuccess": "팀이 생성되었습니다!",
+        "createFail": "팀 생성에 실패했습니다.",
+        "deleteSuccess": "팀이 삭제되었습니다.",
+        "deleteFail": "팀 삭제에 실패했습니다.",
+        "leaveSuccess": "팀을 떠났습니다.",
+        "leaveFail": "팀 탈퇴에 실패했습니다."
+      },
+      "noTeamTitle": "팀이 없습니다",
+      "noTeamDescription": "대회에 참가하려면 팀을 생성해야 합니다. 팀장이 되어 팀원을 초대해보세요.",
+      "createTeam": "팀 생성하기",
+      "deleteTeam": "팀 삭제하기",
+      "confirmDelete": "정말로 팀을 삭제하시겠습니까? 팀원도 모두 삭제됩니다."
     },
     "contestCTA": {
       "title": "참가 신청",

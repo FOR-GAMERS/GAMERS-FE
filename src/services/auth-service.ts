@@ -65,8 +65,8 @@ export const authService = {
   },
 
   async getMe() {
-    // Guest users should be able to view the page, so don't redirect on 401
-    const response = await api.get<ApiResponse<MyUserResponse>>('/users/my', { requiresAuth: false }); 
+    // Guest users should be able to view the page, so don't redirect on 401, but attempt refresh
+    const response = await api.get<ApiResponse<MyUserResponse>>('/users/my', { requiresAuth: true, redirectOnFail: false }); 
     return response.data;
   }
 };

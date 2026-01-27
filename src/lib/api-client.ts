@@ -18,6 +18,7 @@ type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 interface FetchOptions extends RequestInit {
   params?: Record<string, string | number | boolean | undefined>;
   requiresAuth?: boolean;
+  redirectOnFail?: boolean;
 }
 
 // Keep these for compatibility with auth-service, but they primarily affect client-side logic
@@ -34,7 +35,7 @@ export const clearTokens = () => {
 export async function apiClient<T>(
   endpoint: string,
   method: RequestMethod = 'GET',
-  { params, requiresAuth = true, headers, ...customConfig }: FetchOptions = {}
+  { params, requiresAuth = true, redirectOnFail = true, headers, ...customConfig }: FetchOptions = {}
 ): Promise<T> {
   const safeEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
   const url = new URL(`${BASE_URL}${safeEndpoint}`, window.location.origin);
@@ -71,12 +72,16 @@ export async function apiClient<T>(
            // Token refreshed (cookies updated by server). Retry request.
            response = await fetch(url.toString(), config);
         } else {
-           clearTokens();
-           window.location.href = '/login';
+           if (redirectOnFail) {
+             clearTokens();
+             window.location.href = '/login';
+           }
         }
       } catch (error) {
-        clearTokens();
-        window.location.href = '/login';
+        if (redirectOnFail) {
+          clearTokens();
+          window.location.href = '/login';
+        }
       }
   }
 
