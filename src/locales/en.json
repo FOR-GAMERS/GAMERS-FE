@@ -7,7 +7,19 @@
     "createContest": "Create Contest",
     "report": "Report",
     "settings": "Settings",
-    "logout": "Logout"
+    "logout": "Logout",
+    "notifications": {
+      "title": "Notifications",
+      "markAllRead": "Mark all read",
+      "empty": "No notifications",
+      "types": {
+        "TEAM_INVITE_RECEIVED": "{{sender}} invited you to {{team}}.",
+        "TEAM_INVITE_ACCEPTED": "{{user}} accepted your invitation.",
+        "TEAM_INVITE_REJECTED": "{{user}} rejected your invitation.",
+        "APPLICATION_ACCEPTED": "Application for {{contest}} accepted.",
+        "APPLICATION_REJECTED": "Application for {{contest}} rejected."
+      }
+    }
   },
   "landing": {
     "hero": {
@@ -191,7 +203,7 @@
         "gameType": "Game Type",
         "startDate": "Start Date",
         "endDate": "End Date",
-        "totalPoints": "Total Points",
+        "totalPoints": "Team Point Limit (0 = Unlimited)",
         "autoStart": "Auto Start when full?",
         "description": "Description (Markdown)",
         "discord": "Discord Server"
@@ -234,6 +246,7 @@
       "entryFee": "Entry Fee",
       "free": "Free",
       "prizePool": "Prize Pool",
+      "pointLimit": "Point Limit",
       "deadline": "Deadline",
       "button": {
         "join": "Join Contest",
@@ -265,8 +278,26 @@
       "tabs": {
         "overview": "Overview",
         "applications": "Applications",
+        "participants": "Participants",
         "bracket": "Bracket & Teams",
         "settings": "Settings"
+      },
+      "participants": {
+        "title": "Participants",
+        "description": "Manage all members participating in the contest.",
+        "searchPlaceholder": "Search username...",
+        "role": "Role",
+        "points": "Points",
+        "actions": "Actions",
+        "roles": {
+          "LEADER": "Leader",
+          "STAFF": "Staff",
+          "NORMAL": "Participant"
+        },
+        "toast": {
+          "roleChangeSuccess": "Role updated successfully.",
+          "roleChangeFail": "Failed to update role."
+        }
       },
       "stats": {
         "participants": "Participants",
@@ -277,6 +308,39 @@
         "started": "STARTED",
         "stop": "STOP CONTEST",
         "delete": "DELETE"
+      },
+      "toast": {
+        "loadFail": "Failed to fetch contest",
+        "loadDataFail": "Failed to load contest data",
+        "startSuccess": "Contest started successfully",
+        "startFail": "Failed to start contest",
+        "stopSuccess": "Contest stopped successfully",
+        "stopFail": "Failed to stop contest",
+        "deleteSuccess": "Contest deleted successfully",
+        "deleteFail": "Failed to delete contest"
+      },
+      "confirmDelete": "Are you sure you want to delete this contest?",
+      "notFound": "Contest not found",
+      "overview": {
+        "title": "Contest Details",
+        "contestTitle": "Title",
+        "maxTeams": "Maximum Teams",
+        "unlimited": "Unlimited",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "notSet": "Not set",
+        "warning": "Please ensure all teams are shuffled and brackets are generated before starting the contest. Once started, applications are closed and data is finalized."
+      },
+      "settings": {
+        "underConstruction": "Settings panel under construction"
+      },
+      "page": {
+        "accessDenied": "Access Denied",
+        "permissionDenied": "You do not have permission to manage this contest.",
+        "returnToContest": "Return to Contest",
+        "title": "CONTEST",
+        "dashboard": "DASHBOARD",
+        "subtitle": "Manage participants, bracket, and contest status."
       }
     }
 }

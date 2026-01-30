@@ -7,7 +7,19 @@
     "createContest": "대회 생성",
     "report": "신고하기",
     "settings": "설정",
-    "logout": "로그아웃"
+    "logout": "로그아웃",
+    "notifications": {
+      "title": "알림",
+      "markAllRead": "모두 읽음으로 표시",
+      "empty": "알림이 없습니다.",
+      "types": {
+        "TEAM_INVITE_RECEIVED": "{{sender}}님이 {{team}} 팀에 초대했습니다.",
+        "TEAM_INVITE_ACCEPTED": "{{user}}님이 초대를 수락했습니다.",
+        "TEAM_INVITE_REJECTED": "{{user}}님이 초대를 거절했습니다.",
+        "APPLICATION_ACCEPTED": "{{contest}} 참가 신청이 승인되었습니다.",
+        "APPLICATION_REJECTED": "{{contest}} 참가 신청이 거절되었습니다."
+      }
+    }
   },
   "landing": {
     "hero": {
@@ -191,7 +203,7 @@
         "gameType": "게임 종목",
         "startDate": "시작 일시",
         "endDate": "종료 일시",
-        "totalPoints": "총 상금 포인트",
+        "totalPoints": "팀 포인트 제한 (0 = 무제한)",
         "autoStart": "인원이 차면 자동 시작?",
         "description": "상세 설명 (마크다운)",
         "discord": "디스코드 서버"
@@ -245,6 +257,7 @@
       "entryFee": "참가비",
       "free": "무료",
       "prizePool": "총 상금",
+      "pointLimit": "포인트 제한",
       "deadline": "신청 마감",
       "button": {
         "join": "참가 신청하기",
@@ -276,8 +289,26 @@
       "tabs": {
         "overview": "개요",
         "applications": "참가 신청",
+        "participants": "참가자 관리",
         "bracket": "대진표 & 팀",
         "settings": "설정"
+      },
+      "participants": {
+        "title": "참가자 목록",
+        "description": "대회에 참가 중인 모든 멤버를 관리합니다.",
+        "searchPlaceholder": "사용자명 검색...",
+        "role": "역할",
+        "points": "포인트",
+        "actions": "관리",
+        "roles": {
+          "LEADER": "개최자",
+          "STAFF": "스태프",
+          "NORMAL": "참가자"
+        },
+        "toast": {
+          "roleChangeSuccess": "역할이 변경되었습니다.",
+          "roleChangeFail": "역할 변경 실패"
+        }
       },
       "stats": {
         "participants": "참가자",
@@ -288,6 +319,39 @@
         "started": "진행 중",
         "stop": "대회 중지",
         "delete": "대회 삭제"
+      },
+      "toast": {
+        "loadFail": "대회 데이터를 불러오는데 실패했습니다",
+        "loadDataFail": "대회 데이터 로드 실패",
+        "startSuccess": "대회가 시작되었습니다",
+        "startFail": "대회 시작 실패",
+        "stopSuccess": "대회가 중지되었습니다",
+        "stopFail": "대회 중지 실패",
+        "deleteSuccess": "대회가 삭제되었습니다",
+        "deleteFail": "대회 삭제 실패"
+      },
+      "confirmDelete": "정말로 대회를 삭제하시겠습니까?",
+      "notFound": "대회를 찾을 수 없습니다",
+      "overview": {
+        "title": "대회 상세 정보",
+        "contestTitle": "제목",
+        "maxTeams": "최대 팀 수",
+        "unlimited": "무제한",
+        "startDate": "시작 일시",
+        "endDate": "종료 일시",
+        "notSet": "미설정",
+        "warning": "대회 시작 전 모든 팀이 셔플되고 대진표가 생성되었는지 확인해주세요. 시작 후에는 참가 신청이 마감되고 데이터가 확정됩니다."
+      },
+      "settings": {
+        "underConstruction": "설정 패널 준비 중"
+      },
+      "page": {
+        "accessDenied": "접근 거부",
+        "permissionDenied": "이 대회를 관리할 권한이 없습니다.",
+        "returnToContest": "대회로 돌아가기",
+        "title": "CONTEST",
+        "dashboard": "DASHBOARD",
+        "subtitle": "참가자, 대진표 및 대회 상태를 관리합니다."
       }
     }
 }

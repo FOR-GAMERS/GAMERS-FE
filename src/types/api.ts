@@ -253,3 +253,19 @@ export interface NotificationListResponse {
   total: number;
   unread_count: number;
 }
+
+export interface ScheduleGameRequest {
+  scheduled_start_time: string;
+  detection_window_minutes?: number;
+}
+
+export interface MatchResultResponse {
+  game_id: number;
+  winner_team_id?: number;
+  teams: {
+      team_id: number;
+      score: number;
+      is_winner: boolean;
+      team_name: string;
+  }[];
+}

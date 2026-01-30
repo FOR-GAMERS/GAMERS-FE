@@ -1,12 +1,14 @@
+
 import { useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bell, Check, X, Info, Trophy, UserPlus, Users, ClipboardList } from 'lucide-react';
 import { useNotifications } from '@/hooks/use-notifications';
 import { NotificationResponse, NotificationType } from '@/types/api';
 import { formatDistanceToNow } from 'date-fns';
-import { ko } from 'date-fns/locale';
+import { ko, enUS, ja } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
 import { gsap } from 'gsap';
+import { useTranslation } from 'react-i18next';
 
 interface NotificationDropdownProps {
   isOpen: boolean;
@@ -17,6 +19,7 @@ interface NotificationDropdownProps {
 export default function NotificationDropdown({ isOpen, setIsOpen, isLoggedIn }: NotificationDropdownProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { notifications, unreadCount, markAsRead, markAllAsRead } = useNotifications(isLoggedIn);
+  const { t, i18n } = useTranslation();
 
   // Close on click outside
   useEffect(() => {
@@ -62,6 +65,29 @@ export default function NotificationDropdown({ isOpen, setIsOpen, isLoggedIn }: 
     }
   };
 
+  const getLocalizedMessage = (notif: NotificationResponse) => {
+      // Use i18n key based on type if available in translation file
+      const key = `navbar.notifications.types.${notif.type}`;
+      
+      // We pass the entire data object as values for interpolation.
+      // E.g. { sender: "Alice", team: "Alpha", contest: "Cyber League" }
+      // This assumes backend sends these keys in `notif.data`.
+      // If `notif.data` is missing or keys don't match, we fallback to `notif.message`.
+      const translated = t(key, notif.data || {});
+      
+      // If the key doesn't exist (returns the key itself), fallback to the message from backend
+      if (translated === key) return notif.message;
+      return translated;
+  };
+
+  const getDateLocale = () => {
+      switch (i18n.language) {
+          case 'ko': return ko;
+          case 'ja': return ja;
+          default: return enUS;
+      }
+  };
+
   return (
     <div className="relative">
       <button 
@@ -79,14 +105,14 @@ export default function NotificationDropdown({ isOpen, setIsOpen, isLoggedIn }: 
         className="absolute right-0 top-full mt-2 w-80 sm:w-96 bg-[#0f172a] border border-white/10 rounded-xl shadow-2xl overflow-hidden hidden origin-top-right z-50"
       >
         <div className="flex items-center justify-between p-4 border-b border-white/5 bg-black/20">
-            <h3 className="font-bold text-white text-sm">Notifications</h3>
+            <h3 className="font-bold text-white text-sm">{t('navbar.notifications.title')}</h3>
             {unreadCount > 0 && (
                 <button 
                     onClick={markAllAsRead}
                     className="text-xs text-neon-cyan hover:text-cyan-300 transition-colors flex items-center gap-1"
                 >
                     <Check size={12} />
-                    Mark all read
+                    {t('navbar.notifications.markAllRead')}
                 </button>
             )}
         </div>
@@ -94,7 +120,7 @@ export default function NotificationDropdown({ isOpen, setIsOpen, isLoggedIn }: 
         <div className="max-h-[400px] overflow-y-auto custom-scrollbar">
             {notifications.length === 0 ? (
                 <div className="p-8 text-center text-muted-foreground text-sm">
-                    No notifications
+                    {t('navbar.notifications.empty')}
                 </div>
             ) : (
                 <div className="divide-y divide-white/5">
@@ -119,10 +145,10 @@ export default function NotificationDropdown({ isOpen, setIsOpen, isLoggedIn }: 
                                         {notif.title}
                                     </h4>
                                     <p className="text-xs text-neutral-400 line-clamp-2">
-                                        {notif.message}
+                                        {getLocalizedMessage(notif) as string}
                                     </p>
                                     <p className="text-[10px] text-neutral-500 font-mono pt-1">
-                                        {formatDistanceToNow(new Date(notif.created_at), { addSuffix: true, locale: ko })}
+                                        {formatDistanceToNow(new Date(notif.created_at), { addSuffix: true, locale: getDateLocale() })}
                                     </p>
                                 </div>
                             </div>

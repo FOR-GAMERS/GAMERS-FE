@@ -31,23 +31,30 @@ export default function ContestDetailPage() {
       enabled: !!contestId && !isNaN(contestId)
   });
 
-  // Application Status
-  const { data: appStatusResponse, isLoading: isAppStatusLoading } = useQuery({
-      queryKey: ['contest-application', contestId],
-      queryFn: () => contestService.getMyApplicationStatus(contestId),
+  // User Status (Member + Application)
+  const { data: statusResponse, isLoading: isStatusLoading } = useQuery({
+      queryKey: ['contest-status', contestId],
+      queryFn: () => contestService.getMyContestStatus(contestId),
       enabled: isLoggedIn && !!contestId && !isNaN(contestId),
       retry: false
   });
 
   const contest = response?.data;
-  const applicationStatus = appStatusResponse?.data?.status || 'NONE'; 
+  const userStatus = statusResponse?.data;
+  
+  // Refined Logic:
+  // If is_member is true, we consider them 'ACCEPTED' (Joined)
+  // Else if application_status is 'PENDING', they are applying.
+  const isMember = userStatus?.is_member || false;
+  const applicationStatus = userStatus?.application_status || 'NONE'; 
+  const hasJoined = isMember || applicationStatus === 'ACCEPTED'; 
 
-  // Redirect to dashboard if accepted
+  // Redirect to dashboard if joined
   useEffect(() => {
-    if (applicationStatus === 'ACCEPTED') {
+    if (hasJoined) {
         router.push(`/contests/${contestId}/dashboard`);
     }
-  }, [applicationStatus, contestId, router]);
+  }, [hasJoined, contestId, router]);
 
   const getStatusLabel = (status: ContestStatus) => {
     return t(`contestDetail.status.${status}`, status);
@@ -58,7 +65,7 @@ export default function ContestDetailPage() {
       mutationFn: (data?: { point?: number; current_tier?: string; peak_tier?: string }) => contestService.applyContest(contestId, data),
       onSuccess: () => {
           alert(t('contestDetail.alerts.joinSuccess'));
-          queryClient.invalidateQueries({ queryKey: ['contest-application', contestId] });
+          queryClient.invalidateQueries({ queryKey: ['contest-status', contestId] });
           queryClient.invalidateQueries({ queryKey: ['contest', contestId] });
       },
       onError: (error: any) => {
@@ -70,7 +77,7 @@ export default function ContestDetailPage() {
       mutationFn: () => contestService.cancelApplication(contestId),
       onSuccess: () => {
           alert(t('contestDetail.alerts.cancelSuccess'));
-          queryClient.invalidateQueries({ queryKey: ['contest-application', contestId] });
+          queryClient.invalidateQueries({ queryKey: ['contest-status', contestId] });
           queryClient.invalidateQueries({ queryKey: ['contest', contestId] });
       },
       onError: (error: any) => {
@@ -78,7 +85,7 @@ export default function ContestDetailPage() {
       }
   });
 
-  const isLoading = isContestLoading || (isLoggedIn && isAppStatusLoading);
+  const isLoading = isContestLoading || (isLoggedIn && isStatusLoading);
   const isActionLoading = applyMutation.isPending || cancelMutation.isPending;
 
   // Modal State
@@ -90,14 +97,18 @@ export default function ContestDetailPage() {
         return;
     }
     
-    if (applicationStatus === 'NONE' || applicationStatus === 'REJECTED') {
-         setIsApplicationModalOpen(true);
-    } else if (applicationStatus === 'PENDING') {
+    if (hasJoined) {
+        alert(t('contestDetail.alerts.alreadyJoined'));
+        return;
+    }
+
+    if (applicationStatus === 'PENDING') {
          if (confirm(t('contestDetail.alerts.confirmCancel'))) {
             cancelMutation.mutate();
          }
-    } else if (applicationStatus === 'ACCEPTED') {
-         alert(t('contestDetail.alerts.alreadyJoined'));
+    } else {
+         // NONE or REJECTED
+         setIsApplicationModalOpen(true);
     }
   };
 
@@ -107,13 +118,13 @@ export default function ContestDetailPage() {
   
   if (!isLoggedIn) {
       buttonLabel = t('contestCTA.button.login');
+  } else if (hasJoined) {
+      buttonLabel = t('contestCTA.button.joined');
+      variant = 'secondary';
   } else if (applicationStatus === 'PENDING') {
       // User is managing a team. 
       buttonLabel = t('contestCTA.button.deleteTeam'); 
       variant = 'destructive';
-  } else if (applicationStatus === 'ACCEPTED') {
-      buttonLabel = t('contestCTA.button.joined');
-      variant = 'secondary';
   }
 
   if (isLoading) {
@@ -149,6 +160,7 @@ export default function ContestDetailPage() {
             maxParticipants: contest.max_team_count || 0,
             entryFee: 0, 
             prizePool: contest.total_point ? `${contest.total_point.toLocaleString()} PT` : "0 PT",
+            labelType: contest.game_point_table_id ? 'pointLimit' : 'prize',
             deadline: contest.ended_at ? new Date(contest.ended_at).toLocaleDateString() : "TBD",
             onJoin: handleJoin,
             isLoggedIn: isLoggedIn,
