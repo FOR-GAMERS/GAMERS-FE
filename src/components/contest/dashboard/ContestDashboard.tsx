@@ -208,7 +208,7 @@ export function ContestDashboard({ contestId, isLeader }: ContestDashboardProps)
 
             {activeTab === 'bracket' && (
                 <div className="h-[600px] animate-in fade-in slide-in-from-bottom-2 duration-300">
-                    <BracketGenerator contestId={contestId} participants={participants} />
+                    <BracketGenerator contestId={contestId} />
                 </div>
             )}
 
