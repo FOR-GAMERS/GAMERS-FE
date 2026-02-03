@@ -1,7 +1,7 @@
 "use client";
 
 import AnimatedSelect from "@/components/ui/AnimatedSelect";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { contestService } from "@/services/contest-service";
 import { Loader2, Search, Shield, User, Crown } from "lucide-react";
@@ -19,11 +19,21 @@ export default function ContestParticipantsPanel({ contestId, isLeader }: Contes
     const { addToast } = useToast();
     const queryClient = useQueryClient();
     const [search, setSearch] = useState("");
+    const [debouncedSearch, setDebouncedSearch] = useState("");
     const [page, setPage] = useState(1);
 
+    // Debounce search
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedSearch(search);
+            setPage(1); // Reset page on new search
+        }, 500);
+        return () => clearTimeout(timer);
+    }, [search]);
+
     const { data, isLoading } = useQuery({
-        queryKey: ['contest-members', contestId, page],
-        queryFn: () => contestService.getContestMembers(contestId, { page, page_size: 50 }),
+        queryKey: ['contest-members', contestId, page, debouncedSearch],
+        queryFn: () => contestService.getContestMembers(contestId, { page, page_size: 50, search: debouncedSearch }),
     });
 
     const members = data?.data?.data || [];
@@ -41,10 +51,7 @@ export default function ContestParticipantsPanel({ contestId, isLeader }: Contes
         }
     });
 
-    const filteredMembers = members.filter(m => 
-        m.username.toLowerCase().includes(search.toLowerCase()) || 
-        m.tag.toLowerCase().includes(search.toLowerCase())
-    );
+    const filteredMembers = members; // Server-side filtered now
 
     const getRoleIcon = (role: string) => {
         switch(role) {

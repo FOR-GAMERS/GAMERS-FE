@@ -102,6 +102,7 @@ export const contestService = {
     page_size?: number;
     sort_by?: string;
     order?: 'asc' | 'desc';
+    search?: string;
   }) {
     return api.get<ApiResponse<PaginationResponse<ContestMemberResponse>>>(`/contests/${contestId}/members`, { params });
   },

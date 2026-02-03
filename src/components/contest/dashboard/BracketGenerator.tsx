@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Users, Trophy, ExternalLink, CalendarClock, Loader2 } from "lucide-react";
+import { Users, Trophy, CalendarClock, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { contestService } from "@/services/contest-service";
 import { GameResponse } from "@/types/api";
@@ -23,10 +23,9 @@ interface GameMember {
 
 interface BracketGeneratorProps {
     contestId: number;
-    participants: Participant[];
 }
 
-export function BracketGenerator({ contestId, participants }: BracketGeneratorProps) {
+export function BracketGenerator({ contestId }: BracketGeneratorProps) {
   const { addToast } = useToast();
   const [games, setGames] = useState<(GameResponse & { members?: GameMember[] })[]>([]);
   const [loading, setLoading] = useState(true);
@@ -36,8 +35,7 @@ export function BracketGenerator({ contestId, participants }: BracketGeneratorPr
         setLoading(true);
         const res = await contestService.getContestGames(contestId);
         const sortedGames = res.data.sort((a, b) => a.game_id - b.game_id);
-        setGames(sortedGames);
-
+        
         // Fetch members for each game (avoiding waterfall if possible, but limited connection limit might apply)
         // For better performance, we'd want a bulk endpoint.
         const gamesWithMembers = await Promise.all(sortedGames.map(async (game) => {
@@ -52,6 +50,7 @@ export function BracketGenerator({ contestId, participants }: BracketGeneratorPr
 
     } catch (error) {
         console.error("Failed to fetch games", error);
+        addToast("Failed to load tournament bracket", "error");
     } finally {
         setLoading(false);
     }
@@ -135,7 +134,7 @@ function MatchCard({ game }: { game: GameResponse & { members?: GameMember[] } }
                 <div className="flex items-center justify-between p-2 bg-neutral-800/50 rounded border-l-2 border-transparent hover:border-neon-cyan/50 transition-colors">
                     <div className="flex items-center gap-2">
                         <div className="w-6 h-6 rounded-full bg-neutral-700 overflow-hidden">
-                             {team1[0]?.avatar && <img src={team1[0].avatar} alt="" className="w-full h-full object-cover" />}
+                             {team1[0]?.avatar && <img src={team1[0].avatar} alt={team1[0].username} className="w-full h-full object-cover" />}
                         </div>
                         <span className="font-bold text-sm text-white">
                             {team1.length > 0 ? (team1.length > 1 ? `Team ${team1[0].team_id}` : team1[0].username) : 'TBD'}
@@ -151,7 +150,7 @@ function MatchCard({ game }: { game: GameResponse & { members?: GameMember[] } }
                 <div className="flex items-center justify-between p-2 bg-neutral-800/50 rounded border-l-2 border-transparent hover:border-red-500/50 transition-colors">
                     <div className="flex items-center gap-2">
                         <div className="w-6 h-6 rounded-full bg-neutral-700 overflow-hidden">
-                             {team2[0]?.avatar && <img src={team2[0].avatar} alt="" className="w-full h-full object-cover" />}
+                             {team2[0]?.avatar && <img src={team2[0].avatar} alt={team2[0].username} className="w-full h-full object-cover" />}
                         </div>
                         <span className="font-bold text-sm text-white">
                             {team2.length > 0 ? (team2.length > 1 ? `Team ${team2[0].team_id}` : team2[0].username) : 'TBD'}
