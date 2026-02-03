@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import https from 'https';
 
 const RAW_API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
 const API_URL = RAW_API_URL.endsWith('/api') 
   ? RAW_API_URL 
   : `${RAW_API_URL.replace(/\/$/, '')}/api`;
+
+const sslAgent = new https.Agent({
+  rejectUnauthorized: false,
+});
 
 async function handleProxy(
   request: NextRequest,
@@ -37,7 +42,9 @@ async function handleProxy(
       headers: headers,
       body: request.body, // Pass the body stream directly
       // @ts-expect-error - duplex is required for streaming bodies in Next.js/Node fetch
-      duplex: 'half' 
+      duplex: 'half',
+      // agent is supported in Node.js environment
+      agent: sslAgent, 
     });
 
     // Handle response
@@ -49,10 +56,15 @@ async function handleProxy(
       statusText: response.statusText,
       headers: responseHeaders,
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error('[Proxy Error]', error);
     return NextResponse.json(
-      { message: 'Proxy request failed' }, 
+      { 
+        message: 'Proxy request failed', 
+        error: error.message,
+        cause: error.cause,
+        stack: process.env.NODE_ENV === 'development' ? error.stack : undefined 
+      }, 
       { status: 500 }
     );
   }

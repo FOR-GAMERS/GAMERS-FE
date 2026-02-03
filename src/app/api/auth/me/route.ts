@@ -1,10 +1,15 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import https from 'https';
 
 const RAW_API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
 const API_URL = RAW_API_URL.endsWith('/api') 
   ? RAW_API_URL 
   : `${RAW_API_URL.replace(/\/$/, '')}/api`;
+
+const sslAgent = new https.Agent({
+  rejectUnauthorized: false,
+});
 
 export async function GET() {
   const cookieStore = await cookies();
@@ -43,6 +48,8 @@ export async function GET() {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ refresh_token: refreshToken }),
+              // @ts-expect-error - agent is not in standard RequestInit but supported by node-fetch/undici in Next.js
+              agent: sslAgent,
           });
 
           if (!refreshRes.ok) {
