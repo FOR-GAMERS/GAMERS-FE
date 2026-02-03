@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
+const RAW_API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
+const API_URL = RAW_API_URL.endsWith('/api') 
+  ? RAW_API_URL 
+  : `${RAW_API_URL.replace(/\/$/, '')}/api`;
 
 async function handleProxy(
   request: NextRequest,

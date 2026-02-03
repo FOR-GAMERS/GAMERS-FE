@@ -1,7 +1,10 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+const RAW_API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
+const API_URL = RAW_API_URL.endsWith('/api') 
+  ? RAW_API_URL 
+  : `${RAW_API_URL.replace(/\/$/, '')}/api`;
 
 export async function GET() {
   const cookieStore = await cookies();
@@ -36,7 +39,7 @@ export async function GET() {
 
       try {
           // 2. Attempt Refresh
-          const refreshRes = await fetch(`${API_URL}/api/auth/refresh`, {
+          const refreshRes = await fetch(`${API_URL}/auth/refresh`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ refresh_token: refreshToken }),

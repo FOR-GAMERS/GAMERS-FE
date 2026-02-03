@@ -2,7 +2,10 @@ import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
 // Align default with proxy route to handle NEXT_PUBLIC_API_URL consistently
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
+const RAW_API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
+const API_URL = RAW_API_URL.endsWith('/api') 
+  ? RAW_API_URL 
+  : `${RAW_API_URL.replace(/\/$/, '')}/api`;
 
 export async function POST() {
   const cookieStore = await cookies();
@@ -13,8 +16,8 @@ export async function POST() {
   }
 
   try {
-    // Construct URL preventing double /api if API_URL already ends with it
-    const baseUrl = API_URL.endsWith('/') ? API_URL.slice(0, -1) : API_URL;
+    // API_URL is already standardized to end with /api
+    const baseUrl = API_URL;
     // If baseUrl ends with '/api', we append '/auth/refresh'. 
     // If it doesn't (root host), we might need '/api/auth/refresh'.
     // Given the Proxy logic assumes API_URL includes '/api', we treat API_URL as the base for API endpoints.
