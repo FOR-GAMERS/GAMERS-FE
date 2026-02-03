@@ -46,9 +46,16 @@ export default function LoginPage() {
 
   const handleDiscordLogin = () => {
     const RAW_API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
-    const apiUrl = RAW_API_URL.endsWith('/api') 
+    // Ensure protocol is present. If missing, assume https unless localhost
+    const withProtocol = RAW_API_URL.match(/^https?:\/\//) 
       ? RAW_API_URL 
-      : `${RAW_API_URL.replace(/\/$/, '')}/api`;
+      : RAW_API_URL.includes('localhost') 
+        ? `http://${RAW_API_URL}` 
+        : `https://${RAW_API_URL}`;
+
+    const apiUrl = withProtocol.endsWith('/api') 
+      ? withProtocol 
+      : `${withProtocol.replace(/\/$/, '')}/api`;
     window.location.href = `${apiUrl}/oauth2/discord/login`;
   };
 
