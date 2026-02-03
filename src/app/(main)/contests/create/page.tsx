@@ -14,7 +14,8 @@ import {
   ChevronLeft, 
   Image as ImageIcon, 
   Upload, 
-  Loader2
+  Loader2,
+  Trash2
 } from "lucide-react";
 import DiscordServerSelector from "@/components/contest/DiscordServerSelector";
 import ValorantPointTableForm, { ValorantPointTableFormHandle } from "@/components/contest/ValorantPointTableForm";
@@ -182,6 +183,16 @@ export default function CreateContestPage() {
     }
   };
 
+  const handleRemoveThumbnail = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent triggering file input
+    setThumbnailPreview(null);
+    setThumbnailFile(null);
+    setValue("thumbnail", "");
+    if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+    }
+  };
+
   return (
     <main className="min-h-screen bg-deep-black text-white relative overflow-hidden pb-32">
        {/* Background */}
@@ -219,7 +230,16 @@ export default function CreateContestPage() {
                     >
                         <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleThumbnailUpload} />
                         {thumbnailPreview ? (
-                            <img src={thumbnailPreview} alt="Preview" className="w-full h-full object-cover" />
+                            <div className="relative w-full h-full group">
+                                <img src={thumbnailPreview} alt="Preview" className="w-full h-full object-cover" />
+                                <button
+                                    onClick={handleRemoveThumbnail}
+                                    className="absolute top-2 right-2 p-2 bg-red-500/80 hover:bg-red-600 text-white rounded-lg transition-all opacity-0 group-hover:opacity-100 z-10"
+                                    type="button"
+                                >
+                                    <Trash2 size={20} />
+                                </button>
+                            </div>
                         ) : (
                             <div className="text-center p-6 space-y-2">
                                 <ImageIcon className="w-12 h-12 mx-auto text-white/30 group-hover:text-neon-purple transition-colors" />

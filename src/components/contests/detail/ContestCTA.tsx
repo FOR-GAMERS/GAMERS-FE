@@ -10,6 +10,7 @@ interface ContestCTAProps {
   maxParticipants: number;
   entryFee: number;
   prizePool: string;
+  labelType?: 'prize' | 'pointLimit';
   deadline: string;
   onJoin: () => void;
   isLoggedIn: boolean;
@@ -23,21 +24,17 @@ export default function ContestCTA({
   maxParticipants,
   entryFee,
   prizePool,
+  labelType = 'prize',
   deadline,
   onJoin,
   isLoggedIn,
-  buttonLabel, // Pre-translated label might be passed, but we should try to use keys if possible. Actually page.tsx passes translated label.
+  buttonLabel, 
   variant = 'primary',
   isLoading = false
 }: ContestCTAProps) {
   const { t } = useTranslation();
   const isFull = currentParticipants >= maxParticipants;
   const progressPercent = Math.min((currentParticipants / maxParticipants) * 100, 100);
-
-  // If buttonLabel is not provided, we won't default here because page.tsx controls logic.
-  // But for fallback "참가 신청하기" -> we use t('contestCTA.button.join') as default if needed.
-  // However, the prop `buttonLabel` comes from parent. Parent `page.tsx` needs to be updated to pass translated strings.
-  // I will assume `buttonLabel` passed from parent IS translated.
 
   return (
     <div className="sticky top-24 w-full bg-[#0f172a]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl space-y-6 animate-fade-in-up">
@@ -71,7 +68,7 @@ export default function ContestCTA({
         </div>
         <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                <Trophy size={16} /> {t('contestCTA.prizePool')}
+                <Trophy size={16} /> {labelType === 'pointLimit' ? t('contestCTA.pointLimit') : t('contestCTA.prizePool')}
             </div>
             <div className="font-bold text-lg text-neon-purple font-mono">
                 {prizePool}

@@ -7,7 +7,19 @@
     "createContest": "大会作成",
     "report": "報告",
     "settings": "設定",
-    "logout": "ログアウト"
+    "logout": "ログアウト",
+    "notifications": {
+      "title": "通知",
+      "markAllRead": "すべて既読にする",
+      "empty": "通知はありません。",
+      "types": {
+        "TEAM_INVITE_RECEIVED": "{{sender}}さんがチーム {{team}} に招待しました。",
+        "TEAM_INVITE_ACCEPTED": "{{user}}さんが招待を承諾しました。",
+        "TEAM_INVITE_REJECTED": "{{user}}さんが招待を辞退しました。",
+        "APPLICATION_ACCEPTED": "{{contest}} への参加申請が承認されました。",
+        "APPLICATION_REJECTED": "{{contest}} への参加申請が拒否されました。"
+      }
+    }
   },
   "landing": {
     "hero": {
@@ -191,7 +203,7 @@
         "gameType": "ゲームタイトル",
         "startDate": "開始日時",
         "endDate": "終了日時",
-        "totalPoints": "賞金総額ポイント",
+        "totalPoints": "チームポイント制限 (0 = 無制限)",
         "autoStart": "満員時に自動開始？",
         "description": "詳細説明 (Markdown)",
         "discord": "Discordサーバー"
@@ -234,6 +246,7 @@
       "entryFee": "参加費",
       "free": "無料",
       "prizePool": "総賞金",
+      "pointLimit": "ポイント制限",
       "deadline": "申請締切",
       "button": {
         "join": "参加申請する",
@@ -265,8 +278,26 @@
       "tabs": {
         "overview": "概要",
         "applications": "参加申請",
+        "participants": "参加者管理",
         "bracket": "対戦表 & チーム",
         "settings": "設定"
+      },
+      "participants": {
+        "title": "参加者リスト",
+        "description": "大会に参加しているすべてのメンバーを管理します。",
+        "searchPlaceholder": "ユーザー名検索...",
+        "role": "役割",
+        "points": "ポイント",
+        "actions": "操作",
+        "roles": {
+          "LEADER": "主催者",
+          "STAFF": "スタッフ",
+          "NORMAL": "参加者"
+        },
+        "toast": {
+          "roleChangeSuccess": "役割が変更されました。",
+          "roleChangeFail": "役割変更失敗"
+        }
       },
       "stats": {
         "participants": "参加者",
@@ -277,6 +308,39 @@
         "started": "進行中",
         "stop": "大会停止",
         "delete": "大会削除"
+      },
+      "toast": {
+        "loadFail": "大会データの取得に失敗しました",
+        "loadDataFail": "大会データの読み込み失敗",
+        "startSuccess": "大会が開始されました",
+        "startFail": "大会開始失敗",
+        "stopSuccess": "大会が停止されました",
+        "stopFail": "大会停止失敗",
+        "deleteSuccess": "大会が削除されました",
+        "deleteFail": "大会削除失敗"
+      },
+      "confirmDelete": "本当に大会を削除しますか？",
+      "notFound": "大会が見つかりません",
+      "overview": {
+        "title": "大会詳細",
+        "contestTitle": "タイトル",
+        "maxTeams": "最大チーム数",
+        "unlimited": "無制限",
+        "startDate": "開始日時",
+        "endDate": "終了日時",
+        "notSet": "未設定",
+        "warning": "大会開始前に全チームがシャッフルされ、対戦表が生成されていることを確認してください。開始後は参加申請が締め切られ、データが確定します。"
+      },
+      "settings": {
+        "underConstruction": "設定パネル準備中"
+      },
+      "page": {
+        "accessDenied": "アクセス拒否",
+        "permissionDenied": "この大会を管理する権限がありません。",
+        "returnToContest": "大会に戻る",
+        "title": "CONTEST",
+        "dashboard": "DASHBOARD",
+        "subtitle": "参加者、対戦表、大会ステータスを管理します。"
       }
     }
 }

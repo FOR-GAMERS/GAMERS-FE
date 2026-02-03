@@ -2,30 +2,29 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Play, Square, Settings, Users, Trophy, Calendar, CheckCircle2, AlertTriangle, Loader2, Trash2 } from "lucide-react";
-import { api } from "@/lib/api-client";
-import { ContestResponse, ContestStatus } from "@/types/api";
+import { Play, Square, Settings, Users, Trophy, CheckCircle2, AlertTriangle, Loader2, Trash2 } from "lucide-react";
+import { ContestResponse } from "@/types/api";
 import { contestService } from "@/services/contest-service";
 import { useToast } from "@/context/ToastContext";
 import { BracketGenerator } from "./BracketGenerator";
 import { cn } from "@/lib/utils";
 import ReceivedApplicationsSection from "@/components/mypage/ReceivedApplicationsSection";
+import ContestParticipantsPanel from "./ContestParticipantsPanel"; // 
 
 interface ContestDashboardProps {
     contestId: number;
+    isLeader: boolean;
 }
 
 import { useTranslation } from "react-i18next";
-// Other imports remain...
 
-export function ContestDashboard({ contestId }: ContestDashboardProps) {
+export function ContestDashboard({ contestId, isLeader }: ContestDashboardProps) {
   const { t } = useTranslation();
-  // ... existing hooks
   const router = useRouter();
   const { addToast } = useToast();
   const [contest, setContest] = useState<ContestResponse | null>(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'overview' | 'bracket' | 'settings' | 'applications'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'bracket' | 'settings' | 'applications' | 'participants'>('overview');
   const [participants, setParticipants] = useState<any[]>([]); 
 
   const fetchContest = async () => {
@@ -40,7 +39,7 @@ export function ContestDashboard({ contestId }: ContestDashboardProps) {
       
     } catch (error) {
       console.error("Failed to fetch contest", error);
-      addToast("Failed to load contest data", "error");
+      addToast(t('contestDashboard.toast.loadDataFail'), "error");
     } finally {
       setLoading(false);
     }
@@ -84,7 +83,6 @@ export function ContestDashboard({ contestId }: ContestDashboardProps) {
   };
 
   if (loading) {
-     // ...
        return (
         <div className="flex h-64 items-center justify-center">
             <Loader2 className="w-8 h-8 text-neon-cyan animate-spin" />
@@ -92,7 +90,7 @@ export function ContestDashboard({ contestId }: ContestDashboardProps) {
       );
   }
 
-  if (!contest) return <div>Contest not found</div>;
+  if (!contest) return <div>{t('contestDashboard.notFound')}</div>;
 
   const isActive = contest.contest_status !== 'FINISHED' && contest.contest_status !== 'CANCELLED'; 
 
@@ -157,9 +155,10 @@ export function ContestDashboard({ contestId }: ContestDashboardProps) {
         </div>
 
         {/* Tabs */}
-        <div className="border-b border-white/10 flex gap-6">
+        <div className="border-b border-white/10 flex gap-6 overflow-x-auto pb-1">
             <TabButton active={activeTab === 'overview'} onClick={() => setActiveTab('overview')} label={t('contestDashboard.tabs.overview')} icon={Trophy} />
             <TabButton active={activeTab === 'applications'} onClick={() => setActiveTab('applications')} label={t('contestDashboard.tabs.applications')} icon={Users} />
+            <TabButton active={activeTab === 'participants'} onClick={() => setActiveTab('participants')} label={t('contestDashboard.tabs.participants')} icon={Users} />
             <TabButton active={activeTab === 'bracket'} onClick={() => setActiveTab('bracket')} label={t('contestDashboard.tabs.bracket')} icon={Users} />
             <TabButton active={activeTab === 'settings'} onClick={() => setActiveTab('settings')} label={t('contestDashboard.tabs.settings')} icon={Settings} />
         </div>
@@ -169,30 +168,30 @@ export function ContestDashboard({ contestId }: ContestDashboardProps) {
             {activeTab === 'overview' && (
                 <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
                      <div className="bg-neutral-900/30 border border-white/5 p-6 rounded-xl">
-                         <h3 className="text-xl font-bold text-white mb-4">Contest Details</h3>
+                         <h3 className="text-xl font-bold text-white mb-4">{t('contestDashboard.overview.title')}</h3>
                          <div className="grid grid-cols-2 gap-y-4 text-sm">
                              <div>
-                                 <div className="text-neutral-500">Title</div>
+                                 <div className="text-neutral-500">{t('contestDashboard.overview.contestTitle')}</div>
                                  <div className="text-white font-bold">{contest.title}</div>
                              </div>
                              <div>
-                                 <div className="text-neutral-500">Maximum Teams</div>
-                                 <div className="text-white font-bold">{contest.max_team_count || 'Unlimited'}</div>
+                                 <div className="text-neutral-500">{t('contestDashboard.overview.maxTeams')}</div>
+                                 <div className="text-white font-bold">{contest.max_team_count || t('contestDashboard.overview.unlimited')}</div>
                              </div>
                              <div>
-                                 <div className="text-neutral-500">Start Date</div>
-                                 <div className="text-white font-bold">{contest.started_at ? new Date(contest.started_at).toLocaleDateString() : 'Not set'}</div>
+                                 <div className="text-neutral-500">{t('contestDashboard.overview.startDate')}</div>
+                                 <div className="text-white font-bold">{contest.started_at ? new Date(contest.started_at).toLocaleDateString() : t('contestDashboard.overview.notSet')}</div>
                              </div>
                              <div>
-                                 <div className="text-neutral-500">End Date</div>
-                                 <div className="text-white font-bold">{contest.ended_at ? new Date(contest.ended_at).toLocaleDateString() : 'Not set'}</div>
+                                 <div className="text-neutral-500">{t('contestDashboard.overview.endDate')}</div>
+                                 <div className="text-white font-bold">{contest.ended_at ? new Date(contest.ended_at).toLocaleDateString() : t('contestDashboard.overview.notSet')}</div>
                              </div>
                          </div>
                      </div>
                      
                      <div className="bg-amber-500/5 border border-amber-500/20 p-4 rounded-xl flex gap-3 text-amber-500 text-sm">
                          <AlertTriangle className="shrink-0" />
-                         <p>Please ensure all teams are shuffled and brackets are generated before starting the contest. Once started, applications are closed and data is finalized.</p>
+                         <p>{t('contestDashboard.overview.warning')}</p>
                      </div>
                 </div>
             )}
@@ -203,16 +202,20 @@ export function ContestDashboard({ contestId }: ContestDashboardProps) {
                 </div>
             )}
 
+            {activeTab === 'participants' && (
+                <ContestParticipantsPanel contestId={contestId} isLeader={isLeader} />
+            )}
+
             {activeTab === 'bracket' && (
                 <div className="h-[600px] animate-in fade-in slide-in-from-bottom-2 duration-300">
-                    <BracketGenerator participants={participants} />
+                    <BracketGenerator contestId={contestId} participants={participants} />
                 </div>
             )}
 
             {activeTab === 'settings' && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                     <div className="p-10 text-center text-neutral-500 border border-dashed border-white/10 rounded-xl">
-                        Settings panel under construction
+                        {t('contestDashboard.settings.underConstruction')}
                     </div>
                 </div>
             )}

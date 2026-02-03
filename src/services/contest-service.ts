@@ -11,7 +11,8 @@ import {
   ContestMemberResponse,
   GameResponse,
   TeamResponse,
-  CreateTeamRequest
+  CreateTeamRequest,
+  ScheduleGameRequest
 } from '@/types/api';
 import { ContestPointResponse } from '@/types/valorant';
 
@@ -101,9 +102,15 @@ export const contestService = {
     page_size?: number;
     sort_by?: string;
     order?: 'asc' | 'desc';
+    search?: string;
   }) {
     return api.get<ApiResponse<PaginationResponse<ContestMemberResponse>>>(`/contests/${contestId}/members`, { params });
   },
+
+  async changeMemberRole(contestId: number, userId: number, role: 'NORMAL' | 'STAFF' | 'LEADER') {
+    return api.patch<ApiResponse<void>>(`/contests/${contestId}/members/${userId}/role`, { role });
+  },
+
 
   // Games & Teams
   // Teams (New Implementation)
@@ -136,6 +143,10 @@ export const contestService = {
   // Legacy Game Methods (Keep if needed for backward compat or specific game actions)
   async getContestGames(contestId: number) {
       return api.get<ApiResponse<GameResponse[]>>(`/contests/${contestId}/games`);
+  },
+
+  async scheduleGame(contestId: number, gameId: number, data: ScheduleGameRequest) {
+      return api.put<ApiResponse<GameResponse>>(`/contests/${contestId}/games/${gameId}/schedule`, data);
   },
 
   async getGameMembers(gameId: number) {
