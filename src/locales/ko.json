@@ -353,5 +353,18 @@
         "dashboard": "DASHBOARD",
         "subtitle": "참가자, 대진표 및 대회 상태를 관리합니다."
       }
-    }
+    },
+  "loginCheck": {
+    "verifyingTitle": "로그인 확인 중...",
+    "verifyingDesc": "인증 정보를 확인하고 있습니다.",
+    "successTitle": "환영합니다!",
+    "successDesc": "로그인에 성공했습니다. 이동 중...",
+    "notFoundTitle": "계정을 찾을 수 없음",
+    "notFoundDesc": "새 계정을 만드시겠습니까?",
+    "errorTitle": "로그인 실패",
+    "errorDesc": "다시 시도해주세요.",
+    "btnLogin": "로그인으로 이동",
+    "btnSignup": "회원가입 하기",
+    "debugInfo": "디버그 정보:"
+  }
 }

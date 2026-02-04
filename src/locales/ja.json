@@ -342,5 +342,18 @@
         "dashboard": "DASHBOARD",
         "subtitle": "参加者、対戦表、大会ステータスを管理します。"
       }
-    }
+    },
+  "loginCheck": {
+    "verifyingTitle": "ログイン確認中...",
+    "verifyingDesc": "認証情報を確認しています。",
+    "successTitle": "おかえりなさい！",
+    "successDesc": "ログインに成功しました。移動します...",
+    "notFoundTitle": "アカウントが見つかりません",
+    "notFoundDesc": "新しいアカウントを作成しますか？",
+    "errorTitle": "ログイン失敗",
+    "errorDesc": "もう一度お試しください。",
+    "btnLogin": "ログインへ移動",
+    "btnSignup": "会員登録する",
+    "debugInfo": "デバッグ情報:"
+  }
 }

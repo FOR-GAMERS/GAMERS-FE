@@ -5,8 +5,10 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { CheckCircle2, Loader2, Gamepad2 } from "lucide-react";
 import { authService } from "@/services/auth-service";
+import { useTranslation } from "react-i18next";
 
 export default function LoginSuccessPage() {
+  const { t } = useTranslation();
   const router = useRouter();
   const [status, setStatus] = useState<"loading" | "success" | "error" | "not_found">("loading");
   const [debugInfo, setDebugInfo] = useState<string>("");
@@ -62,10 +64,10 @@ export default function LoginSuccessPage() {
             {status === "loading" && (
                 <>
                     <h1 className="text-3xl font-black mb-2 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">
-                        Verifying Login...
+                        {t('loginCheck.verifyingTitle')}
                     </h1>
                     <p className="text-gray-500">
-                        認証情報を確認しています。
+                        {t('loginCheck.verifyingDesc')}
                     </p>
                 </>
             )}
@@ -73,11 +75,10 @@ export default function LoginSuccessPage() {
             {status === "success" && (
                 <>
                     <h1 className="text-3xl font-black mb-2 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-blue-500">
-                        Welcome Back!
+                        {t('loginCheck.successTitle')}
                     </h1>
                     <p className="text-gray-400">
-                        ログインに成功しました。<br/>
-                        コンテストページへ移動します...
+                        {t('loginCheck.successDesc')}
                     </p>
                 </>
             )}
@@ -85,24 +86,24 @@ export default function LoginSuccessPage() {
             {status === "not_found" && (
                 <>
                     <h1 className="text-3xl font-black mb-2 tracking-tighter text-yellow-500">
-                        Account Not Found
+                        {t('loginCheck.notFoundTitle')}
                     </h1>
                     <p className="text-gray-400 mb-6">
                         {errorMessage}<br/>
-                        새 계정을 생성하시겠습니까?
+                        {t('loginCheck.notFoundDesc')}
                     </p>
                     <div className="flex gap-4 justify-center">
                         <button 
                             onClick={() => router.push("/login")}
                             className="px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-sm font-bold transition-all"
                         >
-                            로그인으로 이동
+                            {t('loginCheck.btnLogin')}
                         </button>
                         <button 
                             onClick={() => router.push("/signup")}
                             className="px-6 py-3 bg-neon-cyan/20 hover:bg-neon-cyan/30 border border-neon-cyan/50 text-neon-cyan rounded-xl text-sm font-bold transition-all hover:scale-105 shadow-[0_0_15px_rgba(0,243,255,0.2)]"
                         >
-                            회원가입 하기
+                            {t('loginCheck.btnSignup')}
                         </button>
                     </div>
                 </>
@@ -111,21 +112,21 @@ export default function LoginSuccessPage() {
             {status === "error" && (
                 <>
                     <h1 className="text-3xl font-black mb-2 tracking-tighter text-red-500">
-                        Login Failed
+                        {t('loginCheck.errorTitle')}
                     </h1>
                     <p className="text-gray-400 mb-6">
                         {errorMessage}<br/>
-                        다시 시도해주세요.
+                        {t('loginCheck.errorDesc')}
                     </p>
                     <button 
                         onClick={() => router.push("/login")}
                         className="px-8 py-3 bg-white/10 hover:bg-white/20 border border-white/10 rounded-xl text-sm font-bold transition-all hover:scale-105"
                     >
-                        로그인페이지로 이동
+                        {t('loginCheck.btnLogin')}
                     </button>
                     {/* DEBUG PANEL */}
                     <div className="mt-8 p-4 bg-black/50 rounded-lg text-left w-full overflow-x-auto border border-red-500/30">
-                        <p className="text-xs font-bold text-red-400 mb-2">DEBUG INFO:</p>
+                        <p className="text-xs font-bold text-red-400 mb-2">{t('loginCheck.debugInfo')}</p>
                         <pre className="text-[10px] text-gray-400 font-mono whitespace-pre-wrap">
                             {debugInfo}
                         </pre>

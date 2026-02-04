@@ -342,5 +342,18 @@
         "dashboard": "DASHBOARD",
         "subtitle": "Manage participants, bracket, and contest status."
       }
-    }
+    },
+  "loginCheck": {
+    "verifyingTitle": "Verifying Login...",
+    "verifyingDesc": "Checking authentication info...",
+    "successTitle": "Welcome Back!",
+    "successDesc": "Login successful. Redirecting...",
+    "notFoundTitle": "Account Not Found",
+    "notFoundDesc": "Do you want to create a new account?",
+    "errorTitle": "Login Failed",
+    "errorDesc": "Please try again.",
+    "btnLogin": "Go to Login",
+    "btnSignup": "Sign Up",
+    "debugInfo": "DEBUG INFO:"
+  }
 }

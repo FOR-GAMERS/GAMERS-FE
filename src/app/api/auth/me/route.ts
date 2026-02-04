@@ -20,6 +20,7 @@ const sslAgent = new https.Agent({
 
 export async function GET() {
   const cookieStore = await cookies();
+  console.log('[Auth/Me] All Cookies:', cookieStore.getAll().map(c => `${c.name}=${c.value.substring(0, 10)}...`));
   let accessToken = cookieStore.get('access_token')?.value;
   const refreshToken = cookieStore.get('refresh_token')?.value;
   let wasRefreshed = false;
