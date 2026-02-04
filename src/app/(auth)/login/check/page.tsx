@@ -14,8 +14,12 @@ export default function LoginSuccessPage() {
   const [debugInfo, setDebugInfo] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
+    setMounted(true);
     const checkAuth = async () => {
+      // Small delay to ensure cookies are ready or just visual pacing
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       try {
@@ -33,6 +37,8 @@ export default function LoginSuccessPage() {
 
     checkAuth();
   }, [router]);
+
+  if (!mounted) return null;
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-[#050505] text-white relative overflow-hidden">

@@ -23,6 +23,10 @@ async function handleProxy(
   { params }: { params: Promise<{ path: string[] }> }
 ) {
   const { path } = await params;
+  
+  // Debug Log
+  const cookieStore = await cookies();
+  console.log('[Proxy] Incoming Cookies:', cookieStore.getAll().map(c => `${c.name}=${c.value.substring(0, 10)}...`));
   const pathString = path.join('/');
   const searchParams = request.nextUrl.search;
   const targetUrl = `${API_URL}/${pathString}${searchParams}`;
