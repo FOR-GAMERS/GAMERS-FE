@@ -50,18 +50,27 @@ async function handleProxy(
     const response = await fetch(targetUrl, {
       method: request.method,
       headers: headers,
-      body: request.body, // Pass the body stream directly
-      // @ts-expect-error - duplex is required for streaming bodies in Next.js/Node fetch
+      body: request.body,
+      // @ts-expect-error - duplex is required for streaming bodies
       duplex: 'half',
-      // agent is supported in Node.js environment
       agent: sslAgent, 
     });
+
+    console.log(`[Proxy] Upstream Status: ${response.status}`);
 
     // Handle response
     const responseHeaders = new Headers(response.headers);
     
+    // Remove headers that cause issues when forwarding
+    responseHeaders.delete('content-encoding');
+    responseHeaders.delete('content-length');
+    responseHeaders.delete('transfer-encoding');
+
+    // Buffer the body to avoid streaming issues
+    const bodyBuffer = await response.arrayBuffer();
+    
     // Forward the response
-    return new NextResponse(response.body, {
+    return new NextResponse(bodyBuffer, {
       status: response.status,
       statusText: response.statusText,
       headers: responseHeaders,
