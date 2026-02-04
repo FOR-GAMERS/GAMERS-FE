@@ -2,18 +2,17 @@
 
 import { useState } from 'react';
 import { useValorantInfo, useValorantMutations } from '@/hooks/use-valorant';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { RegisterValorantRequest } from '@/types/valorant';
-import { Loader2, RefreshCw, Link2, Unlink, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Loader2, RefreshCw, Link2, Unlink, AlertCircle, CheckCircle2, Globe } from 'lucide-react';
 import { differenceInHours, formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/context/ToastContext';
+import AnimatedSelect from '@/components/ui/AnimatedSelect';
 
 import { useTranslation } from "react-i18next";
-
-// ... (imports)
 
 export default function ValorantSection() {
   const { t } = useTranslation();
@@ -21,7 +20,7 @@ export default function ValorantSection() {
   const { registerValorant, unlinkValorant, refreshValorant } = useValorantMutations();
   const { addToast } = useToast();
   
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<RegisterValorantRequest>();
+  const { register, handleSubmit, control, formState: { errors, isSubmitting } } = useForm<RegisterValorantRequest>();
   const [isUnlinking, setIsUnlinking] = useState(false);
 
   const valorantInfo = infoResponse?.data;
@@ -85,12 +84,25 @@ export default function ValorantSection() {
         <form onSubmit={handleSubmit(onRegister)} className="space-y-4 max-w-md">
           <div className="space-y-2">
              <label className="text-sm font-medium text-muted-foreground">{t("mypage.valorant.region")}</label>
-             <select {...register('region')} className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-neon-cyan outline-none text-white">
-                <option value="kr">{t('mypage.valorant.regions.kr')}</option>
-                <option value="ap">{t('mypage.valorant.regions.ap')}</option>
-                <option value="na">{t('mypage.valorant.regions.na')}</option>
-                <option value="eu">{t('mypage.valorant.regions.eu')}</option>
-             </select>
+             <Controller
+                name="region"
+                control={control}
+                defaultValue="kr"
+                render={({ field }) => (
+                    <AnimatedSelect
+                        value={field.value}
+                        onChange={field.onChange}
+                        options={[
+                            { value: "kr", label: t('mypage.valorant.regions.kr') },
+                            { value: "ap", label: t('mypage.valorant.regions.ap') },
+                            { value: "na", label: t('mypage.valorant.regions.na') },
+                            { value: "eu", label: t('mypage.valorant.regions.eu') },
+                        ]}
+                        startIcon={<Globe className="w-4 h-4" />}
+                        className="w-full"
+                    />
+                )}
+             />
           </div>
           <div className="grid grid-cols-3 gap-4">
              <div className="col-span-2 space-y-2">
