@@ -112,9 +112,9 @@ export default function ContestParticipantsPanel({ contestId, isLeader }: Contes
                                     <tr key={member.user_id} className="group hover:bg-white/5 transition-colors">
                                         <td className="p-4">
                                             <div className="flex items-center gap-3">
-                                                 <div className="w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center overflow-hidden">
+                                                 <div className="w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center overflow-hidden relative">
                                                     {member.avatar ? (
-                                                        <Image src={member.avatar} alt={member.username} fill className="object-cover" />
+                                                        <Image src={member.avatar} alt={member.username} fill sizes="32px" className="object-cover" />
                                                     ) : (
                                                         <span className="text-xs font-bold">{member.username.substring(0, 2).toUpperCase()}</span>
                                                     )}

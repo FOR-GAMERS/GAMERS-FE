@@ -100,8 +100,9 @@ export default function ContestDetailPage() {
     }
     
     if (hasJoined) {
-        // User requested Routing Button to Dashboard
-        router.push(`/contests/${contestId}/dashboard`);
+        if (userStatus?.member_type === 'LEADER' || userStatus?.member_type === 'STAFF') {
+            router.push(`/contests/${contestId}/dashboard`);
+        }
         return;
     }
 
@@ -122,11 +123,13 @@ export default function ContestDetailPage() {
   if (!isLoggedIn) {
       buttonLabel = t('contestCTA.button.login');
   } else if (hasJoined) {
-     // Check if translation key exists, otherwise fallback to "Go to Dashboard"
-     // Since I can't verify keys easily, I will use a safe string or reuse 'joined' but meaning 'dashboard' logic
-     // Ideally: "Go to Dashboard"
-      buttonLabel = t('contestCTA.button.dashboard', 'Go to Dashboard'); 
-      variant = 'secondary';
+     if (userStatus?.member_type === 'LEADER' || userStatus?.member_type === 'STAFF') {
+        buttonLabel = t('contestCTA.button.dashboard', 'Go to Dashboard'); 
+        variant = 'secondary';
+     } else {
+        buttonLabel = t('contestCTA.button.joined', 'Joined');
+        variant = 'secondary';
+     }
   } else if (applicationStatus === 'PENDING') {
       // User is managing a team or just applied
       buttonLabel = t('contestCTA.button.cancelApplication', 'Cancel Application'); 
