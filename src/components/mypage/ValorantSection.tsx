@@ -156,6 +156,10 @@ export default function ValorantSection() {
                     <span className="font-mono font-bold text-neon-cyan">{valorantInfo.elo}</span>
                  </div>
                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-muted-foreground">{t("mypage.valorant.currentRank")}</span>
+                    <span className="text-white">{valorantInfo.current_tier_patched}</span>
+                 </div>
+                 <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">{t("mypage.valorant.peakRank")}</span>
                     <span className="text-white">{valorantInfo.peak_tier_patched}</span>
                  </div>

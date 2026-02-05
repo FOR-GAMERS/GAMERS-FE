@@ -93,6 +93,7 @@
       "unlinkButton": "연동 해제",
       "refreshButton": "정보 갱신",
       "elo": "ELO 레이팅",
+      "currentRank": "현재 티어",
       "peakRank": "최고 티어",
       "lastUpdated": "최근 갱신",
       "cantRefresh": "갱신 불가능 (24시간 이내)",

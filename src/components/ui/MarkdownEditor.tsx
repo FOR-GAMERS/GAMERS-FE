@@ -11,6 +11,7 @@ import {
     Eye, Edit3, Loader2
 } from 'lucide-react';
 import { storageService } from '@/services/storage-service';
+import { useToast } from '@/context/ToastContext';
 
 interface MarkdownEditorProps {
     value: string;
@@ -27,6 +28,7 @@ export default function MarkdownEditor({
     placeholder,
     className
 }: MarkdownEditorProps) {
+    const { addToast } = useToast();
     const [tab, setTab] = useState<'write' | 'preview'>('write');
     const [isUploading, setIsUploading] = useState(false);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -64,11 +66,11 @@ export default function MarkdownEditor({
             const response = await storageService.uploadContestBanner(file);
             if (response.data?.url) {
                 insertText(`![Image](${response.data.url})`);
+                addToast("Image uploaded successfully", "success");
             }
         } catch (error) {
             console.error("Failed to upload image", error);
-            // Optionally insert a placeholder or error text
-            alert("Failed to upload image");
+            addToast("Failed to upload image", "error");
         } finally {
             setIsUploading(false);
             if (fileInputRef.current) fileInputRef.current.value = "";

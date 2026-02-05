@@ -93,6 +93,7 @@
       "unlinkButton": "Unlink",
       "refreshButton": "Refresh Info",
       "elo": "ELO Rating",
+      "currentRank": "Current Rank",
       "peakRank": "Peak Rank",
       "lastUpdated": "Last Updated",
       "cantRefresh": "Refresh Unavailable (Limit 24h)",

@@ -93,6 +93,7 @@
       "unlinkButton": "連携解除",
       "refreshButton": "情報更新",
       "elo": "ELOレート",
+      "currentRank": "現在のランク",
       "peakRank": "最高ランク",
       "lastUpdated": "最終更新",
       "cantRefresh": "更新不可 (24時間以内)",
