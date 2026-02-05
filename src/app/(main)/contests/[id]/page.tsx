@@ -49,12 +49,14 @@ export default function ContestDetailPage() {
   const applicationStatus = userStatus?.application_status || 'NONE'; 
   const hasJoined = isMember || applicationStatus === 'ACCEPTED'; 
 
-  // Redirect to dashboard if joined
+  // Redirect removed as per user request for a manual "Routing Button"
+  /*
   useEffect(() => {
     if (hasJoined) {
         router.push(`/contests/${contestId}/dashboard`);
     }
   }, [hasJoined, contestId, router]);
+  */
 
   const getStatusLabel = (status: ContestStatus) => {
     return t(`contestDetail.status.${status}`, status);
@@ -98,7 +100,8 @@ export default function ContestDetailPage() {
     }
     
     if (hasJoined) {
-        alert(t('contestDetail.alerts.alreadyJoined'));
+        // User requested Routing Button to Dashboard
+        router.push(`/contests/${contestId}/dashboard`);
         return;
     }
 
@@ -119,11 +122,14 @@ export default function ContestDetailPage() {
   if (!isLoggedIn) {
       buttonLabel = t('contestCTA.button.login');
   } else if (hasJoined) {
-      buttonLabel = t('contestCTA.button.joined');
+     // Check if translation key exists, otherwise fallback to "Go to Dashboard"
+     // Since I can't verify keys easily, I will use a safe string or reuse 'joined' but meaning 'dashboard' logic
+     // Ideally: "Go to Dashboard"
+      buttonLabel = t('contestCTA.button.dashboard', 'Go to Dashboard'); 
       variant = 'secondary';
   } else if (applicationStatus === 'PENDING') {
-      // User is managing a team. 
-      buttonLabel = t('contestCTA.button.deleteTeam'); 
+      // User is managing a team or just applied
+      buttonLabel = t('contestCTA.button.cancelApplication', 'Cancel Application'); 
       variant = 'destructive';
   }
 

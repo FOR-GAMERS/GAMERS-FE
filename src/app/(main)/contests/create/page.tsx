@@ -6,7 +6,6 @@ import { createContestSchema, CreateContestFormValues } from "@/schemas/contest-
 import { useRouter } from "next/navigation";
 import { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
-import ReactMarkdown from "react-markdown";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Link from 'next/link';
@@ -25,6 +24,7 @@ import { useToast } from "@/context/ToastContext";
 import { GameType, ContestType } from "@/types/api";
 import { storageService } from "@/services/storage-service";
 import AnimatedSelect from "@/components/ui/AnimatedSelect";
+import MarkdownEditor from "@/components/ui/MarkdownEditor";
 import { useTranslation } from "react-i18next";
 
 export default function CreateContestPage() {
@@ -36,7 +36,6 @@ export default function CreateContestPage() {
 
   const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
   const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
-  const [editorTab, setEditorTab] = useState<'write' | 'preview'>('write');
   const [isUploading, setIsUploading] = useState(false);
 
   // React Hook Form Setup
@@ -74,7 +73,7 @@ export default function CreateContestPage() {
       name: "games"
   });
 
-  const watchedDescription = watch("description");
+
   const games = watch("games");
   const gameType = watch("game_type");
   const gamePointTableId = watch("game_point_table_id");
@@ -391,27 +390,19 @@ export default function CreateContestPage() {
 
             {/* Markdown Editor */}
             <section className="animate-section space-y-4">
-                <div className="flex items-center justify-between">
-                    <label className="text-sm font-medium text-muted-foreground ml-1">{t('contestCreate.form.description')}</label>
-                    <div className="flex lg:hidden bg-white/5 rounded-lg p-1 gap-1">
-                        <button type="button" onClick={() => setEditorTab('write')} className={cn("px-3 py-1 text-xs rounded-md transition-all", editorTab === 'write' ? "bg-white/10 text-white font-bold" : "text-muted-foreground")}>{t('contestCreate.actions.edit')}</button>
-                        <button type="button" onClick={() => setEditorTab('preview')} className={cn("px-3 py-1 text-xs rounded-md transition-all", editorTab === 'preview' ? "bg-white/10 text-white font-bold" : "text-muted-foreground")}>{t('contestCreate.actions.preview')}</button>
-                    </div>
-                </div>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-[400px]">
-                    <div className={cn("h-full", editorTab === 'preview' && "hidden lg:block")}>
-                        <textarea 
-                            {...register("description")} 
-                            placeholder="# Enter contest details..." 
-                            className="w-full h-full bg-[#0f172a] border border-white/10 rounded-xl p-4 font-mono text-sm leading-relaxed resize-none focus:border-neon-cyan outline-none text-white" 
+                 <Controller
+                    control={control}
+                    name="description"
+                    render={({ field }) => (
+                        <MarkdownEditor
+                            value={field.value || ""}
+                            onChange={field.onChange}
+                            label={t('contestCreate.form.description')}
+                            placeholder="# Enter contest details..."
+                            className="h-full"
                         />
-                    </div>
-                    <div className={cn("h-full bg-black/40 border border-white/5 rounded-xl p-6 overflow-y-auto", editorTab === 'write' && "hidden lg:block")}>
-                        <div className="prose prose-invert prose-sm max-w-none">
-                            {watchedDescription ? <ReactMarkdown>{watchedDescription}</ReactMarkdown> : <p className="text-muted-foreground/30 text-center mt-10">Preview Area</p>}
-                        </div>
-                    </div>
-                </div>
+                    )}
+                />
             </section>
 
              {/* Footer Action */}

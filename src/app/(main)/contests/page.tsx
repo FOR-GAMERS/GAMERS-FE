@@ -11,8 +11,12 @@ import { useContests } from "@/hooks/use-contests";
 import AnimatedSelect from "@/components/ui/AnimatedSelect";
 import { useTranslation } from "react-i18next";
 
+import { useSearchParams } from "next/navigation";
+
 export default function Contests() {
   const { t } = useTranslation();
+  const searchParams = useSearchParams();
+  const search = searchParams.get("search") || "";
   const [filter, setFilter] = useState<"LATEST" | "STATUS">("LATEST");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 15;
@@ -21,7 +25,8 @@ export default function Contests() {
     page: currentPage,
     page_size: itemsPerPage,
     sort_by: "created_at",
-    order: "desc"
+    order: "desc",
+    title: search
   });
   
   const contests = data?.data || [];
@@ -96,7 +101,7 @@ export default function Contests() {
                 {t('contestsList.title')}
             </h1>
             
-            <div className="flex items-center gap-3 w-full md:w-auto">
+            <div className="flex flex-col md:flex-row items-center gap-3 w-full md:w-auto">
                 <AnimatedSelect
                     value={filter}
                     onChange={(val) => {

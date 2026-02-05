@@ -1,130 +1,101 @@
 "use client";
 
-import { InfraHealthPanel } from "@/components/admin/system/InfraHealthPanel";
-import { BannerManagementPanel } from "@/components/admin/system/BannerManagementPanel";
-import { ContestManagementPanel } from "@/components/admin/system/ContestManagementPanel";
-import { Globe, Users, Server, Activity, ArrowRight } from "lucide-react";
+import { Image as ImageIcon, Users, Trophy, GitMerge, Gamepad2, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Koulen } from "next/font/google";
+import { useTranslation } from "react-i18next";
 
 const koulen = Koulen({
   weight: "400",
   subsets: ["latin"],
 });
 
-export default function SystemDashboardPage() {
+export default function AdminDashboardPage() {
+  const { t } = useTranslation();
+  
+  const adminSections = [
+    {
+      title: t('admin.dashboard.cards.banner.title'),
+      description: t('admin.dashboard.cards.banner.description'),
+      icon: <ImageIcon className="w-8 h-8 text-neon-cyan" />,
+      href: "/admin/banners",
+      color: "border-neon-cyan/20 group-hover:border-neon-cyan/50",
+      bgHover: "group-hover:bg-neon-cyan/5"
+    },
+    {
+      title: t('admin.dashboard.cards.user.title'),
+      description: t('admin.dashboard.cards.user.description'),
+      icon: <Users className="w-8 h-8 text-neon-purple" />,
+      href: "/admin/users",
+      color: "border-neon-purple/20 group-hover:border-neon-purple/50",
+      bgHover: "group-hover:bg-neon-purple/5"
+    },
+    {
+      title: t('admin.dashboard.cards.contest.title'),
+      description: t('admin.dashboard.cards.contest.description'),
+      icon: <Trophy className="w-8 h-8 text-emerald-500" />,
+      href: "/admin/contests-manage",
+      color: "border-emerald-500/20 group-hover:border-emerald-500/50",
+      bgHover: "group-hover:bg-emerald-500/5"
+    },
+    {
+      title: t('admin.dashboard.cards.result.title'),
+      description: t('admin.dashboard.cards.result.description'),
+      icon: <GitMerge className="w-8 h-8 text-amber-500" />,
+      href: "/admin/results",
+      color: "border-amber-500/20 group-hover:border-amber-500/50",
+      bgHover: "group-hover:bg-amber-500/5"
+    },
+    {
+      title: t('admin.dashboard.cards.game.title'),
+      description: t('admin.dashboard.cards.game.description'),
+      icon: <Gamepad2 className="w-8 h-8 text-rose-500" />,
+      href: "/admin/games",
+      color: "border-rose-500/20 group-hover:border-rose-500/50",
+      bgHover: "group-hover:bg-rose-500/5"
+    }
+  ];
+
   return (
-    <div className="flex min-h-screen flex-col bg-black">
-        {/* Sidebar provided by layout */}
-        
-        <main className="flex-1 flex flex-col relative w-full">
-            {/* Background Effects */}
-            <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-neutral-900/50 via-black to-black pointer-events-none" />
-            
-            {/* Header */}
-            <header className="h-16 border-b border-white/5 flex items-center justify-between px-6 bg-black/80 backdrop-blur-md sticky top-0 z-20">
-                <div className="flex items-center gap-3">
-                    <Globe className="w-5 h-5 text-emerald-500 animate-pulse" />
-                    <div>
-                        <h1 className={`text-xl font-bold tracking-tight text-white ${koulen.className}`}>
-                            SYSTEM MONITOR <span className="text-emerald-500 text-xs align-top font-sans">LIVE</span>
-                        </h1>
-                    </div>
-                </div>
-                <div className="flex items-center gap-6 font-mono text-xs text-neutral-500">
-                     <div className="flex items-center gap-2">
-                        <Activity className="w-4 h-4" />
-                        <span>UPTIME: 45d 12h 30m</span>
-                     </div>
-                     <div className="flex items-center gap-2">
-                        <Server className="w-4 h-4" />
-                        <span>v2.4.0-stable</span>
-                     </div>
-                </div>
-            </header>
+    <div className="container mx-auto px-6 py-12">
+        <div className="flex flex-col mb-12">
+            <h1 className={`text-4xl md:text-5xl font-bold text-white mb-4 ${koulen.className} tracking-wide`}>
+                {t('admin.dashboard.title')}
+            </h1>
+            <p className="text-neutral-400 max-w-2xl">
+                {t('admin.dashboard.subtitle')}
+            </p>
+        </div>
 
-            {/* Dashboard Content */}
-            <div className="flex-1 p-4 md:p-6 z-10 space-y-6 pb-20">
-                
-                {/* 1. Infrastructure Health Panel (Top) */}
-                <section>
-                    <h2 className="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-3 flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" /> Infrastructure Health
-                    </h2>
-                    <InfraHealthPanel />
-                </section>
-
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[600px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {adminSections.map((section, idx) => (
+                <Link 
+                    key={idx} 
+                    href={section.href}
+                    className={`group relative bg-neutral-900/50 border ${section.color} rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1 overflow-hidden`}
+                >
+                    <div className={`absolute inset-0 transition-opacity duration-300 opacity-0 ${section.bgHover}`} />
                     
-                    {/* Contest & Banner Management (Left) */}
-                    <div className="col-span-1 md:col-span-8 flex flex-col gap-6 h-full">
-                        <div className="h-full md:h-1/2">
-                             {/* Replaced ContestManagementPanel with a Link wrapper if it's meant to route */}
-                             {/* Assuming ContestManagementPanel is visually suitable, we wrap it or just use it.
-                                 BUT user said "routing only". So let's wrap it in Link if it's a card.
-                                 If ContestManagementPanel is complex, we might just leave it or refactor it to look like a widget.
-                                 Let's wrap it in a div that makes it clickable/linkable if appropriate, or just keep it as is
-                                 and expect the panel itself to have a "Manage" link like Banner panel.
-                                 Actually, user wants "routing". I'll wrap the container or add a "View All" button.
-                              */}
-                             <ContestManagementPanel />
+                    <div className="relative z-10">
+                        <div className="mb-6 p-3 bg-white/5 rounded-xl w-fit border border-white/5 group-hover:scale-110 transition-transform duration-300">
+                            {section.icon}
                         </div>
-                        <div className="h-full md:h-1/2">
-                             <BannerManagementPanel />
-                        </div>
-                    </div>
-
-                    {/* Management Actions (Right) */}
-                    <div className="col-span-1 md:col-span-4 space-y-4 font-sans h-full">
-                        {/* User Management Card */}
-                        <Link 
-                            href="/admin/users"
-                            className="block bg-neutral-900/30 border border-white/5 hover:border-neon-cyan/50 hover:bg-neutral-900/50 rounded-xl p-6 h-[250px] cursor-pointer group transition-all relative overflow-hidden"
-                        >
-                             <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                                <Users className="w-24 h-24" />
-                             </div>
-                             <div className="relative z-10 h-full flex flex-col justify-between">
-                                <div>
-                                    <h3 className="text-lg font-bold text-white mb-1 group-hover:text-neon-cyan transition-colors">User Management</h3>
-                                    <p className="text-sm text-neutral-400">View, edit, and ban users.</p>
-                                </div>
-                                <div className="flex items-center gap-2 text-sm font-bold text-neon-cyan opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all">
-                                    OPEN PANEL <ArrowRight className="w-4 h-4" />
-                                </div>
-                             </div>
-                        </Link>
-
-                        {/* Pending Requests Card (Placeholder) */}
-                        <div className="bg-neutral-900/30 border border-white/5 rounded-xl p-6 h-[250px] flex flex-col justify-between opacity-50 hover:opacity-100 transition-opacity cursor-not-allowed">
-                             <div>
-                                 <h3 className="text-lg font-bold text-white mb-1">Organization Requests</h3>
-                                 <p className="text-sm text-neutral-400">0 pending requests.</p>
-                             </div>
+                        
+                        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors">
+                            {section.title}
+                        </h3>
+                        
+                        <p className="text-sm text-neutral-400 mb-8 leading-relaxed">
+                            {section.description}
+                        </p>
+                        
+                        <div className="flex items-center gap-2 text-sm font-bold text-neutral-300 group-hover:text-white transition-colors">
+                            {t('admin.dashboard.enterModule')} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </div>
                     </div>
-                </div>
-
-                {/* 3. System Logs (Bottom) */}
-                <section className="bg-black border border-white/10 rounded-xl overflow-hidden font-mono text-xs flex flex-col h-[300px]">
-                    <div className="p-2 border-b border-white/10 bg-white/5 flex items-center justify-between">
-                         <span className="font-bold text-neutral-400">SYSTEM LOGS STREAM</span>
-                         <div className="flex gap-2">
-                             <span className="text-emerald-500">INFO</span>
-                             <span className="text-amber-500">WARN</span>
-                             <span className="text-rose-600">ERR</span>
-                         </div>
-                    </div>
-                    <div className="p-4 space-y-1 text-neutral-400 overflow-y-auto flex-1">
-                        <div className="opacity-50">Initializing log stream connection...</div>
-                        <div><span className="text-emerald-500">[INFO]</span> Connected to log aggregation service (ws://logs.gamers.internal)</div>
-                        <div><span className="text-emerald-500">[INFO]</span> Consumer group 'admin-dashboard' joined</div>
-                        <div><span className="text-amber-500">[WARN]</span> High latency detected on Queue 'match-processing' (120ms)</div>
-                        <div className="animate-pulse text-neon-cyan">_</div>
-                    </div>
-                </section>
-            </div>
-        </main>
+                </Link>
+            ))}
+        </div>
     </div>
   );
 }

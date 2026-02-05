@@ -26,6 +26,7 @@ export function useContests(params: {
   page_size?: number; 
   sort_by?: string; 
   order?: 'asc' | 'desc'; 
+  title?: string;
 } = { page: 1, page_size: 10, sort_by: 'created_at', order: 'desc' }) {
   return useQuery({
     queryKey: CONTEST_KEYS.list(params),

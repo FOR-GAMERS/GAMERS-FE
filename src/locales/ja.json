@@ -355,5 +355,63 @@
     "btnLogin": "ログインへ移動",
     "btnSignup": "会員登録する",
     "debugInfo": "デバッグ情報:"
+  },
+  "admin": {
+    "dashboard": {
+      "title": "管理ダッシュボード",
+      "subtitle": "この中央ハブからGAMERSプラットフォームのすべての側面を管理します。開始するには、以下のモジュールを選択してください。",
+      "enterModule": "モジュールに入る",
+      "cards": {
+        "banner": { "title": "バナー作成", "description": "ホームページのヒーローバナーとプロモーションを管理します。" },
+        "user": { "title": "ユーザー管理", "description": "ユーザーアカウントと役割を表示、編集、管理します。" },
+        "contest": { "title": "大会管理", "description": "トーナメント、リーグ、イベントを作成および管理します。" },
+        "result": { "title": "対戦結果", "description": "試合のスコアを更新し、ブラケットの進行状況を管理します。" },
+        "game": { "title": "ゲーム管理", "description": "ゲーム設定とサポートされているタイトルを構成します。" }
+      }
+    },
+    "userManagement": {
+      "title": "ユーザー管理",
+      "searchPlaceholder": "ユーザー検索...",
+      "table": {
+        "user": "ユーザー",
+        "contact": "連絡先",
+        "role": "役割",
+        "actions": "操作",
+        "tag": "タグ",
+        "id": "ID",
+        "showing": "{{total}}人中{{count}}人を表示"
+      },
+      "actions": {
+        "edit": "編集",
+        "delete": "BAN/削除",
+        "confirmDelete": "本当にユーザー {{username}} をBAN/削除しますか？",
+        "deleteSuccess": "ユーザーが削除されました",
+        "deleteFail": "ユーザー削除失敗",
+        "editNotImplemented": "ユーザー {{username}} の編集はまだ実装されていません。"
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "invalidEmail": "有効なメールアドレスを入力してください。",
+      "invalidPassword": "パスワードは8文字以上で、大文字、小文字、特殊文字(!@#$%^&*)を含める必要があります。",
+      "heroTitle1": "かけがえのない",
+      "heroTitle2": "思い出を。",
+      "heroSubtitle": "共に過ごした日々を忘れずに。",
+      "sysStatus": "SYS.STATUS: ONLINE",
+      "loc": "LOC: NEO-TOKYO SERVERS",
+      "secureConn": "SECURE CONN: ESTABLISHED",
+      "welcome": "Welcome Back",
+      "welcomeDesc": "GAMERSアカウントでログインして、あなたの伝説を再開しましょう。",
+      "emailLabel": "Email",
+      "emailPlaceholder": "name@example.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "••••••••",
+      "loginButton": "ログイン",
+      "or": "OR",
+      "discordLogin": "Discordでログイン",
+      "noAccount": "アカウントをお持ちでないですか？",
+      "signup": "新規登録"
+    }
   }
 }

@@ -10,11 +10,11 @@ const koulen = Koulen({
   subsets: ["latin"],
 });
 
-export default function Footer() {
+export default function Footer({ className }: { className?: string }) {
   const { t } = useTranslation();
   
   return (
-    <footer className="absolute bottom-0 w-full border-t border-white/10 bg-black py-12">
+    <footer className={cn("absolute bottom-0 w-full border-t border-white/10 bg-black py-12", className)}>
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           

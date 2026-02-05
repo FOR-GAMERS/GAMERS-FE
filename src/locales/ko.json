@@ -366,5 +366,63 @@
     "btnLogin": "로그인으로 이동",
     "btnSignup": "회원가입 하기",
     "debugInfo": "디버그 정보:"
+  },
+  "admin": {
+    "dashboard": {
+      "title": "관리자 대시보드",
+      "subtitle": "이 중앙 허브에서 GAMERS 플랫폼의 모든 측면을 관리하세요. 시작하려면 아래 모듈을 선택하세요.",
+      "enterModule": "모듈 진입",
+      "cards": {
+        "banner": { "title": "배너 관리", "description": "홈페이지 히어로 배너 및 프로모션을 관리합니다." },
+        "user": { "title": "사용자 관리", "description": "사용자 계정 및 역할을 조회, 수정, 관리합니다." },
+        "contest": { "title": "대회 관리", "description": "토너먼트, 리그 및 이벤트를 생성하고 관리합니다." },
+        "result": { "title": "대진표 결과", "description": "경기 점수를 업데이트하고 대진표 진행을 관리합니다." },
+        "game": { "title": "게임 관리", "description": "게임 설정 및 지원되는 타이틀을 구성합니다." }
+      }
+    },
+    "userManagement": {
+      "title": "사용자 관리",
+      "searchPlaceholder": "사용자 검색...",
+      "table": {
+        "user": "사용자",
+        "contact": "연락처",
+        "role": "역할",
+        "actions": "작업",
+        "tag": "태그",
+        "id": "ID",
+        "showing": "총 {{total}}명 중 {{count}}명 표시"
+      },
+      "actions": {
+        "edit": "수정",
+        "delete": "차단/삭제",
+        "confirmDelete": "정말로 사용자 {{username}}님을 차단/삭제하시겠습니까?",
+        "deleteSuccess": "사용자가 삭제되었습니다.",
+        "deleteFail": "사용자 삭제 실패",
+        "editNotImplemented": "사용자 {{username}} 수정 기능은 아직 구현되지 않았습니다."
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "invalidEmail": "유효한 이메일 주소를 입력해주세요.",
+      "invalidPassword": "비밀번호는 8자 이상이어야 하며, 대문자, 소문자, 특수문자(!@#$%^&*)를 포함해야 합니다.",
+      "heroTitle1": "대체할 수 없는",
+      "heroTitle2": "추억을.",
+      "heroSubtitle": "함께 보낸 시간들을 잊지 마세요.",
+      "sysStatus": "시스템 상태: 온라인",
+      "loc": "위치: 네오 도쿄 서버",
+      "secureConn": "보안 연결: 수립됨",
+      "welcome": "다시 오신 것을 환영합니다",
+      "welcomeDesc": "GAMERS 계정으로 로그인하고 당신의 전설을 다시 시작하세요.",
+      "emailLabel": "이메일",
+      "emailPlaceholder": "name@example.com",
+      "passwordLabel": "비밀번호",
+      "passwordPlaceholder": "••••••••",
+      "loginButton": "로그인",
+      "or": "또는",
+      "discordLogin": "디스코드로 로그인",
+      "noAccount": "계정이 없으신가요?",
+      "signup": "회원가입"
+    }
   }
 }

@@ -1,0 +1,4451 @@
+basePath: /api
+definitions:
+  github_com_FOR-GAMERS_GAMERS-BE_internal_auth_application_dto.LoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_auth_application_dto.LogoutRequest:
+    properties:
+      access_token:
+        type: string
+      refresh_token:
+        type: string
+    required:
+    - access_token
+    - refresh_token
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_auth_application_dto.RefreshRequest:
+    properties:
+      refresh_token:
+        type: string
+    required:
+    - refresh_token
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_banner_application_dto.BannerListResponse:
+    properties:
+      banners:
+        items:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_banner_application_dto.BannerResponse'
+        type: array
+      total:
+        type: integer
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_banner_application_dto.BannerResponse:
+    properties:
+      created_at:
+        type: string
+      display_order:
+        type: integer
+      id:
+        type: integer
+      image_key:
+        type: string
+      is_active:
+        type: boolean
+      link_url:
+        type: string
+      modified_at:
+        type: string
+      title:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_banner_application_dto.CreateBannerRequest:
+    properties:
+      display_order:
+        minimum: 0
+        type: integer
+      image_key:
+        type: string
+      is_active:
+        type: boolean
+      link_url:
+        type: string
+      title:
+        type: string
+    required:
+    - image_key
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_banner_application_dto.UpdateBannerRequest:
+    properties:
+      display_order:
+        minimum: 0
+        type: integer
+      image_key:
+        type: string
+      is_active:
+        type: boolean
+      link_url:
+        type: string
+      title:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_comment_application_dto.AuthorResponse:
+    properties:
+      avatar:
+        type: string
+      tag:
+        type: string
+      user_id:
+        type: integer
+      username:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_comment_application_dto.CommentResponse:
+    properties:
+      author:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_comment_application_dto.AuthorResponse'
+      comment_id:
+        type: integer
+      content:
+        type: string
+      contest_id:
+        type: integer
+      created_at:
+        type: string
+      modified_at:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_comment_application_dto.CreateCommentRequest:
+    properties:
+      content:
+        maxLength: 255
+        type: string
+    required:
+    - content
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_comment_application_dto.UpdateCommentRequest:
+    properties:
+      content:
+        maxLength: 255
+        type: string
+    required:
+    - content
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_dto.ChangeMemberRoleRequest:
+    properties:
+      member_type:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_domain.MemberType'
+    required:
+    - member_type
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_dto.ChangeMemberRoleResponse:
+    properties:
+      contest_id:
+        type: integer
+      leader_type:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_domain.LeaderType'
+      member_type:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_domain.MemberType'
+      user_id:
+        type: integer
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_dto.ContestResponse:
+    properties:
+      auto_start:
+        type: boolean
+      contest_id:
+        type: integer
+      contest_status:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_domain.ContestStatus'
+      contest_type:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_domain.ContestType'
+      created_at:
+        type: string
+      description:
+        type: string
+      discord_guild_id:
+        type: string
+      discord_text_channel_id:
+        type: string
+      ended_at:
+        type: string
+      game_point_table_id:
+        type: integer
+      game_type:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_domain.GameType'
+      max_team_count:
+        type: integer
+      modified_at:
+        type: string
+      started_at:
+        type: string
+      thumbnail:
+        type: string
+      title:
+        type: string
+      total_point:
+        type: integer
+      total_team_member:
+        type: integer
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_dto.CreateContestRequest:
+    properties:
+      auto_start:
+        type: boolean
+      contest_type:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_domain.ContestType'
+      description:
+        type: string
+      discord_guild_id:
+        type: string
+      discord_text_channel_id:
+        type: string
+      ended_at:
+        type: string
+      game_point_table_id:
+        type: integer
+      game_type:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_domain.GameType'
+      max_team_count:
+        type: integer
+      started_at:
+        type: string
+      thumbnail:
+        type: string
+      title:
+        type: string
+      total_point:
+        type: integer
+      total_team_member:
+        type: integer
+    required:
+    - contest_type
+    - title
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_dto.DiscordLinkRequiredResponse:
+    properties:
+      message:
+        type: string
+      oauth_url:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_dto.UpdateContestRequest:
+    properties:
+      auto_start:
+        type: boolean
+      contest_status:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_domain.ContestStatus'
+      contest_type:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_domain.ContestType'
+      description:
+        type: string
+      discord_guild_id:
+        type: string
+      discord_text_channel_id:
+        type: string
+      ended_at:
+        type: string
+      game_point_table_id:
+        type: integer
+      game_type:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_domain.GameType'
+      max_team_count:
+        type: integer
+      started_at:
+        type: string
+      thumbnail:
+        type: string
+      title:
+        type: string
+      total_point:
+        type: integer
+      total_team_member:
+        type: integer
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_dto.UserContestStatusResponse:
+    properties:
+      application_status:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_port.ApplicationStatus'
+      has_applied:
+        type: boolean
+      is_leader:
+        type: boolean
+      is_member:
+        type: boolean
+      member_type:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_port.ApplicationStatus:
+    enum:
+    - PENDING
+    - ACCEPTED
+    - REJECTED
+    type: string
+    x-enum-varnames:
+    - ApplicationStatusPending
+    - ApplicationStatusAccepted
+    - ApplicationStatusRejected
+  github_com_FOR-GAMERS_GAMERS-BE_internal_contest_domain.ContestStatus:
+    enum:
+    - PENDING
+    - ACTIVE
+    - FINISHED
+    - CANCELLED
+    type: string
+    x-enum-varnames:
+    - ContestStatusPending
+    - ContestStatusActive
+    - ContestStatusFinished
+    - ContestStatusCancelled
+  github_com_FOR-GAMERS_GAMERS-BE_internal_contest_domain.ContestType:
+    enum:
+    - TOURNAMENT
+    - LEAGUE
+    - CASUAL
+    type: string
+    x-enum-varnames:
+    - ContestTypeTournament
+    - ContestTypeLeague
+    - ContestTypeCasual
+  github_com_FOR-GAMERS_GAMERS-BE_internal_contest_domain.LeaderType:
+    enum:
+    - LEADER
+    - MEMBER
+    type: string
+    x-enum-varnames:
+    - LeaderTypeLeader
+    - LeaderTypeMember
+  github_com_FOR-GAMERS_GAMERS-BE_internal_contest_domain.MemberType:
+    enum:
+    - STAFF
+    - NORMAL
+    type: string
+    x-enum-varnames:
+    - MemberTypeStaff
+    - MemberTypeNormal
+  github_com_FOR-GAMERS_GAMERS-BE_internal_discord_application_dto.DiscordChannel:
+    properties:
+      guild_id:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      parent_id:
+        type: string
+      position:
+        type: integer
+      type:
+        type: integer
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_discord_application_dto.DiscordGuild:
+    properties:
+      icon:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      owner:
+        type: boolean
+      permissions:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.CachedMemberResponse:
+    properties:
+      contest_id:
+        type: integer
+      discord_id:
+        type: string
+      member_type:
+        type: string
+      tag:
+        type: string
+      team_id:
+        type: integer
+      user_id:
+        type: integer
+      username:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.ContestResultResponse:
+    properties:
+      champion:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.TeamSummary'
+      contest_id:
+        type: integer
+      contest_status:
+        type: string
+      rounds:
+        items:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.RoundResult'
+        type: array
+      title:
+        type: string
+      total_rounds:
+        type: integer
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.CreateGameRequest:
+    properties:
+      contest_id:
+        type: integer
+      ended_at:
+        type: string
+      game_team_type:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_domain.GameTeamType'
+      started_at:
+        type: string
+    required:
+    - contest_id
+    - game_team_type
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.CreateGameTeamRequest:
+    properties:
+      game_id:
+        type: integer
+      grade:
+        type: integer
+      team_id:
+        type: integer
+    required:
+    - game_id
+    - team_id
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.CreateTeamRequest:
+    properties:
+      team_name:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.GameResponse:
+    properties:
+      contest_id:
+        type: integer
+      created_at:
+        type: string
+      ended_at:
+        type: string
+      game_id:
+        type: integer
+      game_status:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_domain.GameStatus'
+      game_team_type:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_domain.GameTeamType'
+      modified_at:
+        type: string
+      started_at:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.GameResult:
+    properties:
+      detection_status:
+        type: string
+      game_id:
+        type: integer
+      game_status:
+        type: string
+      match_number:
+        type: integer
+      match_result:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.MatchResultSummary'
+      teams:
+        items:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.GameTeamResult'
+        type: array
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.GameTeamResponse:
+    properties:
+      game_id:
+        type: integer
+      game_team_id:
+        type: integer
+      grade:
+        type: integer
+      team_id:
+        type: integer
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.GameTeamResult:
+    properties:
+      grade:
+        type: integer
+      team_id:
+        type: integer
+      team_name:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.InviteMemberRequest:
+    properties:
+      user_id:
+        type: integer
+    required:
+    - user_id
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.KickMemberRequest:
+    properties:
+      user_id:
+        type: integer
+    required:
+    - user_id
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.ManualResultRequest:
+    properties:
+      loserScore:
+        type: integer
+      note:
+        type: string
+      winnerScore:
+        type: integer
+      winnerTeamId:
+        type: integer
+    required:
+    - loserScore
+    - winnerScore
+    - winnerTeamId
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.MatchResultResponse:
+    properties:
+      detectionStatus:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_domain.DetectionStatus'
+      gameDuration:
+        type: integer
+      gameId:
+        type: integer
+      gameStartedAt:
+        type: string
+      loserScore:
+        type: integer
+      loserTeamId:
+        type: integer
+      mapName:
+        type: string
+      matchResultId:
+        type: integer
+      playerStats:
+        items:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.PlayerStatResponse'
+        type: array
+      roundsPlayed:
+        type: integer
+      valorantMatchId:
+        type: string
+      winnerScore:
+        type: integer
+      winnerTeamId:
+        type: integer
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.MatchResultSummary:
+    properties:
+      loser_score:
+        type: integer
+      loser_team_id:
+        type: integer
+      map_name:
+        type: string
+      winner_score:
+        type: integer
+      winner_team_id:
+        type: integer
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.PlayerStatResponse:
+    properties:
+      agentName:
+        type: string
+      assists:
+        type: integer
+      bodyshots:
+        type: integer
+      deaths:
+        type: integer
+      headshots:
+        type: integer
+      kills:
+        type: integer
+      legshots:
+        type: integer
+      score:
+        type: integer
+      teamId:
+        type: integer
+      userId:
+        type: integer
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.RoundResult:
+    properties:
+      games:
+        items:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.GameResult'
+        type: array
+      round:
+        type: integer
+      round_name:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.ScheduleGameRequest:
+    properties:
+      detectionWindowMinutes:
+        type: integer
+      scheduledStartTime:
+        type: string
+    required:
+    - scheduledStartTime
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.ScheduleGameResponse:
+    properties:
+      contestId:
+        type: integer
+      detectionStatus:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_domain.DetectionStatus'
+      detectionWindowMinutes:
+        type: integer
+      gameId:
+        type: integer
+      gameStatus:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_domain.GameStatus'
+      matchNumber:
+        type: integer
+      round:
+        type: integer
+      scheduledStartTime:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.TeamInviteResponse:
+    properties:
+      contest_id:
+        type: integer
+      invitee_id:
+        type: integer
+      invitee_name:
+        type: string
+      inviter_id:
+        type: integer
+      inviter_name:
+        type: string
+      status:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.TeamSummary:
+    properties:
+      team_id:
+        type: integer
+      team_name:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.TransferLeadershipRequest:
+    properties:
+      new_leader_user_id:
+        type: integer
+    required:
+    - new_leader_user_id
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.UpdateGameRequest:
+    properties:
+      ended_at:
+        type: string
+      game_status:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_domain.GameStatus'
+      game_team_type:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_domain.GameTeamType'
+      started_at:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_domain.DetectionStatus:
+    enum:
+    - NONE
+    - DETECTING
+    - DETECTED
+    - FAILED
+    - MANUAL
+    type: string
+    x-enum-varnames:
+    - DetectionStatusNone
+    - DetectionStatusDetecting
+    - DetectionStatusDetected
+    - DetectionStatusFailed
+    - DetectionStatusManual
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_domain.GameStatus:
+    enum:
+    - PENDING
+    - ACTIVE
+    - FINISHED
+    - CANCELLED
+    type: string
+    x-enum-varnames:
+    - GameStatusPending
+    - GameStatusActive
+    - GameStatusFinished
+    - GameStatusCancelled
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_domain.GameTeamType:
+    enum:
+    - SINGLE
+    - DUO
+    - TRIO
+    - FULL
+    - HURUPA
+    type: string
+    x-enum-comments:
+      GameTeamTypeDuo: 2 members
+      GameTeamTypeFull: 4 members
+      GameTeamTypeHurupa: 5 members
+      GameTeamTypeSingle: 1 member
+      GameTeamTypeTrio: 3 members
+    x-enum-descriptions:
+    - 1 member
+    - 2 members
+    - 3 members
+    - 4 members
+    - 5 members
+    x-enum-varnames:
+    - GameTeamTypeSingle
+    - GameTeamTypeDuo
+    - GameTeamTypeTrio
+    - GameTeamTypeFull
+    - GameTeamTypeHurupa
+  github_com_FOR-GAMERS_GAMERS-BE_internal_game_domain.GameType:
+    enum:
+    - VALORANT
+    - LOL
+    type: string
+    x-enum-varnames:
+    - GameTypeValorant
+    - GameTypeLOL
+  github_com_FOR-GAMERS_GAMERS-BE_internal_global_common_dto.PaginationResponse:
+    properties:
+      data: {}
+      page:
+        type: integer
+      page_size:
+        type: integer
+      total_count:
+        type: integer
+      total_pages:
+        type: integer
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response:
+    properties:
+      data: {}
+      message:
+        type: string
+      status:
+        type: integer
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_notification_application_dto.NotificationListResponse:
+    properties:
+      notifications:
+        items:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_notification_application_dto.NotificationResponse'
+        type: array
+      total:
+        type: integer
+      unread_count:
+        type: integer
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_notification_application_dto.NotificationResponse:
+    properties:
+      created_at:
+        type: string
+      data:
+        additionalProperties: true
+        type: object
+      id:
+        type: integer
+      is_read:
+        type: boolean
+      message:
+        type: string
+      title:
+        type: string
+      type:
+        $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_notification_domain.NotificationType'
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_notification_domain.NotificationType:
+    enum:
+    - TEAM_INVITE_RECEIVED
+    - TEAM_INVITE_ACCEPTED
+    - TEAM_INVITE_REJECTED
+    - APPLICATION_ACCEPTED
+    - APPLICATION_REJECTED
+    type: string
+    x-enum-varnames:
+    - NotificationTypeTeamInviteReceived
+    - NotificationTypeTeamInviteAccepted
+    - NotificationTypeTeamInviteRejected
+    - NotificationTypeApplicationAccepted
+    - NotificationTypeApplicationRejected
+  github_com_FOR-GAMERS_GAMERS-BE_internal_point_application_dto.CreateValorantScoreTableDto:
+    properties:
+      ascendant_1:
+        type: integer
+      ascendant_2:
+        type: integer
+      ascendant_3:
+        type: integer
+      bronze_1:
+        type: integer
+      bronze_2:
+        type: integer
+      bronze_3:
+        type: integer
+      diamond_1:
+        type: integer
+      diamond_2:
+        type: integer
+      diamond_3:
+        type: integer
+      gold_1:
+        type: integer
+      gold_2:
+        type: integer
+      gold_3:
+        type: integer
+      immortal_1:
+        type: integer
+      immortal_2:
+        type: integer
+      immortal_3:
+        type: integer
+      iron_1:
+        type: integer
+      iron_2:
+        type: integer
+      iron_3:
+        type: integer
+      platinum_1:
+        type: integer
+      platinum_2:
+        type: integer
+      platinum_3:
+        type: integer
+      radiant:
+        type: integer
+      silver_1:
+        type: integer
+      silver_2:
+        type: integer
+      silver_3:
+        type: integer
+    required:
+    - ascendant_1
+    - ascendant_2
+    - ascendant_3
+    - bronze_1
+    - bronze_2
+    - bronze_3
+    - diamond_1
+    - diamond_2
+    - diamond_3
+    - gold_1
+    - gold_2
+    - gold_3
+    - immortal_1
+    - immortal_2
+    - immortal_3
+    - iron_1
+    - iron_2
+    - iron_3
+    - platinum_1
+    - platinum_2
+    - platinum_3
+    - radiant
+    - silver_1
+    - silver_2
+    - silver_3
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_point_application_dto.ValorantScoreTableResponse:
+    properties:
+      ascendant_1:
+        type: integer
+      ascendant_2:
+        type: integer
+      ascendant_3:
+        type: integer
+      bronze_1:
+        type: integer
+      bronze_2:
+        type: integer
+      bronze_3:
+        type: integer
+      diamond_1:
+        type: integer
+      diamond_2:
+        type: integer
+      diamond_3:
+        type: integer
+      gold_1:
+        type: integer
+      gold_2:
+        type: integer
+      gold_3:
+        type: integer
+      immortal_1:
+        type: integer
+      immortal_2:
+        type: integer
+      immortal_3:
+        type: integer
+      iron_1:
+        type: integer
+      iron_2:
+        type: integer
+      iron_3:
+        type: integer
+      platinum_1:
+        type: integer
+      platinum_2:
+        type: integer
+      platinum_3:
+        type: integer
+      radiant:
+        type: integer
+      score_table_id:
+        type: integer
+      silver_1:
+        type: integer
+      silver_2:
+        type: integer
+      silver_3:
+        type: integer
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_storage_application_dto.UploadResponse:
+    properties:
+      key:
+        type: string
+      mime_type:
+        type: string
+      size:
+        type: integer
+      uploaded_at:
+        type: string
+      url:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_user_application_dto.CreateUserRequest:
+    properties:
+      avatar:
+        type: string
+      bio:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      tag:
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    - password
+    - tag
+    - username
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_user_application_dto.MyUserResponse:
+    properties:
+      avatar:
+        type: string
+      bio:
+        type: string
+      created_at:
+        type: string
+      current_tier:
+        type: integer
+      current_tier_patched:
+        type: string
+      elo:
+        type: integer
+      email:
+        type: string
+      modified_at:
+        type: string
+      peak_tier:
+        type: integer
+      peak_tier_patched:
+        type: string
+      profile_key:
+        type: string
+      ranking_in_tier:
+        type: integer
+      region:
+        type: string
+      riot_name:
+        type: string
+      riot_tag:
+        type: string
+      tag:
+        type: string
+      user_id:
+        type: integer
+      username:
+        type: string
+      valorant_updated_at:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_user_application_dto.UpdateUserInfoRequest:
+    properties:
+      avatar:
+        type: string
+      bio:
+        type: string
+      tag:
+        type: string
+      username:
+        type: string
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_user_application_dto.UpdateUserRequest:
+    properties:
+      password:
+        type: string
+    required:
+    - password
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_user_application_dto.UserResponse:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      modified_at:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_valorant_application_dto.ContestPointResponse:
+    properties:
+      current_tier_patched:
+        example: Diamond 1
+        type: string
+      current_tier_point:
+        example: 100
+        type: integer
+      final_point:
+        example: 125
+        type: integer
+      peak_tier_patched:
+        example: Immortal 1
+        type: string
+      peak_tier_point:
+        example: 150
+        type: integer
+      refresh_message:
+        example: 마지막 갱신 후 24시간이 지났습니다. 갱신이 필요합니다.
+        type: string
+      refresh_needed:
+        example: false
+        type: boolean
+      riot_name:
+        example: PlayerName
+        type: string
+      riot_tag:
+        example: KR1
+        type: string
+      user_id:
+        example: 123
+        type: integer
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_valorant_application_dto.RegisterValorantRequest:
+    properties:
+      region:
+        enum:
+        - ap
+        - br
+        - eu
+        - kr
+        - latam
+        - na
+        example: ap
+        type: string
+      riot_name:
+        example: PlayerName
+        maxLength: 32
+        type: string
+      riot_tag:
+        example: KR1
+        maxLength: 8
+        type: string
+    required:
+    - region
+    - riot_name
+    - riot_tag
+    type: object
+  github_com_FOR-GAMERS_GAMERS-BE_internal_valorant_application_dto.ValorantInfoResponse:
+    properties:
+      current_tier:
+        example: 21
+        type: integer
+      current_tier_patched:
+        example: Diamond 1
+        type: string
+      elo:
+        example: 1850
+        type: integer
+      peak_tier:
+        example: 24
+        type: integer
+      peak_tier_patched:
+        example: Immortal 1
+        type: string
+      ranking_in_tier:
+        example: 50
+        type: integer
+      refresh_needed:
+        example: false
+        type: boolean
+      region:
+        example: ap
+        type: string
+      riot_name:
+        example: PlayerName
+        type: string
+      riot_tag:
+        example: KR1
+        type: string
+      updated_at:
+        example: "2024-01-15T10:30:00Z"
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@gamers.com
+    name: API Support
+  description: API Server for GAMERS platform
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: http://swagger.io/terms/
+  title: GAMERS API
+  version: "1.0"
+paths:
+  /api/admin/banners:
+    get:
+      description: Retrieves all banners including inactive ones (Admin only)
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_banner_application_dto.BannerListResponse'
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get all banners (Admin)
+      tags:
+      - banners
+    post:
+      consumes:
+      - application/json
+      description: Creates a new banner (maximum 5 banners allowed, Admin only)
+      parameters:
+      - description: Banner creation request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_banner_application_dto.CreateBannerRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_banner_application_dto.BannerResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "409":
+          description: Maximum banner limit exceeded
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Create a new banner (Admin)
+      tags:
+      - banners
+  /api/admin/banners/{id}:
+    delete:
+      description: Deletes an existing banner (Admin only)
+      parameters:
+      - description: Banner ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete a banner (Admin)
+      tags:
+      - banners
+    patch:
+      consumes:
+      - application/json
+      description: Updates an existing banner (Admin only)
+      parameters:
+      - description: Banner ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Banner update request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_banner_application_dto.UpdateBannerRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_banner_application_dto.BannerResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Update a banner (Admin)
+      tags:
+      - banners
+  /api/auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate user with email and password
+      parameters:
+      - description: Login credentials
+        in: body
+        name: login
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_auth_application_dto.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      summary: User login
+      tags:
+      - auth
+  /api/auth/logout:
+    post:
+      consumes:
+      - application/json
+      description: Revoke refresh token
+      parameters:
+      - description: Logout request
+        in: body
+        name: logout
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_auth_application_dto.LogoutRequest'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      summary: Logout
+      tags:
+      - auth
+  /api/auth/refresh:
+    post:
+      consumes:
+      - application/json
+      description: Refresh access token using refresh token
+      parameters:
+      - description: Refresh token request
+        in: body
+        name: refresh
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_auth_application_dto.RefreshRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      summary: Refresh access token
+      tags:
+      - auth
+  /api/banners:
+    get:
+      description: Retrieves all active banners ordered by display_order (for homepage
+        display)
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_banner_application_dto.BannerListResponse'
+              type: object
+      summary: Get active banners
+      tags:
+      - banners
+  /api/contests:
+    get:
+      consumes:
+      - application/json
+      description: Get all contests with pagination, sorting, and title search support
+      parameters:
+      - description: 'Page number (default: 1)'
+        in: query
+        name: page
+        type: integer
+      - description: 'Page size (default: 10, max: 100)'
+        in: query
+        name: page_size
+        type: integer
+      - description: 'Sort field: created_at, started_at, ended_at (default: created_at)'
+        in: query
+        name: sort_by
+        type: string
+      - description: 'Sort order: asc, desc (default: desc)'
+        in: query
+        name: order
+        type: string
+      - description: Search by contest title (partial match)
+        in: query
+        name: title
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_common_dto.PaginationResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      summary: Get all contests with pagination
+      tags:
+      - contests
+    post:
+      consumes:
+      - application/json
+      description: Create a new contest with contest details
+      parameters:
+      - description: Contest creation request
+        in: body
+        name: contest
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_dto.CreateContestRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_dto.ContestResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_dto.DiscordLinkRequiredResponse'
+              type: object
+      security:
+      - BearerAuth: []
+      summary: Create a new contest
+      tags:
+      - contests
+  /api/contests/{contestId}/applications:
+    get:
+      consumes:
+      - application/json
+      description: Get all pending applications for a contest (Leader only)
+      parameters:
+      - description: Contest ID
+        in: path
+        name: contestId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get pending applications for a contest
+      tags:
+      - contest-applications
+    post:
+      consumes:
+      - application/json
+      description: Apply to participate in a contest
+      parameters:
+      - description: Contest ID
+        in: path
+        name: contestId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_dto.DiscordLinkRequiredResponse'
+              type: object
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Request to participate in a contest
+      tags:
+      - contest-applications
+  /api/contests/{contestId}/applications/{userId}/accept:
+    post:
+      consumes:
+      - application/json
+      description: Accept a user's application to join the contest (Leader only)
+      parameters:
+      - description: Contest ID
+        in: path
+        name: contestId
+        required: true
+        type: integer
+      - description: User ID to accept
+        in: path
+        name: userId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Accept a contest application
+      tags:
+      - contest-applications
+  /api/contests/{contestId}/applications/{userId}/reject:
+    post:
+      consumes:
+      - application/json
+      description: Reject a user's application to join the contest (Leader only)
+      parameters:
+      - description: Contest ID
+        in: path
+        name: contestId
+        required: true
+        type: integer
+      - description: User ID to reject
+        in: path
+        name: userId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Reject a contest application
+      tags:
+      - contest-applications
+  /api/contests/{contestId}/applications/cancel:
+    delete:
+      consumes:
+      - application/json
+      description: Cancel current user's pending application for a contest
+      parameters:
+      - description: Contest ID
+        in: path
+        name: contestId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Cancel my pending application
+      tags:
+      - contest-applications
+  /api/contests/{contestId}/applications/me:
+    get:
+      consumes:
+      - application/json
+      description: Get current user's application status for a contest
+      parameters:
+      - description: Contest ID
+        in: path
+        name: contestId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get my application status
+      tags:
+      - contest-applications
+  /api/contests/{contestId}/applications/withdraw:
+    delete:
+      consumes:
+      - application/json
+      description: Withdraw current user from a contest (Leader cannot withdraw)
+      parameters:
+      - description: Contest ID
+        in: path
+        name: contestId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Withdraw from a contest
+      tags:
+      - contest-applications
+  /api/contests/{contestId}/games/{gameId}/detect:
+    post:
+      description: Staff manually triggers match detection for a specific game
+      parameters:
+      - description: Contest ID
+        in: path
+        name: contestId
+        required: true
+        type: integer
+      - description: Game ID
+        in: path
+        name: gameId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Manually trigger match detection
+      tags:
+      - games
+      - match-detection
+  /api/contests/{contestId}/games/{gameId}/detection-status:
+    get:
+      description: Returns the current detection status for a game
+      parameters:
+      - description: Contest ID
+        in: path
+        name: contestId
+        required: true
+        type: integer
+      - description: Game ID
+        in: path
+        name: gameId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.ScheduleGameResponse'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      summary: Get match detection status
+      tags:
+      - games
+      - match-detection
+  /api/contests/{contestId}/games/{gameId}/result:
+    get:
+      description: Returns the match result for a finished game
+      parameters:
+      - description: Contest ID
+        in: path
+        name: contestId
+        required: true
+        type: integer
+      - description: Game ID
+        in: path
+        name: gameId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.MatchResultResponse'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      summary: Get match result
+      tags:
+      - games
+      - match-detection
+    post:
+      consumes:
+      - application/json
+      description: Staff manually inputs the game result (fallback when auto-detection
+        fails)
+      parameters:
+      - description: Contest ID
+        in: path
+        name: contestId
+        required: true
+        type: integer
+      - description: Game ID
+        in: path
+        name: gameId
+        required: true
+        type: integer
+      - description: Manual result request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.ManualResultRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.MatchResultResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Submit manual game result
+      tags:
+      - games
+      - match-detection
+  /api/contests/{contestId}/games/{gameId}/result/stats:
+    get:
+      description: Returns the match result and individual player stats
+      parameters:
+      - description: Contest ID
+        in: path
+        name: contestId
+        required: true
+        type: integer
+      - description: Game ID
+        in: path
+        name: gameId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.MatchResultResponse'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      summary: Get match result with player stats
+      tags:
+      - games
+      - match-detection
+  /api/contests/{contestId}/games/{gameId}/schedule:
+    put:
+      consumes:
+      - application/json
+      description: Staff sets the scheduled start time and detection window for a
+        tournament game
+      parameters:
+      - description: Contest ID
+        in: path
+        name: contestId
+        required: true
+        type: integer
+      - description: Game ID
+        in: path
+        name: gameId
+        required: true
+        type: integer
+      - description: Schedule request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.ScheduleGameRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.ScheduleGameResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Set game scheduled start time
+      tags:
+      - games
+      - match-detection
+  /api/contests/{contestId}/members:
+    get:
+      consumes:
+      - application/json
+      description: Get all members of a contest with user information and points,
+        sorted by points
+      parameters:
+      - description: Contest ID
+        in: path
+        name: contestId
+        required: true
+        type: integer
+      - description: 'Page number (default: 1)'
+        in: query
+        minimum: 1
+        name: page
+        type: integer
+      - description: 'Page size (default: 10, max: 100)'
+        in: query
+        maximum: 100
+        minimum: 1
+        name: page_size
+        type: integer
+      - default: point
+        description: Sort field (point, username)
+        in: query
+        name: sort_by
+        type: string
+      - default: desc
+        description: Sort order (asc, desc)
+        in: query
+        name: order
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_common_dto.PaginationResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get contest members with pagination
+      tags:
+      - contest-members
+  /api/contests/{contestId}/members/{userId}/role:
+    patch:
+      consumes:
+      - application/json
+      description: Promote a member to STAFF or demote STAFF to NORMAL (Leader only,
+        cannot change leader's role)
+      parameters:
+      - description: Contest ID
+        in: path
+        name: contestId
+        required: true
+        type: integer
+      - description: Target User ID
+        in: path
+        name: userId
+        required: true
+        type: integer
+      - description: New member role
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_dto.ChangeMemberRoleRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_dto.ChangeMemberRoleResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Change a member's role (Leader only)
+      tags:
+      - contest-members
+  /api/contests/{contestId}/status/me:
+    get:
+      consumes:
+      - application/json
+      description: Get current user's status in a contest (is_leader, is_member, has_applied,
+        application_status)
+      parameters:
+      - description: Contest ID
+        in: path
+        name: contestId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_dto.UserContestStatusResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get my status in a contest
+      tags:
+      - contest-applications
+  /api/contests/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete contest by contest ID
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete a contest
+      tags:
+      - contests
+    get:
+      consumes:
+      - application/json
+      description: Get contest details by contest ID
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_dto.ContestResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      summary: Get a contest by ID
+      tags:
+      - contests
+    patch:
+      consumes:
+      - application/json
+      description: Update contest details by contest ID
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Contest update request
+        in: body
+        name: contest
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_dto.UpdateContestRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_dto.ContestResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Update a contest
+      tags:
+      - contests
+  /api/contests/{id}/comments:
+    get:
+      consumes:
+      - application/json
+      description: Get all comments for a contest with pagination
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 'Page number (default: 1)'
+        in: query
+        minimum: 1
+        name: page
+        type: integer
+      - description: 'Page size (default: 10, max: 100)'
+        in: query
+        maximum: 100
+        minimum: 1
+        name: page_size
+        type: integer
+      - default: created_at
+        description: Sort field (created_at, modified_at)
+        in: query
+        name: sort_by
+        type: string
+      - default: desc
+        description: Sort order (asc, desc)
+        in: query
+        name: order
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_common_dto.PaginationResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      summary: Get comments for a contest
+      tags:
+      - contest-comments
+    post:
+      consumes:
+      - application/json
+      description: Create a new comment for a contest
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Comment creation request
+        in: body
+        name: comment
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_comment_application_dto.CreateCommentRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_comment_application_dto.CommentResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Create a new comment
+      tags:
+      - contest-comments
+  /api/contests/{id}/comments/{commentId}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a comment (owner only)
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Comment ID
+        in: path
+        name: commentId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete a comment
+      tags:
+      - contest-comments
+    get:
+      consumes:
+      - application/json
+      description: Get a specific comment by its ID
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Comment ID
+        in: path
+        name: commentId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_comment_application_dto.CommentResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      summary: Get a comment by ID
+      tags:
+      - contest-comments
+    patch:
+      consumes:
+      - application/json
+      description: Update a comment (owner only)
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Comment ID
+        in: path
+        name: commentId
+        required: true
+        type: integer
+      - description: Comment update request
+        in: body
+        name: comment
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_comment_application_dto.UpdateCommentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_comment_application_dto.CommentResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Update a comment
+      tags:
+      - contest-comments
+  /api/contests/{id}/games:
+    get:
+      consumes:
+      - application/json
+      description: Get all games under a specific contest
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.GameResponse'
+                  type: array
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      summary: Get all games for a contest
+      tags:
+      - games
+  /api/contests/{id}/result:
+    get:
+      description: Returns the full tournament bracket with game results and champion
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.ContestResultResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      summary: Get tournament contest result
+      tags:
+      - games
+      - tournaments
+  /api/contests/{id}/start:
+    post:
+      consumes:
+      - application/json
+      description: Start a contest and migrate accepted applications to config (Leader
+        only)
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_dto.ContestResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Start a contest
+      tags:
+      - contests
+  /api/contests/{id}/stop:
+    post:
+      consumes:
+      - application/json
+      description: Stop an active contest and transition it to finished status (Leader
+        only)
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_contest_application_dto.ContestResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Stop a contest
+      tags:
+      - contests
+  /api/contests/{id}/team:
+    delete:
+      consumes:
+      - application/json
+      description: Delete all team members (Leader only)
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete the entire team
+      tags:
+      - teams
+    get:
+      consumes:
+      - application/json
+      description: Get all members and team details for a contest (from Redis cache
+        or DB)
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get team information
+      tags:
+      - teams
+    post:
+      consumes:
+      - application/json
+      description: Create a new team in the contest with the current user as leader
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Create team request
+        in: body
+        name: request
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.CreateTeamRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Create a team for a contest
+      tags:
+      - teams
+  /api/contests/{id}/team/finalize:
+    post:
+      consumes:
+      - application/json
+      description: Finalize the team and persist to config (Leader only, team must
+        be full)
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Finalize the team
+      tags:
+      - teams
+  /api/contests/{id}/team/invite:
+    post:
+      consumes:
+      - application/json
+      description: Invite a user to join the contest team. Sends Discord notification
+        if configured.
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Invite member request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.InviteMemberRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.TeamInviteResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Invite a user to the team
+      tags:
+      - teams
+  /api/contests/{id}/team/invite/accept:
+    post:
+      consumes:
+      - application/json
+      description: Accept a pending team invitation and join the team
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.CachedMemberResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Accept a team invitation
+      tags:
+      - teams
+  /api/contests/{id}/team/invite/reject:
+    post:
+      consumes:
+      - application/json
+      description: Reject a pending team invitation
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Reject a team invitation
+      tags:
+      - teams
+  /api/contests/{id}/team/kick:
+    post:
+      consumes:
+      - application/json
+      description: Remove a member from the contest team (Leader only)
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Kick member request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.KickMemberRequest'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Kick a member from the team
+      tags:
+      - teams
+  /api/contests/{id}/team/leave:
+    post:
+      consumes:
+      - application/json
+      description: Leave the contest team voluntarily (Members only, Leader cannot
+        leave)
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Leave the team
+      tags:
+      - teams
+  /api/contests/{id}/team/members:
+    get:
+      consumes:
+      - application/json
+      description: Get all members of a contest team
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.CachedMemberResponse'
+                  type: array
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get all team members
+      tags:
+      - teams
+  /api/contests/{id}/team/members/{userId}:
+    get:
+      consumes:
+      - application/json
+      description: Get a specific member of a contest team by user ID
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.CachedMemberResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get a specific team member
+      tags:
+      - teams
+  /api/contests/{id}/team/transfer:
+    post:
+      consumes:
+      - application/json
+      description: Transfer team leadership to another member (Leader only)
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Transfer leadership request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.TransferLeadershipRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Transfer leadership to another member
+      tags:
+      - teams
+  /api/contests/{id}/valorant-point:
+    get:
+      consumes:
+      - application/json
+      description: Calculate and return the contest point for the authenticated user
+        based on Valorant rank
+      parameters:
+      - description: Contest ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Score Table ID
+        in: query
+        name: scoreTableId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_valorant_application_dto.ContestPointResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get contest point
+      tags:
+      - valorant
+  /api/contests/me:
+    get:
+      consumes:
+      - application/json
+      description: Get all contests that the authenticated user has joined with pagination,
+        sorting, and filtering support
+      parameters:
+      - description: 'Page number (default: 1)'
+        in: query
+        name: page
+        type: integer
+      - description: 'Page size (default: 10, max: 100)'
+        in: query
+        name: page_size
+        type: integer
+      - description: 'Sort field: created_at, started_at, ended_at, point, contest_status
+          (default: created_at)'
+        in: query
+        name: sort_by
+        type: string
+      - description: 'Sort order: asc, desc (default: desc)'
+        in: query
+        name: order
+        type: string
+      - description: 'Filter by contest status: PENDING, ACTIVE, FINISHED, CANCELLED'
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_common_dto.PaginationResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get contests I have joined
+      tags:
+      - contests
+  /api/game-teams:
+    post:
+      consumes:
+      - application/json
+      description: Register a team to participate in a game with optional grade
+      parameters:
+      - description: Game team creation request
+        in: body
+        name: gameTeam
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.CreateGameTeamRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.GameTeamResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Create a new game-team relationship
+      tags:
+      - game-teams
+  /api/game-teams/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Remove a team from a game
+      parameters:
+      - description: Game Team ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete a game-team relationship
+      tags:
+      - game-teams
+    get:
+      consumes:
+      - application/json
+      description: Get game-team details by game team ID
+      parameters:
+      - description: Game Team ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.GameTeamResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      summary: Get a game-team relationship by ID
+      tags:
+      - game-teams
+  /api/games:
+    post:
+      consumes:
+      - application/json
+      description: Create a new game under a contest (creator becomes the leader)
+      parameters:
+      - description: Game creation request
+        in: body
+        name: game
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.CreateGameRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.GameResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Create a new game
+      tags:
+      - games
+  /api/games/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a game by game ID (Leader only, PENDING status only)
+      parameters:
+      - description: Game ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete a game
+      tags:
+      - games
+    get:
+      consumes:
+      - application/json
+      description: Get game details by game ID
+      parameters:
+      - description: Game ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.GameResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      summary: Get a game by ID
+      tags:
+      - games
+    patch:
+      consumes:
+      - application/json
+      description: Update game details by game ID (Leader only, PENDING status only)
+      parameters:
+      - description: Game ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Game update request
+        in: body
+        name: game
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.UpdateGameRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.GameResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Update a game
+      tags:
+      - games
+  /api/games/{id}/cancel:
+    post:
+      consumes:
+      - application/json
+      description: Transition game status to CANCELLED (Leader only)
+      parameters:
+      - description: Game ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.GameResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Cancel a game
+      tags:
+      - games
+  /api/games/{id}/finish:
+    post:
+      consumes:
+      - application/json
+      description: Transition game status from ACTIVE to FINISHED (Leader only)
+      parameters:
+      - description: Game ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.GameResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Finish a game
+      tags:
+      - games
+  /api/games/{id}/game-teams:
+    get:
+      consumes:
+      - application/json
+      description: Get all teams participating in a specific game
+      parameters:
+      - description: Game ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.GameTeamResponse'
+                  type: array
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      summary: Get all game-teams for a game
+      tags:
+      - game-teams
+  /api/games/{id}/start:
+    post:
+      consumes:
+      - application/json
+      description: Transition game status from PENDING to ACTIVE (Leader only)
+      parameters:
+      - description: Game ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_game_application_dto.GameResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Start a game
+      tags:
+      - games
+  /api/notifications:
+    get:
+      description: Retrieves notifications for the authenticated user with pagination
+      parameters:
+      - description: 'Number of notifications to return (default: 20, max: 100)'
+        in: query
+        name: limit
+        type: integer
+      - description: Offset for pagination
+        in: query
+        name: offset
+        type: integer
+      - description: Filter only unread notifications
+        in: query
+        name: unread
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_notification_application_dto.NotificationListResponse'
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get notifications
+      tags:
+      - notifications
+  /api/notifications/{id}/read:
+    patch:
+      description: Marks a specific notification as read
+      parameters:
+      - description: Notification ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Mark notification as read
+      tags:
+      - notifications
+  /api/notifications/read-all:
+    patch:
+      description: Marks all notifications as read for the authenticated user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Mark all notifications as read
+      tags:
+      - notifications
+  /api/notifications/stream:
+    get:
+      description: Establishes an SSE connection for receiving real-time notifications
+      produces:
+      - text/event-stream
+      responses:
+        "200":
+          description: SSE stream
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Subscribe to real-time notifications
+      tags:
+      - notifications
+  /api/oauth2/discord/callback:
+    get:
+      consumes:
+      - application/json
+      description: Handle Discord OAuth2 callback
+      parameters:
+      - description: Authorization code
+        in: query
+        name: code
+        required: true
+        type: string
+      - description: State
+        in: query
+        name: state
+        type: string
+      produces:
+      - application/json
+      responses:
+        "302":
+          description: Redirect to frontend with cookies
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      summary: Discord OAuth2 Callback
+      tags:
+      - oauth2
+  /api/oauth2/discord/login:
+    get:
+      consumes:
+      - application/json
+      description: Redirect to Discord OAuth2 login page
+      produces:
+      - application/json
+      responses:
+        "302":
+          description: Redirect to Discord login page
+          schema:
+            type: string
+      summary: Discord OAuth2 Login
+      tags:
+      - oauth2
+  /api/users:
+    post:
+      consumes:
+      - application/json
+      description: Create a new user with email and password
+      parameters:
+      - description: User creation request
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_user_application_dto.CreateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_user_application_dto.UserResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      summary: Create a new user
+      tags:
+      - users
+  /api/users/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete user by user ID
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete a user
+      tags:
+      - users
+    get:
+      consumes:
+      - application/json
+      description: Get user details by user ID
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_user_application_dto.UserResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get a user by ID
+      tags:
+      - users
+    patch:
+      consumes:
+      - application/json
+      description: Update user password by user ID
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: User update request
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_user_application_dto.UpdateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_user_application_dto.UserResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Update a user
+      tags:
+      - users
+    put:
+      consumes:
+      - application/json
+      description: Update user profile information (username, tag, bio, avatar)
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: User info update request
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_user_application_dto.UpdateUserInfoRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_user_application_dto.MyUserResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Update user information
+      tags:
+      - users
+  /api/users/my:
+    get:
+      consumes:
+      - application/json
+      description: Get authenticated user's information from access token
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_user_application_dto.MyUserResponse'
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get my user information
+      tags:
+      - users
+  /api/users/valorant:
+    delete:
+      consumes:
+      - application/json
+      description: Remove the Valorant account link from the user
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Unlink Valorant account
+      tags:
+      - valorant
+    get:
+      consumes:
+      - application/json
+      description: Get the stored Valorant information for the authenticated user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_valorant_application_dto.ValorantInfoResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get Valorant info
+      tags:
+      - valorant
+    post:
+      consumes:
+      - application/json
+      description: Link a Valorant account to the user by providing Riot ID
+      parameters:
+      - description: Riot ID registration request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_valorant_application_dto.RegisterValorantRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_valorant_application_dto.ValorantInfoResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Register Valorant account
+      tags:
+      - valorant
+  /api/users/valorant/refresh:
+    post:
+      consumes:
+      - application/json
+      description: Refresh the Valorant MMR data from Valorant API
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_valorant_application_dto.ValorantInfoResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Refresh Valorant data
+      tags:
+      - valorant
+  /api/v1/storage/contest-banner:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 'Upload a banner image for a contest. Maximum file size is 5MB.
+        Allowed formats: jpeg, png, webp.'
+      parameters:
+      - description: Contest ID
+        in: formData
+        name: contest_id
+        required: true
+        type: integer
+      - description: Image file (max 5MB, jpeg/png/webp)
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_storage_application_dto.UploadResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Upload a contest banner image
+      tags:
+      - storage
+  /api/v1/storage/user-profile:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 'Upload a profile image for the authenticated user. Maximum file
+        size is 2MB. Allowed formats: jpeg, png, webp.'
+      parameters:
+      - description: Image file (max 2MB, jpeg/png/webp)
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_storage_application_dto.UploadResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Upload a user profile image
+      tags:
+      - storage
+  /api/valorant/score-tables:
+    get:
+      consumes:
+      - application/json
+      description: Get all available score tables
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_point_application_dto.ValorantScoreTableResponse'
+                  type: array
+              type: object
+      summary: Get all Valorant score tables
+      tags:
+      - valorant
+    post:
+      consumes:
+      - application/json
+      description: Create a new score table with points for each rank tier
+      parameters:
+      - description: Score table creation request
+        in: body
+        name: scoreTable
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_point_application_dto.CreateValorantScoreTableDto'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_point_application_dto.ValorantScoreTableResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Create a new Valorant score table
+      tags:
+      - valorant
+  /api/valorant/score-tables/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a score table by score table ID
+      parameters:
+      - description: Score Table ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete a Valorant score table
+      tags:
+      - valorant
+    get:
+      consumes:
+      - application/json
+      description: Get score table details by score table ID
+      parameters:
+      - description: Score Table ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_point_application_dto.ValorantScoreTableResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      summary: Get a Valorant score table by ID
+      tags:
+      - valorant
+  /discord/guilds:
+    get:
+      consumes:
+      - application/json
+      description: Returns all guilds where both the GAMERS bot and the authenticated
+        user are members
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_discord_application_dto.DiscordGuild'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get available guilds for contest creation
+      tags:
+      - Discord
+  /discord/guilds/{guildId}/channels:
+    get:
+      consumes:
+      - application/json
+      description: Returns all text channels in a guild where both the bot and the
+        authenticated user are members
+      parameters:
+      - description: Discord Guild ID
+        in: path
+        name: guildId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_discord_application_dto.DiscordChannel'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_FOR-GAMERS_GAMERS-BE_internal_global_response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get guild's text channels
+      tags:
+      - Discord
+securityDefinitions:
+  BearerAuth:
+    description: Type "Bearer" followed by a space and JWT token.
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

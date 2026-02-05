@@ -6,8 +6,10 @@ import { Mail, Lock, AlertCircle, ArrowRight, Eye, EyeOff, UserPlus } from "luci
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 export default function LoginPage() {
+  const { t } = useTranslation();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,15 +26,13 @@ export default function LoginPage() {
     setIsLoading(true);
 
     if (!emailRegex.test(email)) {
-      setError("有効なメールアドレスを入力してください。");
+      setError(t('auth.login.invalidEmail'));
       setIsLoading(false);
       return;
     }
 
     if (!passwordRegex.test(password)) {
-      setError(
-        "パスワードは8文字以上で、大文字、小文字、特殊文字(!@#$%^&*)を含める必要があります。"
-      );
+      setError(t('auth.login.invalidPassword'));
       setIsLoading(false);
       return;
     }
@@ -83,9 +83,9 @@ export default function LoginPage() {
             >
                <h1 className="text-4xl lg:text-6xl font-black mb-8 leading-tight tracking-tighter drop-shadow-[0_0_25px_rgba(0,243,255,0.6)]">
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-blue-600">
-                     かけがえのない
+                     {t('auth.login.heroTitle1')}
                   </span><br />
-                  <span className="text-white">思い出を。</span>
+                  <span className="text-white">{t('auth.login.heroTitle2')}</span>
                </h1>
             </motion.div>
 
@@ -96,7 +96,9 @@ export default function LoginPage() {
                className="space-y-6 flex flex-col items-center lg:items-start"
             >
                <p className="text-lg lg:text-2xl font-bold text-gray-200 tracking-wide border-l-4 border-neon-purple pl-6 py-2">
-                  共に過ごした日々を<br/>忘れずに。
+                  {t('auth.login.heroSubtitle').split('\n').map((line, i) => (
+                    <span key={i}>{line}<br/></span>
+                  ))}
                </p>
                
                <div className="pt-8 flex gap-4">
@@ -109,9 +111,9 @@ export default function LoginPage() {
 
          <div className="absolute bottom-10 left-10 opacity-30 pointer-events-none hidden lg:block">
             <div className="text-[10px] font-mono text-neon-cyan space-y-1">
-               <p>SYS.STATUS: ONLINE</p>
-               <p>LOC: NEO-TOKYO SERVERS</p>
-               <p>SECURE CONN: ESTABLISHED</p>
+               <p>{t('auth.login.sysStatus')}</p>
+               <p>{t('auth.login.loc')}</p>
+               <p>{t('auth.login.secureConn')}</p>
             </div>
          </div>
       </div>
@@ -140,13 +142,13 @@ export default function LoginPage() {
                     />
                   </Link>
                </div>
-               <h2 className="text-2xl lg:text-4xl font-black text-white mb-2 tracking-tighter">Welcome Back</h2>
-               <p className="text-sm lg:text-base text-gray-400 leading-relaxed">GAMERSアカウントでログインして、<br />あなたの伝説を再開しましょう。</p>
+               <h2 className="text-2xl lg:text-4xl font-black text-white mb-2 tracking-tighter">{t('auth.login.welcome')}</h2>
+               <p className="text-sm lg:text-base text-gray-400 leading-relaxed">{t('auth.login.welcomeDesc')}</p>
             </div>
 
             <form onSubmit={handleLogin} className="space-y-4"> 
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-neon-cyan uppercase tracking-widest ml-1">Email</label>
+                <label className="text-xs font-bold text-neon-cyan uppercase tracking-widest ml-1">{t('auth.login.emailLabel')}</label>
                 <div className="relative group">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 group-focus-within:text-neon-cyan transition-colors" />
                   <input
@@ -154,13 +156,13 @@ export default function LoginPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full bg-[#111] border border-[#333] rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-neon-cyan/70 focus:ring-1 focus:ring-neon-cyan/70 transition-all shadow-inner"
-                    placeholder="name@example.com"
+                    placeholder={t('auth.login.emailPlaceholder')}
                   />
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-neon-cyan uppercase tracking-widest ml-1">Password</label>
+                <label className="text-xs font-bold text-neon-cyan uppercase tracking-widest ml-1">{t('auth.login.passwordLabel')}</label>
                 <div className="relative group">
                   <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 group-focus-within:text-neon-cyan transition-colors" />
                   <input
@@ -168,7 +170,7 @@ export default function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full bg-[#111] border border-[#333] rounded-xl py-3 pl-10 pr-10 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-neon-cyan/70 focus:ring-1 focus:ring-neon-cyan/70 transition-all shadow-inner"
-                    placeholder="••••••••"
+                    placeholder={t('auth.login.passwordPlaceholder')}
                   />
                   <button
                     type="button"
@@ -200,7 +202,7 @@ export default function LoginPage() {
                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                 ) : (
                   <>
-                    ログイン <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                    {t('auth.login.loginButton')} <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   </>
                 )}
               </button>
@@ -211,7 +213,7 @@ export default function LoginPage() {
                 <span className="w-full border-t border-white/10" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-[#050505] px-4 text-gray-500 tracking-widest">OR</span>
+                <span className="bg-[#050505] px-4 text-gray-500 tracking-widest">{t('auth.login.or')}</span>
               </div>
             </div>
 
@@ -223,13 +225,13 @@ export default function LoginPage() {
                     <svg width="20" height="20" viewBox="0 0 127 96" className="w-5 h-5 fill-current transition-transform group-hover:scale-110">
                         <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.11,77.11,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.89,105.89,0,0,0,126.6,80.22c1.24-24.43-6.68-47.53-18.9-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.25-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z" />
                     </svg>
-                    Discordでログイン
+                    {t('auth.login.discordLogin')}
                 </button>
 
                 <div className="flex items-center justify-center mt-1">
-                    <p className="text-gray-500 text-xs lg:text-sm">アカウントをお持ちでないですか？</p>
+                    <p className="text-gray-500 text-xs lg:text-sm">{t('auth.login.noAccount')}</p>
                     <Link href="/signup" className="ml-3 text-neon-cyan hover:text-white font-bold text-xs lg:text-sm border-b border-neon-cyan/30 hover:border-white transition-all">
-                        新規登録
+                        {t('auth.login.signup')}
                     </Link>
                 </div>
             </div>

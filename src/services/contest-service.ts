@@ -22,6 +22,7 @@ export const contestService = {
     page_size?: number; 
     sort_by?: string; 
     order?: 'asc' | 'desc'; 
+    title?: string;
   }) {
     return api.get<ApiResponse<PaginationResponse<ContestResponse>>>('/contests', { params });
   },

@@ -355,5 +355,63 @@
     "btnLogin": "Go to Login",
     "btnSignup": "Sign Up",
     "debugInfo": "DEBUG INFO:"
+  },
+  "admin": {
+    "dashboard": {
+      "title": "ADMIN DASHBOARD",
+      "subtitle": "Manage all aspects of the GAMERS platform from this central hub. Select a module below to get started.",
+      "enterModule": "ENTER MODULE",
+      "cards": {
+        "banner": { "title": "Banner Creation", "description": "Manage homepage hero banners and promotions." },
+        "user": { "title": "User Management", "description": "View, edit, and manage user accounts and roles." },
+        "contest": { "title": "Contest Management", "description": "Create and manage tournaments, leagues, and events." },
+        "result": { "title": "Bracket Results", "description": "Update match scores and manage bracket progression." },
+        "game": { "title": "Game Management", "description": "Configure game settings and supported titles." }
+      }
+    },
+    "userManagement": {
+      "title": "User Management",
+      "searchPlaceholder": "Search users...",
+      "table": {
+        "user": "User",
+        "contact": "Contact",
+        "role": "Role",
+        "actions": "Actions",
+        "tag": "Tag",
+        "id": "ID",
+        "showing": "Showing {{count}} of {{total}} users"
+      },
+      "actions": {
+        "edit": "Edit",
+        "delete": "Ban/Delete",
+        "confirmDelete": "Are you sure you want to ban/delete user {{username}}?",
+        "deleteSuccess": "User deleted successfully",
+        "deleteFail": "Failed to delete user",
+        "editNotImplemented": "Editing user {{username}} is not implemented yet."
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "invalidEmail": "Please enter a valid email address.",
+      "invalidPassword": "Password must be at least 8 characters long and include uppercase, lowercase, special characters (!@#$%^&*).",
+      "heroTitle1": "Create",
+      "heroTitle2": "Memories.",
+      "heroSubtitle": "Don't forget the days we spent together.",
+      "sysStatus": "SYS.STATUS: ONLINE",
+      "loc": "LOC: NEO-TOKYO SERVERS",
+      "secureConn": "SECURE CONN: ESTABLISHED",
+      "welcome": "Welcome Back",
+      "welcomeDesc": "Log in with your GAMERS account and resume your legend.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "name@example.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "••••••••",
+      "loginButton": "Login",
+      "or": "OR",
+      "discordLogin": "Login with Discord",
+      "noAccount": "Don't have an account?",
+      "signup": "Sign Up"
+    }
   }
 }

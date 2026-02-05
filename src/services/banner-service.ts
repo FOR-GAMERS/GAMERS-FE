@@ -1,45 +1,16 @@
 import { api } from "@/lib/api-client";
-// import { BannerResponse, CreateBannerRequest, UpdateBannerRequest } from "@/types/api"; 
-// Note: Since types/api might not have these specific definitions generated yet, I will define them here locally or in a types file if needed.
-// Checking swagger again, the types should ideally be in types/api.ts if generated. Use `any` or define interfaces if missing.
-
-export interface Banner {
-  id: number;
-  title: string;
-  link_url: string;
-  image_key: string;
-  is_active: boolean;
-  display_order: number;
-  created_at: string;
-  modified_at: string;
-}
-
-export interface CreateBannerDto {
-  title: string;
-  link_url: string;
-  image_key: string;
-  is_active: boolean;
-  display_order: number;
-}
-
-export interface UpdateBannerDto {
-  title?: string;
-  link_url?: string;
-  image_key?: string;
-  is_active?: boolean;
-  display_order?: number;
-}
+import { Banner, BannerResponse, CreateBannerRequest, UpdateBannerRequest } from "@/types/api";
 
 export const bannerService = {
   getAdminBanners: async () => {
-    return api.get<{ data: { banners: Banner[] } }>("/admin/banners");
+    return api.get<{ data: BannerResponse }>("/admin/banners");
   },
 
-  createBanner: async (data: CreateBannerDto) => {
+  createBanner: async (data: CreateBannerRequest) => {
     return api.post<{ data: Banner }>("/admin/banners", data);
   },
 
-  updateBanner: async (id: number, data: UpdateBannerDto) => {
+  updateBanner: async (id: number, data: UpdateBannerRequest) => {
     return api.patch<{ data: Banner }>(`/admin/banners/${id}`, data);
   },
 

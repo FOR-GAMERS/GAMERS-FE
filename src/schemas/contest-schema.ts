@@ -6,7 +6,7 @@ export const createContestSchema = z.object({
   max_team_count: z.coerce.number().refine((val) => [4, 8, 16, 32].includes(val), "Must be 4, 8, 16, or 32").default(16),
   total_team_member: z.coerce.number().min(1, "At least 1 member required").max(6, "Max 6 members").default(5),
   total_point: z.number().optional(),
-  contest_type: z.enum(["TOURNAMENT", "LEAGUE"]).default("TOURNAMENT"),
+  contest_type: z.enum(["TOURNAMENT", "LEAGUE", "CASUAL"]).default("TOURNAMENT"),
   game_type: z.string().default("VALORANT"),
   started_at: z.string().refine((date) => new Date(date) > new Date(), {
     message: "Start date must be in the future",

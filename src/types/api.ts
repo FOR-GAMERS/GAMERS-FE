@@ -51,6 +51,13 @@ export interface UserResponse {
   role?: string | "ADMIN" | "USER"; 
 }
 
+export interface UpdateUserInfoRequest {
+  username?: string;
+  tag?: string;
+  bio?: string;
+  avatar?: string;
+}
+
 export interface MyUserResponse {
   avatar: string;
   bio: string;
@@ -268,4 +275,37 @@ export interface MatchResultResponse {
       is_winner: boolean;
       team_name: string;
   }[];
+}
+
+// --- Banners ---
+
+export interface Banner {
+  id: number;
+  title: string;
+  link_url?: string;
+  image_key: string;
+  is_active: boolean;
+  display_order: number;
+  created_at: string;
+  modified_at: string;
+}
+
+export interface BannerResponse {
+  banners: Banner[];
+}
+
+export interface CreateBannerRequest {
+  title: string;
+  link_url?: string;
+  image_key: string;
+  is_active?: boolean;
+  display_order?: number;
+}
+
+export interface UpdateBannerRequest {
+  title?: string;
+  link_url?: string;
+  image_key?: string;
+  is_active?: boolean;
+  display_order?: number;
 }

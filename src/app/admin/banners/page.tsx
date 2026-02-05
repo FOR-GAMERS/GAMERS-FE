@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { bannerService, Banner, CreateBannerDto, UpdateBannerDto } from "@/services/banner-service";
+import { useState } from "react";
+import { bannerService } from "@/services/banner-service";
+import { Banner, CreateBannerRequest } from "@/types/api";
 import { Loader2, Plus, Edit, Trash2, Image as ImageIcon, Link as LinkIcon, Save, X } from "lucide-react";
 import { useToast } from "@/context/ToastContext";
 import { Koulen } from "next/font/google";
-import Image from "next/image";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const koulen = Koulen({
   weight: "400",
@@ -14,11 +15,10 @@ const koulen = Koulen({
 
 export default function BannerManagementPage() {
   const { addToast } = useToast();
-  const [banners, setBanners] = useState<Banner[]>([]);
-  const [loading, setLoading] = useState(true);
+  const queryClient = useQueryClient();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingBanner, setEditingBanner] = useState<Banner | null>(null);
-  const [formData, setFormData] = useState<CreateBannerDto>({
+  const [formData, setFormData] = useState<CreateBannerRequest>({
     title: "",
     link_url: "",
     image_key: "",
@@ -26,29 +26,59 @@ export default function BannerManagementPage() {
     display_order: 0,
   });
 
-  const fetchBanners = async () => {
-    try {
-      setLoading(true);
-      const res = await bannerService.getAdminBanners();
-      setBanners(res.data.banners);
-    } catch (error) {
-      console.error("Failed to fetch banners", error);
-      // Determine if error is 401/403 or just empty
-    } finally {
-        setLoading(false);
+  // Fetch Banners
+  const { data, isLoading } = useQuery({
+    queryKey: ['admin-banners'],
+    queryFn: async () => {
+        const res = await bannerService.getAdminBanners();
+        return res.data;
     }
-  };
+  });
 
-  useEffect(() => {
-    fetchBanners();
-  }, []);
+  const banners = data?.banners || [];
+
+  // Mutations
+  const createMutation = useMutation({
+    mutationFn: (data: CreateBannerRequest) => bannerService.createBanner(data),
+    onSuccess: () => {
+        addToast("Banner created successfully", "success");
+        queryClient.invalidateQueries({ queryKey: ['admin-banners'] });
+        setIsModalOpen(false);
+    },
+    onError: (error: any) => {
+        addToast(error.response?.data?.message || "Failed to create banner", "error");
+    }
+  });
+
+  const updateMutation = useMutation({
+    mutationFn: ({ id, data }: { id: number, data: CreateBannerRequest }) => bannerService.updateBanner(id, data),
+    onSuccess: () => {
+        addToast("Banner updated successfully", "success");
+        queryClient.invalidateQueries({ queryKey: ['admin-banners'] });
+        setIsModalOpen(false);
+    },
+    onError: (error: any) => {
+        addToast(error.response?.data?.message || "Failed to update banner", "error");
+    }
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: (id: number) => bannerService.deleteBanner(id),
+    onSuccess: () => {
+        addToast("Banner deleted successfully", "success");
+        queryClient.invalidateQueries({ queryKey: ['admin-banners'] });
+    },
+    onError: (error: any) => {
+        addToast("Failed to delete banner", "error");
+    }
+  });
 
   const handleOpenModal = (banner?: Banner) => {
     if (banner) {
       setEditingBanner(banner);
       setFormData({
         title: banner.title,
-        link_url: banner.link_url,
+        link_url: banner.link_url || "",
         image_key: banner.image_key,
         is_active: banner.is_active,
         display_order: banner.display_order,
@@ -72,29 +102,15 @@ export default function BannerManagementPage() {
 
   const handleDelete = async (id: number) => {
       if (!confirm("Are you sure you want to delete this banner?")) return;
-      try {
-          await bannerService.deleteBanner(id);
-          addToast("Banner deleted successfully", "success");
-          fetchBanners();
-      } catch (error) {
-          addToast("Failed to delete banner", "error");
-      }
+      deleteMutation.mutate(id);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-        if (editingBanner) {
-            await bannerService.updateBanner(editingBanner.id, formData);
-            addToast("Banner updated successfully", "success");
-        } else {
-            await bannerService.createBanner(formData);
-            addToast("Banner created successfully", "success");
-        }
-        setIsModalOpen(false);
-        fetchBanners();
-    } catch (error: any) {
-        addToast(error.response?.data?.message || "Operation failed", "error");
+    if (editingBanner) {
+        updateMutation.mutate({ id: editingBanner.id, data: formData });
+    } else {
+        createMutation.mutate(formData);
     }
   };
 
@@ -103,19 +119,15 @@ export default function BannerManagementPage() {
       if (!file) return;
       
       try {
-          // This assumes the upload service returns a full URL or key. 
-          // Based on swagger: /api/v1/storage/contest-banner returns { image_key, url }
-          // Actually, swagger had /api/v1/storage/contest-banner. Let's assume we use that or similar.
-          // For now, I'll assume the service handles it.
           const res = await bannerService.uploadBannerImage(file);
-          setFormData(prev => ({ ...prev, image_key: res.data.image_key, imageUrl: res.data.url })); // Store URL for preview if needed
+          setFormData(prev => ({ ...prev, image_key: res.data.image_key }));
           addToast("Image uploaded successfully", "success");
       } catch (error) {
           addToast("Image upload failed", "error");
       }
   };
 
-  if (loading) {
+  if (isLoading) {
       return (
           <div className="flex h-screen items-center justify-center bg-black">
               <Loader2 className="w-10 h-10 text-neon-cyan animate-spin" />
@@ -153,10 +165,6 @@ export default function BannerManagementPage() {
                     <div key={banner.id} className="group relative bg-neutral-900/50 border border-white/5 hover:border-neon-cyan/50 rounded-2xl p-6 transition-all flex flex-col md:flex-row gap-6 items-center">
                         {/* Image Preview */}
                         <div className="w-full md:w-64 h-32 bg-black rounded-xl overflow-hidden relative border border-white/10 shrink-0">
-                            {/* Check if image_key is a full URL or needs a base URL. Assuming full URL or handled by Image component for now. 
-                                Actually, checking swagger, it just says string. I'll assume it's a URL or I need to prepend something.
-                                For now, imply it's a URL or use a placeholder if invalid. 
-                            */}
                             {banner.image_key ? (
                                 <img src={banner.image_key.startsWith('http') ? banner.image_key : `/api/storage/${banner.image_key}`} alt={banner.title} className="w-full h-full object-cover" />
                             ) : (
@@ -293,10 +301,11 @@ export default function BannerManagementPage() {
                          <div className="pt-4">
                             <button 
                                 type="submit"
-                                className="w-full py-4 bg-neon-cyan hover:bg-neon-cyan/80 text-black font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(0,243,255,0.2)] flex items-center justify-center gap-2"
+                                disabled={createMutation.isPending || updateMutation.isPending}
+                                className="w-full py-4 bg-neon-cyan hover:bg-neon-cyan/80 text-black font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(0,243,255,0.2)] flex items-center justify-center gap-2 disabled:opacity-50"
                             >
                                 <Save size={18} />
-                                {editingBanner ? 'UPDATE BANNER' : 'CREATE BANNER'}
+                                {editingBanner ? (updateMutation.isPending ? 'UPDATING...' : 'UPDATE BANNER') : (createMutation.isPending ? 'CREATING...' : 'CREATE BANNER')}
                             </button>
                          </div>
                     </form>

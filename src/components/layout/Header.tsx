@@ -176,12 +176,18 @@ export default function Header() {
             </Link>
         </nav>
 
-        <div className="hidden md:flex items-center flex-1 max-w-sm mx-8 relative group transition-all duration-300 focus-within:max-w-md focus-within:shadow-[0_0_20px_rgba(34,211,238,0.3)] rounded-full">
+        <div className="hidden md:flex items-center flex-1 max-w-sm mx-8 relative group transition-all duration-300 focus-within:max-w-[26rem] focus-within:shadow-[0_0_15px_rgba(34,211,238,0.15)] rounded-full">
             <Search className="absolute left-3 text-muted-foreground w-4 h-4 group-focus-within:text-primary transition-colors" />
             <input 
                 type="text" 
                 placeholder={t('navbar.search')}
                 maxLength={64}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                        const target = e.target as HTMLInputElement;
+                        router.push(`/contests?search=${encodeURIComponent(target.value)}`);
+                    }
+                }}
                 className="w-full bg-secondary/50 border border-white/5 rounded-full pl-10 pr-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary/50 transition-all placeholder:text-muted-foreground/50"
             />
         </div>

@@ -1,19 +1,21 @@
 import { cn } from "@/lib/utils";
 
-type StatusType = "Online" | "Offline" | "Playing" | "Banned" | "Warning";
+type StatusType = "Online" | "Offline" | "Playing" | "Banned" | "Warning" | "ADMIN" | "USER";
 
 interface StatusBadgeProps {
-  status: StatusType;
+  status: StatusType | string;
   className?: string;
 }
 
 export function StatusBadge({ status, className }: StatusBadgeProps) {
-  const styles = {
+  const styles: Record<string, string> = {
     Online: "bg-green-500/10 text-green-500 border-green-500/20",
     Offline: "bg-neutral-500/10 text-neutral-400 border-neutral-500/20",
     Playing: "bg-neon-cyan/10 text-neon-cyan border-neon-cyan/20",
     Banned: "bg-red-500/10 text-red-500 border-red-500/20",
     Warning: "bg-yellow-500/10 text-yellow-500 border-yellow-500/20",
+    ADMIN: "bg-neon-purple/10 text-neon-purple border-neon-purple/20",
+    USER: "bg-neutral-500/10 text-neutral-300 border-neutral-500/20",
   };
 
   return (

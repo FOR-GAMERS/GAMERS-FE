@@ -1,27 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { Image, ArrowRight, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { bannerService } from "@/services/banner-service";
+import { useQuery } from "@tanstack/react-query";
 
 export function BannerManagementPanel() {
-  const [count, setCount] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchCount = async () => {
-      try {
+  const { data, isLoading } = useQuery({
+    queryKey: ['admin-banners'],
+    queryFn: async () => {
         const res = await bannerService.getAdminBanners();
-        setCount(res.data.banners.length);
-      } catch (e) {
-        console.error("Failed to fetch banner count");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchCount();
-  }, []);
+        return res.data;
+    }
+  });
+
+  const count = data?.banners.length || 0;
 
   return (
     <div className="bg-neutral-900/30 border border-white/5 hover:border-neon-cyan/50 hover:bg-neutral-900/50 rounded-xl p-6 h-full flex flex-col justify-between group transition-all relative overflow-hidden">
@@ -37,11 +30,11 @@ export function BannerManagementPanel() {
         </div>
 
         <div className="relative z-10 mt-4">
-             {loading ? (
+             {isLoading ? (
                  <Loader2 className="w-5 h-5 animate-spin text-neutral-600" />
              ) : (
                 <div className="text-3xl font-black text-white font-mono">
-                    {count ?? 0}<span className="text-sm text-neutral-500 font-normal ml-1">/ 5</span>
+                    {count}<span className="text-sm text-neutral-500 font-normal ml-1">/ 5</span>
                 </div>
              )}
              <div className="text-xs text-emerald-500 mt-1">Active on Homepage</div>
