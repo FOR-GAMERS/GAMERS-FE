@@ -13,7 +13,9 @@ import { useTranslation } from "react-i18next";
 
 import { useSearchParams } from "next/navigation";
 
-export default function Contests() {
+import { Suspense } from "react";
+
+function ContestsContent() {
   const { t } = useTranslation();
   const searchParams = useSearchParams();
   const search = searchParams.get("search") || "";
@@ -200,5 +202,17 @@ export default function Contests() {
       </div>
       <Footer />
     </main>
+  );
+}
+
+export default function Contests() {
+  return (
+    <Suspense fallback={
+       <div className="min-h-screen bg-background flex items-center justify-center">
+            <Loader2 className="w-10 h-10 text-primary animate-spin" />
+       </div>
+    }>
+        <ContestsContent />
+    </Suspense>
   );
 }
