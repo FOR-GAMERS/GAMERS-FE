@@ -348,6 +348,17 @@
         "title": "CONTEST",
         "dashboard": "DASHBOARD",
         "subtitle": "参加者、対戦表、大会ステータスを管理します。"
+      },
+      "bracket": {
+        "title": "トーナメント表",
+        "refresh": "更新",
+        "noMatches": "マッチがまだ生成されていません。",
+        "noMatchesDesc": "大会が開始されると、ここにマッチが表示されます。",
+        "loadFail": "トーナメント表の読み込みに失敗しました。",
+        "match": "マッチ",
+        "team": "チーム",
+        "tbd": "未定",
+        "vs": "VS"
       }
     },
   "loginCheck": {

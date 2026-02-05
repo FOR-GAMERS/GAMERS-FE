@@ -348,6 +348,17 @@
         "title": "CONTEST",
         "dashboard": "DASHBOARD",
         "subtitle": "Manage participants, bracket, and contest status."
+      },
+      "bracket": {
+        "title": "Tournament Bracket",
+        "refresh": "REFRESH",
+        "noMatches": "No matches generated yet.",
+        "noMatchesDesc": "Matches will appear here once the contest is started.",
+        "loadFail": "Failed to load tournament bracket",
+        "match": "MATCH",
+        "team": "Team",
+        "tbd": "TBD",
+        "vs": "VS"
       }
     },
   "loginCheck": {

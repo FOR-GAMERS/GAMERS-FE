@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { contestService } from "@/services/contest-service";
 import { GameResponse } from "@/types/api";
 import { useToast } from "@/context/ToastContext";
+import { useTranslation } from "react-i18next";
 
 interface Participant {
     id: number;
@@ -27,6 +28,7 @@ interface BracketGeneratorProps {
 }
 
 export function BracketGenerator({ contestId }: BracketGeneratorProps) {
+  const { t } = useTranslation();
   const { addToast } = useToast();
   const [games, setGames] = useState<(GameResponse & { members?: GameMember[] })[]>([]);
   const [loading, setLoading] = useState(true);
@@ -51,7 +53,7 @@ export function BracketGenerator({ contestId }: BracketGeneratorProps) {
 
     } catch (error) {
         console.error("Failed to fetch games", error);
-        addToast("Failed to load tournament bracket", "error");
+        addToast(t('contestDashboard.bracket.loadFail'), "error");
     } finally {
         setLoading(false);
     }
@@ -68,13 +70,13 @@ export function BracketGenerator({ contestId }: BracketGeneratorProps) {
         {/* Header */}
         <div className="p-4 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
             <h3 className="font-bold text-white flex items-center gap-2">
-                <Trophy className="w-5 h-5 text-neon-cyan" /> Tournament Bracket
+                <Trophy className="w-5 h-5 text-neon-cyan" /> {t('contestDashboard.bracket.title')}
             </h3>
             <button 
                 onClick={fetchGames}
                 className="flex items-center gap-2 px-4 py-2 bg-neon-cyan/5 hover:bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/20 rounded-lg transition-all text-sm font-bold active:scale-95"
             >
-                REFRESH
+                {t('contestDashboard.bracket.refresh')}
             </button>
         </div>
 
@@ -88,8 +90,8 @@ export function BracketGenerator({ contestId }: BracketGeneratorProps) {
                     <div className="w-16 h-16 rounded-full bg-neutral-800 flex items-center justify-center">
                         <Users className="w-8 h-8 opacity-50" />
                     </div>
-                    <p>No matches generated yet.</p>
-                    <p className="text-xs text-neutral-600">Matches will appear here once the contest is started.</p>
+                    <p>{t('contestDashboard.bracket.noMatches')}</p>
+                    <p className="text-xs text-neutral-600">{t('contestDashboard.bracket.noMatchesDesc')}</p>
                 </div>
             ) : (
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -104,6 +106,7 @@ export function BracketGenerator({ contestId }: BracketGeneratorProps) {
 }
 
 function MatchCard({ game }: { game: GameResponse & { members?: GameMember[] } }) {
+    const { t } = useTranslation();
     // Group members by team_id
     const teams = game.members?.reduce((acc: Record<string, GameMember[]>, member) => {
         const teamId = member.team_id ? String(member.team_id) : 'no-team';
@@ -119,7 +122,7 @@ function MatchCard({ game }: { game: GameResponse & { members?: GameMember[] } }
     return (
         <div className="bg-black/50 border border-white/10 rounded-lg p-4 relative group hover:border-neon-cyan/50 transition-colors">
             <div className="flex justify-between items-start mb-4">
-                <span className="text-xs font-mono text-neutral-500">MATCH #{game.game_id}</span>
+                <span className="text-xs font-mono text-neutral-500">{t('contestDashboard.bracket.match')} #{game.game_id}</span>
                 <span className={cn(
                     "text-[10px] px-2 py-0.5 rounded-full font-bold uppercase",
                     game.game_status === 'ACTIVE' ? "bg-green-500/20 text-green-500" :
@@ -138,13 +141,13 @@ function MatchCard({ game }: { game: GameResponse & { members?: GameMember[] } }
                              {team1[0]?.avatar && <Image src={team1[0].avatar} alt={team1[0].username} fill sizes="24px" className="object-cover" />}
                         </div>
                         <span className="font-bold text-sm text-white">
-                            {team1.length > 0 ? (team1.length > 1 ? `Team ${team1[0].team_id}` : team1[0].username) : 'TBD'}
+                            {team1.length > 0 ? (team1.length > 1 ? `${t('contestDashboard.bracket.team')} ${team1[0].team_id}` : team1[0].username) : t('contestDashboard.bracket.tbd')}
                         </span>
                     </div>
                 </div>
 
                 <div className="flex items-center justify-center">
-                    <span className="text-xs font-bold text-neutral-600">VS</span>
+                    <span className="text-xs font-bold text-neutral-600">{t('contestDashboard.bracket.vs')}</span>
                 </div>
 
                 {/* Team 2 */}
@@ -154,7 +157,7 @@ function MatchCard({ game }: { game: GameResponse & { members?: GameMember[] } }
                              {team2[0]?.avatar && <Image src={team2[0].avatar} alt={team2[0].username} fill sizes="24px" className="object-cover" />}
                         </div>
                         <span className="font-bold text-sm text-white">
-                            {team2.length > 0 ? (team2.length > 1 ? `Team ${team2[0].team_id}` : team2[0].username) : 'TBD'}
+                            {team2.length > 0 ? (team2.length > 1 ? `${t('contestDashboard.bracket.team')} ${team2[0].team_id}` : team2[0].username) : t('contestDashboard.bracket.tbd')}
                         </span>
                     </div>
                 </div>
@@ -163,7 +166,7 @@ function MatchCard({ game }: { game: GameResponse & { members?: GameMember[] } }
             <div className="mt-4 pt-4 border-t border-white/5 flex justify-between items-center">
                 <div className="text-xs text-neutral-500 flex items-center gap-1">
                      <CalendarClock className="w-3 h-3" />
-                     {game.started_at ? new Date(game.started_at).toLocaleDateString() : 'TBD'}
+                     {game.started_at ? new Date(game.started_at).toLocaleDateString() : t('contestDashboard.bracket.tbd')}
                 </div>
             </div>
         </div>

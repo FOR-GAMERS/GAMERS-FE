@@ -359,6 +359,17 @@
         "title": "CONTEST",
         "dashboard": "DASHBOARD",
         "subtitle": "참가자, 대진표 및 대회 상태를 관리합니다."
+      },
+      "bracket": {
+        "title": "대진표",
+        "refresh": "새로고침",
+        "noMatches": "생성된 매치가 없습니다.",
+        "noMatchesDesc": "대회가 시작되면 매치가 이곳에 표시됩니다.",
+        "loadFail": "대진표를 불러오는데 실패했습니다.",
+        "match": "매치",
+        "team": "팀",
+        "tbd": "미정",
+        "vs": "VS"
       }
     },
   "loginCheck": {
