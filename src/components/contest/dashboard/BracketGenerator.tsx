@@ -134,8 +134,8 @@ function MatchCard({ game }: { game: GameResponse & { members?: GameMember[] } }
                 {/* Team 1 */}
                 <div className="flex items-center justify-between p-2 bg-neutral-800/50 rounded border-l-2 border-transparent hover:border-neon-cyan/50 transition-colors">
                     <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-full bg-neutral-700 overflow-hidden">
-                             {team1[0]?.avatar && <Image src={team1[0].avatar} alt={team1[0].username} fill className="object-cover" />}
+                        <div className="w-6 h-6 rounded-full bg-neutral-700 overflow-hidden relative">
+                             {team1[0]?.avatar && <Image src={team1[0].avatar} alt={team1[0].username} fill sizes="24px" className="object-cover" />}
                         </div>
                         <span className="font-bold text-sm text-white">
                             {team1.length > 0 ? (team1.length > 1 ? `Team ${team1[0].team_id}` : team1[0].username) : 'TBD'}
@@ -150,8 +150,8 @@ function MatchCard({ game }: { game: GameResponse & { members?: GameMember[] } }
                 {/* Team 2 */}
                 <div className="flex items-center justify-between p-2 bg-neutral-800/50 rounded border-l-2 border-transparent hover:border-red-500/50 transition-colors">
                     <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-full bg-neutral-700 overflow-hidden">
-                             {team2[0]?.avatar && <Image src={team2[0].avatar} alt={team2[0].username} fill className="object-cover" />}
+                        <div className="w-6 h-6 rounded-full bg-neutral-700 overflow-hidden relative">
+                             {team2[0]?.avatar && <Image src={team2[0].avatar} alt={team2[0].username} fill sizes="24px" className="object-cover" />}
                         </div>
                         <span className="font-bold text-sm text-white">
                             {team2.length > 0 ? (team2.length > 1 ? `Team ${team2[0].team_id}` : team2[0].username) : 'TBD'}

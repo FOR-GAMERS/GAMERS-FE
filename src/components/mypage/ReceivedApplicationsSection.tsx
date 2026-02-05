@@ -175,9 +175,9 @@ export default function ReceivedApplicationsSection({ contestId }: ReceivedAppli
                              <tr key={app.user_id} className="group hover:bg-white/5 transition-colors">
                                  <td className="p-4">
                                      <div className="flex items-center gap-3">
-                                         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center font-bold text-xs text-white overflow-hidden">
+                                         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center font-bold text-xs text-white overflow-hidden relative">
                                              {app.sender.avatar ? (
-                                                 <Image src={app.sender.avatar} alt={app.sender.username} fill className="object-cover" />
+                                                 <Image src={app.sender.avatar} alt={app.sender.username} fill sizes="32px" className="object-cover" />
                                              ) : (
                                                  (app.sender.username || "?").substring(0, 2).toUpperCase()
                                              )}
