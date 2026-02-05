@@ -60,13 +60,11 @@ export default function Header() {
     const verifySession = async () => {
       try {
         const userData = await authService.getMe();
-        console.log(userData);
         if (userData) {
             setUser(userData);
             setIsLoggedIn(true);
         }
       } catch (error) {
-        console.log("[Header] Session invalid or failed to fetch user");
         setIsLoggedIn(false);
         setUser(null);
       }

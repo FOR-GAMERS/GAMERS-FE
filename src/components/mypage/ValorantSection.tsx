@@ -13,6 +13,7 @@ import { useToast } from '@/context/ToastContext';
 import AnimatedSelect from '@/components/ui/AnimatedSelect';
 
 import { useTranslation } from "react-i18next";
+import { getValorantTierName } from '@/utils/valorant-tiers';
 
 export default function ValorantSection() {
   const { t } = useTranslation();
@@ -145,7 +146,7 @@ export default function ValorantSection() {
                         <span className="text-xs px-2 py-0.5 rounded bg-white/10 text-white/70 uppercase">{valorantInfo.region}</span>
                     </div>
                     <div className="text-sm text-muted-foreground mt-1 flex items-center gap-2">
-                        {valorantInfo.current_tier_patched} • {valorantInfo.ranking_in_tier} RR
+                        {valorantInfo.current_tier_patched || getValorantTierName(valorantInfo.current_tier)} • {valorantInfo.ranking_in_tier} RR
                     </div>
                  </div>
               </div>
@@ -157,7 +158,7 @@ export default function ValorantSection() {
                  </div>
                  <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">{t("mypage.valorant.currentRank")}</span>
-                    <span className="text-white">{valorantInfo.current_tier_patched}</span>
+                    <span className="text-white">{valorantInfo.current_tier_patched || getValorantTierName(valorantInfo.current_tier)}</span>
                  </div>
                  <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">{t("mypage.valorant.peakRank")}</span>
