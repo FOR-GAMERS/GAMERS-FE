@@ -1,5 +1,6 @@
 import { StatusBadge } from "./StatusBadge";
 import { Search, MoreVertical, ShieldAlert, Ban, Edit } from "lucide-react";
+import Image from "next/image";
 
 interface Participant {
   id: string;
@@ -55,7 +56,7 @@ export function ParticipantTable({ data }: ParticipantTableProps) {
                         <td className="px-4 py-3">
                             <div className="flex items-center gap-3">
                                 <div className="w-8 h-8 rounded-full bg-neutral-800 overflow-hidden relative">
-                                    <img src={user.avatarUrl} alt={user.username} className="object-cover w-full h-full" />
+                                    <Image src={user.avatarUrl} alt={user.username} fill className="object-cover" />
                                 </div>
                                 <div>
                                     <div className="font-medium text-white group-hover:text-neon-cyan transition-colors">{user.username}</div>

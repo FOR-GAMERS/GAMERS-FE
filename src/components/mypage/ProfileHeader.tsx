@@ -76,6 +76,7 @@ export default function ProfileHeader({ user }: ProfileHeaderProps) {
           src={user.bannerUrl}
           alt="Banner"
           fill
+          sizes="(max-width: 768px) 100vw, 1200px"
           className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-transparent opacity-90" />
@@ -91,6 +92,7 @@ export default function ProfileHeader({ user }: ProfileHeaderProps) {
               src={avatarUrl}
               alt="Avatar"
               fill
+              sizes="(max-width: 768px) 96px, 128px"
               className="object-cover"
             />
           </div>

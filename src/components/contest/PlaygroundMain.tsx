@@ -16,6 +16,7 @@ import {
   UserPlus,
   Crown,
 } from 'lucide-react';
+import Image from "next/image";
 import { getValorantRankName } from "@/lib/valorant-utils";
 import { useToast } from '@/context/ToastContext';
 import { ContestResponse } from '@/types/api';
@@ -419,7 +420,7 @@ function MemberListView({ contestId }: { contestId: number }) {
                  <td className="py-4 px-4 font-medium text-white flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-neutral-800 to-neutral-700 flex items-center justify-center text-xs font-bold ring-1 ring-white/10 group-hover:ring-neon-cyan/50 transition-all overflow-hidden">
                        {avatarSrc ? (
-                           <img src={avatarSrc} alt={member.username} className="w-full h-full object-cover" />
+                           <Image src={avatarSrc} alt={member.username} fill className="object-cover" />
                        ) : (
                            <span>{member.username.substring(0,2).toUpperCase()}</span>
                        )}
@@ -545,7 +546,7 @@ function InviteUserView({ contestId, existingMemberIds, iAmLeader }: InviteUserV
                             <div key={member.user_id} className="flex items-center justify-between p-3 rounded-xl bg-neutral-900/50 border border-neutral-800 hover:border-neutral-700 transition-colors">
                                 <div className="flex items-center gap-3">
                                     <div className="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center text-sm font-bold overflow-hidden">
-                                        {avatarSrc ? <img src={avatarSrc} alt={member.username} className="w-full h-full object-cover"/> : member.username.substring(0, 1).toUpperCase()}
+                                        {avatarSrc ? <Image src={avatarSrc} alt={member.username} fill className="object-cover"/> : member.username.substring(0, 1).toUpperCase()}
                                     </div>
                                     <div>
                                         <div className="text-sm font-bold text-white">{member.username}</div>
@@ -757,7 +758,7 @@ function MyTeamView({ contestId }: { contestId: number }) {
                 <div className="flex items-center gap-4">
                    <div className="w-12 h-12 rounded-full bg-neutral-800 flex items-center justify-center text-white font-bold text-lg shadow-lg overflow-hidden">
                       {avatarSrc ? (
-                          <img src={avatarSrc} alt={member.username} className="w-full h-full object-cover" />
+                          <Image src={avatarSrc} alt={member.username} fill className="object-cover" />
                       ) : (
                           <span>{member.username.substring(0,1).toUpperCase()}</span>
                       )}

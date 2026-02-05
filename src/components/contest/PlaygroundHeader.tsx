@@ -4,6 +4,7 @@ import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Gamepad2 } from 'lucide-react';
+import Image from 'next/image';
 import { ContestResponse } from '@/types/api';
 
 gsap.registerPlugin(useGSAP);
@@ -41,7 +42,12 @@ export default function PlaygroundHeader({ contest }: PlaygroundHeaderProps) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-neon-purple/20 via-transparent to-transparent opacity-50 blur-xl" />
         {contest.thumbnail && (
             <div className="absolute inset-0 z-0 opacity-30">
-                <img src={contest.thumbnail} alt="background" className="w-full h-full object-cover" />
+                <Image 
+                  src={contest.thumbnail} 
+                  alt="background" 
+                  fill
+                  className="object-cover"
+                />
             </div>
         )}
       </div>

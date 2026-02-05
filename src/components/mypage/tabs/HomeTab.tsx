@@ -40,7 +40,7 @@ export default function HomeTab({ history }: HomeTabProps) {
             <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
               {/* Server Icon */}
               <div className="relative w-12 h-12 rounded-full overflow-hidden border border-white/10 shrink-0">
-                 <Image src={item.serverIconUrl} alt="Server" fill className="object-cover" />
+                 <Image src={item.serverIconUrl} alt="Server" fill sizes="48px" className="object-cover" />
               </div>
               
               {/* Info */}

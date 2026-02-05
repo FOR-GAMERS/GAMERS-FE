@@ -4,6 +4,7 @@ import { useState } from "react";
 import { bannerService } from "@/services/banner-service";
 import { Banner, CreateBannerRequest } from "@/types/api";
 import { Loader2, Plus, Edit, Trash2, Image as ImageIcon, Link as LinkIcon, Save, X } from "lucide-react";
+import Image from "next/image";
 import { useToast } from "@/context/ToastContext";
 import { Koulen } from "next/font/google";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -166,7 +167,7 @@ export default function BannerManagementPage() {
                         {/* Image Preview */}
                         <div className="w-full md:w-64 h-32 bg-black rounded-xl overflow-hidden relative border border-white/10 shrink-0">
                             {banner.image_key ? (
-                                <img src={banner.image_key.startsWith('http') ? banner.image_key : `/api/storage/${banner.image_key}`} alt={banner.title} className="w-full h-full object-cover" />
+                                <Image src={banner.image_key.startsWith('http') ? banner.image_key : `/api/storage/${banner.image_key}`} alt={banner.title} fill className="object-cover" />
                             ) : (
                                 <div className="w-full h-full flex items-center justify-center text-neutral-700">
                                     <ImageIcon size={32} />
@@ -251,8 +252,8 @@ export default function BannerManagementPage() {
                              <label className="text-sm font-bold text-neutral-400">Banner Image</label>
                              <div className="flex items-center gap-4">
                                 {formData.image_key && (
-                                    <div className="w-20 h-12 bg-black rounded border border-white/10 overflow-hidden">
-                                        <img src={formData.image_key.startsWith('http') ? formData.image_key : `/api/storage/${formData.image_key}`} className="w-full h-full object-cover" />
+                                    <div className="w-20 h-12 bg-black rounded border border-white/10 overflow-hidden relative">
+                                        <Image src={formData.image_key.startsWith('http') ? formData.image_key : `/api/storage/${formData.image_key}`} alt="Preview" fill className="object-cover" />
                                     </div>
                                 )}
                                 <label className="flex-1 cursor-pointer">

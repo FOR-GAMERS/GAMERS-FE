@@ -5,6 +5,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { contestService } from "@/services/contest-service";
 import { ContestResponse, ContestApplicationResponse } from "@/types/api";
 import { Loader2, Check, X, Search, ChevronDown, Trophy, Users, Calendar, ArrowRight } from "lucide-react";
+import Image from "next/image";
 import { useToast } from "@/context/ToastContext";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
@@ -176,7 +177,7 @@ export default function ReceivedApplicationsSection({ contestId }: ReceivedAppli
                                      <div className="flex items-center gap-3">
                                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center font-bold text-xs text-white overflow-hidden">
                                              {app.sender.avatar ? (
-                                                 <img src={app.sender.avatar} alt={app.sender.username} className="w-full h-full object-cover" />
+                                                 <Image src={app.sender.avatar} alt={app.sender.username} fill className="object-cover" />
                                              ) : (
                                                  (app.sender.username || "?").substring(0, 2).toUpperCase()
                                              )}

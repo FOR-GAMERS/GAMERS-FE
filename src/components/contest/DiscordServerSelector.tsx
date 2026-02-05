@@ -4,6 +4,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { discordService } from '@/services/discord-service';
 import { Server, Hash, AlertTriangle, Loader2, RefreshCw } from 'lucide-react';
+import Image from 'next/image';
 import { Controller, Control, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { CreateContestFormValues } from '@/schemas/contest-schema';
 import AnimatedSelect from '../ui/AnimatedSelect';
@@ -120,7 +121,7 @@ export default function DiscordServerSelector({ control, setValue, watch }: Disc
                       {selectedGuild ? (
                           <>
                             {selectedGuild.icon ? (
-                                <img src={getIconUrl(selectedGuild.id, selectedGuild.icon)!} alt="" className="w-5 h-5 rounded-full" />
+                                <Image src={getIconUrl(selectedGuild.id, selectedGuild.icon)!} alt="" width={20} height={20} className="rounded-full" />
                             ) : (
                                 <div className="w-5 h-5 rounded-full bg-[#5865F2] flex items-center justify-center text-[10px] text-white">
                                     {selectedGuild.name.substring(0, 1)}
@@ -158,7 +159,7 @@ export default function DiscordServerSelector({ control, setValue, watch }: Disc
                                    className="px-4 py-3 flex items-center gap-3 hover:bg-[#5865F2]/20 cursor-pointer transition-colors border-b border-white/5 last:border-0"
                                >
                                    {guild.icon ? (
-                                       <img src={getIconUrl(guild.id, guild.icon)!} alt="" className="w-8 h-8 rounded-full" />
+                                       <Image src={getIconUrl(guild.id, guild.icon)!} alt="" width={32} height={32} className="rounded-full" />
                                    ) : (
                                        <div className="w-8 h-8 rounded-full bg-[#5865F2] flex items-center justify-center text-xs font-bold text-white">
                                            {guild.name.substring(0, 1)}

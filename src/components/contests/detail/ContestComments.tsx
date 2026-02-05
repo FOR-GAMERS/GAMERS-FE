@@ -1,6 +1,7 @@
 "use client";
 
 import { MessageSquare, Send, MoreVertical, Trash2, Edit2, User } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -55,7 +56,7 @@ export default function ContestComments({ comments, isLoggedIn, currentUser }: C
         <form onSubmit={handleSubmit} className={cn("flex gap-4 transition-opacity duration-300", !isLoggedIn && "opacity-40 select-none pointer-events-none")}>
             <div className="w-10 h-10 rounded-full bg-white/10 flex-shrink-0 overflow-hidden flex items-center justify-center border border-white/10">
                 {currentUser?.avatarUrl ? (
-                    <img src={currentUser.avatarUrl} alt={currentUser.name} className="w-full h-full object-cover" />
+                    <Image src={currentUser.avatarUrl} alt={currentUser.name} fill className="object-cover" />
                 ) : (
                     <User size={20} className="text-muted-foreground" />
                 )}
@@ -89,7 +90,7 @@ export default function ContestComments({ comments, isLoggedIn, currentUser }: C
                 <div key={comment.id} className="flex gap-4 group animate-fade-in-up">
                     <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex-shrink-0 flex items-center justify-center overflow-hidden border border-white/10">
                          {comment.avatarUrl ? (
-                            <img src={comment.avatarUrl} alt={comment.author} className="w-full h-full object-cover" />
+                            <Image src={comment.avatarUrl} alt={comment.author} fill className="object-cover" />
                          ) : (
                             <span className="text-xs font-bold text-gray-400">{comment.author[0]}</span>
                          )}

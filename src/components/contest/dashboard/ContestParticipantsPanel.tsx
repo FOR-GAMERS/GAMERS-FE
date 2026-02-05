@@ -8,6 +8,7 @@ import { Loader2, Search, Shield, User, Crown } from "lucide-react";
 import { useToast } from "@/context/ToastContext";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface ContestParticipantsPanelProps {
     contestId: number;
@@ -113,7 +114,7 @@ export default function ContestParticipantsPanel({ contestId, isLeader }: Contes
                                             <div className="flex items-center gap-3">
                                                  <div className="w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center overflow-hidden">
                                                     {member.avatar ? (
-                                                        <img src={member.avatar} alt={member.username} className="w-full h-full object-cover" />
+                                                        <Image src={member.avatar} alt={member.username} fill className="object-cover" />
                                                     ) : (
                                                         <span className="text-xs font-bold">{member.username.substring(0, 2).toUpperCase()}</span>
                                                     )}

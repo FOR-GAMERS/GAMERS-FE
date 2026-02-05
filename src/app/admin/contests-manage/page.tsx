@@ -9,6 +9,7 @@ import { ContestResponse } from "@/types/api";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { StatusBadge } from "@/components/admin/StatusBadge"; // Reusing or need to create specific badge?
+import Image from "next/image";
 
 export default function ContestManagementPage() {
     const { t } = useTranslation();
@@ -135,7 +136,9 @@ export default function ContestManagementPage() {
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-3">
                                             {contest.thumbnail && (
-                                                <img src={contest.thumbnail} alt={contest.title} className="w-8 h-8 rounded object-cover bg-neutral-800" />
+                                                <div className="w-8 h-8 rounded overflow-hidden relative bg-neutral-800">
+                                                    <Image src={contest.thumbnail} alt={contest.title} fill className="object-cover" />
+                                                </div>
                                             )}
                                             <div>
                                                 <div className="font-bold text-white group-hover:text-emerald-500 transition-colors">{contest.title}</div>

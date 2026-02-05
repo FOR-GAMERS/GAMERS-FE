@@ -10,6 +10,7 @@ import { authService } from "@/services/auth-service";
 import { cn } from "@/lib/utils";
 import { UserResponse, MyUserResponse } from "@/types/api";
 import { Koulen } from "next/font/google";
+import Image from "next/image";
 
 const koulen = Koulen({
   weight: "400",
@@ -237,10 +238,11 @@ export default function Header() {
                         >
                             <div className="w-full h-full rounded-full bg-black/50 overflow-hidden flex items-center justify-center backdrop-blur-sm">
                                 {avatarUrl && !imgError ? (
-                                    <img 
+                                    <Image 
                                         src={avatarUrl} 
                                         alt={user.username} 
-                                        className="w-full h-full object-cover" 
+                                        fill
+                                        className="object-cover" 
                                         onError={() => setImgError(true)}
                                     />
                                 ) : (

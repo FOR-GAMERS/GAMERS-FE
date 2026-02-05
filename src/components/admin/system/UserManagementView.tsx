@@ -8,6 +8,7 @@ import { adminUserService } from "@/services/admin-user-service";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { UserResponse } from "@/types/api";
 import { useTranslation } from "react-i18next";
+import Image from "next/image";
 
 export function UserManagementView() {
   const { t } = useTranslation();
@@ -121,7 +122,7 @@ export function UserManagementView() {
                                     <div className="flex items-center gap-3">
                                         <div className="w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center text-xs font-bold text-neutral-400 overflow-hidden">
                                             {user.avatar ? (
-                                                <img src={user.avatar} alt={user.username} className="w-full h-full object-cover" />
+                                                <Image src={user.avatar} alt={user.username} fill className="object-cover" />
                                             ) : (
                                                 user.username.substring(0,2).toUpperCase()
                                             )}

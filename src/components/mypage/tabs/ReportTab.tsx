@@ -169,7 +169,7 @@ function InviteCard({ invite, onRemove }: InviteCardProps) {
              {/* Left: Inviter Avatar */}
              <div className="shrink-0 relative">
                 <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white/10 ring-2 ring-transparent group-hover:ring-neon-purple/50 transition-all">
-                    <Image src={invite.inviterAvatarUrl} alt="Inviter" fill className="object-cover" />
+                    <Image src={invite.inviterAvatarUrl} alt="Inviter" fill sizes="64px" className="object-cover" />
                 </div>
                 <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-[#2f3136] rounded-full flex items-center justify-center border border-white/10">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />

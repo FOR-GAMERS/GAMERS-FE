@@ -16,6 +16,7 @@ import {
   Loader2,
   Trash2
 } from "lucide-react";
+import Image from "next/image";
 import DiscordServerSelector from "@/components/contest/DiscordServerSelector";
 import ValorantPointTableForm, { ValorantPointTableFormHandle } from "@/components/contest/ValorantPointTableForm";
 import { addDays, format } from "date-fns";
@@ -230,7 +231,7 @@ export default function CreateContestPage() {
                         <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleThumbnailUpload} />
                         {thumbnailPreview ? (
                             <div className="relative w-full h-full group">
-                                <img src={thumbnailPreview} alt="Preview" className="w-full h-full object-cover" />
+                                <Image src={thumbnailPreview} alt="Preview" fill className="object-cover" />
                                 <button
                                     onClick={handleRemoveThumbnail}
                                     className="absolute top-2 right-2 p-2 bg-red-500/80 hover:bg-red-600 text-white rounded-lg transition-all opacity-0 group-hover:opacity-100 z-10"
