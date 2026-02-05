@@ -164,7 +164,7 @@ function MatchCard({ game }: { game: GameResponse & { members?: GameMember[] } }
             </div>
 
             <div className="mt-4 pt-4 border-t border-white/5 flex justify-between items-center">
-                <div className="text-xs text-neutral-500 flex items-center gap-1">
+                <div className="text-xs text-neutral-500 flex items-center gap-1" suppressHydrationWarning>
                      <CalendarClock className="w-3 h-3" />
                      {game.started_at ? new Date(game.started_at).toLocaleDateString() : t('contestDashboard.bracket.tbd')}
                 </div>

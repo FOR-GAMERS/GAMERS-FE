@@ -175,7 +175,7 @@ export default function ValorantSection() {
            </div>
 
            <div className="flex items-center justify-between gap-4">
-              <div className="text-sm text-muted-foreground">
+              <div className="text-sm text-muted-foreground" suppressHydrationWarning>
                  {lastUpdated && <>{t("mypage.valorant.lastUpdated")}: {formatDistanceToNow(lastUpdated, { addSuffix: true, locale: currentLocale })}</>}
               </div>
               <div className="flex gap-3">
