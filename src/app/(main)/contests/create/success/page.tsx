@@ -4,8 +4,11 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { CheckCircle2, Trophy, ArrowRight } from "lucide-react";
 
+import { useTranslation } from "react-i18next";
+
 export default function ContestCreateSuccessPage() {
   const router = useRouter();
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-[#050505] text-white relative overflow-hidden">
@@ -36,12 +39,9 @@ export default function ContestCreateSuccessPage() {
             className="space-y-4"
         >
             <h1 className="text-4xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-neon-cyan to-white">
-                CONTEST CREATED
+                {t("contestCreate.success.title")}
             </h1>
-            <p className="text-gray-400 text-lg font-medium">
-                대회가 성공적으로 생성되었습니다.<br/>
-                참가자 모집이 시작됩니다!
-            </p>
+            <p className="text-gray-400 text-lg font-medium" dangerouslySetInnerHTML={{ __html: t("contestCreate.success.description") }} />
         </motion.div>
 
         <motion.div
@@ -54,13 +54,13 @@ export default function ContestCreateSuccessPage() {
                 onClick={() => router.push("/contests")}
                 className="flex-1 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-sm font-bold transition-all hover:scale-105 active:scale-95"
             >
-                목록으로 돌아가기
+                {t("contestCreate.success.backToList")}
             </button>
             <button 
                 onClick={() => router.push("/contests")} // TODO: Ideally go to the detail page of the created contest we might need to store id in query param
                 className="flex-1 py-4 bg-neon-cyan text-black font-bold rounded-xl transition-all hover:bg-cyan-300 hover:shadow-[0_0_20px_rgba(0,243,255,0.5)] hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
             >
-                대회 확인하기 <ArrowRight size={18} />
+                {t("contestCreate.success.checkContest")} <ArrowRight size={18} />
             </button>
         </motion.div>
 

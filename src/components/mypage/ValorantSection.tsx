@@ -6,7 +6,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { RegisterValorantRequest } from '@/types/valorant';
 import { Loader2, RefreshCw, Link2, Unlink, AlertCircle, CheckCircle2, Globe } from 'lucide-react';
 import { differenceInHours, formatDistanceToNow } from 'date-fns';
-import { ko } from 'date-fns/locale';
+import { ko, enUS, ja } from 'date-fns/locale';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/context/ToastContext';
@@ -16,7 +16,14 @@ import { useTranslation } from "react-i18next";
 import { getValorantTierName } from '@/utils/valorant-tiers';
 
 export default function ValorantSection() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  
+  const locales: Record<string, any> = {
+    ko: ko,
+    en: enUS,
+    ja: ja
+  };
+  const currentLocale = locales[i18n.language] || ko;
   const { data: infoResponse, isLoading } = useValorantInfo();
   const { registerValorant, unlinkValorant, refreshValorant } = useValorantMutations();
   const { addToast } = useToast();
@@ -169,7 +176,7 @@ export default function ValorantSection() {
 
            <div className="flex items-center justify-between gap-4">
               <div className="text-sm text-muted-foreground">
-                 {lastUpdated && <>{t("mypage.valorant.lastUpdated")}: {formatDistanceToNow(lastUpdated, { addSuffix: true, locale: ko })}</>}
+                 {lastUpdated && <>{t("mypage.valorant.lastUpdated")}: {formatDistanceToNow(lastUpdated, { addSuffix: true, locale: currentLocale })}</>}
               </div>
               <div className="flex gap-3">
                  <button 

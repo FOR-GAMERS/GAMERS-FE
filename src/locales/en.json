@@ -194,6 +194,12 @@
     },
     "contestCreate": {
       "title": "Create Contest",
+      "success": {
+        "title": "CONTEST CREATED",
+        "description": "Contest created successfully.<br/>Recruitment starts now!",
+        "backToList": "Back to List",
+        "checkContest": "Check Contest"
+      },
       "form": {
         "titleLabel": "Contest Title",
         "titlePlaceholder": "Enter contest title (e.g. 2026 Cyber League)",

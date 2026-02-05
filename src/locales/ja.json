@@ -194,6 +194,12 @@
     },
     "contestCreate": {
       "title": "大会作成",
+      "success": {
+        "title": "CONTEST CREATED",
+        "description": "大会が正常に作成されました。<br/>参加者の募集が開始されます！",
+        "backToList": "一覧に戻る",
+        "checkContest": "大会を確認する"
+      },
       "form": {
         "titleLabel": "大会タイトル",
         "titlePlaceholder": "大会タイトルを入力（例：2026 サイバーリーグ）",
