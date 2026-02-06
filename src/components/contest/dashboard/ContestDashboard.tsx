@@ -180,7 +180,13 @@ export function ContestDashboard({ contestId, isLeader }: ContestDashboardProps)
                              </div>
                              <div>
                                  <div className="text-neutral-500">{t('contestDashboard.overview.startDate')}</div>
-                                 <div className="text-white font-bold">{contest.started_at ? new Date(contest.started_at).toLocaleDateString() : t('contestDashboard.overview.notSet')}</div>
+                                 <div className="text-white font-bold">
+                                     {contest.started_at ? (
+                                         <span suppressHydrationWarning>{new Date(contest.started_at).toLocaleDateString()}</span>
+                                     ) : (
+                                         t('contestDashboard.overview.notSet')
+                                     )}
+                                 </div>
                              </div>
                              <div>
                                  <div className="text-neutral-500">{t('contestDashboard.overview.endDate')}</div>

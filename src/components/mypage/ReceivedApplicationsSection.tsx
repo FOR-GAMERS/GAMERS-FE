@@ -133,7 +133,7 @@ export default function ReceivedApplicationsSection({ contestId }: ReceivedAppli
         <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-wrap gap-6 text-sm items-center">
             <div className="flex items-center gap-2 text-muted-foreground">
                 <Calendar size={14} />
-                <span>{t("mypage.applications.created")}: {new Date(selectedContest.created_at).toLocaleDateString()}</span>
+                <span suppressHydrationWarning>{t("mypage.applications.created")}: {new Date(selectedContest.created_at).toLocaleDateString()}</span>
             </div>
              <div className="flex items-center gap-2 text-muted-foreground">
                 <Users size={14} />
@@ -186,7 +186,7 @@ export default function ReceivedApplicationsSection({ contestId }: ReceivedAppli
                                      </div>
                                  </td>
                                  <td className="p-4 text-sm text-muted-foreground">#{app.sender.tag}</td>
-                                 <td className="p-4 text-sm text-muted-foreground">
+                                 <td className="p-4 text-sm text-muted-foreground" suppressHydrationWarning>
                                      {new Date(app.requested_at).toLocaleDateString()}
                                  </td>
                                  <td className="p-4">
