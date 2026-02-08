@@ -272,8 +272,10 @@
         "closed": "모집 종료",
         "login": "로그인하고 신청하기",
         "cancel": "신청 취소",
-        "joined": "참가 확정됨",
-        "deleteTeam": "팀 삭제"
+        "joined": "참가 완료",
+        "deleteTeam": "팀 삭제",
+        "playground": "대회장",
+        "dashboard": "대시보드"
       },
       "loginRequired": "참가 신청을 하려면 로그인이 필요합니다."
     },

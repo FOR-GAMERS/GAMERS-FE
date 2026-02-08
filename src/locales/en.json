@@ -262,7 +262,9 @@
         "login": "Login to Join",
         "cancel": "Cancel Join",
         "joined": "Joined",
-        "deleteTeam": "Delete Team"
+        "deleteTeam": "Delete Team",
+        "playground": "Playground",
+        "dashboard": "Dashboard"
       },
       "loginRequired": "Login is required to join."
     },

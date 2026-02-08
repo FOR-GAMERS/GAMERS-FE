@@ -1,12 +1,14 @@
 import ContestCTA from "./ContestCTA";
 import ReactMarkdown from "react-markdown";
+import ContestNavigationLinks from "./ContestNavigationLinks";
 
 interface ContestBodyProps {
   description: string;
   ctaProps: React.ComponentProps<typeof ContestCTA>;
+  navigationProps?: React.ComponentProps<typeof ContestNavigationLinks>;
 }
 
-export default function ContestBody({ description, ctaProps }: ContestBodyProps) {
+export default function ContestBody({ description, ctaProps, navigationProps }: ContestBodyProps) {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="flex flex-col lg:flex-row gap-12">
@@ -26,6 +28,15 @@ export default function ContestBody({ description, ctaProps }: ContestBodyProps)
         </div>
         <div className="lg:w-[380px] flex-shrink-0">
             <ContestCTA {...ctaProps} />
+            <div className="mt-4">
+               {/* Navigation Links (Playground / Dashboard) */}
+               {navigationProps && (
+                  <ContestNavigationLinks 
+                    contestId={navigationProps.contestId} 
+                    userStatus={navigationProps.userStatus} 
+                  />
+               )}
+            </div>
         </div>
       </div>
     </div>

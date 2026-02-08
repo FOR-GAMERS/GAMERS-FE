@@ -262,7 +262,9 @@
         "login": "ログインして申請",
         "cancel": "申請キャンセル",
         "joined": "参加確定",
-        "deleteTeam": "チーム削除"
+        "deleteTeam": "チーム削除",
+        "playground": "大会会場",
+        "dashboard": "ダッシュボード"
       },
       "loginRequired": "参加申請をするにはログインが必要です。"
     },

@@ -12,7 +12,7 @@ import { ContestStatus } from "@/types/api";
 import { useMe } from "@/hooks/use-user";
 import { useTranslation } from "react-i18next";
 import TeamManagementSection from "@/components/contests/detail/TeamManagementSection";
-import ContestNavigationWidget from "@/components/contests/detail/ContestNavigationWidget";
+
 
 export default function ContestDetailPage() {
   const { t } = useTranslation();
@@ -147,7 +147,7 @@ export default function ContestDetailPage() {
 
   return (
     <main className="min-h-screen bg-deep-black text-white pb-32">
-      <ContestNavigationWidget contestId={contestId} userStatus={userStatus} />
+
 
       <ContestHero 
         title={contest.title}
@@ -170,6 +170,10 @@ export default function ContestDetailPage() {
             buttonLabel: buttonLabel,
             variant: variant,
             isLoading: isActionLoading
+        }}
+        navigationProps={{
+            contestId: contestId,
+            userStatus: userStatus
         }}
       />
       
