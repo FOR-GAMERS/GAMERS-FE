@@ -69,11 +69,15 @@ export default function NotificationDropdown({ isOpen, setIsOpen, isLoggedIn }: 
       // Use i18n key based on type if available in translation file
       const key = `navbar.notifications.types.${notif.type}`;
       
-      // We pass the entire data object as values for interpolation.
-      // E.g. { sender: "Alice", team: "Alpha", contest: "Cyber League" }
-      // This assumes backend sends these keys in `notif.data`.
-      // If `notif.data` is missing or keys don't match, we fallback to `notif.message`.
-      const translated = t(key, notif.data || {});
+      const data = notif.data || {};
+      // Normalize keys to lowercase to support case-insensitive interpolation
+      // (e.g. "Sender" -> "sender", "Team" -> "team")
+      const normalizedData = Object.keys(data).reduce((acc, k) => {
+        acc[k.toLowerCase()] = data[k];
+        return acc;
+      }, { ...data });
+
+      const translated = t(key, normalizedData);
       
       // If the key doesn't exist (returns the key itself), fallback to the message from backend
       if (translated === key) return notif.message;
