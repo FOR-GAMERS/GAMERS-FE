@@ -430,6 +430,11 @@
       "discordLogin": "Login with Discord",
       "noAccount": "Don't have an account?",
       "signup": "Sign Up"
-    }
+    }},
+  "contestDiscussion": {
+    "title": "Discussion",
+    "placeholder": "Share your thoughts about this match...",
+    "postButton": "Post Comment",
+    "noComments": "No comments yet. Be the first to cheer!"
   }
 }

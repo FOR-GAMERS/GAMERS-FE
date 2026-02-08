@@ -431,5 +431,11 @@
       "noAccount": "アカウントをお持ちでないですか？",
       "signup": "新規登録"
     }
+  },
+  "contestDiscussion": {
+    "title": "応援コメント",
+    "placeholder": "試合いについての思いを共有しましょう...",
+    "postButton": "コメントを投稿",
+    "noComments": "まだコメントがありません。最初に応援しましょう！"
   }
 }

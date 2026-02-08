@@ -441,6 +441,11 @@
       "discordLogin": "디스코드로 로그인",
       "noAccount": "계정이 없으신가요?",
       "signup": "회원가입"
-    }
+    },
+  "contestDiscussion": {
+    "title": "응원 톡",
+    "placeholder": "경기에 대한 생각을 공유해보세요...",
+    "postButton": "댓글 작성",
+    "noComments": "아직 댓글이 없습니다. 첫 번째로 응원해보세요!"
   }
 }

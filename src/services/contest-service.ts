@@ -109,7 +109,7 @@ export const contestService = {
   },
 
   async changeMemberRole(contestId: number, userId: number, role: 'NORMAL' | 'STAFF' | 'LEADER') {
-    return api.patch<ApiResponse<void>>(`/contests/${contestId}/members/${userId}/role`, { role });
+    return api.patch<ApiResponse<void>>(`/contests/${contestId}/members/${userId}/role`, { member_type: role });
   },
 
 

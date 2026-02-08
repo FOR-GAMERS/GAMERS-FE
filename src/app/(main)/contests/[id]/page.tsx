@@ -12,6 +12,7 @@ import { ContestStatus } from "@/types/api";
 import { useMe } from "@/hooks/use-user";
 import { useTranslation } from "react-i18next";
 import TeamManagementSection from "@/components/contests/detail/TeamManagementSection";
+import ContestNavigationWidget from "@/components/contests/detail/ContestNavigationWidget";
 
 export default function ContestDetailPage() {
   const { t } = useTranslation();
@@ -48,15 +49,6 @@ export default function ContestDetailPage() {
   const isMember = userStatus?.is_member || false;
   const applicationStatus = userStatus?.application_status || 'NONE'; 
   const hasJoined = isMember || applicationStatus === 'ACCEPTED'; 
-
-  // Redirect removed as per user request for a manual "Routing Button"
-  /*
-  useEffect(() => {
-    if (hasJoined) {
-        router.push(`/contests/${contestId}/dashboard`);
-    }
-  }, [hasJoined, contestId, router]);
-  */
 
   const getStatusLabel = (status: ContestStatus) => {
     return t(`contestDetail.status.${status}`, status);
@@ -155,6 +147,8 @@ export default function ContestDetailPage() {
 
   return (
     <main className="min-h-screen bg-deep-black text-white pb-32">
+      <ContestNavigationWidget contestId={contestId} userStatus={userStatus} />
+
       <ContestHero 
         title={contest.title}
         thumbnailUrl={contest.thumbnail || "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2940&auto=format&fit=crop"} 
@@ -179,32 +173,7 @@ export default function ContestDetailPage() {
         }}
       />
       
-      {/* Team Management Section (Only visible when Applied/Creating Team) */}
-      {applicationStatus === 'PENDING' && (
-          <div className="container mx-auto px-4 pb-12">
-            <TeamManagementSection 
-                contestId={contestId}
-                maxTeamMember={contest.total_team_member}
-                maxTotalPoint={contest.total_point} // Assuming total_point is also max_total_point logic or strictly prize? 
-                // Wait, field `total_point` is Prize Pool usually. 
-                // There is no `max_total_point_limit` in ContestResponse.
-                // Re-checking schema: `total_point` is generally prize. 
-                // Is there a restriction? The user said "Team 의 총 Point 를 계산해서 ... 최대 Point 이내의 Point 라면".
-                // I will assume `total_point` is used as limit OR I need a new field.
-                // Looking at `CreateContest` page, `total_point` is input as "Total Points".
-                // It likely means "Max Team Point Limit" for participation, OR "Prize Pool".
-                // Given the context of "Calculated Points" and "Tier", it sounds like a limit.
-                // BUT `prizePool` in CTA uses it too.
-                // Let's assume it IS the limit for now.
-                // If it's 0, maybe no limit?
-                // I will pass it as `maxTotalPoint` if > 0, else Infinity.
-                // Actually, let's look at `createContest` page again. "Total Points" label.
-                // Usually "Prize Pool".
-                // But the user prompt says "Point 가 최대 Point 이내의 Point 라면". Use context.
-                // I will just pass `contest.total_point` for now.
-             />
-          </div>
-      )}
+
       
       <ContestApplicationModal 
         isOpen={isApplicationModalOpen}

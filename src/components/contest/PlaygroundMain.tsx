@@ -286,13 +286,6 @@ function GameListView({ contestId }: { contestId: number }) {
 import { ChevronLeft, ChevronRight, Filter } from 'lucide-react';
 import { useMe } from '@/hooks/use-user';
 
-// ... (previous imports remain, make sure to check for duplicates if replacing whole file or parts) 
-// Actually I am replacing from line 285 onwards (MemberListView and below) to implement changes safely.
-// Wait, I should do targeted edits or I will lose context if I replace too much.
-// But the changes are structural in MemberListView and MyTeamView. 
-
-// Let's implement MemberListView first with Pagination/Sort.
-
 function MemberListView({ contestId }: { contestId: number }) {
   const { addToast } = useToast();
   const [page, setPage] = useState(1);
