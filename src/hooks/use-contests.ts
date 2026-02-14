@@ -138,6 +138,15 @@ export function useContestMutations() {
     }
   });
 
+  const uploadThumbnail = useMutation({
+    mutationFn: ({ contestId, file }: { contestId: number, file: File }) => 
+        contestService.uploadThumbnail(contestId, file),
+    onSuccess: (_, { contestId }) => {
+        queryClient.invalidateQueries({ queryKey: CONTEST_KEYS.detail(contestId) });
+    }
+  });
+
+
   // Application Mutations
   const applyContest = useMutation({
     mutationFn: (id: number) => contestService.applyContest(id),
@@ -186,6 +195,7 @@ export function useContestMutations() {
     deleteContest,
     startContest,
     stopContest,
+    uploadThumbnail,
     applyContest,
     cancelApplication,
     withdrawContest,

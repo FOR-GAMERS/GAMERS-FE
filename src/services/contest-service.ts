@@ -45,6 +45,16 @@ export const contestService = {
     return api.post<ApiResponse<ContestResponse>>('/contests', data);
   },
 
+  async uploadThumbnail(contestId: number, file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return api.post<ApiResponse<{ key: string; url: string }>>(`/contests/${contestId}/thumbnail`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  },
+
   async updateContest(id: number, data: UpdateContestRequest) {
     return api.patch<ApiResponse<ContestResponse>>(`/contests/${id}`, data);
   },

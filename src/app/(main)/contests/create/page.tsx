@@ -90,7 +90,7 @@ export default function CreateContestPage() {
     });
   }, { scope: containerRef });
 
-  const { createContest } = useContestMutations();
+  const { createContest, uploadThumbnail } = useContestMutations();
   const { addToast } = useToast();
 
   const onSubmit = async (data: CreateContestFormValues) => {
@@ -122,24 +122,8 @@ export default function CreateContestPage() {
              }
         }
 
-        // 2. Upload Banner if exists
-        let bannerUrl = data.thumbnail; // Default to existing string if no new file
-        if (thumbnailFile) {
-            try {
-                const uploadRes = await storageService.uploadContestBanner(thumbnailFile);
-                if (uploadRes.data) {
-                    bannerUrl = uploadRes.data.url;
-                }
-            } catch (error) {
-                console.error("Banner upload failed", error);
-                addToast("Failed to upload banner image", "error");
-                setIsUploading(false);
-                return;
-            }
-        }
-
-        // 3. Create Contest
-        await createContest.mutateAsync({
+        // 2. Create Contest first (without thumbnail URL initially)
+        const contestResponse = await createContest.mutateAsync({
             title: data.title,
             description: data.description,
             max_team_count: data.max_team_count,
@@ -152,9 +136,25 @@ export default function CreateContestPage() {
             discord_guild_id: data.discord_guild_id,
             discord_text_channel_id: data.discord_text_channel_id,
             auto_start: data.auto_start,
-            thumbnail: bannerUrl,
+            thumbnail: "", // Will be uploaded separately
             game_point_table_id: pointTableId
         });
+        
+        const contestId = contestResponse.data.contest_id;
+
+        // 3. Upload Thumbnail if exists
+        if (thumbnailFile && contestId) {
+            try {
+                await uploadThumbnail.mutateAsync({
+                    contestId: contestId,
+                    file: thumbnailFile
+                });
+            } catch (error) {
+                console.error("Thumbnail upload failed", error);
+                addToast("Contest created but failed to upload thumbnail", "error");
+                // We still proceed to success page as contest is created
+            }
+        }
         
         // 4. Redirect
         router.push("/contests/create/success");
