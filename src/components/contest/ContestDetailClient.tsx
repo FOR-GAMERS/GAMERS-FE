@@ -1,4 +1,5 @@
 'use client';
+import { useTranslation } from 'react-i18next';
 
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
@@ -9,6 +10,7 @@ import { Loader2, AlertCircle } from 'lucide-react';
 import { useParams } from 'next/navigation';
 
 export default function ContestDetailClient({ contestId }: { contestId: string }) {
+  const { t } = useTranslation();
   const { data: contestResponse, isLoading, error } = useQuery({
     queryKey: ['contest', contestId],
     queryFn: () => contestService.getContest(Number(contestId)),
@@ -28,8 +30,8 @@ export default function ContestDetailClient({ contestId }: { contestId: string }
     return (
       <div className="min-h-screen flex flex-col items-center justify-center text-white gap-4">
         <AlertCircle className="w-12 h-12 text-red-500" />
-        <h1 className="text-2xl font-bold">大会情報の読み込みに失敗しました</h1>
-        <p className="text-neutral-400">URLを確認するか、しばらく経ってから再度お試しください。</p>
+        <h1 className="text-2xl font-bold">{t('contestPlayground.loadingFail', 'Failed to load contest info')}</h1>
+        <p className="text-neutral-400">{t('contestPlayground.retry', 'Please check the URL or try again later.')}</p>
       </div>
     );
   }

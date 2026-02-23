@@ -6,6 +6,7 @@ import { useGSAP } from '@gsap/react';
 import { Gamepad2 } from 'lucide-react';
 import Image from 'next/image';
 import { ContestResponse } from '@/types/api';
+import { useTranslation } from 'react-i18next';
 
 gsap.registerPlugin(useGSAP);
 
@@ -14,6 +15,7 @@ interface PlaygroundHeaderProps {
 }
 
 export default function PlaygroundHeader({ contest }: PlaygroundHeaderProps) {
+  const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -61,7 +63,7 @@ export default function PlaygroundHeader({ contest }: PlaygroundHeaderProps) {
           {contest.title}
         </h1>
         <p className="header-content-item text-neutral-400 text-sm md:text-base uppercase tracking-widest border border-neon-purple/50 px-4 py-1 rounded-full bg-deep-black/50 backdrop-blur-sm">
-          プレイグラウンド
+          {t('contestPlayground.header.label', 'Playground')}
         </p>
       </div>
     </section>

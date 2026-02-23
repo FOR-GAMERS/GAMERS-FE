@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -25,13 +26,7 @@ import { contestService } from '@/services/contest-service';
 import { Loader2, AlertCircle } from 'lucide-react';
 import AnimatedSelect from '@/components/ui/AnimatedSelect';
 
-const MENU_ITEMS = [
-  { name: 'ホーム', id: 'Home', icon: LayoutDashboard },
-  { name: '参加者一覧', id: 'Member List', icon: Users },
-  { name: 'マイチーム', id: 'My Team', icon: Shield },
-  { name: 'トーナメント表', id: 'Bracket', icon: Trophy },
-  { name: '結果', id: 'Result', icon: ClipboardList },
-];
+// --- Mock Data for unsupported features ---
 
 // --- Mock Data for unsupported features ---
 const MOCK_MY_TEAM = {
@@ -85,8 +80,17 @@ interface PlaygroundMainProps {
 }
 
 export default function PlaygroundMain({ contest }: PlaygroundMainProps) {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('Home');
   const sidebarRef = useRef<HTMLDivElement>(null);
+
+  const MENU_ITEMS = [
+    { name: t('contestPlayground.menu.home', 'Home'), id: 'Home', icon: LayoutDashboard },
+    { name: t('contestPlayground.menu.memberList', 'Member List'), id: 'Member List', icon: Users },
+    { name: t('contestPlayground.menu.myTeam', 'My Team'), id: 'My Team', icon: Shield },
+    { name: t('contestPlayground.menu.bracket', 'Bracket'), id: 'Bracket', icon: Trophy },
+    { name: t('contestPlayground.menu.result', 'Result'), id: 'Result', icon: ClipboardList },
+  ];
 
   // Sidebar Stagger Animation
   useGSAP(() => {
@@ -122,7 +126,7 @@ export default function PlaygroundMain({ contest }: PlaygroundMainProps) {
         <div className="p-6 rounded-2xl bg-neutral-900/40 border border-neutral-800/60 backdrop-blur-md shadow-lg sticky top-8">
           <h2 className="text-lg font-semibold text-neon-purple mb-6 flex items-center gap-2">
             <span className="w-1 h-5 bg-neon-purple rounded-full shadow-[0_0_8px_#b23aff]"></span>
-            メニュー
+            {t('contestPlayground.menu.title', 'Menu')}
           </h2>
           <nav className="space-y-2">
             {MENU_ITEMS.map((item) => (
@@ -159,6 +163,7 @@ export default function PlaygroundMain({ contest }: PlaygroundMainProps) {
 // --- Views ---
 
 function HomeView({ contest }: { contest: ContestResponse }) {
+  const { t } = useTranslation();
   return (
     <div className="space-y-6 animate-fade-in-up">
        <div className="p-8 rounded-2xl bg-neutral-900/30 border border-neutral-800">
@@ -168,26 +173,26 @@ function HomeView({ contest }: { contest: ContestResponse }) {
           </h2>
           
           <div className="prose prose-invert prose-p:text-neutral-400 prose-headings:text-white prose-a:text-neon-cyan prose-strong:text-white max-w-none">
-            <p className="text-neutral-300 whitespace-pre-wrap">{contest.description || '大会の説明はありません。'}</p>
+             <p className="text-neutral-300 whitespace-pre-wrap">{contest.description || t('contestPlayground.home.noDescription', 'No description available.')}</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 pt-6 border-t border-neutral-800">
              <div className="p-4 rounded-xl bg-deep-black/50 border border-neutral-800 flex justify-between items-center group hover:border-neon-cyan/30 transition-colors cursor-default">
-                <span className="text-sm text-gray-500">ステータス</span>
+                <span className="text-sm text-gray-500">{t('contestPlayground.home.status', 'Status')}</span>
                 <div className="text-xl text-neon-cyan font-bold drop-shadow-[0_0_5px_rgba(0,243,255,0.5)]">
-                    {contest.contest_status === 'ACTIVE' ? '開催中' : 
-                     contest.contest_status === 'PENDING' ? '準備中' :
-                     contest.contest_status === 'RECRUITING' ? '募集中' :
-                     contest.contest_status === 'FINISHED' ? '終了' : 
-                     contest.contest_status === 'CANCELLED' ? '中止' : contest.contest_status}
+                    {contest.contest_status === 'ACTIVE' ? t('contestPlayground.home.active', 'Active') : 
+                     contest.contest_status === 'PENDING' ? t('contestPlayground.home.pending', 'Pending') :
+                     contest.contest_status === 'RECRUITING' ? t('contestPlayground.home.recruiting', 'Recruiting') :
+                     contest.contest_status === 'FINISHED' ? t('contestPlayground.home.finished', 'Finished') : 
+                     contest.contest_status === 'CANCELLED' ? t('contestPlayground.home.cancelled', 'Cancelled') : contest.contest_status}
                 </div>
              </div>
               <div className="p-4 rounded-xl bg-deep-black/50 border border-neutral-800 flex justify-between items-center group hover:border-neon-purple/30 transition-colors cursor-default">
-                <span className="text-sm text-gray-500">参加チーム / 上限</span>
+                <span className="text-sm text-gray-500">{t('contestPlayground.home.teams', 'Teams / Limit')}</span>
                 <div className="text-xl text-white font-bold">{Math.floor((contest.total_team_member || 0) / 5)} / {contest.max_team_count || '∞'}</div>
              </div>
              <div className="p-4 rounded-xl bg-deep-black/50 border border-neutral-800 flex justify-between items-center group hover:border-neon-purple/30 transition-colors cursor-default">
-                <span className="text-sm text-gray-500">ゲームタイプ</span>
+                <span className="text-sm text-gray-500">{t('contestPlayground.home.gameType', 'Game Type')}</span>
                 <div className="text-xl text-white font-bold">{contest.game_type}</div>
              </div>
           </div>
@@ -197,6 +202,7 @@ function HomeView({ contest }: { contest: ContestResponse }) {
 }
 
 function GameListView({ contestId }: { contestId: number }) {
+  const { t } = useTranslation();
   const [expandedId, setExpandedId] = useState<number | null>(null);
   
   const { data: gamesResponse, isLoading } = useQuery({
@@ -218,11 +224,11 @@ function GameListView({ contestId }: { contestId: number }) {
     <div className="p-8 rounded-2xl bg-neutral-900/30 border border-neutral-800 animate-fade-in-up">
       <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
         <Gamepad2 className="text-neon-cyan" />
-        ゲーム一覧
+        {t('contestPlayground.gameList.title', 'Game List')}
       </h2>
       
       {games.length === 0 ? (
-          <div className="text-neutral-500 text-center py-8">ゲームが登録されていません。</div>
+          <div className="text-neutral-500 text-center py-8">{t('contestPlayground.gameList.empty', 'No games registered.')}</div>
       ) : (
         <div className="space-y-3">
             {games.map((game) => {
@@ -248,9 +254,9 @@ function GameListView({ contestId }: { contestId: number }) {
                         </div>
                         <div>
                             <h3 className={`font-bold text-lg transition-colors ${isExpanded ? 'text-white' : 'text-neutral-300'}`}>
-                            Game #{game.game_id}
+                            {t('contestPlayground.gameList.gameNumber', { id: game.game_id, defaultValue: `Game #${game.game_id}` })}
                             </h3>
-                            <p className="text-xs text-neutral-500 font-mono tracking-wide">Status: {game.game_status}</p>
+                            <p className="text-xs text-neutral-500 font-mono tracking-wide">{t('contestPlayground.gameList.statusLabel', 'Status: ')}{game.game_status}</p>
                         </div>
                         </div>
                         {isExpanded ? <ChevronUp className="text-neon-cyan" /> : <ChevronDown className="text-neutral-600" />}
@@ -264,11 +270,11 @@ function GameListView({ contestId }: { contestId: number }) {
                     <div className="overflow-hidden">
                         <div className="p-5 pt-0 border-t border-white/5 text-neutral-400 text-sm leading-relaxed space-y-4">
                         <div>
-                            <strong className="text-white block mb-1">形式</strong>
+                            <strong className="text-white block mb-1">{t('contestPlayground.gameList.format', 'Format')}</strong>
                             {game.game_team_type}
                         </div>
                         <div className="p-3 rounded-lg bg-deep-black/30 border border-white/5">
-                            <strong className="text-neon-purple block mb-1 text-xs uppercase tracking-wider">作成日</strong>
+                            <strong className="text-neon-purple block mb-1 text-xs uppercase tracking-wider">{t('contestPlayground.gameList.createdAt', 'Created At')}</strong>
                             {new Date(game.created_at).toLocaleDateString()}
                         </div>
                         </div>
@@ -287,6 +293,7 @@ import { ChevronLeft, ChevronRight, Filter } from 'lucide-react';
 import { useMe } from '@/hooks/use-user';
 
 function MemberListView({ contestId }: { contestId: number }) {
+  const { t } = useTranslation();
   const { addToast } = useToast();
   const [page, setPage] = useState(1);
   const [sortBy, setSortBy] = useState('point');
@@ -326,9 +333,9 @@ function MemberListView({ contestId }: { contestId: number }) {
       if (!activeGameId) return;
       try {
           await contestService.inviteUserToTeam(activeGameId, userId);
-          addToast(`${username}を招待しました！`, 'success');
+          addToast(t('contestPlayground.memberList.inviteSuccess', { username, defaultValue: `Invited ${username}!` }), 'success');
       } catch (e) {
-          addToast('招待に失敗しました。', 'error');
+          addToast(t('contestPlayground.memberList.inviteFail', 'Failed to invite.'), 'error');
       }
   };
 
@@ -341,7 +348,7 @@ function MemberListView({ contestId }: { contestId: number }) {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
         <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <Users className="text-neon-cyan" />
-            参加者一覧
+            {t('contestPlayground.memberList.title', 'Member List')}
         </h2>
         
         <div className="flex items-center gap-3">
@@ -350,9 +357,9 @@ function MemberListView({ contestId }: { contestId: number }) {
                     value={sortBy}
                     onChange={(val: string | number) => setSortBy(val as string)}
                     options={[
-                        { value: "point", label: "ポイント順" },
-                        { value: "current_tier", label: "現在のランク順" },
-                        { value: "peak_tier", label: "最高ランク順" }
+                        { value: "point", label: t('contestPlayground.memberList.filter.point', 'Points') },
+                        { value: "current_tier", label: t('contestPlayground.memberList.filter.currentTier', 'Current Tier') },
+                        { value: "peak_tier", label: t('contestPlayground.memberList.filter.peakTier', 'Peak Tier') }
                     ]}
                     startIcon={<Filter size={16} />}
                 />
@@ -362,8 +369,8 @@ function MemberListView({ contestId }: { contestId: number }) {
                     value={order}
                     onChange={(val: string | number) => setOrder(val as 'asc' | 'desc')}
                     options={[
-                        { value: "desc", label: "降順" },
-                        { value: "asc", label: "昇順" }
+                        { value: "desc", label: t('contestPlayground.memberList.filter.desc', 'Desc') },
+                        { value: "asc", label: t('contestPlayground.memberList.filter.asc', 'Asc') }
                     ]}
                 />
             </div>
@@ -371,19 +378,19 @@ function MemberListView({ contestId }: { contestId: number }) {
       </div>
       
       {members.length === 0 ? (
-          <div className="text-neutral-500 text-center py-8">参加者がいません。</div>
+          <div className="text-neutral-500 text-center py-8">{t('contestPlayground.memberList.empty', 'No participants found.')}</div>
       ) : (
       <>
       <div className="overflow-x-auto min-h-[400px]">
         <table className="w-full text-left border-collapse">
           <thead>
               <tr className="border-b border-neutral-800 text-sm font-medium text-neutral-500 uppercase tracking-wider">
-               <th className="py-4 px-4">名前</th>
-               <th className="py-4 px-4">タグ</th>
-               <th className="py-4 px-4">現在ランク</th>
-               <th className="py-4 px-4">最高ランク</th>
-               <th className="py-4 px-4 text-right">ポイント</th>
-               {iAmLeader && <th className="py-4 px-4 text-right">操作</th>}
+               <th className="py-4 px-4">{t('contestPlayground.memberList.table.name', 'Name')}</th>
+               <th className="py-4 px-4">{t('contestPlayground.memberList.table.tag', 'Tag')}</th>
+               <th className="py-4 px-4">{t('contestPlayground.memberList.table.currentRank', 'Current Rank')}</th>
+               <th className="py-4 px-4">{t('contestPlayground.memberList.table.peakRank', 'Peak Rank')}</th>
+               <th className="py-4 px-4 text-right">{t('contestPlayground.memberList.table.points', 'Points')}</th>
+               {iAmLeader && <th className="py-4 px-4 text-right">{t('contestPlayground.memberList.table.action', 'Action')}</th>}
              </tr>
            </thead>
            <tbody className="divide-y divide-neutral-800">
@@ -421,7 +428,7 @@ function MemberListView({ contestId }: { contestId: number }) {
                     <div>
                         <div className="flex items-center gap-2">
                             {member.username}
-                            {member.leader_type === 'LEADER' && <span className="text-[10px] bg-neon-cyan/20 text-neon-cyan px-1.5 py-0.5 rounded border border-neon-cyan/30">LEADER</span>}
+                            {member.leader_type === 'LEADER' && <span className="text-[10px] bg-neon-cyan/20 text-neon-cyan px-1.5 py-0.5 rounded border border-neon-cyan/30">{t('contestPlayground.memberList.table.leader', 'LEADER')}</span>}
                         </div>
                     </div>
                  </td>
@@ -435,12 +442,12 @@ function MemberListView({ contestId }: { contestId: number }) {
                        onClick={() => handleInvite(member.user_id, member.username)}
                        className="text-xs bg-neon-purple/10 text-neon-purple border border-neon-purple/30 hover:bg-neon-purple hover:text-white px-3 py-1.5 rounded-lg transition-all flex items-center gap-1 ml-auto"
                      >
-                       <UserPlus size={14} /> 招待
+                       <UserPlus size={14} /> {t('contestPlayground.memberList.invite', 'Invite')}
                      </button>
                    </td>
                  )}
                  {iAmLeader && me?.data?.user_id === member.user_id && (
-                     <td className="py-4 px-4 text-right"><span className="text-neutral-600 text-xs">自分</span></td>
+                     <td className="py-4 px-4 text-right"><span className="text-neutral-600 text-xs">{t('contestPlayground.memberList.table.me', 'Me')}</span></td>
                  )}
                </tr>
              );
@@ -460,7 +467,7 @@ function MemberListView({ contestId }: { contestId: number }) {
                 <ChevronLeft size={20} />
             </button>
             <span className="text-sm text-neutral-400 font-mono">
-                Page <span className="text-white font-bold">{page}</span> / {totalPages}
+                {t('contestPlayground.memberList.page', 'Page ')} <span className="text-white font-bold">{page}</span> / {totalPages}
             </span>
             <button 
                 onClick={() => setPage(p => Math.min(totalPages, p + 1))}
@@ -485,6 +492,7 @@ interface InviteUserViewProps {
 }
 
 function InviteUserView({ contestId, existingMemberIds, iAmLeader }: InviteUserViewProps) {
+    const { t } = useTranslation();
     const { addToast } = useToast();
     const [page, setPage] = useState(1);
     const PAGE_SIZE = 5;
@@ -505,9 +513,9 @@ function InviteUserView({ contestId, existingMemberIds, iAmLeader }: InviteUserV
     const handleInvite = async (userId: number, username: string) => {
         try {
             await contestService.inviteMember(contestId, userId);
-            addToast(`${username}を招待しました！`, 'success');
+            addToast(t('contestPlayground.memberList.inviteSuccess', { username, defaultValue: `Invited ${username}!` }), 'success');
         } catch (e: any) {
-            addToast(e.message || '招待に失敗しました。', 'error');
+            addToast(e.message || t('contestPlayground.memberList.inviteFail', 'Failed to invite.'), 'error');
         }
     };
 
@@ -517,7 +525,7 @@ function InviteUserView({ contestId, existingMemberIds, iAmLeader }: InviteUserV
         <div className="mt-8 pt-8 border-t border-neutral-800 animate-fade-in-up">
             <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <UserPlus className="text-neon-cyan" size={24} />
-                メンバーを招待
+                {t('contestPlayground.myTeam.inviteMember', 'Invite Member')}
             </h3>
             
             {isLoading ? (
@@ -547,13 +555,13 @@ function InviteUserView({ contestId, existingMemberIds, iAmLeader }: InviteUserV
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                     <div className="text-sm font-mono text-neon-cyan">{member.point}pt</div>
+                                     <div className="text-sm font-mono text-neon-cyan">{member.point}{t('contestPlayground.memberList.pt', 'pt')}</div>
                                      <button
                                         onClick={() => handleInvite(member.user_id, member.username)}
                                         disabled={isAlreadyMember}
                                         className="px-3 py-1.5 text-xs rounded-lg bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/20 hover:bg-neon-cyan hover:text-black disabled:opacity-30 disabled:hover:bg-neon-cyan/10 disabled:hover:text-neon-cyan transition-all"
                                      >
-                                        {isAlreadyMember ? '参加済み' : '招待'}
+                                        {isAlreadyMember ? t('contestPlayground.myTeam.alreadyJoined', 'Joined') : t('contestPlayground.memberList.invite', 'Invite')}
                                      </button>
                                 </div>
                             </div>
@@ -573,7 +581,7 @@ function InviteUserView({ contestId, existingMemberIds, iAmLeader }: InviteUserV
                         <ChevronLeft size={16} />
                     </button>
                     <span className="text-xs text-neutral-500 font-mono">
-                        Page {page} / {totalPages}
+                        {t('contestPlayground.memberList.page', 'Page ')}{page} / {totalPages}
                     </span>
                     <button 
                         onClick={() => setPage(p => Math.min(totalPages, p + 1))}
@@ -589,6 +597,7 @@ function InviteUserView({ contestId, existingMemberIds, iAmLeader }: InviteUserV
 }
 
 function MyTeamView({ contestId }: { contestId: number }) {
+  const { t } = useTranslation();
   const { addToast } = useToast();
   const { data: me } = useMe();
   const myUserId = me?.data?.user_id;
@@ -629,36 +638,36 @@ function MyTeamView({ contestId }: { contestId: number }) {
   const handleCreateTeam = async () => {
        try {
            await contestService.createTeam(contestId);
-           addToast('チームを作成しました！', 'success');
+           addToast(t('contestPlayground.myTeam.createSuccess', 'Team created!'), 'success');
            queryClient.invalidateQueries({ queryKey: ['contest-team', contestId] });
            refetch();
        } catch (e: any) {
-           addToast(e.message || 'チーム作成に失敗しました。', 'error');
+           addToast(e.message || t('contestPlayground.myTeam.createFail', 'Failed to create team.'), 'error');
            console.error(e);
        }
   };
 
   const handleDeleteTeam = async () => {
-      if (!confirm('本当にチームを解散しますか？この操作は取り消せません。')) return;
+      if (!confirm(t('contestPlayground.myTeam.confirmDisband', 'Are you sure you want to disband this team? This cannot be undone.'))) return;
       try {
           await contestService.deleteTeam(contestId);
-          addToast('チームを解散しました。', 'success');
+          addToast(t('contestPlayground.myTeam.disbandSuccess', 'Team disbanded.'), 'success');
            queryClient.invalidateQueries({ queryKey: ['contest-team', contestId] });
            refetch();
       } catch (e: any) {
-           addToast('チームの解散に失敗しました。', 'error');
+           addToast(t('contestPlayground.myTeam.disbandFail', 'Failed to disband team.'), 'error');
       }
   };
 
   const handleLeaveTeam = async () => {
-       if (!confirm('本当にチームを脱退しますか？')) return;
+       if (!confirm(t('contestPlayground.myTeam.confirmLeave', 'Are you sure you want to leave this team?'))) return;
        try {
            await contestService.deleteTeam(contestId); 
-           addToast('チームを脱退しました。', 'success');
+           addToast(t('contestPlayground.myTeam.leaveSuccess', 'Left team.'), 'success');
             queryClient.invalidateQueries({ queryKey: ['contest-team', contestId] });
             refetch();
        } catch (e: any) {
-           addToast('チームの脱退に失敗しました。', 'error');
+           addToast(t('contestPlayground.myTeam.leaveFail', 'Failed to leave team.'), 'error');
        }
   };
 
@@ -670,13 +679,13 @@ function MyTeamView({ contestId }: { contestId: number }) {
       return (
           <div className="p-8 rounded-2xl bg-neutral-900/30 border border-neutral-800 animate-fade-in-up flex flex-col items-center justify-center min-h-[400px]">
              <Shield className="text-neutral-800 mb-4" size={48} />
-             <h2 className="text-xl font-bold text-neutral-400 mb-2">チーム未所属</h2>
-             <p className="text-neutral-600 text-sm mb-6">現在チームに所属していません。</p>
+             <h2 className="text-xl font-bold text-neutral-400 mb-2">{t('contestPlayground.myTeam.noTeam.title', 'No Team')}</h2>
+             <p className="text-neutral-600 text-sm mb-6">{t('contestPlayground.myTeam.noTeam.desc', 'You are not in a team.')}</p>
              <button 
                 onClick={handleCreateTeam}
                 className="bg-neon-cyan text-black px-6 py-2 rounded-full font-bold shadow-[0_0_15px_rgba(0,243,255,0.2)] hover:shadow-[0_0_25px_rgba(0,243,255,0.4)] transition-all flex items-center gap-2"
              >
-                <UserPlus size={18} /> チームを作成
+                <UserPlus size={18} /> {t('contestPlayground.myTeam.noTeam.create', 'Create Team')}
              </button>
           </div>
       );
@@ -691,11 +700,11 @@ function MyTeamView({ contestId }: { contestId: number }) {
         <div>
             <h2 className="text-2xl font-bold text-white flex items-center gap-3">
             <Shield className="text-neon-cyan" />
-            {team.name || 'My Team'} 
+            {team.name || t('contestPlayground.myTeam.title', 'My Team')} 
             </h2>
              {/* Point Display with Alert Logic */}
              <div className="mt-2 flex items-center gap-2">
-                <span className="text-sm text-gray-400">Total Points:</span>
+                <span className="text-sm text-gray-400">{t('contestPlayground.myTeam.totalPoints', 'Total Points')}:</span>
                 <div className={`text-lg font-mono font-bold ${isPointOver ? 'text-nasu-red' : 'text-neon-blue'} flex items-center gap-2`}>
                     {currentTotalPoint.toLocaleString()} 
                     <span className="text-neutral-600 text-sm">/ {maxTotalPoint.toLocaleString()}</span>
@@ -703,7 +712,7 @@ function MyTeamView({ contestId }: { contestId: number }) {
                 {isPointOver && (
                     <div className="flex items-center gap-1 text-nasu-red text-xs bg-nasu-red/10 px-2 py-0.5 rounded border border-nasu-red/20">
                         <AlertCircle size={12} />
-                        <span>ポイント超過</span>
+                        <span>{t('contestPlayground.myTeam.pointOver', 'Points Exceeded')}</span>
                     </div>
                 )}
             </div>
@@ -711,24 +720,24 @@ function MyTeamView({ contestId }: { contestId: number }) {
 
         <div className="flex items-center gap-4 flex-wrap">
              <div className="text-sm text-neutral-500 px-3 py-1 rounded-full border border-neutral-800 bg-neutral-900">
-                コード: <span className="text-white font-bold select-all">{team.invite_code}</span>
+                {t('contestPlayground.myTeam.code', 'Code')}: <span className="text-white font-bold select-all">{team.invite_code}</span>
              </div>
              <div className="text-sm text-neutral-500 px-3 py-1 rounded-full border border-neutral-800 bg-neutral-900">
-                定員: <span className="text-white font-bold">{teamMembers.length}</span> / {capacity}
+                {t('contestPlayground.myTeam.capacity', 'Capacity')}: <span className="text-white font-bold">{teamMembers.length}</span> / {capacity}
              </div>
              {iAmLeader ? (
                  <button 
                     onClick={handleDeleteTeam}
                     className="text-xs bg-red-500/10 text-red-500 border border-red-500/30 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg transition-all"
                  >
-                    チーム解散
+                    {t('contestPlayground.myTeam.disband', 'Disband')}
                  </button>
              ) : (
                  <button 
                     onClick={handleLeaveTeam}
                     className="text-xs bg-red-500/10 text-red-500 border border-red-500/30 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg transition-all"
                  >
-                    チーム脱退
+                    {t('contestPlayground.myTeam.leave', 'Leave')}
                  </button>
              )}
         </div>
@@ -761,7 +770,7 @@ function MyTeamView({ contestId }: { contestId: number }) {
                       <div className="flex items-center gap-2">
                         <span className="text-xs text-neon-cyan uppercase tracking-wider font-semibold">{member.member_type}</span>
                         {member.point !== undefined && (
-                             <span className="text-xs text-neutral-500 font-mono bg-neutral-950 px-1.5 rounded border border-neutral-800">{member.point}pt</span>
+                             <span className="text-xs text-neutral-500 font-mono bg-neutral-950 px-1.5 rounded border border-neutral-800">{member.point}{t('contestPlayground.memberList.pt', 'pt')}</span>
                         )}
                       </div>
                    </div>
@@ -779,7 +788,7 @@ function MyTeamView({ contestId }: { contestId: number }) {
          {Array.from({ length: emptySlots }).map((_, idx) => (
              <div key={`empty-${idx}`} className="p-6 rounded-xl border-2 border-dashed border-neutral-800 bg-neutral-900/20 flex flex-col items-center justify-center gap-2 min-h-[100px] text-neutral-600 hover:text-neutral-400 hover:border-neutral-700 transition-colors">
                 <UserPlus size={24} />
-                <span className="text-sm font-medium">空き枠</span>
+                <span className="text-sm font-medium">{t('contestPlayground.myTeam.emptySlot', 'Empty Slot')}</span>
              </div>
          ))}
       </div>
@@ -795,21 +804,23 @@ function MyTeamView({ contestId }: { contestId: number }) {
 }
 
 function BracketView() {
+  const { t } = useTranslation();
   return (
     <div className="p-8 rounded-2xl bg-neutral-900/30 border border-neutral-800 animate-fade-in-up flex flex-col items-center justify-center min-h-[400px]">
        <Trophy className="text-neutral-800 mb-4" size={48} />
-       <h2 className="text-xl font-bold text-neutral-400 mb-2">トーナメント表</h2>
-       <p className="text-neutral-600 text-sm">現在準備中です...</p>
+       <h2 className="text-xl font-bold text-neutral-400 mb-2">{t('contestPlayground.bracket.title', 'Tournament Bracket')}</h2>
+       <p className="text-neutral-600 text-sm">{t('contestPlayground.bracket.preparing', 'Currently in preparation...')}</p>
     </div>
   );
 }
 
 function ResultView() {
+  const { t } = useTranslation();
   return (
     <div className="p-8 rounded-2xl bg-neutral-900/30 border border-neutral-800 animate-fade-in-up flex flex-col items-center justify-center min-h-[400px]">
        <ClipboardList className="text-neutral-800 mb-4" size={48} />
-       <h2 className="text-xl font-bold text-neutral-400 mb-2">大会結果</h2>
-       <p className="text-neutral-600 text-sm">現在準備中です...</p>
+       <h2 className="text-xl font-bold text-neutral-400 mb-2">{t('contestPlayground.result.title', 'Results')}</h2>
+       <p className="text-neutral-600 text-sm">{t('contestPlayground.result.preparing', 'Currently in preparation...')}</p>
     </div>
   );
 }

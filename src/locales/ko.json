@@ -280,9 +280,9 @@
       "loginRequired": "참가 신청을 하려면 로그인이 필요합니다."
     },
     "contestModal": {
-      "title": "팀 생성",
+      "title": "대회 참가 신청",
       "qualification": "자격 확인",
-      "description": "이 대회에 참가하려면 팀을 생성해야 합니다. 먼저 발로란트 랭크를 확인합니다.",
+      "description": "이 대회에 참가하려면 자격 확인이 필요합니다. 먼저 발로란트 랭크를 확인합니다.",
       "calculate": "내 포인트 계산하기",
       "notConfigured": "포인트 테이블 미설정",
       "calculating": "포인트 계산 중...",
@@ -292,7 +292,7 @@
       "peakTier": "최고 티어",
       "calculatedPoints": "계산된 포인트",
       "cancel": "취소",
-      "createTeam": "팀 생성"
+      "createTeam": "참가 신청"
     },
     "contestDashboard": {
       "tabs": {
@@ -449,5 +449,101 @@
     "placeholder": "경기에 대한 생각을 공유해보세요...",
     "postButton": "댓글 작성",
     "noComments": "아직 댓글이 없습니다. 첫 번째로 응원해보세요!"
+  },
+  "contestPlayground": {
+    "menu": {
+      "title": "메뉴",
+      "home": "홈",
+      "gameList": "게임 목록",
+      "memberList": "참가자 목록",
+      "myTeam": "마이팀",
+      "bracket": "대진표",
+      "result": "결과"
+    },
+    "header": {
+      "label": "플레이그라운드"
+    },
+    "home": {
+      "noDescription": "대회 설명이 없습니다.",
+      "status": "상태",
+      "teams": "참가 팀 / 상한",
+      "gameType": "게임 타입",
+      "active": "개최 중",
+      "pending": "준비 중",
+      "recruiting": "모집 중",
+      "finished": "종료",
+      "cancelled": "취소됨"
+    },
+    "gameList": {
+      "title": "게임 목록",
+      "empty": "등록된 게임이 없습니다.",
+      "gameNumber": "게임 #{{id}}",
+      "format": "형식",
+      "statusLabel": "상태: ",
+      "status": "상태",
+      "createdAt": "생성일"
+    },
+    "memberList": {
+      "title": "참가자 목록",
+      "filter": {
+        "point": "포인트순",
+        "currentTier": "현재 티어순",
+        "peakTier": "최고 티어순",
+        "desc": "내림차순",
+        "asc": "오름차순"
+      },
+      "empty": "참가자가 없습니다.",
+      "table": {
+        "name": "이름",
+        "tag": "태그",
+        "currentRank": "현재 티어",
+        "peakRank": "최고 티어",
+        "points": "포인트",
+        "action": "조작",
+        "leader": "방장",
+        "me": "나"
+      },
+      "page": "페이지 ",
+      "pt": "pt",
+      "invite": "초대",
+      "inviteSuccess": "{{username}}님을 초대했습니다!",
+      "inviteFail": "초대에 실패했습니다."
+    },
+    "myTeam": {
+      "title": "마이팀",
+      "noTeam": {
+        "title": "팀 미소속",
+        "desc": "현재 소속된 팀이 없습니다.",
+        "create": "팀 생성"
+      },
+      "code": "코드",
+      "capacity": "정원",
+      "disband": "팀 해체",
+      "leave": "팀 탈퇴",
+      "confirmDisband": "정말로 팀을 해체하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+      "confirmLeave": "정말로 팀을 탈퇴하시겠습니까?",
+      "createSuccess": "팀이 생성되었습니다!",
+      "createFail": "팀 생성에 실패했습니다.",
+      "disbandSuccess": "팀이 해체되었습니다.",
+      "disbandFail": "팀 해체에 실패했습니다.",
+      "leaveSuccess": "팀을 탈퇴했습니다.",
+      "leaveFail": "팀 탈퇴에 실패했습니다.",
+      "totalPoints": "총 포인트",
+      "pointOver": "포인트 초과",
+      "emptySlot": "빈 슬롯",
+      "manage": "팀 관리",
+      "inviteMember": "멤버 초대",
+      "alreadyJoined": "이미 참가함"
+    },
+    "bracket": {
+      "title": "토너먼트 대진표",
+      "preparing": "현재 준비중입니다..."
+    },
+    "result": {
+      "title": "결과",
+      "preparing": "현재 준비중입니다..."
+    },
+    "loadingFail": "대회 정보를 불러오는데 실패했습니다",
+    "retry": "URL을 확인하거나 잠시 후 다시 시도해주세요."
   }
 }

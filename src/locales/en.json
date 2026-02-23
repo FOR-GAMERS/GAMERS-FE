@@ -269,9 +269,9 @@
       "loginRequired": "Login is required to join."
     },
     "contestModal": {
-      "title": "Create Team",
+      "title": "Join Contest",
       "qualification": "Qualification Check",
-      "description": "To participate in this contest, you need to create a team. We need to verify your Valorant rank first.",
+      "description": "To participate in this contest, we need to verify your Valorant rank first.",
       "calculate": "Calculate My Points",
       "notConfigured": "Point Table Not Configured",
       "calculating": "Calculating points...",
@@ -281,7 +281,7 @@
       "peakTier": "Peak Tier",
       "calculatedPoints": "Calculated Points",
       "cancel": "Cancel",
-      "createTeam": "Create Team"
+      "createTeam": "Join Contest"
     },
     "contestDashboard": {
       "tabs": {
@@ -438,5 +438,101 @@
     "placeholder": "Share your thoughts about this match...",
     "postButton": "Post Comment",
     "noComments": "No comments yet. Be the first to cheer!"
+  },
+  "contestPlayground": {
+    "menu": {
+      "title": "Menu",
+      "home": "Home",
+      "gameList": "Game List",
+      "memberList": "Member List",
+      "myTeam": "My Team",
+      "bracket": "Bracket",
+      "result": "Result"
+    },
+    "header": {
+      "label": "Playground"
+    },
+    "home": {
+      "noDescription": "No description available.",
+      "status": "Status",
+      "teams": "Teams / Limit",
+      "gameType": "Game Type",
+      "active": "Active",
+      "pending": "Pending",
+      "recruiting": "Recruiting",
+      "finished": "Finished",
+      "cancelled": "Cancelled"
+    },
+    "gameList": {
+      "title": "Game List",
+      "empty": "No games registered.",
+      "gameNumber": "Game #{{id}}",
+      "format": "Format",
+      "statusLabel": "Status: ",
+      "status": "Status",
+      "createdAt": "Created At"
+    },
+    "memberList": {
+      "title": "Member List",
+      "filter": {
+        "point": "Points",
+        "currentTier": "Current Tier",
+        "peakTier": "Peak Tier",
+        "desc": "Desc",
+        "asc": "Asc"
+      },
+      "empty": "No participants found.",
+      "table": {
+        "name": "Name",
+        "tag": "Tag",
+        "currentRank": "Current Rank",
+        "peakRank": "Peak Rank",
+        "points": "Points",
+        "action": "Action",
+        "leader": "LEADER",
+        "me": "Me"
+      },
+      "page": "Page ",
+      "pt": "pt",
+      "invite": "Invite",
+      "inviteSuccess": "Invited {{username}}!",
+      "inviteFail": "Failed to invite."
+    },
+    "myTeam": {
+      "title": "My Team",
+      "noTeam": {
+        "title": "No Team",
+        "desc": "You are not in a team.",
+        "create": "Create Team"
+      },
+      "code": "Code",
+      "capacity": "Capacity",
+      "disband": "Disband",
+      "leave": "Leave",
+      "confirmDisband": "Are you sure you want to disband this team? This cannot be undone.",
+      "confirmLeave": "Are you sure you want to leave this team?",
+      "createSuccess": "Team created!",
+      "createFail": "Failed to create team.",
+      "disbandSuccess": "Team disbanded.",
+      "disbandFail": "Failed to disband team.",
+      "leaveSuccess": "Left team.",
+      "leaveFail": "Failed to leave team.",
+      "totalPoints": "Total Points",
+      "pointOver": "Points Exceeded",
+      "emptySlot": "Empty Slot",
+      "manage": "Manage Team",
+      "inviteMember": "Invite Member",
+      "alreadyJoined": "Joined"
+    },
+    "bracket": {
+      "title": "Tournament Bracket",
+      "preparing": "Currently in preparation..."
+    },
+    "result": {
+      "title": "Results",
+      "preparing": "Currently in preparation..."
+    },
+    "loadingFail": "Failed to load contest info",
+    "retry": "Please check the URL or try again later."
   }
 }
