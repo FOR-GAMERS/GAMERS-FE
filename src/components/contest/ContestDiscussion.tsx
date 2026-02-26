@@ -125,9 +125,18 @@ export default function ContestDiscussion({ contestId }: ContestDiscussionProps)
           </div>
         ) : (
           <div className="space-y-4">
-             {comments.map((comment) => (
+             {comments.map((comment) => {
+                const getAvatarSrc = (author: any) => {
+                    if (author.avatar?.startsWith('http')) return author.avatar;
+                    if (author.profile_key && author.avatar) {
+                        return `https://cdn.discordapp.com/avatars/${author.profile_key}/${author.avatar}.png`;
+                    }
+                    return "/img/discord-avatar.png";
+                };
+                
+                return (
                 <div key={comment.comment_id} className="bg-neutral-900/30 p-5 rounded-2xl border border-neutral-800/50 flex gap-4 relative group">
-                  <img src={comment.author.avatar || "/img/discord-avatar.png"} alt={comment.author.username} className="w-10 h-10 rounded-full object-cover shrink-0" />
+                  <img src={getAvatarSrc(comment.author)} alt={comment.author.username} className="w-10 h-10 rounded-full object-cover shrink-0" />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between mb-1">
                       <div className="flex items-center gap-2 truncate">
@@ -208,7 +217,8 @@ export default function ContestDiscussion({ contestId }: ContestDiscussionProps)
                     )}
                   </div>
                 </div>
-             ))}
+                );
+             })}
           </div>
         )}
     </div>
