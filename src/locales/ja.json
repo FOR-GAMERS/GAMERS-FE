@@ -439,5 +439,94 @@
     "placeholder": "試合いについての思いを共有しましょう...",
     "postButton": "コメントを投稿",
     "noComments": "まだコメントがありません。最初に応援しましょう！"
+  },
+  "contestPlayground": {
+    "menu": {
+      "title": "メニュー",
+      "home": "ホーム",
+      "memberList": "メンバーリスト",
+      "myTeam": "マイチーム",
+      "bracket": "トーナメント表",
+      "result": "結果"
+    },
+    "home": {
+      "noDescription": "説明はありません。",
+      "status": "ステータス",
+      "active": "進行中",
+      "pending": "準備中",
+      "recruiting": "募集中",
+      "finished": "終了",
+      "cancelled": "中止",
+      "teams": "チーム / 上限",
+      "gameType": "ゲームタイプ"
+    },
+    "gameList": {
+      "title": "ゲームリスト",
+      "empty": "登録されたゲームはありません。",
+      "gameNumber": "ゲーム #{{id}}",
+      "statusLabel": "ステータス: ",
+      "format": "フォーマット",
+      "createdAt": "作成日"
+    },
+    "memberList": {
+      "title": "メンバーリスト",
+      "filter": {
+        "point": "ポイント",
+        "currentTier": "現在のティア",
+        "peakTier": "最高ティア",
+        "desc": "降順",
+        "asc": "昇順"
+      },
+      "empty": "参加者が見つかりません。",
+      "table": {
+        "name": "名前",
+        "tag": "タグ",
+        "currentRank": "現在のランク",
+        "peakRank": "最高ランク",
+        "points": "ポイント",
+        "action": "操作",
+        "leader": "リーダー",
+        "me": "私"
+      },
+      "invite": "招待",
+      "inviteSuccess": "{{username}}を招待しました！",
+      "inviteFail": "招待に失敗しました。",
+      "pt": "pt",
+      "page": "ページ "
+    },
+    "myTeam": {
+      "title": "マイチーム",
+      "createSuccess": "チームを作成しました！",
+      "createFail": "チーム作成に失敗しました。",
+      "confirmDisband": "本当にチームを解散しますか？この操作は取り消せません。",
+      "disbandSuccess": "チームを解散しました。",
+      "disbandFail": "チームの解散に失敗しました。",
+      "confirmLeave": "本当にチームを脱退しますか？",
+      "leaveSuccess": "チームを脱退しました。",
+      "leaveFail": "チームの脱退に失敗しました。",
+      "noTeam": {
+        "title": "チームなし",
+        "desc": "現在チームに所属していません。",
+        "create": "チームを作成する"
+      },
+      "totalPoints": "合計ポイント",
+      "pointOver": "ポイント超過",
+      "code": "コード",
+      "capacity": "定員",
+      "disband": "解散",
+      "leave": "脱退",
+      "emptySlot": "空きスロット",
+      "inviteMember": "メンバー招待",
+      "alreadyJoined": "参加済み",
+      "manageInvites": "招待を管理"
+    },
+    "bracket": {
+      "title": "トーナメント表",
+      "preparing": "現在準備中です..."
+    },
+    "result": {
+      "title": "結果",
+      "preparing": "現在準備中です..."
+    }
   }
 }

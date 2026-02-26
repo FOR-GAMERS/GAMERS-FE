@@ -419,7 +419,7 @@ function MemberListView({ contestId }: { contestId: number }) {
                return (
                <tr key={member.user_id} className="group hover:bg-gradient-to-r hover:from-neutral-900 hover:to-neon-purple/10 transform transition-all duration-300 hover:-translate-y-1 will-change-transform text-sm">
                  <td className="py-4 px-4 font-medium text-white flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-neutral-800 to-neutral-700 flex items-center justify-center text-xs font-bold ring-1 ring-white/10 group-hover:ring-neon-cyan/50 transition-all overflow-hidden">
+                    <div className="relative w-8 h-8 rounded-full bg-gradient-to-tr from-neutral-800 to-neutral-700 flex items-center justify-center text-xs font-bold ring-1 ring-white/10 group-hover:ring-neon-cyan/50 transition-all overflow-hidden">
                        {avatarSrc ? (
                            <Image src={avatarSrc} alt={member.username} fill className="object-cover" />
                        ) : (
@@ -660,7 +660,7 @@ function MyTeamView({ contestId }: { contestId: number }) {
              return (
              <div key={member.user_id} className="relative p-6 rounded-xl bg-gradient-to-br from-neutral-800/40 to-neutral-900/40 border border-neutral-700/50 hover:border-neon-cyan/40 transition-all duration-300 hover:-translate-y-1 will-change-transform group">
                 <div className="flex items-center gap-4">
-                   <div className="w-12 h-12 rounded-full bg-neutral-800 flex items-center justify-center text-white font-bold text-lg shadow-lg overflow-hidden">
+                    <div className="relative w-12 h-12 rounded-full bg-neutral-800 flex items-center justify-center text-white font-bold text-lg shadow-lg overflow-hidden">
                       {avatarSrc ? (
                           <Image src={avatarSrc} alt={member.username} fill className="object-cover" />
                       ) : (
@@ -688,10 +688,14 @@ function MyTeamView({ contestId }: { contestId: number }) {
          })}
 
          {Array.from({ length: emptySlots }).map((_, idx) => (
-             <div key={`empty-${idx}`} className="p-6 rounded-xl border-2 border-dashed border-neutral-800 bg-neutral-900/20 flex flex-col items-center justify-center gap-2 min-h-[100px] text-neutral-600 hover:text-neutral-400 hover:border-neutral-700 transition-colors">
+             <button 
+                key={`empty-${idx}`} 
+                onClick={() => iAmLeader ? router.push(`/contest/${contestId}/team/invite`) : null}
+                className={`w-full p-6 rounded-xl border-2 border-dashed border-neutral-800 bg-neutral-900/20 flex flex-col items-center justify-center gap-2 min-h-[100px] transition-colors ${iAmLeader ? 'text-neutral-500 hover:text-neon-cyan hover:border-neon-cyan/50 cursor-pointer' : 'text-neutral-600 cursor-default'}`}
+             >
                 <UserPlus size={24} />
                 <span className="text-sm font-medium">{t('contestPlayground.myTeam.emptySlot', 'Empty Slot')}</span>
-             </div>
+             </button>
          ))}
       </div>
     </div>
