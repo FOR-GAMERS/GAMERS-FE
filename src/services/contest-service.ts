@@ -12,7 +12,10 @@ import {
   GameResponse,
   TeamResponse,
   CreateTeamRequest,
-  ScheduleGameRequest
+  ScheduleGameRequest,
+  CommentResponse,
+  CreateCommentRequest,
+  UpdateCommentRequest
 } from '@/types/api';
 import { ContestPointResponse } from '@/types/valorant';
 
@@ -105,6 +108,28 @@ export const contestService = {
 
   async rejectApplication(contestId: number, userId: number) {
     return api.post<ApiResponse<void>>(`/contests/${contestId}/applications/${userId}/reject`);
+  },
+
+  // Comments
+  async getComments(contestId: number, params?: {
+    page?: number;
+    page_size?: number;
+    sort_by?: string;
+    order?: 'asc' | 'desc';
+  }) {
+    return api.get<ApiResponse<PaginationResponse<CommentResponse>>>(`/contests/${contestId}/comments`, { params });
+  },
+
+  async createComment(contestId: number, data: CreateCommentRequest) {
+    return api.post<ApiResponse<CommentResponse>>(`/contests/${contestId}/comments`, data);
+  },
+
+  async updateComment(contestId: number, commentId: number, data: UpdateCommentRequest) {
+    return api.patch<ApiResponse<CommentResponse>>(`/contests/${contestId}/comments/${commentId}`, data);
+  },
+
+  async deleteComment(contestId: number, commentId: number) {
+    return api.delete<ApiResponse<void>>(`/contests/${contestId}/comments/${commentId}`);
   },
 
   // Members

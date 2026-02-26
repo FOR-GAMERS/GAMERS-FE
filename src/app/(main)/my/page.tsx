@@ -1,6 +1,7 @@
 'use client';
 
-import { Suspense, useState } from 'react';
+import { Suspense, useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import ProfileHeader from '@/components/mypage/ProfileHeader';
 import ValorantSection from '@/components/mypage/ValorantSection';
 import ProfileEditSection from '@/components/mypage/ProfileEditSection';
@@ -64,7 +65,15 @@ function MyPageContent() {
   const { t } = useTranslation();
   const { data: userResponse, isLoading, error } = useMe();
   const user = userResponse?.data;
-  const [activeTab, setActiveTab] = useState('overview');
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get('tab');
+  const [activeTab, setActiveTab] = useState(tabParam || 'overview');
+
+  useEffect(() => {
+    if (tabParam) {
+      setActiveTab(tabParam);
+    }
+  }, [tabParam]);
 
   const profileUser = user ? {
     id: String(user.user_id),

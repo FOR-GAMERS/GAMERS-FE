@@ -138,6 +138,31 @@ export interface DiscordLinkRequiredResponse {
   oauth_url: string;
 }
 
+// --- Comments ---
+export interface AuthorResponse {
+  avatar?: string;
+  tag: string;
+  user_id: number;
+  username: string;
+}
+
+export interface CommentResponse {
+  author: AuthorResponse;
+  comment_id: number;
+  content: string;
+  contest_id: number;
+  created_at: string;
+  modified_at: string;
+}
+
+export interface CreateCommentRequest {
+  content: string;
+}
+
+export interface UpdateCommentRequest {
+  content: string;
+}
+
 export interface ContestApplicationResponse {
   user_id: number;
   contest_id?: number;

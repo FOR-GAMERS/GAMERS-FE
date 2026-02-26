@@ -260,7 +260,7 @@ export default function Header() {
                             <DropdownItem icon={User} label={t('navbar.myPage')} onClick={() => { setIsDropdownOpen(false); router.push("/my"); }} />
                             <DropdownItem icon={Trophy} label={t('navbar.createContest')} onClick={() => { setIsDropdownOpen(false); router.push("/contests/create"); }} />
                             <DropdownItem icon={FileText} label={t('navbar.report')} onClick={() => { setIsDropdownOpen(false); router.push("/report"); }} />
-                            <DropdownItem icon={Settings} label={t('navbar.settings')} />
+                            <DropdownItem icon={Settings} label={t('navbar.settings')} onClick={() => { setIsDropdownOpen(false); router.push("/my?tab=settings"); }} />
                             <div className="h-px bg-white/5 my-1" />
                             <DropdownItem icon={LogOut} label={t('navbar.logout')} className="text-red-400 hover:text-red-300 hover:bg-red-500/10" onClick={handleLogout} />
                         </div>

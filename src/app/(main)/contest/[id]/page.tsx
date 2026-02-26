@@ -14,7 +14,7 @@ export default async function ContestPlaygroundPage({
 
       <section className="border-t border-neutral-800 bg-neutral-900/20 mt-12">
         <div className="container mx-auto px-4 py-12">
-             <ContestDiscussion />
+             <ContestDiscussion contestId={parseInt(id)} />
         </div>
       </section>
     </div>

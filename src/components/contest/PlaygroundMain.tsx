@@ -23,6 +23,7 @@ import { useToast } from '@/context/ToastContext';
 import { ContestResponse } from '@/types/api';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { contestService } from '@/services/contest-service';
+import { useRouter } from 'next/navigation';
 import { Loader2, AlertCircle } from 'lucide-react';
 import AnimatedSelect from '@/components/ui/AnimatedSelect';
 
@@ -484,117 +485,7 @@ function MemberListView({ contestId }: { contestId: number }) {
   );
 }
 
-interface InviteUserViewProps {
-  contestId: number;
-  activeGameId?: number; // Needed for verify if active game is required for invite api
-  existingMemberIds: number[];
-  iAmLeader: boolean;
-}
 
-function InviteUserView({ contestId, existingMemberIds, iAmLeader }: InviteUserViewProps) {
-    const { t } = useTranslation();
-    const { addToast } = useToast();
-    const [page, setPage] = useState(1);
-    const PAGE_SIZE = 5;
-
-    // We can reuse getContestMembers to find people to invite
-    const { data: membersResponse, isLoading } = useQuery({
-        queryKey: ['contest-members-invite', contestId, page],
-        queryFn: () => contestService.getContestMembers(contestId, { page, page_size: PAGE_SIZE })
-    });
-
-    const members = membersResponse?.data?.data || [];
-    const totalPages = membersResponse?.data?.total_pages || 1;
-
-    // Filter out existing team members
-    // Note: This only filters current page. Ideally backend supports exclusion, but client-side visual filter is OK for now.
-    // Or we show them as "Already in team" disabled button.
-    
-    const handleInvite = async (userId: number, username: string) => {
-        try {
-            await contestService.inviteMember(contestId, userId);
-            addToast(t('contestPlayground.memberList.inviteSuccess', { username, defaultValue: `Invited ${username}!` }), 'success');
-        } catch (e: any) {
-            addToast(e.message || t('contestPlayground.memberList.inviteFail', 'Failed to invite.'), 'error');
-        }
-    };
-
-    if (!iAmLeader) return null;
-
-    return (
-        <div className="mt-8 pt-8 border-t border-neutral-800 animate-fade-in-up">
-            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                <UserPlus className="text-neon-cyan" size={24} />
-                {t('contestPlayground.myTeam.inviteMember', 'Invite Member')}
-            </h3>
-            
-            {isLoading ? (
-                <div className="flex justify-center p-4"><Loader2 className="animate-spin text-neon-cyan" /></div>
-            ) : (
-                <div className="space-y-3">
-                    {members.map(member => {
-                        const isAlreadyMember = existingMemberIds.includes(member.user_id);
-                         const getAvatarSrc = () => {
-                            if (member.avatar?.startsWith('http')) return member.avatar;
-                            if (member.profile_key && member.avatar) {
-                                return `https://cdn.discordapp.com/avatars/${member.profile_key}/${member.avatar}.png`;
-                            }
-                            return undefined;
-                        };
-                        const avatarSrc = getAvatarSrc();
-
-                        return (
-                            <div key={member.user_id} className="flex items-center justify-between p-3 rounded-xl bg-neutral-900/50 border border-neutral-800 hover:border-neutral-700 transition-colors">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center text-sm font-bold overflow-hidden">
-                                        {avatarSrc ? <Image src={avatarSrc} alt={member.username} fill className="object-cover"/> : member.username.substring(0, 1).toUpperCase()}
-                                    </div>
-                                    <div>
-                                        <div className="text-sm font-bold text-white">{member.username}</div>
-                                        <div className="text-xs text-neutral-500 font-mono">#{member.tag}</div>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-4">
-                                     <div className="text-sm font-mono text-neon-cyan">{member.point}{t('contestPlayground.memberList.pt', 'pt')}</div>
-                                     <button
-                                        onClick={() => handleInvite(member.user_id, member.username)}
-                                        disabled={isAlreadyMember}
-                                        className="px-3 py-1.5 text-xs rounded-lg bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/20 hover:bg-neon-cyan hover:text-black disabled:opacity-30 disabled:hover:bg-neon-cyan/10 disabled:hover:text-neon-cyan transition-all"
-                                     >
-                                        {isAlreadyMember ? t('contestPlayground.myTeam.alreadyJoined', 'Joined') : t('contestPlayground.memberList.invite', 'Invite')}
-                                     </button>
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>
-            )}
-
-             {/* Simple Pagination for Invite List */}
-             {totalPages > 1 && (
-                <div className="flex justify-center items-center gap-4 mt-4">
-                    <button 
-                        onClick={() => setPage(p => Math.max(1, p - 1))}
-                        disabled={page === 1}
-                        className="p-1.5 rounded-lg border border-neutral-800 text-neutral-400 hover:text-white disabled:opacity-30"
-                    >
-                        <ChevronLeft size={16} />
-                    </button>
-                    <span className="text-xs text-neutral-500 font-mono">
-                        {t('contestPlayground.memberList.page', 'Page ')}{page} / {totalPages}
-                    </span>
-                    <button 
-                        onClick={() => setPage(p => Math.min(totalPages, p + 1))}
-                        disabled={page === totalPages}
-                        className="p-1.5 rounded-lg border border-neutral-800 text-neutral-400 hover:text-white disabled:opacity-30"
-                    >
-                        <ChevronRight size={16} />
-                    </button>
-                </div>
-             )}
-        </div>
-    );
-}
 
 function MyTeamView({ contestId }: { contestId: number }) {
   const { t } = useTranslation();
@@ -602,6 +493,7 @@ function MyTeamView({ contestId }: { contestId: number }) {
   const { data: me } = useMe();
   const myUserId = me?.data?.user_id;
   const queryClient = useQueryClient();
+  const router = useRouter(); // <-- Ensure useRouter is available if not imported yet
 
   // Need contest info for total point limit
   const { data: contestResponse } = useQuery({
@@ -640,7 +532,8 @@ function MyTeamView({ contestId }: { contestId: number }) {
            await contestService.createTeam(contestId);
            addToast(t('contestPlayground.myTeam.createSuccess', 'Team created!'), 'success');
            queryClient.invalidateQueries({ queryKey: ['contest-team', contestId] });
-           refetch();
+           // Redirect immediately to the invite page after success
+           router.push(`/contest/${contestId}/team/invite`);
        } catch (e: any) {
            addToast(e.message || t('contestPlayground.myTeam.createFail', 'Failed to create team.'), 'error');
            console.error(e);
@@ -725,6 +618,15 @@ function MyTeamView({ contestId }: { contestId: number }) {
              <div className="text-sm text-neutral-500 px-3 py-1 rounded-full border border-neutral-800 bg-neutral-900">
                 {t('contestPlayground.myTeam.capacity', 'Capacity')}: <span className="text-white font-bold">{teamMembers.length}</span> / {capacity}
              </div>
+             {iAmLeader && (
+                 <button 
+                    onClick={() => router.push(`/contest/${contestId}/team/invite`)}
+                    className="text-xs bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/30 hover:bg-neon-cyan hover:text-black px-3 py-1.5 rounded-lg transition-all flex items-center gap-1"
+                 >
+                    <UserPlus size={14} />
+                    {t('contestPlayground.myTeam.manageInvites', 'Manage Invites')}
+                 </button>
+             )}
              {iAmLeader ? (
                  <button 
                     onClick={handleDeleteTeam}
@@ -792,13 +694,6 @@ function MyTeamView({ contestId }: { contestId: number }) {
              </div>
          ))}
       </div>
-      
-      {/* Invitation Section */}
-      <InviteUserView 
-        contestId={contestId} 
-        existingMemberIds={existingMemberIds} 
-        iAmLeader={!!iAmLeader} 
-      />
     </div>
   );
 }
