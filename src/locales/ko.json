@@ -152,8 +152,69 @@
       "toast": {
         "passwordMismatch": "비밀번호가 일치하지 않습니다.",
         "passwordChanged": "비밀번호가 변경되었습니다.",
-        "updateNotSupported": "프로필 정보 수정은 아직 지원되지 않습니다. (비밀번호 제외)",
+        "updated": "프로필이 수정되었습니다.",
         "failed": "프로필 수정 실패"
+      },
+      "withdrawal": {
+        "title": "서비스 탈퇴",
+        "description": "계정 삭제는 영구적이며 취소할 수 없습니다. 대전 기록 및 대회 기록을 포함한 모든 데이터가 삭제됩니다.",
+        "button": "서비스 탈퇴하기",
+        "confirm": "정말로 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+        "success": "계정이 삭제되었습니다.",
+        "failed": "계정 삭제 실패"
+      }
+    },
+    "lol": {
+      "title": "리그 오브 레전드 연동",
+      "region": "지역",
+      "riotName": "소환사 명",
+      "tag": "태그",
+      "linkButton": "LOL 계정 연동하기",
+      "unlinkButton": "연동 해제",
+      "refreshButton": "정보 갱신",
+      "elo": "ELO 레이팅",
+      "currentRank": "현재 티어",
+      "peakRank": "최고 티어",
+      "lastUpdated": "최근 갱신",
+      "cantRefresh": "갱신 불가능 (24시간 이내)",
+      "confirmUnlink": "정말로 LOL 계정 연동을 해제하시겠습니까?",
+      "toast": {
+        "linked": "LOL 계정이 연동되었습니다.",
+        "linkFailed": "연동 실패",
+        "unlinked": "LOL 계정 연동이 해제되었습니다.",
+        "unlinkFailed": "해제 실패",
+        "refreshed": "LOL 정보가 갱신되었습니다.",
+        "refreshFailed": "갱신 실패"
+      }
+    },
+    "chart": {
+      "title": "실력 성과 지표",
+      "subtitle": "대전 기록 및 ELO 변화 추이",
+      "winRate": "승률",
+      "currentElo": "현재 ELO",
+      "totalWins": "총 승리",
+      "totalMatches": "총 경기 수",
+      "peakPerformance": "최고 ELO"
+    },
+    "participation": {
+      "title": "참여 중인 대회",
+      "count": "개의 대회",
+      "empty": "참여 중인 대회가 없습니다",
+      "emptyDesc": "대회에 참여하여 실력을 증명해보세요!",
+      "findContests": "대회 찾아보기",
+      "confirmWithdraw": "정말로 이 대회에서 탈퇴하시겠습니까?",
+      "withdraw": "대회 탈퇴",
+      "toast": {
+        "withdrawn": "대회에서 탈퇴했습니다.",
+        "failed": "탈퇴 실패"
+      }
+    },
+    "invitations": {
+      "title": "대기 중인 초대",
+      "toast": {
+        "accepted": "초대를 수락했습니다.",
+        "rejected": "초대를 거절했습니다.",
+        "failed": "초대 처리 실패"
       }
     }
   },

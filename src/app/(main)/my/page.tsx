@@ -7,59 +7,15 @@ import ValorantSection from '@/components/mypage/ValorantSection';
 import ProfileEditSection from '@/components/mypage/ProfileEditSection';
 import ReceivedApplicationsSection from '@/components/mypage/ReceivedApplicationsSection';
 import ManagedContestsSection from '@/components/mypage/ManagedContestsSection';
+import LOLSection from '@/components/mypage/LOLSection';
+import MatchHistoryChart from '@/components/mypage/MatchHistoryChart';
+import ParticipationContestsSection from '@/components/mypage/ParticipationContestsSection';
+import InvitationsSection from '@/components/mypage/InvitationsSection';
 import { useMe } from '@/hooks/use-user';
+import { useTranslation } from 'react-i18next';
 import { Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { getDiscordAvatarUrl } from '@/lib/discord';
-
-function ContentArea({ activeTab }: { activeTab: string }) {
-  if (activeTab === 'profile') {
-     return (
-       <div className="space-y-12">
-           <ProfileEditSection />
-       </div>
-     );
-  }
-  
-  if (activeTab === 'integration') {
-      return (
-        <div className="space-y-4">
-            <h3 className="text-2xl font-black text-white px-2 border-l-4 border-neon-cyan">Game Integration</h3>
-            <ValorantSection />
-        </div>
-      );
-  }
-
-    if (activeTab === 'manage') {
-      return (
-        <div className="space-y-4">
-            <h3 className="text-2xl font-black text-white px-2 border-l-4 border-neon-cyan">Manage</h3>
-            <ReceivedApplicationsSection />
-        </div>
-      );
-    }
-
-  return (
-    <div className="space-y-12">
-       <div className="space-y-4">
-            <h3 className="text-2xl font-black text-white px-2 border-l-4 border-neon-cyan">Game Integration</h3>
-            <ValorantSection />
-       </div>
-       <div className="space-y-4">
-            <h3 className="text-2xl font-black text-white px-2 border-l-4 border-neon-cyan">Manage</h3>
-            <ReceivedApplicationsSection />
-       </div>
-       <div className="space-y-4">
-            <h3 className="text-2xl font-black text-white px-2 border-l-4 border-neon-cyan">Settings</h3>
-            <ProfileEditSection />
-       </div>
-    </div>
-  );
-}
-
-import { useTranslation } from 'react-i18next';
-
-// ... (imports)
 
 function MyPageContent() {
   const { t } = useTranslation();
@@ -84,7 +40,7 @@ function MyPageContent() {
     email: user.email,
     bio: user.bio || 'No bio yet.',
     joinDate: user.created_at,
-    tier: (user.role === "ADMIN" ? "ADMIN" : "MEMBER") as any, // Cast or update type
+    tier: (user.role === "ADMIN" ? "ADMIN" : "MEMBER") as any,
   } : null;
 
   if (isLoading) {
@@ -137,13 +93,28 @@ function MyPageContent() {
       <div className="min-h-[400px] mt-8">
           {activeTab === 'overview' && (
               <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                 <section className="space-y-6">
-                     <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                         <span className="w-1 h-6 bg-neon-cyan rounded-full"/> 
-                         {t('mypage.sections.gameIntegration')}
-                     </h3>
-                     <ValorantSection />
-                 </section>
+                 <InvitationsSection />
+                 
+                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <section className="space-y-6">
+                        <div className="flex items-center justify-between">
+                            <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                                <span className="w-1 h-6 bg-neon-cyan rounded-full"/> 
+                                {t('mypage.sections.gameIntegration')}
+                            </h3>
+                        </div>
+                        <div className="space-y-6">
+                            <ValorantSection />
+                            <LOLSection />
+                        </div>
+                    </section>
+
+                    <section className="space-y-6">
+                        <MatchHistoryChart />
+                    </section>
+                 </div>
+
+                 <ParticipationContestsSection />
               </div>
           )}
          

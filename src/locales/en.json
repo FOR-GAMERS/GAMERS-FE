@@ -152,8 +152,69 @@
       "toast": {
         "passwordMismatch": "Passwords do not match.",
         "passwordChanged": "Password changed.",
-        "updateNotSupported": "Profile update not supported yet (except password).",
+        "updated": "Profile updated.",
         "failed": "Profile update failed."
+      },
+      "withdrawal": {
+        "title": "Service Withdrawal",
+        "description": "Account deletion is permanent and cannot be undone. All your data, including match history and tournament records, will be deleted.",
+        "button": "Withdraw from Service",
+        "confirm": "Are you sure you want to delete your account? This action is irreversible.",
+        "success": "Account deleted.",
+        "failed": "Failed to delete account."
+      }
+    },
+    "lol": {
+      "title": "League of Legends Integration",
+      "region": "Region",
+      "riotName": "Summoner Name",
+      "tag": "Tag",
+      "linkButton": "Link LOL Account",
+      "unlinkButton": "Unlink",
+      "refreshButton": "Refresh Info",
+      "elo": "ELO Rating",
+      "currentRank": "Current Rank",
+      "peakRank": "Peak Rank",
+      "lastUpdated": "Last Updated",
+      "cantRefresh": "Refresh Unavailable (Limit 24h)",
+      "confirmUnlink": "Are you sure you want to unlink your LOL account?",
+      "toast": {
+        "linked": "LOL account linked.",
+        "linkFailed": "Link failed.",
+        "unlinked": "LOL account unlinked.",
+        "unlinkFailed": "Unlink failed.",
+        "refreshed": "LOL info refreshed.",
+        "refreshFailed": "Refresh failed."
+      }
+    },
+    "chart": {
+      "title": "Performance Metrics",
+      "subtitle": "Match History & ELO Trends",
+      "winRate": "Win Rate",
+      "currentElo": "Current ELO",
+      "totalWins": "Total Wins",
+      "totalMatches": "Total Matches",
+      "peakPerformance": "Peak ELO"
+    },
+    "participation": {
+      "title": "Joined Contests",
+      "count": "contests",
+      "empty": "No joined contests",
+      "emptyDesc": "Join a contest to prove your skills!",
+      "findContests": "Find Contests",
+      "confirmWithdraw": "Are you sure you want to withdraw from this contest?",
+      "withdraw": "Withdraw",
+      "toast": {
+        "withdrawn": "Withdrawn from contest.",
+        "failed": "Withdrawal failed."
+      }
+    },
+    "invitations": {
+      "title": "Pending Invitations",
+      "toast": {
+        "accepted": "Invitation accepted.",
+        "rejected": "Invitation rejected.",
+        "failed": "Failed to process invitation."
       }
     }
   },
