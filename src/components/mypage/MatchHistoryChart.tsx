@@ -51,29 +51,29 @@ export default function MatchHistoryChart() {
   }, []);
 
   return (
-    <div className="w-full bg-deep-black/50 border border-white/10 rounded-2xl p-6 md:p-8 space-y-6">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
-        <div className="flex items-center gap-3">
-          <div className="p-2 bg-neon-cyan/10 rounded-lg">
-            <TrendingUp className="text-neon-cyan" size={24} />
+    <div className="w-full glass-card p-6 md:p-8 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-white/5 pb-8">
+        <div className="flex items-center gap-4">
+          <div className="p-3 bg-neon-cyan/10 rounded-xl neon-glow-cyan">
+            <TrendingUp className="text-neon-cyan" size={28} />
           </div>
           <div>
-            <h2 className="text-xl font-bold text-white">{t("mypage.chart.title") || "Performance Trends"}</h2>
-            <p className="text-sm text-muted-foreground">{t("mypage.chart.subtitle") || "Match record and ELO progress"}</p>
+            <h2 className="text-2xl font-black text-white tracking-tight">{t("mypage.chart.title") || "Performance Trends"}</h2>
+            <p className="text-sm text-white/50 font-medium">{t("mypage.chart.subtitle") || "Match record and ELO progress"}</p>
           </div>
         </div>
 
-        <div className="flex gap-6 items-center">
+        <div className="flex gap-8 items-center bg-white/5 px-6 py-3 rounded-2xl border border-white/10 backdrop-blur-md">
             <div className="text-right">
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">{t("mypage.chart.winRate") || "Win Rate"}</p>
-                <p className="text-xl font-black text-white">{stats.winRate}%</p>
+                <p className="text-[10px] text-white/40 uppercase font-black tracking-widest mb-1">{t("mypage.chart.winRate") || "Win Rate"}</p>
+                <p className="text-2xl font-black text-white">{stats.winRate}%</p>
             </div>
-            <div className="h-8 w-px bg-white/10" />
+            <div className="h-10 w-px bg-white/10" />
             <div className="text-right">
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">{t("mypage.chart.currentElo") || "Current ELO"}</p>
-                <p className="text-xl font-black text-neon-cyan">
+                <p className="text-[10px] text-white/40 uppercase font-black tracking-widest mb-1">{t("mypage.chart.currentElo") || "Current ELO"}</p>
+                <p className="text-2xl font-black text-neon-cyan text-glow">
                     {stats.currentElo}
-                    <span className={stats.eloChange >= 0 ? "text-green-500 text-xs ml-1" : "text-red-500 text-xs ml-1"}>
+                    <span className={stats.eloChange >= 0 ? "text-green-400 text-xs ml-2 font-bold" : "text-red-400 text-xs ml-2 font-bold"}>
                         {stats.eloChange >= 0 ? `+${stats.eloChange}` : stats.eloChange}
                     </span>
                 </p>
@@ -81,79 +81,86 @@ export default function MatchHistoryChart() {
         </div>
       </div>
 
-      <div className="h-[300px] w-full pt-4">
+      <div className="h-[320px] w-full pt-4 relative">
+        {/* Subtle Background Decorative Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-neon-cyan/5 blur-[100px] -z-10" />
+        
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={chartData}>
             <defs>
               <linearGradient id="colorElo" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#00f3ff" stopOpacity={0.3}/>
+                <stop offset="5%" stopColor="#00f3ff" stopOpacity={0.4}/>
                 <stop offset="95%" stopColor="#00f3ff" stopOpacity={0}/>
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#ffffff08" vertical={false} />
             <XAxis 
               dataKey="displayDate" 
-              stroke="#ffffff40" 
-              fontSize={12}
+              stroke="#ffffff30" 
+              fontSize={11}
+              fontWeight={700}
               tickLine={false}
               axisLine={false}
-              dy={10}
+              dy={15}
             />
             <YAxis 
-              stroke="#ffffff40" 
-              fontSize={12}
+              stroke="#ffffff30" 
+              fontSize={11}
+              fontWeight={700}
               tickLine={false}
               axisLine={false}
-              domain={['dataMin - 50', 'dataMax + 50']}
+              domain={['dataMin - 30', 'dataMax + 30']}
             />
             <Tooltip 
               contentStyle={{ 
-                backgroundColor: '#0a0a0a', 
-                border: '1px solid #ffffff20',
-                borderRadius: '12px',
+                backgroundColor: '#050506', 
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: '16px',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
                 color: '#fff'
               }}
-              itemStyle={{ color: '#00f3ff' }}
+              itemStyle={{ color: '#00f3ff', fontWeight: 900 }}
+              labelStyle={{ color: 'rgba(255,255,255,0.5)', marginBottom: '4px' }}
             />
             <Area 
               type="monotone" 
               dataKey="elo" 
               stroke="#00f3ff" 
-              strokeWidth={3}
+              strokeWidth={4}
               fillOpacity={1} 
               fill="url(#colorElo)" 
-              animationDuration={1500}
+              animationDuration={2000}
             />
           </AreaChart>
         </ResponsiveContainer>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
-          <div className="bg-white/5 rounded-xl p-4 border border-white/5 flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center text-green-500">
-                  <Award size={20} />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+          <div className="glass-morphism rounded-2xl p-5 flex items-center gap-5 hover:border-white/20 hover:scale-105 transition-all">
+              <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-400 border border-green-500/20 shadow-[0_0_15px_rgba(34,197,94,0.2)]">
+                  <Award size={24} />
               </div>
               <div>
-                  <p className="text-xs text-muted-foreground">{t("mypage.chart.totalWins") || "Total Wins"}</p>
-                  <p className="text-lg font-bold text-white">{stats.wins}</p>
+                  <p className="text-[10px] text-white/40 uppercase font-black tracking-widest">{t("mypage.chart.totalWins") || "Total Wins"}</p>
+                  <p className="text-xl font-black text-white">{stats.wins}</p>
               </div>
           </div>
-          <div className="bg-white/5 rounded-xl p-4 border border-white/5 flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center text-red-500">
-                  <Target size={20} />
+          <div className="glass-morphism rounded-2xl p-5 flex items-center gap-5 hover:border-white/20 hover:scale-105 transition-all">
+              <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center text-red-400 border border-red-500/20 shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+                  <Target size={24} />
               </div>
               <div>
-                  <p className="text-xs text-muted-foreground">{t("mypage.chart.totalMatches") || "Total Matches"}</p>
-                  <p className="text-lg font-bold text-white">{stats.total}</p>
+                  <p className="text-[10px] text-white/40 uppercase font-black tracking-widest">{t("mypage.chart.totalMatches") || "Total Matches"}</p>
+                  <p className="text-xl font-black text-white">{stats.total}</p>
               </div>
           </div>
-          <div className="bg-white/5 rounded-xl p-4 border border-white/5 flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-500">
-                  <TrendingUp size={20} />
+          <div className="glass-morphism rounded-2xl p-5 flex items-center gap-5 hover:border-white/20 hover:scale-105 transition-all">
+              <div className="w-12 h-12 rounded-xl bg-neon-purple/10 flex items-center justify-center text-neon-purple border border-neon-purple/20 shadow-[0_0_15px_rgba(178,58,255,0.2)]">
+                  <TrendingUp size={24} />
               </div>
               <div>
-                  <p className="text-xs text-muted-foreground">{t("mypage.chart.peakPerformance") || "Peak ELO"}</p>
-                  <p className="text-lg font-bold text-white">{Math.max(...MOCK_MATCH_HISTORY.map(m => m.elo))}</p>
+                  <p className="text-[10px] text-white/40 uppercase font-black tracking-widest">{t("mypage.chart.peakPerformance") || "Peak ELO"}</p>
+                  <p className="text-xl font-black text-white">{Math.max(...MOCK_MATCH_HISTORY.map(m => m.elo))}</p>
               </div>
           </div>
       </div>

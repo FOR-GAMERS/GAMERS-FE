@@ -72,22 +72,25 @@ export default function LOLSection() {
   }
 
   return (
-    <div className="w-full bg-deep-black/50 border border-white/10 rounded-2xl p-6 md:p-8 space-y-6">
-      <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-        <Image 
-          src={lolInfo ? "/images/games/lol-icon.png" : "/images/games/lol-icon-grey.png"} 
-          alt="League of Legends" 
-          width={40} 
-          height={40}
-          className="object-contain" 
-        />
-        <h2 className="text-xl font-bold text-white">{t("mypage.lol.title") || "League of Legends Integration"}</h2>
+    <div className="w-full glass-card p-6 md:p-8 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+      <div className="flex items-center gap-4 border-b border-white/5 pb-6">
+        <div className="p-3 bg-blue-500/10 rounded-xl relative overflow-hidden group">
+            <div className="absolute inset-0 bg-blue-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+            <Image 
+              src={lolInfo ? "/images/games/lol-icon.png" : "/images/games/lol-icon-grey.png"} 
+              alt="League of Legends" 
+              width={32} 
+              height={32}
+              className="relative z-10 w-8 h-8 object-contain drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" 
+            />
+        </div>
+        <h2 className="text-2xl font-black text-white tracking-tight uppercase">{t("mypage.lol.title") || "League of Legends Integration"}</h2>
       </div>
 
       {!lolInfo ? (
-        <form onSubmit={handleSubmit(onRegister)} className="space-y-4 max-w-md">
+        <form onSubmit={handleSubmit(onRegister)} className="space-y-6 max-w-md">
           <div className="space-y-2">
-             <label className="text-sm font-medium text-muted-foreground">{t("mypage.lol.region") || "Region"}</label>
+             <label className="text-[10px] font-black text-white/40 uppercase tracking-widest ml-1">{t("mypage.lol.region") || "Region"}</label>
              <Controller
                 name="region"
                 control={control}
@@ -102,7 +105,7 @@ export default function LOLSection() {
                             { value: "na", label: "NA" },
                             { value: "euw", label: "EUW" },
                         ]}
-                        startIcon={<Globe className="w-4 h-4" />}
+                        startIcon={<Globe className="w-4 h-4 text-neon-cyan" />}
                         className="w-full"
                     />
                 )}
@@ -110,99 +113,110 @@ export default function LOLSection() {
           </div>
           <div className="grid grid-cols-3 gap-4">
              <div className="col-span-2 space-y-2">
-                <label className="text-sm font-medium text-muted-foreground">{t("mypage.lol.riotName") || "Game Name"}</label>
+                <label className="text-[10px] font-black text-white/40 uppercase tracking-widest ml-1">{t("mypage.lol.riotName") || "Game Name"}</label>
                 <input 
                   {...register('riot_name', { required: true })} 
                   placeholder="Summoner Name"
-                  className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-neon-cyan outline-none text-white" 
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-neon-cyan outline-none text-white transition-all placeholder:text-white/20" 
                 />
              </div>
              <div className="space-y-2">
-                <label className="text-sm font-medium text-muted-foreground">{t("mypage.lol.tag") || "Tag"}</label>
+                <label className="text-[10px] font-black text-white/40 uppercase tracking-widest ml-1">{t("mypage.lol.tag") || "Tag"}</label>
                 <input 
                   {...register('riot_tag', { required: true })} 
                   placeholder="#TAG"
-                  className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-neon-cyan outline-none text-white" 
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-neon-cyan outline-none text-white transition-all placeholder:text-white/20" 
                 />
              </div>
           </div>
           <button 
             type="submit" 
             disabled={isSubmitting}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-neon-cyan/20 hover:bg-neon-cyan/30 border border-neon-cyan/50 rounded-xl text-neon-cyan font-bold transition-all"
+            className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-neon-cyan/10 hover:bg-neon-cyan/20 border border-neon-cyan/40 rounded-2xl text-neon-cyan font-black uppercase tracking-wider transition-all hover:scale-[1.02] active:scale-95 shadow-[0_0_20px_rgba(0,243,255,0.1)] hover:shadow-[0_0_30px_rgba(0,243,255,0.3)]"
           >
-            {isSubmitting ? <Loader2 className="animate-spin" /> : <Link2 size={18} />}
+            {isSubmitting ? <Loader2 className="animate-spin" /> : <Link2 size={20} />}
             {t("mypage.lol.linkButton") || "Link Account"}
           </button>
         </form>
       ) : (
-        <div className="space-y-6">
-           <div className="flex flex-col md:flex-row gap-6 md:items-center justify-between bg-white/5 p-6 rounded-xl border border-white/10">
-              <div className="flex items-center gap-4">
-                 <div className="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center border border-blue-500/50 text-blue-100 font-bold text-xl">
+        <div className="space-y-8">
+           <div className="flex flex-col md:flex-row gap-8 md:items-center justify-between glass-morphism p-8 rounded-3xl border border-white/10 relative overflow-hidden group">
+               {/* Background Accent */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 blur-3xl -z-10 group-hover:scale-150 transition-transform duration-1000" />
+
+              <div className="flex items-center gap-6">
+                 <div className="relative w-24 h-24 rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/30 text-blue-500 font-black text-4xl shadow-[0_0_20px_rgba(59,130,246,0.2)]">
                     L
+                    <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-green-500 border-4 border-deep-black shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
                  </div>
-                 <div>
-                    <div className="flex items-center gap-2">
-                        <h3 className="text-lg font-bold text-white">{lolInfo.riot_name} <span className="text-white/50">#{lolInfo.riot_tag}</span></h3>
-                        <span className="text-xs px-2 py-0.5 rounded bg-white/10 text-white/70 uppercase">{lolInfo.region}</span>
+                 <div className="space-y-1">
+                    <div className="flex items-center gap-3">
+                        <h3 className="text-2xl font-black text-white tracking-tight">{lolInfo.riot_name} <span className="text-white/30 font-medium">#{lolInfo.riot_tag}</span></h3>
+                        <span className="text-[10px] px-2 py-1 rounded-full bg-white/10 text-white/70 font-black uppercase tracking-widest border border-white/10">{lolInfo.region}</span>
                     </div>
-                    <div className="text-sm text-muted-foreground mt-1 flex items-center gap-2">
-                        {lolInfo.current_tier_patched} • {lolInfo.ranking_in_tier} LP
+                    <div className="text-sm text-white/50 font-black uppercase tracking-widest flex items-center gap-2">
+                        <span className="text-neon-cyan text-glow">{lolInfo.current_tier_patched}</span> 
+                        <span className="opacity-30">•</span> 
+                        <span>{lolInfo.ranking_in_tier} LP</span>
                     </div>
                  </div>
               </div>
 
-              <div className="flex flex-col gap-3 min-w-[200px]">
-                 <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">{t("mypage.lol.elo") || "ELO"}</span>
-                    <span className="font-mono font-bold text-neon-cyan">{lolInfo.elo}</span>
+              <div className="grid grid-cols-3 md:flex md:flex-col gap-4 min-w-[200px] border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8">
+                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1">
+                    <span className="text-[10px] text-white/40 uppercase font-black tracking-widest">{t("mypage.lol.elo") || "ELO"}</span>
+                    <span className="font-mono font-black text-neon-cyan text-lg md:text-base">{lolInfo.elo}</span>
                  </div>
-                 <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">{t("mypage.lol.currentRank") || "Current Rank"}</span>
-                    <span className="text-white">{lolInfo.current_tier_patched}</span>
+                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1">
+                    <span className="text-[10px] text-white/40 uppercase font-black tracking-widest">{t("mypage.lol.currentRank") || "Current Rank"}</span>
+                    <span className="text-white font-black text-xs uppercase">{lolInfo.current_tier_patched}</span>
                  </div>
-                 <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">{t("mypage.lol.peakRank") || "Peak Rank"}</span>
-                    <span className="text-white">{lolInfo.peak_tier_patched}</span>
+                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1">
+                    <span className="text-[10px] text-white/40 uppercase font-black tracking-widest">{t("mypage.lol.peakRank") || "Peak Rank"}</span>
+                    <span className="text-white/70 font-black text-xs uppercase">{lolInfo.peak_tier_patched}</span>
                  </div>
               </div>
            </div>
 
-           <div className="flex items-center justify-between gap-4">
-              <div className="text-sm text-muted-foreground" suppressHydrationWarning>
-                 {lastUpdated && <>{t("mypage.lol.lastUpdated") || "Last Updated"}: {formatDistanceToNow(lastUpdated, { addSuffix: true, locale: currentLocale })}</>}
+           <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-2">
+              <div className="text-[10px] text-white/40 font-black uppercase tracking-widest flex items-center gap-2" suppressHydrationWarning>
+                 {lastUpdated && <>
+                    <RefreshCw size={12} className="text-white/20" />
+                    {t("mypage.lol.lastUpdated") || "Last Updated"}: {formatDistanceToNow(lastUpdated, { addSuffix: true, locale: currentLocale })}
+                 </>}
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-4 w-full md:w-auto">
                  <button 
                    onClick={onUnlink} 
                    disabled={isUnlinking}
-                   className="px-4 py-2 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-500 rounded-lg text-sm font-medium transition-all flex items-center gap-2"
+                   className="flex-1 md:flex-none px-6 py-3 glass-card hover:bg-red-500/10 border-red-500/20 text-red-500 transition-all hover:scale-105 active:scale-95 group"
                  >
-                    {isUnlinking ? <Loader2 className="animate-spin w-4 h-4" /> : <Unlink size={16} />}
-                    {t("mypage.lol.unlinkButton") || "Unlink"}
+                    <div className="flex items-center justify-center gap-2">
+                        {isUnlinking ? <Loader2 className="animate-spin w-4 h-4" /> : <Unlink size={18} className="group-hover:-rotate-12 transition-transform" />}
+                        <span className="text-xs font-black uppercase tracking-widest">{t("mypage.lol.unlinkButton") || "Unlink"}</span>
+                    </div>
                  </button>
                  
                  <button
                     onClick={onRefresh}
                     disabled={!canRefresh || refreshLOL.isPending}
                     className={cn(
-                        "px-6 py-2 rounded-lg text-sm font-bold transition-all flex items-center gap-2 border",
+                        "flex-1 md:flex-none px-8 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2 border shadow-lg",
                         canRefresh 
-                           ? "bg-neon-cyan text-black border-neon-cyan hover:bg-cyan-300 shadow-[0_0_15px_rgba(0,243,255,0.3)]"
-                           : "bg-white/5 text-white/30 border-white/5 cursor-not-allowed"
+                           ? "bg-neon-cyan text-black border-neon-cyan hover:bg-white hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(0,243,255,0.3)]"
+                           : "bg-white/5 text-white/20 border-white/5 cursor-not-allowed"
                     )}
                  >
                     {refreshLOL.isPending ? (
                         <Loader2 className="animate-spin w-4 h-4" />
                     ) : !canRefresh ? (
                         <>
-                           <AlertCircle size={16} /> 
+                           <AlertCircle size={18} /> 
                            {t("mypage.lol.cantRefresh") || "Cooling down"}
                         </>
                     ) : (
                         <>
-                           <RefreshCw size={16} />
+                           <RefreshCw size={18} className="animate-pulse" />
                            {t("mypage.lol.refreshButton") || "Refresh"}
                         </>
                     )}

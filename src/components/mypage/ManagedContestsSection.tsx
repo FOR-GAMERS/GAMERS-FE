@@ -29,13 +29,13 @@ export default function ManagedContestsSection() {
   }
 
   return (
-    <div className="space-y-6">
-        <div>
-            <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                <span className="w-1 h-6 bg-neon-cyan rounded-full"/> 
+    <div className="space-y-8 animate-in fade-in slide-in-from-top-4 duration-700">
+        <div className="px-2">
+            <h3 className="text-xl font-black text-white flex items-center gap-3 uppercase tracking-tighter">
+                <span className="w-1.5 h-8 bg-neon-cyan rounded-full shadow-[0_0_15px_rgba(0,243,255,0.6)]"/> 
                 {t('mypage.managed.title')}
             </h3>
-            <p className="text-muted-foreground text-sm mt-1 ml-3">
+            <p className="text-white/40 text-xs font-black uppercase tracking-widest mt-2 ml-4">
                 {t('mypage.managed.description')}
             </p>
         </div>
@@ -44,28 +44,33 @@ export default function ManagedContestsSection() {
             {contests.map((contest) => {
                 const contestId = contest.contest_id || (contest as any).id;
                 return (
-                <div key={contestId} className="bg-neutral-900/50 border border-white/10 rounded-xl overflow-hidden hover:border-neon-cyan/50 transition-all group flex flex-col">
-                    <div className="p-5 flex-1">
-                        <div className="flex items-start justify-between mb-4">
-                            <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-neon-cyan">
-                                <Trophy size={20} />
+                <div key={contestId} className="group relative glass-card p-0 overflow-hidden hover:translate-y-[-4px] transition-all duration-500 border border-white/5 hover:border-neon-cyan/40 flex flex-col shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+                    <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/0 via-transparent to-neon-cyan/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    
+                    <div className="p-6 flex-1 relative z-10">
+                        <div className="flex items-start justify-between mb-6">
+                            <div className="w-12 h-12 rounded-xl bg-neon-cyan/10 border border-neon-cyan/20 flex items-center justify-center text-neon-cyan group-hover:scale-110 transition-transform duration-300">
+                                <Trophy size={24} />
                             </div>
-                            <span className="px-2 py-1 rounded bg-white/5 border border-white/10 text-xs font-mono text-neutral-400">
+                            <span className="px-3 py-1 rounded-lg bg-neon-cyan/10 border border-neon-cyan/20 text-[10px] font-black uppercase tracking-widest text-neon-cyan shadow-[0_0_10px_rgba(0,243,255,0.2)]">
                                 {contest.contest_status}
                             </span>
                         </div>
-                        <Link href={`/contests/${contestId}`} className="hover:underline">
-                            <h4 className="font-bold text-white text-lg mb-1 line-clamp-1">{contest.title}</h4>
+                        <Link href={`/contests/${contestId}`} className="block group/title">
+                            <h4 className="font-black text-white text-xl mb-1 line-clamp-1 group-hover/title:text-neon-cyan transition-colors tracking-tight">
+                                {contest.title}
+                            </h4>
                         </Link>
-                        <div className="text-xs text-neutral-500 mb-4">
+                        <div className="text-[10px] font-black uppercase tracking-widest text-white/20 mt-2 flex items-center gap-2">
+                            <span className="w-1 h-1 bg-white/20 rounded-full" />
                             Created {new Date(contest.created_at).toLocaleDateString()}
                         </div>
                     </div>
                     
-                    <div className="p-4 border-t border-white/5 bg-white/[0.02]">
+                    <div className="p-5 border-t border-white/5 bg-white/[0.02] relative z-10">
                         <Link 
                             href={`/contests/${contestId}/dashboard`}
-                            className="flex items-center justify-center gap-2 w-full py-2 bg-white/5 hover:bg-neon-cyan hover:text-black rounded-lg text-sm font-bold transition-all text-white"
+                            className="flex items-center justify-center gap-2 w-full py-3 bg-neon-cyan/10 hover:bg-neon-cyan text-neon-cyan hover:text-black rounded-xl text-xs font-black uppercase tracking-[0.2em] transition-all duration-300 shadow-[0_0_20px_rgba(0,243,255,0.1)] hover:shadow-[0_0_40px_rgba(0,243,255,0.4)] border border-neon-cyan/20 hover:border-neon-cyan"
                         >
                             <Settings size={16} />
                             {t('mypage.managed.button')}

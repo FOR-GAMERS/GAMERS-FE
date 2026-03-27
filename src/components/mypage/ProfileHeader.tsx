@@ -69,65 +69,71 @@ export default function ProfileHeader({ user }: ProfileHeaderProps) {
   }, { scope: headerRef });
 
   return (
-    <div ref={headerRef} className="relative w-full mb-8 group">
+    <div ref={headerRef} className="relative w-full mb-8 group overflow-visible">
       {/* Banner Image */}
-      <div className="relative w-full h-48 md:h-64 rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(0,243,255,0.1)]">
+      <div className="relative w-full h-56 md:h-80 rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(0,243,255,0.15)] bg-zinc-900">
         <Image
           src={user.bannerUrl}
           alt="Banner"
           fill
+          priority
           sizes="(max-width: 768px) 100vw, 1200px"
-          className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+          className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-out opacity-80"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-transparent opacity-90" />
+        <div className="absolute inset-0 bg-gradient-to-t from-deep-black via-deep-black/20 to-transparent" />
+        
+        {/* Decorative Overlay */}
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none" />
       </div>
 
       {/* Profile Content Overlay */}
-      <div className="absolute -bottom-4 left-0 w-full px-6 md:px-10 pb-6 translate-y-12 md:translate-y-1/2 flex flex-col md:flex-row items-center md:items-end gap-6 z-20">
+      <div className="absolute -bottom-6 left-0 w-full px-6 md:px-12 pb-8 translate-y-24 md:translate-y-1/2 flex flex-col md:flex-row items-center md:items-end gap-8 z-20">
         
         {/* Avatar */}
-        <div ref={avatarRef} className="relative w-24 h-24 md:w-32 md:h-32 shrink-0">
-          <div className="w-full h-full rounded-2xl overflow-hidden border-4 border-deep-black shadow-[0_0_20px_rgba(0,243,255,0.4)] relative bg-zinc-900">
+        <div ref={avatarRef} className="relative w-28 h-28 md:w-40 md:h-40 shrink-0">
+          <div className="w-full h-full rounded-3xl overflow-hidden border-4 border-deep-black shadow-[0_0_30px_rgba(0,243,255,0.5)] relative bg-zinc-900 neon-glow-cyan">
              <Image
               src={avatarUrl}
               alt="Avatar"
               fill
-              sizes="(max-width: 768px) 96px, 128px"
+              sizes="(max-width: 768px) 112px, 160px"
               className="object-cover"
             />
           </div>
           {/* Status Indicator */}
-          <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-4 border-deep-black z-10" />
+          <div className="absolute bottom-1 right-1 w-8 h-8 bg-green-500 rounded-full border-4 border-deep-black z-10 shadow-[0_0_15px_rgba(34,197,94,0.5)]" />
         </div>
 
         {/* Info Text */}
-        <div ref={infoRef} className="flex-1 pb-2 md:pb-0 flex flex-col items-center md:items-start gap-1 z-10 text-center md:text-left">
-          <div className="flex items-center gap-3">
-            <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight flex items-center gap-2">
+        <div ref={infoRef} className="flex-1 pb-4 md:pb-0 flex flex-col items-center md:items-start gap-2 z-10 text-center md:text-left">
+          <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
+            <h1 className="text-4xl md:text-5xl font-black text-white tracking-tighter flex items-center gap-2 drop-shadow-lg">
               {user.username}
-              <span className="text-xl md:text-2xl text-white/40 font-normal">{user.discriminator}</span>
+              <span className="text-2xl md:text-3xl text-white/30 font-medium">{user.discriminator}</span>
             </h1>
-            <div className="px-2 py-0.5 rounded border border-neon-cyan/30 bg-neon-cyan/10 text-neon-cyan text-xs font-bold uppercase tracking-wider shadow-[0_0_10px_rgba(0,243,255,0.2)]">
+            <div className="inline-flex px-3 py-1 rounded-full border border-neon-cyan/40 bg-neon-cyan/10 text-neon-cyan text-xs font-black uppercase tracking-widest shadow-[0_0_15px_rgba(0,243,255,0.3)] backdrop-blur-md">
               {user.tier}
             </div>
           </div>
-          <p className="text-white/60 text-sm md:text-base max-w-xl font-medium">
+          <p className="text-white/70 text-base md:text-lg max-w-2xl font-medium leading-relaxed">
             {user.bio}
           </p>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-3 pb-2 md:pb-0 z-10 flex-wrap justify-center md:justify-start">
-             {/* Edit Button Removed in favor of Settings Tab */}
-             <Link href="/report" className="p-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-white flex items-center justify-center gap-2 transition-all hover:border-neon-cyan/50 hover:text-neon-cyan hover:shadow-[0_0_15px_rgba(0,243,255,0.2)]">
-                <Shield size={18} />
-                <span className="text-sm font-bold">{t('mypage.profile.report')}</span>
+        <div className="flex gap-4 pb-2 md:pb-0 z-10 flex-wrap justify-center md:justify-start">
+             <Link 
+                href="/report" 
+                className="px-6 py-3 glass-card hover:bg-white/10 text-white flex items-center justify-center gap-2 transition-all hover:border-neon-cyan/60 hover:text-neon-cyan hover:scale-105 active:scale-95 group"
+             >
+                <Shield size={20} className="group-hover:rotate-12 transition-transform" />
+                <span className="text-sm font-black uppercase tracking-wider">{t('mypage.profile.report')}</span>
              </Link>
         </div>
       </div>
        
-       {/* Spacer for overlay to not overlap content below due to translate-y */}
-       <div className='hidden md:block h-16 w-full absolute -bottom-16 bg-gradient-to-b from-deep-black to-transparent z-0 pointer-events-none' />
+       {/* Background Glow Spacer */}
+       <div className='hidden md:block h-32 w-full absolute -bottom-32 bg-gradient-to-b from-deep-black/50 to-transparent z-0 pointer-events-none' />
 
     </div>
   );

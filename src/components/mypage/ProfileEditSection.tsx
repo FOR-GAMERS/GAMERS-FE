@@ -94,107 +94,111 @@ export default function ProfileEditSection() {
   }
 
   return (
-    <div className="w-full space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="bg-deep-black/50 border border-white/10 rounded-2xl p-6 md:p-8 space-y-6">
-        <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-          <User className="text-neon-cyan" size={24} />
-          <h2 className="text-xl font-bold text-white">{t("mypage.edit.title")}</h2>
+    <div className="w-full space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+      <div className="group relative glass-card p-6 md:p-10 space-y-10 border border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+        <div className="flex items-center gap-4 border-b border-white/5 pb-6">
+          <div className="p-3 bg-neon-cyan/10 rounded-xl border border-neon-cyan/20">
+            <User className="text-neon-cyan" size={24} />
+          </div>
+          <h2 className="text-2xl font-black text-white uppercase tracking-tighter">{t("mypage.edit.title")}</h2>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-                <label className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                  <User size={14} /> {t("mypage.edit.username")}
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-3">
+                <label className="text-xs font-black text-white/40 uppercase tracking-[0.2em] flex items-center gap-2 ml-1">
+                  <User size={14} className="text-neon-cyan/60" /> {t("mypage.edit.username")}
                 </label>
                 <input 
                   {...register('username')}
-                  className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-neon-cyan outline-none text-white transition-colors"
+                  className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-sm focus:border-neon-cyan/50 focus:bg-white/[0.05] outline-none text-white transition-all shadow-inner font-bold placeholder:text-white/10"
                   placeholder={t("mypage.edit.username")} 
                 />
             </div>
-            <div className="space-y-2">
-                <label className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                  <Hash size={14} /> {t("mypage.edit.tag")}
+            <div className="space-y-3">
+                <label className="text-xs font-black text-white/40 uppercase tracking-[0.2em] flex items-center gap-2 ml-1">
+                  <Hash size={14} className="text-neon-cyan/60" /> {t("mypage.edit.tag")}
                 </label>
-                <div className="flex items-center gap-2">
-                    <span className="text-white/50">#</span>
+                <div className="relative flex items-center">
+                    <span className="absolute left-5 text-neon-cyan font-black">#</span>
                     <input 
                       {...register('tag')}
-                      className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-neon-cyan outline-none text-white transition-colors"
+                      className="w-full bg-white/[0.03] border border-white/10 rounded-2xl pl-10 pr-5 py-4 text-sm focus:border-neon-cyan/50 focus:bg-white/[0.05] outline-none text-white transition-all shadow-inner font-bold placeholder:text-white/10"
                       placeholder="0000" 
                     />
                 </div>
             </div>
           </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                <FileText size={14} /> {t("mypage.edit.bio")}
+          <div className="space-y-3">
+            <label className="text-xs font-black text-white/40 uppercase tracking-[0.2em] flex items-center gap-2 ml-1">
+                <FileText size={14} className="text-neon-cyan/60" /> {t("mypage.edit.bio")}
             </label>
             <textarea 
               {...register('bio')}
-              className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-neon-cyan outline-none text-white min-h-[100px] resize-none transition-colors"
+              className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-sm focus:border-neon-cyan/50 focus:bg-white/[0.05] outline-none text-white min-h-[120px] resize-none transition-all shadow-inner font-medium leading-relaxed placeholder:text-white/10"
               placeholder={t("mypage.edit.bio")} 
             />
           </div>
 
-          <div className="pt-4 border-t border-white/5 space-y-4">
-            <h3 className="text-sm font-bold text-white/70 uppercase tracking-wider">{t("mypage.edit.changePassword")}</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                      <Lock size={14} /> {t("mypage.edit.newPassword")}
+          <div className="pt-10 border-t border-white/5 space-y-8">
+            <h3 className="text-xs font-black text-white/20 uppercase tracking-[0.3em]">{t("mypage.edit.changePassword")}</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-3">
+                  <label className="text-xs font-black text-white/40 uppercase tracking-[0.2em] flex items-center gap-2 ml-1">
+                      <Lock size={14} className="text-neon-cyan/60" /> {t("mypage.edit.newPassword")}
                   </label>
                   <input 
                     {...register('password')}
                     type="password"
-                    className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-neon-cyan outline-none text-white transition-colors"
+                    className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-sm focus:border-neon-cyan/50 focus:bg-white/[0.05] outline-none text-white transition-all shadow-inner font-bold placeholder:text-white/10"
                     placeholder={t("mypage.edit.newPassword")} 
                   />
                 </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                      <Lock size={14} /> {t("mypage.edit.confirmPassword")}
+                <div className="space-y-3">
+                  <label className="text-xs font-black text-white/40 uppercase tracking-[0.2em] flex items-center gap-2 ml-1">
+                      <Lock size={14} className="text-neon-cyan/60" /> {t("mypage.edit.confirmPassword")}
                   </label>
                   <input 
                     {...register('passwordConfirm', { 
                         validate: (val) => !password || val === password || t("mypage.edit.toast.passwordMismatch")
                     })}
                     type="password"
-                    className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-neon-cyan outline-none text-white transition-colors"
+                    className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-sm focus:border-neon-cyan/50 focus:bg-white/[0.05] outline-none text-white transition-all shadow-inner font-bold placeholder:text-white/10"
                     placeholder={t("mypage.edit.confirmPassword")} 
                   />
-                  {errors.passwordConfirm && <span className="text-xs text-red-500">{errors.passwordConfirm.message}</span>}
+                  {errors.passwordConfirm && <span className="text-xs text-red-500 font-bold mt-1 block">{errors.passwordConfirm.message}</span>}
                 </div>
             </div>
           </div>
 
-          <div className="pt-4">
+          <div className="pt-6">
             <button 
               type="submit" 
               disabled={isSaving}
-              className="flex items-center gap-2 px-6 py-3 bg-neon-cyan/20 hover:bg-neon-cyan/30 border border-neon-cyan/50 rounded-xl text-neon-cyan font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-3 px-10 py-4 bg-neon-cyan/10 hover:bg-neon-cyan text-neon-cyan hover:text-black rounded-2xl text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300 shadow-[0_0_20px_rgba(0,243,255,0.1)] hover:shadow-[0_0_40px_rgba(0,243,255,0.4)] border border-neon-cyan/30 hover:border-neon-cyan disabled:opacity-50 active:scale-95"
             >
-                {isSaving ? <Loader2 className="animate-spin" /> : <Save size={18} />}
+                {isSaving ? <Loader2 className="animate-spin w-5 h-5" /> : <Save size={20} />}
                 {t("mypage.edit.save")}
             </button>
           </div>
         </form>
       </div>
 
-      <div className="bg-red-500/5 border border-red-500/20 rounded-2xl p-6 md:p-8 space-y-4">
-          <div className="flex items-center gap-3">
-              <AlertCircle className="text-red-500" size={24} />
-              <h2 className="text-xl font-bold text-white">{t("mypage.edit.withdrawal.title") || "Service Withdrawal"}</h2>
+      <div className="group relative glass-card p-6 md:p-10 space-y-6 border border-red-500/10 hover:border-red-500/30 transition-colors shadow-[0_8px_32px_rgba(239,68,68,0.05)]">
+          <div className="flex items-center gap-4">
+              <div className="p-3 bg-red-500/10 rounded-xl border border-red-500/20">
+                <AlertCircle className="text-red-500" size={24} />
+              </div>
+              <h2 className="text-2xl font-black text-white uppercase tracking-tighter">{t("mypage.edit.withdrawal.title") || "Service Withdrawal"}</h2>
           </div>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-white/40 text-sm font-medium leading-relaxed max-w-2xl">
               {t("mypage.edit.withdrawal.description") || "Deleting your account is permanent and cannot be reversed. All your data including match history and tournament records will be removed."}
           </p>
-          <div className="pt-2">
+          <div className="pt-4">
               <button 
                 onClick={onWithdraw}
-                className="px-6 py-3 bg-red-500/10 hover:bg-red-500/20 border border-red-500/50 rounded-xl text-red-500 font-bold transition-all"
+                className="px-8 py-4 bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white border border-red-500/30 rounded-2xl text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300 shadow-[0_0_20px_rgba(239,68,68,0.1)] hover:shadow-[0_0_40px_rgba(239,68,68,0.3)] active:scale-95"
               >
                   {t("mypage.edit.withdrawal.button") || "Withdraw Service"}
               </button>

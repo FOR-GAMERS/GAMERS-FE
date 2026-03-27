@@ -93,14 +93,14 @@ export default function ReceivedApplicationsSection({ contestId }: ReceivedAppli
   const selectedContest = contests.find(c => c.contest_id === selectedContestId);
 
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
-         <div>
-            <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                <span className="w-1 h-6 bg-neon-cyan rounded-full"/> 
+    <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
+      <div className="flex flex-col md:flex-row gap-8 justify-between items-start md:items-center px-2">
+         <div className="space-y-2">
+            <h3 className="text-xl font-black text-white flex items-center gap-3 uppercase tracking-tighter">
+                <span className="w-1.5 h-8 bg-neon-cyan rounded-full shadow-[0_0_15px_rgba(0,243,255,0.6)]"/> 
                 {t("mypage.applications.title")}
             </h3>
-            <p className="text-muted-foreground text-sm mt-1 ml-3">
+            <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.2em] ml-4">
                 {t("mypage.applications.description")}
             </p>
          </div>
@@ -108,120 +108,122 @@ export default function ReceivedApplicationsSection({ contestId }: ReceivedAppli
          
          {/* Contest Selector - Only show if not fixed contestId */}
          {!contestId && (
-         <div className="relative w-full md:w-72">
-             <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none">
-                <Trophy size={16} />
+         <div className="relative w-full md:w-80 group">
+             <div className="absolute left-5 top-1/2 -translate-y-1/2 text-neon-cyan pointer-events-none group-hover:scale-110 transition-transform">
+                <Trophy size={18} />
              </div>
              <select 
                 value={selectedContestId || ""}
                 onChange={(e) => setSelectedContestId(Number(e.target.value))}
-                className="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-10 py-2.5 text-sm appearance-none outline-none focus:border-neon-cyan transition-colors text-white cursor-pointer"
+                className="w-full bg-white/[0.03] border border-white/10 rounded-2xl pl-12 pr-12 py-3.5 text-xs font-black uppercase tracking-widest appearance-none outline-none focus:border-neon-cyan/50 transition-all text-white cursor-pointer hover:bg-white/[0.06]"
              >
                 {contests.map((contest) => (
-                    <option key={contest.contest_id} value={contest.contest_id}>
+                    <option key={contest.contest_id} value={contest.contest_id} className="bg-deep-black text-white uppercase tracking-widest">
                         {contest.title}
                     </option>
                 ))}
              </select>
-             <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" size={16} />
+             <ChevronDown className="absolute right-5 top-1/2 -translate-y-1/2 text-white/20 pointer-events-none group-hover:text-neon-cyan transition-colors" size={18} />
          </div>
          )}
       </div>
 
       {/* Selected Contest Info Summary (Optional) */}
       {selectedContest && (
-        <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-wrap gap-6 text-sm items-center">
-            <div className="flex items-center gap-2 text-muted-foreground">
-                <Calendar size={14} />
+        <div className="glass-card p-5 flex flex-wrap gap-8 text-[10px] items-center border border-white/5">
+            <div className="flex items-center gap-3 text-white/40 font-black uppercase tracking-widest">
+                <Calendar size={14} className="text-neon-cyan/40" />
                 <span suppressHydrationWarning>{t("mypage.applications.created")}: {new Date(selectedContest.created_at).toLocaleDateString()}</span>
             </div>
-             <div className="flex items-center gap-2 text-muted-foreground">
-                <Users size={14} />
-                <span>{t("mypage.applications.currentTeams")}: <span className="text-white font-bold">{selectedContest.current_team_count || 0}</span> / {selectedContest.max_team_count}</span>
+             <div className="flex items-center gap-3 text-white/40 font-black uppercase tracking-widest">
+                <Users size={14} className="text-neon-cyan/40" />
+                <span>{t("mypage.applications.currentTeams")}: <span className="text-neon-cyan">{selectedContest.current_team_count || 0}</span> / {selectedContest.max_team_count}</span>
             </div>
             <div className="ml-auto">
-                <Link href={`/contests/${selectedContest.contest_id}`} className="text-neon-cyan hover:underline text-xs font-bold flex items-center gap-1">
-                    {t('contestDetail.cta.goToDashboard')} <ArrowRight size={12} />
+                <Link href={`/contests/${selectedContest.contest_id}`} className="group/link text-neon-cyan hover:text-white transition-colors text-[10px] font-black uppercase tracking-[0.3em] flex items-center gap-2 px-4 py-2 rounded-xl bg-neon-cyan/5 border border-neon-cyan/20">
+                    {t('contestDetail.cta.goToDashboard')} <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
                 </Link>
             </div>
         </div>
       )}
 
       {/* Applications Table */}
-      <div className="w-full bg-deep-black/50 border border-white/10 rounded-2xl overflow-hidden">
+      <div className="w-full glass-card p-0 border border-white/5 overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
          {isAppsLoading ? (
-             <div className="flex justify-center p-12">
-                 <Loader2 className="w-8 h-8 text-neon-cyan animate-spin" />
+             <div className="flex justify-center p-20">
+                 <Loader2 className="w-12 h-12 text-neon-cyan animate-spin" />
              </div>
          ) : applications.length === 0 ? (
-             <div className="text-center py-16">
-                 <Users className="w-10 h-10 text-white/20 mx-auto mb-4" />
-                 <p className="text-muted-foreground">{t("mypage.applications.noApps")}</p>
+             <div className="text-center py-24 flex flex-col items-center">
+                 <div className="p-5 bg-white/5 rounded-full border border-white/10 mb-6">
+                    <Users className="w-12 h-12 text-white/10" />
+                 </div>
+                 <p className="text-white/40 font-black uppercase tracking-widest text-xs">{t("mypage.applications.noApps")}</p>
              </div>
          ) : (
              <div className="overflow-x-auto">
                  <table className="w-full text-left border-collapse">
                      <thead>
-                         <tr className="border-b border-white/10 bg-white/5">
-                             <th className="p-4 text-xs font-bold text-muted-foreground uppercase tracking-wider">{t("mypage.applications.applicant")}</th>
-                             <th className="p-4 text-xs font-bold text-muted-foreground uppercase tracking-wider">{t("mypage.applications.tag")}</th>
-                             <th className="p-4 text-xs font-bold text-muted-foreground uppercase tracking-wider">{t("mypage.applications.appliedAt")}</th>
-                             <th className="p-4 text-xs font-bold text-muted-foreground uppercase tracking-wider">{t("mypage.applications.status")}</th>
-                             <th className="p-4 text-xs font-bold text-muted-foreground uppercase tracking-wider text-right">{t("mypage.applications.actions")}</th>
+                         <tr className="border-b border-white/5 bg-white/[0.02]">
+                             <th className="p-6 text-[10px] font-black text-white/20 uppercase tracking-[0.2em]">{t("mypage.applications.applicant")}</th>
+                             <th className="p-6 text-[10px] font-black text-white/20 uppercase tracking-[0.2em]">{t("mypage.applications.tag")}</th>
+                             <th className="p-6 text-[10px] font-black text-white/20 uppercase tracking-[0.2em]">{t("mypage.applications.appliedAt")}</th>
+                             <th className="p-6 text-[10px] font-black text-white/20 uppercase tracking-[0.2em]">{t("mypage.applications.status")}</th>
+                             <th className="p-6 text-[10px] font-black text-white/20 uppercase tracking-[0.2em] text-right">{t("mypage.applications.actions")}</th>
                          </tr>
                      </thead>
                      <tbody className="divide-y divide-white/5">
                          {applications.map((app) => (
-                             <tr key={app.user_id} className="group hover:bg-white/5 transition-colors">
-                                 <td className="p-4">
-                                     <div className="flex items-center gap-3">
-                                         <div className="w-8 h-8 min-w-[2rem] min-h-[2rem] shrink-0 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center font-bold text-xs text-white overflow-hidden relative">
+                             <tr key={app.user_id} className="group hover:bg-white/[0.04] transition-all duration-300">
+                                 <td className="p-6">
+                                     <div className="flex items-center gap-4">
+                                         <div className="w-10 h-10 min-w-[2.5rem] min-h-[2.5rem] shrink-0 rounded-xl bg-gradient-to-br from-neutral-800 to-black border border-white/10 flex items-center justify-center font-black text-xs text-neon-cyan overflow-hidden relative shadow-lg group-hover:scale-110 transition-transform">
                                              {app.sender.avatar ? (
-                                                 <Image src={app.sender.avatar} alt={app.sender.username} fill sizes="32px" className="object-cover rounded-full" />
+                                                 <Image src={app.sender.avatar} alt={app.sender.username} fill sizes="40px" className="object-cover rounded-xl" />
                                              ) : (
                                                  (app.sender.username || "?").substring(0, 2).toUpperCase()
                                              )}
                                          </div>
-                                         <span className="font-medium text-white">{app.sender.username || t("mypage.applications.unknownUser")}</span>
+                                         <span className="font-black text-white tracking-tight group-hover:text-neon-cyan transition-colors">{app.sender.username || t("mypage.applications.unknownUser")}</span>
                                      </div>
                                  </td>
-                                 <td className="p-4 text-sm text-muted-foreground">#{app.sender.tag}</td>
-                                 <td className="p-4 text-sm text-muted-foreground" suppressHydrationWarning>
+                                 <td className="p-6 text-xs font-bold text-white/30 uppercase tracking-widest">#{app.sender.tag}</td>
+                                 <td className="p-6 text-xs font-bold text-white/30 uppercase tracking-widest" suppressHydrationWarning>
                                      {new Date(app.requested_at).toLocaleDateString()}
                                  </td>
-                                 <td className="p-4">
+                                 <td className="p-6">
                                      <span className={cn(
-                                         "px-2 py-1 rounded text-xs font-bold uppercase tracking-wider",
-                                         app.status === 'ACCEPTED' ? "bg-green-500/10 text-green-500 border border-green-500/20" :
-                                         app.status === 'REJECTED' ? "bg-red-500/10 text-red-500 border border-red-500/20" :
-                                         "bg-yellow-500/10 text-yellow-500 border border-yellow-500/20"
+                                         "px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-[0.15em] border transition-all shadow-lg",
+                                         app.status === 'ACCEPTED' ? "bg-green-500/10 text-green-400 border-green-500/20 shadow-green-500/5" :
+                                         app.status === 'REJECTED' ? "bg-red-500/10 text-red-500 border border-red-500/20 shadow-red-500/5" :
+                                         "bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 shadow-yellow-500/5"
                                      )}>
                                          {app.status}
                                      </span>
                                  </td>
-                                 <td className="p-4 text-right">
+                                 <td className="p-6 text-right">
                                      {app.status === 'PENDING' && (
-                                         <div className="flex items-center justify-end gap-2">
+                                         <div className="flex items-center justify-end gap-3">
                                              <button 
                                                 onClick={() => acceptMutation.mutate({ contestId: selectedContestId!, userId: app.user_id })}
                                                 disabled={acceptMutation.isPending || rejectMutation.isPending}
-                                                className="p-1.5 bg-green-500/10 text-green-500 hover:bg-green-500 hover:text-black rounded-lg transition-colors disabled:opacity-50"
+                                                className="p-2.5 bg-green-500/10 text-green-500 hover:bg-green-500 hover:text-black rounded-xl transition-all duration-300 disabled:opacity-50 border border-green-500/20 hover:border-green-500"
                                                 title="Accept"
                                              >
-                                                 <Check size={16} />
+                                                 <Check size={18} />
                                              </button>
                                              <button 
                                                 onClick={() => rejectMutation.mutate({ contestId: selectedContestId!, userId: app.user_id })}
                                                 disabled={acceptMutation.isPending || rejectMutation.isPending}
-                                                className="p-1.5 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white rounded-lg transition-colors disabled:opacity-50"
+                                                className="p-2.5 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white rounded-xl transition-all duration-300 disabled:opacity-50 border border-red-500/20 hover:border-red-500"
                                                 title="Reject"
                                              >
-                                                 <X size={16} />
+                                                 <X size={18} />
                                              </button>
                                          </div>
                                      )}
                                      {app.status !== 'PENDING' && (
-                                         <span className="text-xs text-muted-foreground italic">{t("mypage.applications.processed")}</span>
+                                         <span className="text-[10px] font-black uppercase tracking-widest text-white/10 italic">{t("mypage.applications.processed")}</span>
                                      )}
                                  </td>
                              </tr>

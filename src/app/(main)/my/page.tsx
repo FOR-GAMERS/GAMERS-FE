@@ -70,46 +70,46 @@ function MyPageContent() {
      <div className="container mx-auto px-4 py-8 max-w-5xl pb-32">
       <ProfileHeader user={profileUser} />
 
-      <div className="flex items-center gap-6 border-b border-white/10 mt-32">
+      <div className="flex items-center gap-8 border-b border-white/5 mt-32">
           {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={cn(
-                    "pb-4 text-sm font-bold uppercase tracking-wider transition-all relative",
+                    "pb-5 text-[10px] font-black uppercase tracking-[0.25em] transition-all relative",
                     activeTab === tab.id 
                         ? "text-neon-cyan" 
-                        : "text-white/40 hover:text-white"
+                        : "text-white/30 hover:text-white"
                 )}
               >
                  {tab.label}
                  {activeTab === tab.id && (
-                     <div className="absolute bottom-0 left-0 w-full h-0.5 bg-neon-cyan shadow-[0_0_10px_rgba(0,243,255,0.5)]" />
+                     <div className="absolute bottom-0 left-0 w-full h-[3px] bg-neon-cyan shadow-[0_0_15px_rgba(0,243,255,0.6)] rounded-full" />
                  )}
               </button>
           ))}
       </div>
 
-      <div className="min-h-[400px] mt-8">
+      <div className="min-h-[400px] mt-12">
           {activeTab === 'overview' && (
-              <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <div className="space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
                  <InvitationsSection />
                  
-                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <section className="space-y-6">
-                        <div className="flex items-center justify-between">
-                            <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                                <span className="w-1 h-6 bg-neon-cyan rounded-full"/> 
+                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    <section className="space-y-8">
+                        <div className="flex items-center justify-between px-2">
+                            <h3 className="text-xl font-black text-white flex items-center gap-3 uppercase tracking-tighter">
+                                <span className="w-1.5 h-8 bg-neon-cyan rounded-full shadow-[0_0_15px_rgba(0,243,255,0.6)]"/> 
                                 {t('mypage.sections.gameIntegration')}
                             </h3>
                         </div>
-                        <div className="space-y-6">
+                        <div className="space-y-8">
                             <ValorantSection />
                             <LOLSection />
                         </div>
                     </section>
 
-                    <section className="space-y-6">
+                    <section className="space-y-8">
                         <MatchHistoryChart />
                     </section>
                  </div>
@@ -118,26 +118,28 @@ function MyPageContent() {
               </div>
           )}
          
-         {activeTab === 'manage' && (
-             <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                 <ManagedContestsSection />
-                 <div className="space-y-4">
-                    <ReceivedApplicationsSection />
-                 </div>
-             </div>
-         )}
+          {activeTab === 'manage' && (
+              <div className="space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                  <ManagedContestsSection />
+                  <div className="space-y-6">
+                     <ReceivedApplicationsSection />
+                  </div>
+              </div>
+          )}
 
-         {activeTab === 'settings' && (
-             <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                 <section className="space-y-6">
-                     <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                        <span className="w-1 h-6 bg-neon-cyan rounded-full"/> 
-                        {t('mypage.sections.accountSettings')}
-                     </h3>
-                     <ProfileEditSection />
-                 </section>
-             </div>
-         )}
+          {activeTab === 'settings' && (
+              <div className="space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                  <section className="space-y-8">
+                      <div className="px-2">
+                        <h3 className="text-xl font-black text-white flex items-center gap-3 uppercase tracking-tighter">
+                            <span className="w-1.5 h-8 bg-neon-cyan rounded-full shadow-[0_0_15px_rgba(0,243,255,0.6)]"/> 
+                            {t('mypage.sections.accountSettings')}
+                        </h3>
+                      </div>
+                      <ProfileEditSection />
+                  </section>
+              </div>
+          )}
       </div>
     </div>
   );
