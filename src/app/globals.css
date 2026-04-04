@@ -1,97 +1,48 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
 
 @theme {
-  --color-deep-black: #050506;
-  --color-neon-cyan: #00f3ff;
-  --color-neon-purple: #b23aff;
-  --color-nav-bg: rgba(10, 10, 11, 0.8);
+  --color-background: #0C0C0F;
+  --color-foreground: #EEEEF0;
   
-  --radius: 0.75rem;
-}
+  --color-deep-black: #0C0C0F;
+  --color-neon-mint: #6EE7B7;
+  --color-neon-purple: #C084FC;
+  --color-muted-gray: #7A7A85;
+  --color-card-border: #1E1E24;
+  --color-card-bg: #141418;
 
-:root {
-  --background: #050506;
-  --foreground: #fafafa;
-
-  --primary: #8b5cf6;
-  --primary-foreground: #ffffff;
-
-  --secondary: #18181b;
-  --secondary-foreground: #fafafa;
-
-  --muted: #18181b;
-  --muted-foreground: #a1a1aa;
-
-  --accent: #8b5cf6;
-  --accent-foreground: #fafafa;
-
-  --destructive: #ef4444;
-  --destructive-foreground: #fafafa;
-
-  --border: rgba(255, 255, 255, 0.08);
-  --input: rgba(255, 255, 255, 0.05);
-  --ring: #8b5cf6;
+  --font-inter: var(--font-inter);
+  --font-barlow: var(--font-barlow);
+  --font-space: var(--font-space);
+  --font-pretendard: var(--font-pretendard);
 }
 
 @layer base {
-  * {
-    @apply border-border;
+  :root {
+    --background: #0c0c0f;
+    --foreground: #eeeef0;
   }
+
   body {
-    @apply bg-background text-foreground selection:bg-primary/30 selection:text-white;
+    @apply bg-background text-foreground antialiased selection:bg-neon-mint selection:text-deep-black;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+  }
+
+  * {
+    @apply border-white/5;
   }
 }
 
 @layer utilities {
+  .text-glow-mint {
+    text-shadow: 0 0 20px rgba(110, 231, 183, 0.4);
+  }
+  
+  .glow-bg-mint {
+    background: radial-gradient(circle at center, rgba(110, 231, 183, 0.15) 0%, transparent 70%);
+  }
+
   .glass-card {
-    @apply bg-white/[0.03] backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
+    @apply bg-card-bg/80 border border-white/5 backdrop-blur-xl;
   }
-  
-  .glass-morphism {
-    @apply bg-white/5 backdrop-blur-md border border-white/10;
-  }
-
-  .neon-border {
-    @apply border-transparent relative overflow-hidden;
-    background-image: linear-gradient(var(--background), var(--background)), 
-                      linear-gradient(to right, var(--color-neon-cyan), var(--color-neon-purple));
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-  }
-
-  .text-glow {
-    text-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
-  }
-
-  .neon-glow-cyan {
-    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
-  }
-  
-  .neon-glow-purple {
-    box-shadow: 0 0 15px rgba(178, 58, 255, 0.4);
-  }
-}
-
-/* Custom Utilities */
-.dark-calendar {
-  color-scheme: dark;
-}
-.dark-calendar::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-    opacity: 0.6;
-    cursor: pointer;
-}
-.dark-calendar::-webkit-calendar-picker-indicator:hover {
-    opacity: 1;
-}
-
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-
-.animate-float {
-  animation: float 4s ease-in-out infinite;
 }

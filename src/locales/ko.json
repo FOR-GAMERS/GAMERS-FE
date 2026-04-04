@@ -1,610 +1,124 @@
 {
-  "navbar": {
-    "contests": "대회",
-    "search": "검색...",
-    "login": "디스코드로 로그인",
-    "myPage": "마이페이지",
-    "createContest": "대회 생성",
-    "report": "신고하기",
-    "settings": "설정",
-    "logout": "로그아웃",
-    "notifications": {
-      "title": "알림",
-      "markAllRead": "모두 읽음으로 표시",
-      "empty": "알림이 없습니다.",
-      "types": {
-        "TEAM_INVITE_RECEIVED": "{{sender}}님이 {{team}} 팀에 초대했습니다.",
-        "TEAM_INVITE_ACCEPTED": "{{user}}님이 초대를 수락했습니다.",
-        "TEAM_INVITE_REJECTED": "{{user}}님이 초대를 거절했습니다.",
-        "APPLICATION_ACCEPTED": "{{contest}} 참가 신청이 승인되었습니다.",
-        "APPLICATION_REJECTED": "{{contest}} 참가 신청이 거절되었습니다."
-      }
-    }
-  },
-  "landing": {
-    "hero": {
-      "badge": "차세대 게이밍 경험",
-      "headline": "디스코드 커스텀 매치, 웹에서 버튼 한 번으로.",
-      "subtitle": "복잡한 명령어는 필요 없습니다! 웹에서 간편하게 조작해보세요!",
-      "inviteBot": "GAMERS 봇 초대",
-      "findContest": "대회 찾기"
+  "contests": {
+    "list_title": "공개 대회 목록",
+    "list_subtitle": "전 세계 플레이어들과 경쟁하고 우승 상금을 획득하세요.",
+    "list_search_placeholder": "대회명, 종목, 주최자 검색...",
+    "filter_all": "전체",
+    "filter_ongoing": "진행 중",
+    "filter_recruiting": "모집 중",
+    "filter_ended": "종료",
+    "sort_recent": "최신순",
+    "sort_prize": "상금순",
+    "sort_closing": "마감임박순",
+    "create_contest": "대회 개최하기",
+    "no_results": "검색 결과가 없습니다.",
+    "apply_now": "참가 신청",
+    "view_details": "상세 보기",
+    "prize_pool": "총 상금",
+    "slots": "모집 팀",
+    "status": {
+      "RECRUITING": "모집 중",
+      "ONGOING": "진행 중",
+      "ENDED": "종료",
+      "CANCELLED": "취소됨"
     },
-    "features": {
-      "headline": "승리를 위한 설계",
-      "description": "순위표를 지배하기 위해 필요한 모든 것이 여기에 있습니다.",
-      "zeroLatency": { "title": "제로 레이턴시", "description": "엣지 네트워크를 통해 전 세계 10ms 이하 Ping 실현." },
-      "antiCheat": { "title": "안티치트 플러스", "description": "AI 감지로 공정한 플레이 보장." },
-      "crossPlatform": { "title": "크로스 플랫폼", "description": "언제 어디서나, 어떤 기기로든 친구와 함께 플레이." },
-      "instantReplay": { "title": "인스턴트 리플레이", "description": "최고의 순간을 자동으로 공유." }
-    },
-    "problem": {
-      "headlinePrefix": "",
-      "headlineHighlight": "게이밍",
-      "headlineSuffix": "을 더 쾌적하게",
-      "subheadline": "쾌적한 게이밍 환경을 되찾으세요.",
-      "management": { "title": "수십 명의 멤버 관리, 어렵지 않나요?", "description": "수동 관리는 한계가 있습니다. 자동화로 스트레스 프리." },
-      "settings": { "title": "매번 발생하는 설정 실수와 경기 지연", "description": "설정 실수로 망친 경기... 그런 경험은 이제 끝입니다." },
-      "status": { "title": "누가 참여 중인지 한눈에 알기 어렵다면!", "description": "시각화된 로비로 참여 현황을 실시간 파악." }
-    },
-    "solution": {
-      "mobileHeadline": "간편 3단계",
-      "steps": {
-        "web": { "title": "웹 관리", "description": "웹 대시보드에서의 직관적인 관리" },
-        "bot": { "title": "봇 연동", "description": "디스코드 봇과의 실시간 연결" },
-        "complete": { "title": "완료", "description": "대회 개최 완료!" }
+    "single": {
+      "hero": {
+        "apply_button": "참가 신청하기",
+        "applied": "참가 신청 완료",
+        "deadline": "신청 마감",
+        "prize": "총 상금"
       },
-      "desktop": {
-        "phase1": "웹 대시보드에서의 직관적인 관리",
-        "phase2": "디스코드 봇과의 실시간 연결",
-        "phase3": "대회 개최 완료"
-      },
-      "scroll": "스크롤하여 체험"
-    },
-    "cta": {
-      "headline": "지금 바로 디스코드 서버에 GAMERS를 도입하세요!",
-      "description": "수천 개의 커뮤니티가 애용하는 도구를 지금 경험해보세요.",
-      "button": "무료로 시작하기",
-      "noCard": "신용카드 등록 불필요"
-    },
-    "footer": {
-      "copyright": "Power by Gamers Inc. 판권 소유."
-    }
-  },
-  "mypage": {
-    "tabs": {
-      "overview": "개요",
-      "manage": "관리",
-      "settings": "설정"
-    },
-    "sections": {
-      "gameIntegration": "게임 연동",
-      "manageApplications": "참가 신청 관리",
-      "accountSettings": "계정 설정"
-    },
-    "profile": {
-      "report": "신고하기"
-    },
-    "valorant": {
-      "title": "발로란트 연동",
-      "region": "지역",
-      "riotName": "라이엇 이름",
-      "tag": "태그",
-      "linkButton": "발로란트 계정 연동하기",
-      "unlinkButton": "연동 해제",
-      "refreshButton": "정보 갱신",
-      "elo": "ELO 레이팅",
-      "currentRank": "현재 티어",
-      "peakRank": "최고 티어",
-      "lastUpdated": "최근 갱신",
-      "cantRefresh": "갱신 불가능 (24시간 이내)",
-      "confirmUnlink": "정말로 연동을 해제하시겠습니까?",
-      "toast": {
-        "linked": "Valorant 계정이 연동되었습니다.",
-        "linkFailed": "연동 실패",
-        "unlinked": "Valorant 계정 연동이 해제되었습니다.",
-        "unlinkFailed": "해제 실패",
-        "refreshed": "Valorant 정보가 갱신되었습니다.",
-        "refreshFailed": "갱신 실패"
-      },
-      "regions": {
-        "kr": "한국 (KR)",
-        "ap": "아시아 태평양 (AP)",
-        "na": "북미 (NA)",
-        "eu": "유럽 (EU)"
-      }
-    },
-    "managed": {
-      "title": "관리 중인 대회",
-      "description": "운영 중인 대회의 대시보드로 빠르게 이동하세요.",
-      "button": "대시보드 관리"
-    },
-    "applications": {
-      "title": "참가 신청 관리",
-      "description": "참가 신청을 관리하고 승인/거절을 처리하세요.",
-      "noContest": "개최한 대회가 없습니다",
-      "noContestDesc": "대회를 개최하고 참가 신청을 받아보세요.",
-      "applicant": "신청자",
-      "tag": "태그",
-      "appliedAt": "신청일",
-      "status": "상태",
-      "actions": "작업",
-      "created": "생성일",
-      "currentTeams": "현재 팀",
-      "noApps": "아직 신청한 팀이 없습니다.",
-      "unknownUser": "알 수 없는 사용자",
-      "processed": "처리됨",
-      "toast": {
-        "accepted": "신청을 수락했습니다.",
-        "rejected": "신청을 거절했습니다.",
-        "acceptFailed": "신청 승인에 실패했습니다.",
-        "rejectFailed": "신청 거절에 실패했습니다."
-      }
-    },
-    "edit": {
-      "title": "프로필 설정",
-      "username": "사용자명",
-      "tag": "태그",
-      "bio": "자기소개",
-      "changePassword": "비밀번호 변경",
-      "newPassword": "새 비밀번호",
-      "confirmPassword": "비밀번호 확인",
-      "save": "변경사항 저장",
-      "toast": {
-        "passwordMismatch": "비밀번호가 일치하지 않습니다.",
-        "passwordChanged": "비밀번호가 변경되었습니다.",
-        "updated": "프로필이 수정되었습니다.",
-        "failed": "프로필 수정 실패"
-      },
-      "withdrawal": {
-        "title": "서비스 탈퇴",
-        "description": "계정 삭제는 영구적이며 취소할 수 없습니다. 대전 기록 및 대회 기록을 포함한 모든 데이터가 삭제됩니다.",
-        "button": "서비스 탈퇴하기",
-        "confirm": "정말로 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
-        "success": "계정이 삭제되었습니다.",
-        "failed": "계정 삭제 실패"
-      }
-    },
-    "lol": {
-      "title": "리그 오브 레전드 연동",
-      "region": "지역",
-      "riotName": "소환사 명",
-      "tag": "태그",
-      "linkButton": "LOL 계정 연동하기",
-      "unlinkButton": "연동 해제",
-      "refreshButton": "정보 갱신",
-      "elo": "ELO 레이팅",
-      "currentRank": "현재 티어",
-      "peakRank": "최고 티어",
-      "lastUpdated": "최근 갱신",
-      "cantRefresh": "갱신 불가능 (24시간 이내)",
-      "confirmUnlink": "정말로 LOL 계정 연동을 해제하시겠습니까?",
-      "toast": {
-        "linked": "LOL 계정이 연동되었습니다.",
-        "linkFailed": "연동 실패",
-        "unlinked": "LOL 계정 연동이 해제되었습니다.",
-        "unlinkFailed": "해제 실패",
-        "refreshed": "LOL 정보가 갱신되었습니다.",
-        "refreshFailed": "갱신 실패"
-      }
-    },
-    "chart": {
-      "title": "실력 성과 지표",
-      "subtitle": "대전 기록 및 ELO 변화 추이",
-      "winRate": "승률",
-      "currentElo": "현재 ELO",
-      "totalWins": "총 승리",
-      "totalMatches": "총 경기 수",
-      "peakPerformance": "최고 ELO"
-    },
-    "participation": {
-      "title": "참여 중인 대회",
-      "count": "개의 대회",
-      "empty": "참여 중인 대회가 없습니다",
-      "emptyDesc": "대회에 참여하여 실력을 증명해보세요!",
-      "findContests": "대회 찾아보기",
-      "confirmWithdraw": "정말로 이 대회에서 탈퇴하시겠습니까?",
-      "withdraw": "대회 탈퇴",
-      "toast": {
-        "withdrawn": "대회에서 탈퇴했습니다.",
-        "failed": "탈퇴 실패"
-      }
-    },
-    "invitations": {
-      "title": "대기 중인 초대",
-      "toast": {
-        "accepted": "초대를 수락했습니다.",
-        "rejected": "초대를 거절했습니다.",
-        "failed": "초대 처리 실패"
-      }
-    }
-  },
-  "contestDetail": {
-      "status": {
-        "PENDING": "준비 중",
-        "RECRUITING": "모집 중",
-        "ACTIVE": "진행 중",
-        "FINISHED": "종료됨",
-        "CANCELLED": "취소됨",
-        "PREPARING": "준비 중"
-      },
-      "cta": {
-        "join": "참가 신청하기",
-        "loginToJoin": "로그인하고 신청하기",
-        "cancelJoin": "신청 취소",
-        "joined": "참가 확정됨",
-        "goToDashboard": "대회 대시보드로 이동"
-      },
-      "alerts": {
-        "joinSuccess": "참가 신청이 완료되었습니다.",
-        "joinFail": "참가 신청에 실패했습니다.",
-        "cancelSuccess": "신청을 취소했습니다.",
-        "cancelFail": "취소에 실패했습니다.",
-        "confirmCancel": "참가 신청을 취소하시겠습니까?",
-        "alreadyJoined": "이미 참가 확정된 상태입니다.",
-        "loadingFail": "대회 정보를 불러오는데 실패했습니다."
-      },
-      "noInfo": "상세 정보가 없습니다."
-    },
-    "contestsList": {
-      "title": "진행 중인 대회",
-      "filter": {
-        "latest": "정렬: 최신순",
-        "status": "정렬: 상태순"
-      },
-      "noContests": "대회가 없습니다."
-    },
-    "contestCreate": {
-      "title": "대회 생성",
-      "success": {
-        "title": "CONTEST CREATED",
-        "description": "대회가 성공적으로 생성되었습니다.<br/>참가자 모집이 시작됩니다!",
-        "backToList": "목록으로 돌아가기",
-        "checkContest": "대회 확인하기"
-      },
-      "form": {
-        "titleLabel": "대회 제목",
-        "titlePlaceholder": "대회 제목을 입력하세요 (예: 2026 사이버 리그)",
-        "thumbnail": "썸네일 업로드",
-        "maxTeams": "최대 팀 수",
-        "teamSize": "팀 규모",
-        "contestType": "대회 유형",
-        "gameType": "게임 종목",
-        "startDate": "시작 일시",
-        "endDate": "종료 일시",
-        "totalPoints": "팀 포인트 제한 (0 = 무제한)",
-        "autoStart": "인원이 차면 자동 시작?",
-        "description": "상세 설명 (마크다운)",
-        "discord": "디스코드 서버"
-      },
-      "actions": {
-        "edit": "작성",
-        "preview": "미리보기",
-        "creating": "생성 중...",
-        "submit": "대회 생성하기"
-      },
-      "status": {
-        "ready": "생성 준비 완료 🚀",
-        "fillRequired": "모든 필수 항목을 입력해주세요"
-      },
-      "options": {
-        "tournament": "토너먼트",
-        "league": "리그"
-      }
-    },
-    "teamManagement": {
-      "title": "팀 관리",
-      "members": "멤버",
-      "points": "포인트",
-      "invite": "멤버 초대",
-      "searchPlaceholder": "사용자명#태그 검색...",
-      "search": "검색",
-      "inviteAction": "초대",
-      "ready": "팀 구성 완료! 참가 준비가 되었습니다.",
-      "notReady": "팀 구성이 완료되지 않았습니다.",
-      "leaderOnly": "팀장만 멤버를 관리할 수 있습니다.",
-      "toast": {
-        "inviteSuccess": "초대가 전송되었습니다!",
-        "inviteFail": "초대에 실패했습니다.",
-        "createSuccess": "팀이 생성되었습니다!",
-        "createFail": "팀 생성에 실패했습니다.",
-        "deleteSuccess": "팀이 삭제되었습니다.",
-        "deleteFail": "팀 삭제에 실패했습니다.",
-        "leaveSuccess": "팀을 떠났습니다.",
-        "leaveFail": "팀 탈퇴에 실패했습니다."
-      },
-      "noTeamTitle": "팀이 없습니다",
-      "noTeamDescription": "대회에 참가하려면 팀을 생성해야 합니다. 팀장이 되어 팀원을 초대해보세요.",
-      "createTeam": "팀 생성하기",
-      "deleteTeam": "팀 삭제하기",
-      "confirmDelete": "정말로 팀을 삭제하시겠습니까? 팀원도 모두 삭제됩니다."
-    },
-    "contestCTA": {
-      "title": "참가 신청",
-      "status": "모집 현황",
-      "teams": "팀",
-      "entryFee": "참가비",
-      "free": "무료",
-      "prizePool": "총 상금",
-      "pointLimit": "포인트 제한",
-      "deadline": "신청 마감",
-      "button": {
-        "join": "참가 신청하기",
-        "processing": "처리 중...",
-        "closed": "모집 종료",
-        "login": "로그인하고 신청하기",
-        "cancel": "신청 취소",
-        "joined": "참가 완료",
-        "deleteTeam": "팀 삭제",
-        "playground": "대회장",
-        "dashboard": "대시보드"
-      },
-      "loginRequired": "참가 신청을 하려면 로그인이 필요합니다."
-    },
-    "contestModal": {
-      "title": "대회 참가 신청",
-      "qualification": "자격 확인",
-      "description": "이 대회에 참가하려면 자격 확인이 필요합니다. 먼저 발로란트 랭크를 확인합니다.",
-      "calculate": "내 포인트 계산하기",
-      "notConfigured": "포인트 테이블 미설정",
-      "calculating": "포인트 계산 중...",
-      "failed": "포인트 계산 실패",
-      "checkProfile": "프로필 설정 확인",
-      "currentTier": "현재 티어",
-      "peakTier": "최고 티어",
-      "calculatedPoints": "계산된 포인트",
-      "cancel": "취소",
-      "createTeam": "참가 신청"
-    },
-    "contestDashboard": {
       "tabs": {
         "overview": "개요",
-        "applications": "참가 신청",
-        "participants": "참가자 관리",
-        "bracket": "대진표 & 팀",
-        "settings": "설정"
+        "bracket": "대진표",
+        "teams": "참가 팀",
+        "rules": "규정"
       },
-      "participants": {
-        "title": "참가자 목록",
-        "description": "대회에 참가 중인 모든 멤버를 관리합니다.",
-        "searchPlaceholder": "사용자명 검색...",
-        "role": "역할",
-        "points": "포인트",
-        "actions": "관리",
-        "roles": {
-          "LEADER": "개최자",
-          "STAFF": "스태프",
-          "NORMAL": "참가자"
-        },
-        "toast": {
-          "roleChangeSuccess": "역할이 변경되었습니다.",
-          "roleChangeFail": "역할 변경 실패"
-        }
+      "sidebar": {
+        "bracket_preview": "대진표 미리보기",
+        "recent_teams": "최근 신청 팀",
+        "no_teams": "아직 신청한 팀이 없습니다."
       },
-      "stats": {
-        "participants": "참가자",
-        "status": "상태"
-      },
-      "actions": {
-        "start": "대회 시작",
-        "started": "진행 중",
-        "stop": "대회 중지",
-        "delete": "대회 삭제"
-      },
-      "toast": {
-        "loadFail": "대회 데이터를 불러오는데 실패했습니다",
-        "loadDataFail": "대회 데이터 로드 실패",
-        "startSuccess": "대회가 시작되었습니다",
-        "startFail": "대회 시작 실패",
-        "stopSuccess": "대회가 중지되었습니다",
-        "stopFail": "대회 중지 실패",
-        "deleteSuccess": "대회가 삭제되었습니다",
-        "deleteFail": "대회 삭제 실패"
-      },
-      "confirmDelete": "정말로 대회를 삭제하시겠습니까?",
-      "notFound": "대회를 찾을 수 없습니다",
-      "overview": {
-        "title": "대회 상세 정보",
-        "contestTitle": "제목",
-        "maxTeams": "최대 팀 수",
-        "unlimited": "무제한",
-        "startDate": "시작 일시",
-        "endDate": "종료 일시",
-        "notSet": "미설정",
-        "warning": "대회 시작 전 모든 팀이 셔플되고 대진표가 생성되었는지 확인해주세요. 시작 후에는 참가 신청이 마감되고 데이터가 확정됩니다."
-      },
-      "settings": {
-        "underConstruction": "설정 패널 준비 중"
-      },
-      "page": {
-        "accessDenied": "접근 거부",
-        "permissionDenied": "이 대회를 관리할 권한이 없습니다.",
-        "returnToContest": "대회로 돌아가기",
-        "title": "CONTEST",
-        "dashboard": "DASHBOARD",
-        "subtitle": "참가자, 대진표 및 대회 상태를 관리합니다."
-      },
-      "bracket": {
-        "title": "대진표",
-        "refresh": "새로고침",
-        "noMatches": "생성된 매치가 없습니다.",
-        "noMatchesDesc": "대회가 시작되면 매치가 이곳에 표시됩니다.",
-        "loadFail": "대진표를 불러오는데 실패했습니다.",
-        "match": "매치",
-        "team": "팀",
-        "tbd": "미정",
-        "vs": "VS"
+      "footer": {
+        "applied_count": "팀 신청 중",
+        "prize_label": "총 상금",
+        "format_label": "대회 방식"
       }
     },
-  "loginCheck": {
-    "verifyingTitle": "로그인 확인 중...",
-    "verifyingDesc": "인증 정보를 확인하고 있습니다.",
-    "successTitle": "환영합니다!",
-    "successDesc": "로그인에 성공했습니다. 이동 중...",
-    "notFoundTitle": "계정을 찾을 수 없음",
-    "notFoundDesc": "새 계정을 만드시겠습니까?",
-    "errorTitle": "로그인 실패",
-    "errorDesc": "다시 시도해주세요.",
-    "btnLogin": "로그인으로 이동",
-    "btnSignup": "회원가입 하기",
-    "debugInfo": "디버그 정보:"
-  },
-  "admin": {
-    "dashboard": {
-      "title": "관리자 대시보드",
-      "subtitle": "이 중앙 허브에서 GAMERS 플랫폼의 모든 측면을 관리하세요. 시작하려면 아래 모듈을 선택하세요.",
-      "enterModule": "모듈 진입",
-      "cards": {
-        "banner": { "title": "배너 관리", "description": "홈페이지 히어로 배너 및 프로모션을 관리합니다." },
-        "user": { "title": "사용자 관리", "description": "사용자 계정 및 역할을 조회, 수정, 관리합니다." },
-        "contest": { "title": "대회 관리", "description": "토너먼트, 리그 및 이벤트를 생성하고 관리합니다." },
-        "result": { "title": "대진표 결과", "description": "경기 점수를 업데이트하고 대진표 진행을 관리합니다." },
-        "game": { "title": "게임 관리", "description": "게임 설정 및 지원되는 타이틀을 구성합니다." }
-      }
-    },
-    "userManagement": {
-      "title": "사용자 관리",
-      "searchPlaceholder": "사용자 검색...",
-      "table": {
-        "user": "사용자",
-        "contact": "연락처",
-        "role": "역할",
-        "actions": "작업",
-        "tag": "태그",
-        "id": "ID",
-        "showing": "총 {{total}}명 중 {{count}}명 표시"
+    "verified_team": "인증된 팀",
+    "create": {
+      "title": "대회 생성",
+      "subtitle": "대회의 모든 세부 사항을 설정하고 새로운 역사를 시작하세요.",
+      "save_draft": "임시 저장",
+      "publish": "대회 발행하기",
+      "cancel": "취소",
+      "save_draft_auto_info": "작성 중인 내용은 임시저장됩니다. 최종 제출 전까지 공개되지 않습니다.",
+      "image_settings_subtitle": "대회의 시각적인 정체성을 설정합니다.",
+      "basic_info_subtitle": "대회의 가장 기본적인 정보를 입력합니다.",
+      "sections": {
+        "basic_info": "기본 정보",
+        "image_settings": "이미지 설정",
+        "game_settings": "게임 설정",
+        "team_composition": "팀 구성",
+        "schedule_settings": "일정 설정",
+        "discord_integration": "Discord 연동"
       },
-      "actions": {
-        "edit": "수정",
-        "delete": "차단/삭제",
-        "confirmDelete": "정말로 사용자 {{username}}님을 차단/삭제하시겠습니까?",
-        "deleteSuccess": "사용자가 삭제되었습니다.",
-        "deleteFail": "사용자 삭제 실패",
-        "editNotImplemented": "사용자 {{username}} 수정 기능은 아직 구현되지 않았습니다."
+      "basic": {
+        "contest_name": "대회명",
+        "contest_intro": "대회 소개",
+        "precautions": "주의사항 (선택)",
+        "placeholder_name": "대회명을 입력하세요",
+        "placeholder_intro": "대회에 대한 상세 설명을 입력하세요 (Markdown 지원)",
+        "placeholder_precautions": "참가자가 반드시 알아야 할 규칙이나 주의사항을 입력하세요..."
+      },
+      "image": {
+        "thumbnail": "썸네일 (1:1)",
+        "banner": "배너 이미지 (16:5 권장)",
+        "upload_desc": "JPG, PNG, WebP · 최대 2MB",
+        "banner_upload_desc": "JPG, PNG, WebP · 최대 5MB",
+        "click_to_upload": "클릭하여 업로드"
+      },
+      "game": {
+        "select_game": "게임 종목",
+        "valorant_settings": "VALORANT 세부 설정",
+        "lol_settings": "LEAGUE OF LEGENDS 세부 설정",
+        "format": "대회 방식",
+        "format_tournament": "토너먼트",
+        "format_league": "리그",
+        "format_single": "단판 (ONE_TIME)",
+        "map_pool": "맵 풀 (복수 선택)",
+        "agent_restrictions": "에이전트 제한 (선택)",
+        "champion_restrictions": "챔피언 제한 (선택)",
+        "patch_version": "패치 버전",
+        "rounds_per_match": "경기당 라운드 수",
+        "split_count": "스플릿 수",
+        "placeholder_agent": "에이전트 검색...",
+        "placeholder_champion": "챔피언 검색..."
+      },
+      "team": {
+        "max_teams": "최대 참가 팀 수",
+        "team_size": "팀당 인원 수",
+        "total_points": "포인트 총량"
+      },
+      "schedule": {
+        "start_date": "대회 시작일",
+        "end_date": "대회 종료일",
+        "auto_start": "자동 시작",
+        "auto_start_desc": "시작일이 되면 대회를 자동으로 ACTIVE 상태로 전환합니다"
+      },
+      "discord": {
+        "integration": "Discord 연동 (선택)",
+        "integration_desc": "Discord 서버와 연동하면 대회 알림, 입장 관리 등을 자동으로 처리할 수 있습니다.",
+        "server_id": "Discord 서버 ID",
+        "channel_id": "알림 채널 ID",
+        "notification_types": "알림 유형",
+        "invite_bot": "봇 초대하기"
+      },
+      "preview": {
+        "title": "미리보기",
+        "summary_title": "설정 요약"
       }
     }
-  },
-  "auth": {
-    "login": {
-      "invalidEmail": "유효한 이메일 주소를 입력해주세요.",
-      "invalidPassword": "비밀번호는 8자 이상이어야 하며, 대문자, 소문자, 특수문자(!@#$%^&*)를 포함해야 합니다.",
-      "heroTitle1": "대체할 수 없는",
-      "heroTitle2": "추억을.",
-      "heroSubtitle": "함께 보낸 시간들을 잊지 마세요.",
-      "sysStatus": "시스템 상태: 온라인",
-      "loc": "위치: 네오 도쿄 서버",
-      "secureConn": "보안 연결: 수립됨",
-      "welcome": "다시 오신 것을 환영합니다",
-      "welcomeDesc": "GAMERS 계정으로 로그인하고 당신의 전설을 다시 시작하세요.",
-      "emailLabel": "이메일",
-      "emailPlaceholder": "name@example.com",
-      "passwordLabel": "비밀번호",
-      "passwordPlaceholder": "••••••••",
-      "loginButton": "로그인",
-      "or": "또는",
-      "discordLogin": "디스코드로 로그인",
-      "noAccount": "계정이 없으신가요?",
-      "signup": "회원가입"
-    }},
-  "contestDiscussion": {
-    "title": "응원 톡",
-    "placeholder": "경기에 대한 생각을 공유해보세요...",
-    "postButton": "댓글 작성",
-    "noComments": "아직 댓글이 없습니다. 첫 번째로 응원해보세요!"
-  },
-  "contestPlayground": {
-    "menu": {
-      "title": "메뉴",
-      "home": "홈",
-      "gameList": "게임 목록",
-      "memberList": "참가자 목록",
-      "myTeam": "마이팀",
-      "bracket": "대진표",
-      "result": "결과"
-    },
-    "header": {
-      "label": "플레이그라운드"
-    },
-    "home": {
-      "noDescription": "대회 설명이 없습니다.",
-      "status": "상태",
-      "teams": "참가 팀 / 상한",
-      "gameType": "게임 타입",
-      "active": "개최 중",
-      "pending": "준비 중",
-      "recruiting": "모집 중",
-      "finished": "종료",
-      "cancelled": "취소됨"
-    },
-    "gameList": {
-      "title": "게임 목록",
-      "empty": "등록된 게임이 없습니다.",
-      "gameNumber": "게임 #{{id}}",
-      "format": "형식",
-      "statusLabel": "상태: ",
-      "status": "상태",
-      "createdAt": "생성일"
-    },
-    "memberList": {
-      "title": "참가자 목록",
-      "filter": {
-        "point": "포인트순",
-        "currentTier": "현재 티어순",
-        "peakTier": "최고 티어순",
-        "desc": "내림차순",
-        "asc": "오름차순"
-      },
-      "empty": "참가자가 없습니다.",
-      "table": {
-        "name": "이름",
-        "tag": "태그",
-        "currentRank": "현재 티어",
-        "peakRank": "최고 티어",
-        "points": "포인트",
-        "action": "조작",
-        "leader": "방장",
-        "me": "나"
-      },
-      "page": "페이지 ",
-      "pt": "pt",
-      "invite": "초대",
-      "inviteSuccess": "{{username}}님을 초대했습니다!",
-      "inviteFail": "초대에 실패했습니다."
-    },
-    "myTeam": {
-      "title": "마이팀",
-      "noTeam": {
-        "title": "팀 미소속",
-        "desc": "현재 소속된 팀이 없습니다.",
-        "create": "팀 생성"
-      },
-      "code": "코드",
-      "capacity": "정원",
-      "disband": "팀 해체",
-      "leave": "팀 탈퇴",
-      "confirmDisband": "정말로 팀을 해체하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
-      "confirmLeave": "정말로 팀을 탈퇴하시겠습니까?",
-      "createSuccess": "팀이 생성되었습니다!",
-      "createFail": "팀 생성에 실패했습니다.",
-      "disbandSuccess": "팀이 해체되었습니다.",
-      "disbandFail": "팀 해체에 실패했습니다.",
-      "leaveSuccess": "팀을 탈퇴했습니다.",
-      "leaveFail": "팀 탈퇴에 실패했습니다.",
-      "totalPoints": "총 포인트",
-      "pointOver": "포인트 초과",
-      "emptySlot": "빈 슬롯",
-      "manage": "팀 관리",
-      "inviteMember": "멤버 초대",
-      "alreadyJoined": "이미 참가함"
-    },
-    "bracket": {
-      "title": "토너먼트 대진표",
-      "preparing": "현재 준비중입니다..."
-    },
-    "result": {
-      "title": "결과",
-      "preparing": "현재 준비중입니다..."
-    },
-    "loadingFail": "대회 정보를 불러오는데 실패했습니다",
-    "retry": "URL을 확인하거나 잠시 후 다시 시도해주세요."
   }
 }

@@ -1,19 +1,23 @@
-import Hero from "@/components/landing/Hero";
-import Problem from "@/components/landing/Problem";
-import Solution from "@/components/landing/Solution";
-import Features from "@/components/landing/Features";
-import CTA from "@/components/landing/CTA";
-import Footer from "@/components/landing/Footer";
+import { Navbar } from '@/components/landing/Navbar';
+import { HeroSection } from '@/components/landing/HeroSection';
+import { ProblemSection } from '@/components/landing/ProblemSection';
+import { SolutionSection } from '@/components/landing/SolutionSection';
+import { FeaturesGrid } from '@/components/landing/FeaturesGrid';
+import { CTASection } from '@/components/landing/CTASection';
+import { Footer } from '@/components/landing/Footer';
 
-export default function Home() {
+export default function LandingPage() {
   return (
-    <main className="relative pb-24 min-h-screen block bg-background">
-      <Hero />
-      <Problem />
-      <Solution />
-      <Features />
-      <CTA />
+    <div className="flex min-h-screen flex-col overflow-hidden bg-deep-black">
+      <Navbar />
+      <main className="flex-1">
+        <HeroSection />
+        <ProblemSection />
+        <SolutionSection />
+        <FeaturesGrid />
+        <CTASection />
+      </main>
       <Footer />
-    </main>
+    </div>
   );
 }
