@@ -63,24 +63,24 @@ export function ContestCardCompleted({
         <h4 className="text-[17px] font-black italic tracking-tight text-[#EEEEF0] line-clamp-1 group-hover:text-neon-mint transition-colors">
           {title}
         </h4>
-        <p className="text-[12px] font-bold text-[#4A4A55] tracking-tight">{date} 완료</p>
+        <p className="text-[12px] font-bold text-[#4A4A55] tracking-tight">{date} {t('my_contests.card.completed_suffix')}</p>
       </div>
 
       <div className="grid grid-cols-3 gap-2">
         <div className="flex flex-col items-center justify-center gap-1.5 rounded-xl bg-white/[0.02] border border-white/5 py-4">
           <span className="text-[14px] font-black text-[#EEEEF0] italic leading-none">{rank}{t('my_contests.card.rank_suffix')}</span>
-          <span className="text-[9px] font-black text-[#4A4A55] uppercase tracking-widest leading-none">최종 순위</span>
+          <span className="text-[9px] font-black text-[#4A4A55] uppercase tracking-widest leading-none">{t('my_contests.card.final_rank')}</span>
         </div>
         <div className="flex flex-col items-center justify-center gap-1.5 rounded-xl bg-white/[0.02] border border-white/5 py-4">
           <span className={cn(
             "text-[14px] font-black italic leading-none",
             prize !== '—' ? "text-[#EEEEF0]" : "text-[#4A4A55]"
           )}>{prize}</span>
-          <span className="text-[9px] font-black text-[#4A4A55] uppercase tracking-widest leading-none">획득 상금</span>
+          <span className="text-[9px] font-black text-[#4A4A55] uppercase tracking-widest leading-none">{t('my_contests.card.prize_earned')}</span>
         </div>
         <div className="flex flex-col items-center justify-center gap-1.5 rounded-xl bg-white/[0.02] border border-white/5 py-4">
           <span className="text-[14px] font-black text-[#EEEEF0] italic leading-none">{record.wins}W{record.losses}L</span>
-          <span className="text-[9px] font-black text-[#4A4A55] uppercase tracking-widest leading-none">전체 전적</span>
+          <span className="text-[9px] font-black text-[#4A4A55] uppercase tracking-widest leading-none">{t('my_contests.card.total_record')}</span>
         </div>
       </div>
 

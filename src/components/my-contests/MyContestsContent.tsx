@@ -23,7 +23,7 @@ export function MyContestsContent() {
       statusText: t('my_contests.mock.contest1_status'),
       formatText: t('my_contests.mock.contest1_format'),
       myTeam: { name: 'Team Alpha', membersCount: 5 },
-      nextMatch: { opponent: 'NexusGG', time: t('community.post.time_ago.hours', { count: 3 }) },
+      nextMatch: { opponent: 'NexusGG', time: t('my_contests.card.hours_after', { count: 3 }) },
       record: { wins: 2, losses: 0, isUnbeatable: true },
       prize: '₩500,000',
       isLive: true,

@@ -181,10 +181,27 @@
     },
     "card": {
       "my_team": "マイチーム",
+      "members_participating": "{{count}}名参加",
       "next_match": "次戦",
+      "no_record": "試合結果なし",
       "my_record": "マイ戦績",
+      "hours_after": "{{count}}時間後",
+      "unbeatable": "無敗",
+      "participants_status": "参加状況",
+      "team_suffix": "チーム",
+      "full": "締切",
+      "no_info": "情報なし",
+      "contest_start": "大会開始",
       "prize": "賞金",
-      "view_details": "大会詳細を見る"
+      "prize_earned": "獲得賞金",
+      "view_details": "大会詳細を見る",
+      "enter_stadium": "スタジアム入場",
+      "team_distribution": "チーム分け",
+      "rank_suffix": "位",
+      "completed_suffix": "完了",
+      "final_rank": "最終順位",
+      "total_record": "全体戦績",
+      "view_results": "結果を確認"
     },
     "mock": {
       "contest1": "Valorant 新人オープンカップ シーズン4 by GMS_Creator",
@@ -523,5 +540,71 @@
         "info": "ApexDuo · ベスト16敗退"
       }
     }
+  },
+  "hero": {
+    "tag": "THE NEXT GEN GAMING PLATFORM",
+    "title_1": "すべての競争が",
+    "title_2": "記録になる瞬間",
+    "subtitle": "カジュアルトーナメントからプロリーグまで。 \nGAMERSであなたのキャリアを始めましょう。",
+    "cta_join": "大会に参加する",
+    "cta_create": "大会を開催する"
+  },
+  "problem": {
+    "tag": "THE CHALLENGE",
+    "title": "何があなたの競争を妨げていますか？",
+    "card_1": {
+      "title": "参加の難しさ",
+      "description": "どこで申し込み、どう進めればいいか分かりませんでしたか？GAMERSは数クリックですべての準備を完了します。"
+    },
+    "card_2": {
+      "title": "不足している記録",
+      "description": "あなたの素晴らしいプレイが消えてしまわないように。すべての勝利と記録をあなたのキャリアにします。"
+    },
+    "card_3": {
+      "title": "不便な運営",
+      "description": "相手チームとの連絡やトーナメント表作成の煩わしさ。GAMERSの自動化システムが解決します。"
+    }
+  },
+  "solution": {
+    "tag": "THE SOLUTION",
+    "title": "ゲーマーのための完璧な空間",
+    "item_1": {
+      "title": "直感的な大会探索",
+      "description": "あなたの実力と地域に合わせた最適な大会をAIが推薦します。"
+    },
+    "item_2": {
+      "title": "リアルタイムデータ分析",
+      "description": "試合結果と統計が自動的に記録され、トーナメント表に即座に反映されます。"
+    },
+    "item_3": {
+      "title": "公正な競技環境",
+      "description": "徹底した本人認証とアンチチート連携により、クリーンな勝負を保証します。"
+    }
+  },
+  "features": {
+    "tag": "FEATURES",
+    "title": "強力なプラットフォームの力",
+    "card_1": {
+      "title": "自動トーナメント表生成",
+      "description": "参加申込からトーナメント表確定まで1秒で十分です。"
+    },
+    "card_2": {
+      "title": "チーム管理システム",
+      "description": "チームメイトを招待し役割を割り当てて、完璧なシナジーを生み出しましょう。"
+    },
+    "card_3": {
+      "title": "Discord連携",
+      "description": "ボットがすべてのチャンネル管理と通知を自動的に処理します。"
+    },
+    "card_4": {
+      "title": "管理者ダッシュボード",
+      "description": "主催者のための洗練された運営ツールを無料で提供します。"
+    }
+  },
+  "cta": {
+    "tag": "READY TO PLAY?",
+    "title": "今すぐ\n始めましょう",
+    "subtitle": "日本最大級のゲーミングオー픈トーナメントプラットフォーム\nGAMERSと共に成長を体験してください。",
+    "button": "無料で始める"
   }
 }

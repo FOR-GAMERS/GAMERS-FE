@@ -181,10 +181,27 @@
     },
     "card": {
       "my_team": "내 팀",
+      "members_participating": "{{count}}명 참여",
       "next_match": "다음 경기",
+      "no_record": "경기 기록 없음",
       "my_record": "내 전적",
+      "hours_after": "{{count}}시간 후",
+      "unbeatable": "무패",
+      "participants_status": "참가 현황",
+      "team_suffix": "팀",
+      "full": "마감",
+      "no_info": "정보 없음",
+      "contest_start": "대회 시작",
       "prize": "상금",
-      "view_details": "대회 상세 보기"
+      "prize_earned": "획득 상금",
+      "view_details": "대회 상세 보기",
+      "enter_stadium": "경기장 입장",
+      "team_distribution": "팀 배분",
+      "rank_suffix": "위",
+      "completed_suffix": "완료",
+      "final_rank": "최종 순위",
+      "total_record": "전체 전적",
+      "view_results": "결과 확인"
     },
     "mock": {
       "contest1": "발로란트 신인 오픈컵 시즌 4 by GMS_Creator",
@@ -362,7 +379,7 @@
       "new": "새로운"
     },
     "bracket": {
-       "title": "대진표"
+      "title": "대진표"
     },
     "rounds": {
       "round_of_16": "16강",
@@ -371,6 +388,51 @@
       "semifinals": "준결승",
       "finals": "결승",
       "group_stage": "조별예선"
+    },
+    "team_distribution": {
+      "title": "LoL 팀 배분",
+      "subtitle": "참가자 닉네임을 입력하여 밸런스 있는 팀을 구성하세요.",
+      "parsing": {
+        "title": "닉네임 파싱",
+        "placeholder": "텍스트를 붙여넣으세요. (예: 닉네임#TAG 태그... 또는 채팅 로그)",
+        "parse_button": "파싱하기",
+        "clear_button": "초기화",
+        "parsed_count": "{{count}}명 파싱됨"
+      },
+      "participants": {
+        "title": "참가자 명단 (10명)",
+        "empty_slot": "비어있음",
+        "select_role": "포지션 선택",
+        "select_tier": "티어 선택"
+      },
+      "result": {
+        "title": "배분 결과",
+        "blue_side": "블루 진영",
+        "red_side": "레드 진영",
+        "reroll": "다시 배치",
+        "copy_result": "결과 복사",
+        "new_session": "새 세션"
+      },
+      "start_button": "팀 배분 시작",
+      "roles": {
+        "TOP": "탑",
+        "JG": "정글",
+        "MID": "미드",
+        "ADC": "원딜",
+        "SUP": "서폿"
+      },
+      "tiers": {
+        "IRON": "아이언",
+        "BRONZE": "브론즈",
+        "SILVER": "실버",
+        "GOLD": "골드",
+        "PLATINUM": "플래티넘",
+        "EMERALD": "에메랄드",
+        "DIAMOND": "다이아몬드",
+        "MASTER": "마스터",
+        "GRANDMASTER": "그랜드마스터",
+        "CHALLENGER": "챌린저"
+      }
     }
   },
   "common": {
@@ -430,7 +492,7 @@
     "login_title": "로그인",
     "signup_title": "회원가입"
   },
-    "mypage": {
+  "mypage": {
     "title": "마이페이지",
     "subtitle": "MY PAGE",
     "edit_profile": "프로필 편집",
@@ -500,5 +562,109 @@
         "info": "ApexDuo · 16강 탈락"
       }
     }
+  },
+  "admin": {
+    "sidebar": {
+      "dashboard": "대시보드",
+      "members": "멤버 관리",
+      "contests": "대회 관리",
+      "reports": "신고 처리",
+      "settings": "설정",
+      "console": "Admin Console"
+    },
+    "header": {
+      "members_title": "멤버 관리",
+      "total_users": "총 {{count}}명의 등록된 사용자",
+      "search_placeholder": "닉네임, 이메일 검색...",
+      "export": "내보내기"
+    },
+    "members": {
+      "tabs": {
+        "all": "전체",
+        "active": "활성",
+        "banned": "정지",
+        "staff": "운영진",
+        "new": "신규 (7일)"
+      },
+      "table": {
+        "user": "사용자",
+        "role": "역할",
+        "status": "상태",
+        "join_date": "가입일",
+        "last_active": "마지막 활동",
+        "actions": "액션"
+      },
+      "status": {
+        "active": "활성",
+        "banned": "정지",
+        "warning": "경고"
+      }
+    }
+  },
+  "hero": {
+    "tag": "THE NEXT GEN GAMING PLATFORM",
+    "title_1": "모든 경쟁이",
+    "title_2": "기록이 되는 순간",
+    "subtitle": "캐주얼 토너먼트부터 정식 리그까지. \nGAMERS에서 당신의 커리어를 시작하세요.",
+    "cta_join": "대회 참가하기",
+    "cta_create": "대회 개최하기"
+  },
+  "problem": {
+    "tag": "THE CHALLENGE",
+    "title": "무엇이 당신의 경쟁을 방해하나요?",
+    "card_1": {
+      "title": "참여의 어려움",
+      "description": "어디서 신청하고 어떻게 진행해야 할지 막막하셨나요? GAMERS는 클릭 몇 번으로 모든 준비를 끝냅니다."
+    },
+    "card_2": {
+      "title": "부족한 기록",
+      "description": "당신의 멋진 플레이가 휘발되지 않도록. 모든 승리와 기록을 당신의 커리어로 만들어 드립니다."
+    },
+    "card_3": {
+      "title": "불편한 운영",
+      "description": "상대 팀과 연락하고 대진표를 짜는 번거로움. GAMERS의 자동화 시스템이 해결합니다."
+    }
+  },
+  "solution": {
+    "tag": "THE SOLUTION",
+    "title": "게이머를 위한 완벽한 공간",
+    "item_1": {
+      "title": "직관적인 대회 탐색",
+      "description": "당신의 실력과 지역에 맞는 최적의 대회를 AI가 추천합니다."
+    },
+    "item_2": {
+      "title": "실시간 데이터 분석",
+      "description": "경기 결과와 스탯이 자동으로 기록되어 대진표에 즉시 반영됩니다."
+    },
+    "item_3": {
+      "title": "공정한 경쟁 환경",
+      "description": "철저한 본인 인증과 안티치트 연동으로 깨끗한 승부를 보장합니다."
+    }
+  },
+  "features": {
+    "tag": "FEATURES",
+    "title": "강력한 플랫폼의 힘",
+    "card_1": {
+      "title": "자동 대진표 생성",
+      "description": "참가 신청부터 대진표 확정까지 1초면 충분합니다."
+    },
+    "card_2": {
+      "title": "팀 관리 시스템",
+      "description": "팀원을 초대하고 역할을 배정하여 완벽한 시너지를 내세요."
+    },
+    "card_3": {
+      "title": "디스코드 연동",
+      "description": "봇이 모든 채널 관리와 알림을 자동으로 처리합니다."
+    },
+    "card_4": {
+      "title": "관리자 대시보드",
+      "description": "주최자를 위한 정교한 운영 툴을 무료로 제공합니다."
+    }
+  },
+  "cta": {
+    "tag": "READY TO PLAY?",
+    "title": "지금 바로\n시작하세요",
+    "subtitle": "대한민국 최대 게이밍 오픈 토너먼트 플랫폼\nGAMERS와 함께 성장을 경험하세요.",
+    "button": "무료로 시작하기"
   }
 }

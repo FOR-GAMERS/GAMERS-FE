@@ -134,7 +134,7 @@ export function ContestCardParticipating({
             </div>
             <div className="flex flex-col">
               <span className="text-[15px] font-black text-[#EEEEF0] leading-tight tracking-tight">{myTeam.name}</span>
-              <span className="text-[11px] font-bold text-[#5A5A65]">{myTeam.membersCount}명 참여</span>
+              <span className="text-[11px] font-bold text-[#5A5A65]">{t('my_contests.card.members_participating', { count: myTeam.membersCount })}</span>
             </div>
           </div>
         </div>
@@ -154,7 +154,7 @@ export function ContestCardParticipating({
                   </div>
                   <div className="flex flex-col">
                     <span className="text-[15px] font-black text-[#EEEEF0] leading-tight">vs {nextMatch.opponent}</span>
-                    <span className="text-[11px] font-bold text-neon-mint">{nextMatch.time} 후</span>
+                    <span className="text-[11px] font-bold text-neon-mint">{nextMatch.time}</span>
                   </div>
                 </div>
               ) : (
@@ -190,16 +190,16 @@ export function ContestCardParticipating({
             {/* Participants Progress (OPEN state) */}
             <div className="flex flex-col gap-3 rounded-2xl bg-black/30 p-5 border border-white/5 group/stat hover:border-white/10 transition-colors">
               <span className="text-[11px] font-black uppercase tracking-widest text-[#4A4A55] group-hover/stat:text-[#7A7A85] transition-colors">
-                참가 현황
+                {t('my_contests.card.participants_status')}
               </span>
               {participantsProgress ? (
                 <div className="flex flex-col gap-2">
                   <div className="flex items-baseline gap-1">
                     <span className="text-2xl font-black italic text-[#EEEEF0]">{participantsProgress.current}</span>
                     <span className="text-[13px] font-black text-[#4A4A55] opacity-50">/</span>
-                    <span className="text-[15px] font-black text-[#7A7A85]">{participantsProgress.max}팀</span>
+                    <span className="text-[15px] font-black text-[#7A7A85]">{participantsProgress.max}{t('my_contests.card.team_suffix')}</span>
                     {participantsProgress.isFull && (
-                      <span className="ml-auto text-[10px] font-black text-neon-red uppercase tracking-wider">마감</span>
+                      <span className="ml-auto text-[10px] font-black text-neon-red uppercase tracking-wider">{t('my_contests.card.full')}</span>
                     )}
                   </div>
                   <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/5">
@@ -214,7 +214,7 @@ export function ContestCardParticipating({
                 </div>
               ) : (
                 <div className="flex h-10 items-center text-[13px] font-bold text-[#3A3A45]">
-                  정보 없음
+                  {t('my_contests.card.no_info')}
                 </div>
               )}
             </div>
@@ -222,7 +222,7 @@ export function ContestCardParticipating({
             {/* Start Date (OPEN state) */}
             <div className="flex flex-col gap-3 rounded-2xl bg-black/30 p-5 border border-white/5 group/stat hover:border-white/10 transition-colors">
               <span className="text-[10px] font-black uppercase tracking-[0.1em] text-[#4A4A55] group-hover/stat:text-[#5A5A65] transition-colors">
-                대회 시작
+                {t('my_contests.card.contest_start')}
               </span>
               <div className="flex flex-col">
                 <span className="text-[17px] font-black text-[#EEEEF0] italic leading-tight">{startDate}</span>

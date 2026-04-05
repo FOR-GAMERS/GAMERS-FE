@@ -19,6 +19,7 @@ export function PlaygroundSubNav() {
     { id: 'overview', name: t('playground.tabs.overview') },
     { id: 'bracket', name: t('playground.tabs.bracket') },
     { id: 'team', name: t('playground.tabs.team') },
+    { id: 'team_distribution', name: t('playground.team_distribution.title') },
     { id: 'members', name: t('playground.tabs.members') },
     { id: 'notice', name: t('playground.tabs.notice') },
     { id: 'withdrawal', name: t('playground.tabs.withdrawal') },
