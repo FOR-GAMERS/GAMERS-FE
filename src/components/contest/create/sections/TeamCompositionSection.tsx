@@ -22,7 +22,7 @@ export function TeamCompositionSection() {
           {t('contests.create.sections.team_composition')}
         </h2>
         <p className="text-sm font-medium text-[#7A7A85]">
-          참가할 팀의 구성과 규모를 설정합니다.
+          {t('contests.create.team.desc')}
         </p>
       </div>
 
@@ -53,7 +53,7 @@ export function TeamCompositionSection() {
             </button>
           </div>
           <p className="text-[11px] font-medium text-[#4A4A55]">
-            최소 2팀에서 최대 128팀까지 설정 가능합니다.
+            {t('contests.create.team.max_teams_help')}
           </p>
         </div>
 
@@ -83,7 +83,7 @@ export function TeamCompositionSection() {
             </button>
           </div>
           <p className="text-[11px] font-medium text-[#4A4A55]">
-            한 팀당 참가 인원수를 의미합니다 (교체 선수 미포함).
+            {t('contests.create.team.team_size_help')}
           </p>
         </div>
 
@@ -103,7 +103,7 @@ export function TeamCompositionSection() {
                 "w-full bg-[#141418] border border-white/5 rounded-xl px-4 py-3.5 text-lg font-black text-[#EEEEF0] focus:outline-none focus:border-neon-mint transition-all shadow-inner tabular-nums",
                 errors.totalPoints && "border-red-500/50"
               )}
-              placeholder="0 (제한 없음)"
+              placeholder={t('contests.create.team.unlimited')}
             />
             {totalPoints > 0 && (
               <div className="absolute right-3 top-1/2 -translate-y-1/2 px-2 py-1 rounded bg-neon-mint/10 border border-neon-mint/20 text-[10px] font-black text-neon-mint">
@@ -112,7 +112,7 @@ export function TeamCompositionSection() {
             )}
           </div>
           <p className="text-[11px] font-medium text-[#4A4A55]">
-            팀 로스터의 총 포인트 합계를 제한합니다. (0점은 제한 없음)
+            {t('contests.create.team.points_desc')}
           </p>
         </div>
       </div>

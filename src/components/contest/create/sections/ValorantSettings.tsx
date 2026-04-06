@@ -77,8 +77,8 @@ export function ValorantSettings() {
           <p className="text-[11px] font-medium text-[#4A4A55] flex items-center gap-1.5">
             <Info className="h-3 w-3" />
             {format === 'TOURNAMENT' 
-              ? '토너먼트: 단계별 탈락 방식입니다. 최후의 1팀이 우승합니다.' 
-              : '리그: 모든 대상과 경기하여 승점에 따라 순위가 결정됩니다.'}
+              ? t('contests.create.game_settings.valorant.tournament_desc') 
+              : t('contests.create.game_settings.valorant.league_desc')}
           </p>
         </div>
 
@@ -165,7 +165,7 @@ export function ValorantSettings() {
             </button>
           </div>
           <p className="text-[11px] font-medium text-[#4A4A55] text-right">
-            Bo{rounds} ({Math.ceil(rounds/2)}선승제)
+            Bo{rounds} ({t('contests.create.game.win_condition', { count: Math.ceil(rounds/2) })})
           </p>
         </div>
       </div>

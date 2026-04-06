@@ -1,171 +1,225 @@
 {
+  "common": {
+    "loading": "로딩 중...",
+    "error": "에러가 발생했습니다",
+    "save": "저장",
+    "cancel": "취소",
+    "delete": "삭제",
+    "edit": "편집",
+    "confirm": "확인",
+    "back": "뒤로",
+    "next": "다음",
+    "finish": "완료",
+    "submit": "제출",
+    "search": "검색",
+    "filter": "필터",
+    "sort": "정렬"
+  },
+  "header": {
+    "contests": "대회",
+    "playground": "플레이그라운드",
+    "community": "커뮤니티",
+    "login": "로그인",
+    "signup": "회원가입",
+    "mypage": "마이페이지",
+    "admin": "관리",
+    "logout": "로그아웃"
+  },
   "contests": {
-    "list_title": "공개 대회 목록",
-    "list_subtitle": "전 세계 플레이어들과 경쟁하고 우승 상금을 획득하세요.",
-    "list_search_placeholder": "대회명, 종목, 주최자 검색...",
-    "filter_all": "전체",
-    "filter_ongoing": "진행 중",
-    "filter_upcoming": "예정",
-    "filter_recruiting": "모집 중",
-    "filter_ended": "종료",
-    "filter_completed": "완료",
-    "sort_recent": "최신순",
-    "sort_prize": "상금순",
-    "sort_closing": "마감임박순",
-    "create_contest": "대회 개최하기",
-    "no_results": "검색 결과가 없습니다.",
-    "apply_now": "참가 신청",
-    "view_details": "상세 보기",
-    "prize_pool": "총 상금",
-    "slots": "모집 팀",
-    "status": {
-      "RECRUITING": "모집 중",
-      "ONGOING": "진행 중",
-      "ENDED": "종료",
-      "CANCELLED": "취소됨"
-    },
-    "single": {
-      "hero": {
-        "apply_button": "참가 신청하기",
-        "applied": "참가 신청 완료",
-        "deadline": "신청 마감",
-        "prize": "총 상금"
+    "list": {
+      "title": "대회",
+      "subtitle": "진행 중이거나 예정된 대회를 탐색해보세요.",
+      "search_placeholder": "대회 이름으로 검색",
+      "create_btn": "대회 개최하기",
+      "filters": {
+        "all": "전체",
+        "recruiting": "모집 중",
+        "ongoing": "진행 중",
+        "finished": "종료"
       },
+      "empty": "진행 중인 대회가 없습니다.",
+      "contest4": "Apex Legends 듀오 챌린지",
+      "contest5": "발로란트 챌린저스 예선",
+      "contest6": "멀티 게임 배틀로얄 인비테이셔널",
+      "multi_game": "멀티 게임"
+    },
+    "detail": {
       "tabs": {
         "overview": "개요",
+        "prizes": "상금 및 혜택",
+        "rules": "규칙",
+        "schedule": "일정",
         "bracket": "대진표",
-        "teams": "참가 팀",
-        "rules": "규정"
+        "recent_matches": "최근 경기"
       },
-      "sidebar": {
-        "bracket_preview": "대진표 미리보기",
-        "recent_teams": "최근 신청 팀",
-        "no_teams": "아직 신청한 팀이 없습니다."
+      "hero": {
+        "organizer": "주최자",
+        "prize_pool": "상금",
+        "entry_fee": "참가비",
+        "free": "무료",
+        "slots": "모집 인원",
+        "region": "지역",
+        "asia_pacific": "아시아 태평애"
       },
-      "footer": {
-        "applied_count": "팀 신청 중",
-        "prize_label": "총 상금",
-        "format_label": "대회 방식"
+      "cta": {
+        "apply": "대회 신청하기",
+        "already_applied": "신청 완료",
+        "closed": "신청 마감",
+        "recruiting": "모집 중",
+        "ongoing": "진행 중",
+        "finished": "종료",
+        "bracket_link": "대진표 보기",
+        "days_left": "{{count}}일 남음",
+        "share": "공유",
+        "bookmark": "북마크"
+      },
+      "status": {
+        "DRAFT": "초안",
+        "UPCOMING": "예정",
+        "RECRUITING": "모집 중",
+        "CLOSED": "마감",
+        "ACTIVE": "진행 중",
+        "COMPLETED": "종료",
+        "CANCELLED": "취소"
       }
     },
-    "verified_team": "인증된 팀",
     "create": {
       "title": "대회 개최",
-      "subtitle": "당신만의 리그를 시작하세요",
+      "subtitle": "당신만의 리그를 시작해보세요",
       "save_draft_auto_info": "작성 중인 내용은 임시저장됩니다. 최종 제출 전까지 공개되지 않습니다.",
       "section_label": "섹션",
-      "progress_label": "진행률",
+      "progress_label": "진행 상황",
       "sections_completed": "{{count}} / 6 섹션 완료",
       "success_alert": "대회가 성공적으로 생성되었습니다!",
-      "save_alert": "임시저장되었습니다.",
+      "save_alert": "임시 저장되었습니다.",
+      "auto_save_done": "자동저장 완료",
       "sections": {
         "basic_info": "기본 정보",
         "image_settings": "이미지 설정",
         "game_settings": "게임 설정",
         "team_composition": "팀 구성",
         "schedule_settings": "일정 설정",
-        "discord_integration": "Discord 연동"
-      },
-      "steps": {
-        "basic": "기본 정보",
-        "format": "대회 방식",
-        "schedule": "일정 설정",
-        "discord": "Discord 연동",
-        "preview": "미리보기"
+        "discord_integration": "디스코드 연동"
       },
       "basic": {
         "title": "대회 제목",
         "title_placeholder": "예: 발로란트 신인 오픈컵",
-        "game_settings": {
-          "desc": "대회에서 진행할 게임의 세부 규칙을 설정합니다.",
-          "valorant_sub": "5:5 택티컬 슈터",
-          "lol_sub": "5:5 MOBA"
-        },
-        "preview": {
-          "title": "대회 미리보기",
-          "live": "라이브 미리보기",
-          "draft": "초안",
-          "thumbnail_preview": "썸네일 미리보기",
-          "desc": "설정된 정보로 생성될 대회의 모습입니다.",
-          "status": "접수중",
-          "slots": "인 남음",
-          "organizer": "주최자",
-          "entry_fee": "참가비",
-          "free": "무료",
-          "apply": "대회 신청하기",
-          "summary": "방식 요약",
-          "mode": "진행 방식",
-          "tournament": "토너먼트",
-          "league": "리그",
-          "region": "지역",
-          "asia": "아시아"
-        },
-        "game": "게임 종목",
-        "game_placeholder": "게임 선택",
-        "description": "대회 설명",
-        "description_placeholder": "대회 규칙 및 상세 내용을 입력하세요."
+        "description": "대회 소개",
+        "description_placeholder": "대회 규칙 및 상세 내용을 MDX 형식으로 입력해주세요.",
+        "precautions": "주의사항",
+        "precautions_placeholder": "참가자가 반드시 확인해야 할 내용을 입력해주세요.",
+        "subtitle": "대회의 가장 기본적인 정보를 입력합니다.",
+        "required": "필수",
+        "edit": "편집",
+        "preview": "미리보기",
+        "preview_empty": "내용을 입력하면 미리보기가 생성됩니다."
       },
-      "format": {
-        "type": "토너먼트 방식",
-        "single": "싱글 엘리미네이션",
-        "double": "더블 엘리미네이션",
-        "league": "리그전",
-        "max_teams": "최대 참가 팀 수",
-        "team_size": "팀당 인원 수",
-        "total_points": "포인트 총량",
-        "settings_desc": "대회에서 진행할 게임의 세부 규칙을 설정합니다.",
+      "image": {
+        "thumbnail": "썸네일 이미지",
+        "banner": "헤더 배너 이미지",
+        "click_to_upload": "클릭하여 업로드",
+        "upload_desc": "권장: 400x400 (1:1)",
+        "banner_upload_desc": "권장: 1200x400 (3:1)",
+        "replace": "교체하기"
+      },
+      "game": {
+        "select_game": "게임 선택",
+        "valorant_settings": "발로란트 설정",
+        "lol_settings": "리그 오브 레전드 설정",
+        "format": "진행 방식",
+        "format_tournament": "토너먼트",
+        "format_league": "리그",
+        "map_pool": "맵 풀",
+        "agent_restrictions": "요원 제한",
+        "champion_restrictions": "챔피언 제한",
+        "placeholder_agent": "요원 이름 검색...",
+        "placeholder_champion": "챔피언 이름 검색...",
+        "rounds_per_match": "경기 당 라운드 수",
+        "patch_version": "패치 버전",
+        "latest": "(최신)",
+        "pro_patch": "LCP 프로 패치",
+        "win_condition": "{{count}}선승제"
+      },
+      "game_settings": {
+        "desc": "대회에서 사용할 게임과 세부 규칙을 설정합니다.",
+        "valorant_sub": "5v5 캐릭터 기반 전략 슈팅 게임",
+        "lol_sub": "전략적인 팀 전투 MOBA 게임",
+        "valorant": {
+          "tournament_desc": "토너먼트: 단계별 탈락 방식입니다. 최후의 1팀이 우승합니다.",
+          "league_desc": "리그: 모든 대상과 경기하여 승점에 따라 순위가 결정됩니다."
+        },
         "lol": {
-          "tournament_desc": "토너먼트: 드래프트 픽 규칙이 적용되는 다단계 토너먼트입니다.",
-          "league_desc": "리그: 풀리그 방식으로 모든 팀과 경기합니다.",
-          "search_results": "검색 결과: {{count}}개",
+          "tournament_desc": "토너먼트: 단계별 탈락 방식입니다.",
+          "league_desc": "리그: 모든 대상과 경기하여 승점에 따라 순위가 결정됩니다.",
+          "search_results": "검색 결과: {{count}}명",
           "restricted_champions": "제한된 챔피언: {{count}}명"
         }
       },
+      "validation": {
+        "name_required": "대회명을 입력해주세요",
+        "desc_required": "대회 소개를 입력해주세요",
+        "map_pool_required": "적어도 하나 이상의 맵을 선택해주세요",
+        "patch_required": "패치 버전을 선택해주세요",
+        "start_date_required": "시작일을 선택해주세요",
+        "end_date_required": "종료일을 선택해주세요"
+      },
+      "team": {
+        "title": "팀 구성",
+        "desc": "참가할 팀의 구성과 규모를 설정합니다.",
+        "max_teams": "최대 참가 팀 수",
+        "max_teams_help": "최소 2팀에서 최대 128팀까지 설정 가능합니다.",
+        "team_size": "팀당 인원",
+        "team_size_help": "한 팀당 참가 인원수를 의미합니다 (교체 선수 미포함).",
+        "total_points": "총 포인트 합계",
+        "points_desc": "팀 로스터의 총 포인트 합계를 제한합니다. (0점은 제한 없음)",
+        "unlimited": "0 (제한 없음)"
+      },
       "schedule": {
+        "title": "일정 설정",
         "start_date": "대회 시작일",
         "end_date": "대회 종료일",
         "auto_start": "자동 시작",
         "auto_start_desc": "시작일이 되면 대회를 자동으로 ACTIVE 상태로 전환합니다",
-        "desc": "대회의 진행 일정을 설정합니다. 시간대는 현재 브라우저 기준(KST)입니다."
+        "desc": "대회 진행 일정을 설정합니다. 시간대는 현재 브라우저 기준(KST)입니다."
       },
       "discord": {
-        "integration": "Discord 연동 (선택)",
-        "integration_desc": "Discord 서버와 연동하면 대회 알림, 입장 관리 등을 자동으로 처리할 수 있습니다.",
-        "server_id": "Discord 서버 ID",
-        "server_id_help": "Discord의 개발자 모드를 켜고 서버 우클릭 후 ID를 복사하세요.",
+        "title": "디스코드 연동",
+        "desc": "디스코드 서버와 연동하면 대회 알림 및 입장 관리 등을 자동화할 수 있습니다.",
+        "integration_desc": "디스코드 서버와 연동하여 대회 운영을 자동화하세요.",
+        "bot_settings": "디스코드 봇 설정",
+        "server_id": "디스코드 서버 ID",
+        "server_id_help": "디스코드 개발자 모드를 켜고 서버를 우클릭하여 ID를 복사하세요.",
         "channel_id": "알림 채널 ID",
-        "notification_types": "알림 유형",
+        "notification_types": "알림 타입",
         "invite_bot": "봇 초대하기",
         "bot_permissions": "GAMERS Bot 권한 설정",
         "auto_channel": "참가자 전용 채널 자동 생성",
-        "realtime_notif": "매치 결과 실시간 알림 서비스",
+        "realtime_notif": "경기 결과 실시간 알림",
         "staff_support": "스태프 호출 및 지원 관리"
       },
       "preview": {
-        "title": "미리보기",
-        "summary_title": "설정 요약",
-        "placeholder_title": "대회명을 입력하세요"
+        "title": "대회 미리보기",
+        "live": "라이브 프리뷰",
+        "draft": "초안",
+        "thumbnail_preview": "섬네일 미리보기",
+        "desc": "설정된 정보로 생성될 대회의 모습입니다.",
+        "status": "모집 중",
+        "slots": "모집 인원",
+        "organizer": "주최자",
+        "just_now": "방금 전",
+        "entry_fee": "참가비",
+        "free": "무료",
+        "apply": "대회 신청하기",
+        "summary": "방식 요약",
+        "mode": "방식",
+        "tournament": "토너먼트",
+        "league": "리그",
+        "region": "지역",
+        "asia": "아시아"
       },
       "cancel": "취소",
-      "save_draft": "임시저장",
-      "publish": "게시하기",
-      "validation": {
-        "name_required": "대회명을 입력해주세요",
-        "desc_required": "대회 소개를 입력해주세요",
-        "map_pool_required": "최소 하나 이상의 맵을 선택해주세요",
-        "patch_required": "패치 버전을 선택해주세요",
-        "start_date_required": "시작일을 선택해주세요",
-        "end_date_required": "종료일을 선택해주세요"
-      }
-    },
-    "mock": {
-      "contest1": "발로란트 신인 오픈컵 시즌 3",
-      "contest2": "리그 오브 레전드 커뮤니티 5vs5",
-      "contest3": "CS2 한국 서버 토너먼트",
-      "contest4": "Apex Legends 듀오 챌린지",
-      "contest5": "발로란트 챌린저스 예선",
-      "contest6": "멀티게임 배틀로얄 인비테이셔널",
-      "multi_game": "멀티게임"
+      "save_draft": "임시 저장",
+      "publish": "개최하기"
     }
   },
   "my_contests": {
@@ -191,480 +245,88 @@
       "team_suffix": "팀",
       "full": "마감",
       "no_info": "정보 없음",
-      "contest_start": "대회 시작",
-      "prize": "상금",
-      "prize_earned": "획득 상금",
-      "view_details": "대회 상세 보기",
-      "enter_stadium": "경기장 입장",
-      "team_distribution": "팀 배분",
-      "rank_suffix": "위",
-      "completed_suffix": "완료",
-      "final_rank": "최종 순위",
-      "total_record": "전체 전적",
-      "view_results": "결과 확인"
-    },
-    "mock": {
-      "contest1": "발로란트 신인 오픈컵 시즌 4 by GMS_Creator",
-      "contest1_status": "8강 진행 중",
-      "contest1_format": "토너먼트 · 5v5",
-      "contest2": "리그 오브 레전드 커뮤니티 5vs5 by LOL_Official",
-      "contest2_status": "접수 중",
-      "contest2_format": "리그 · 5v5",
-      "contest3": "발로란트 신인 오픈컵 시즌 3",
-      "contest4": "리그 오브 레전드 5vs5 Winter",
-      "contest5": "CS2 한국 서버 토너먼트"
-    }
-  },
-  "navbar": {
-    "contests": "전체 대회",
-    "find_contests": "대회 찾기",
-    "my_contests": "내 참여",
-    "community": "커뮤니티",
-    "my_page": "마이페이지",
-    "login": "로그인",
-    "signup": "시작하기",
-    "get_started": "시작하기",
-    "logout": "로그아웃"
-  },
-  "footer": {
-    "product": "제품",
-    "find_contests": "대회 찾기",
-    "create_contest": "대회 개최",
-    "community": "커뮤니티",
-    "company": "회사",
-    "about": "소개",
-    "blog": "블로그",
-    "jobs": "채용",
-    "legal": "법적 고지",
-    "terms": "이용약관",
-    "privacy": "개인정보처리방침",
-    "description": "캐주얼부터 정식 리그까지. 당신만의 무대에서 경쟁하세요.\n모든 경쟁이 기록되고 기억되는 국내 최대 게이밍 플랫폼 GAMERS.",
-    "rights": "© 2026 GAMERS Inc. All rights reserved."
-  },
-  "community": {
-    "title": "커뮤니티",
-    "subtitle": "게이머들과 정보를 나누고, 팀원을 찾아보세요.",
-    "write_post": "글 작성하기",
-    "categories": {
-      "all": "전체",
-      "free": "자유게시판",
-      "tips": "공략/팁",
-      "recruiting": "팀 찾기",
-      "reviews": "대회 후기"
-    },
-    "post": {
-      "hot": "HOT",
-      "recruiting_status": "모집 중",
-      "views": "조회",
-      "comments": "댓글",
-      "likes": "좋아요",
-      "time_ago": {
-        "hours": "{{count}}시간 전",
-        "days": "{{count}}일 전"
-      }
-    },
-    "sidebar": {
-      "popular_posts": "인기 글",
-      "team_recruiting": "팀원 모집 중",
-      "cta": {
-        "title": "팀원이 필요하신가요?",
-        "subtitle": "팀 찾기 글을 올려보세요.",
-        "button": "글 작성"
-      }
-    },
-    "mock_posts": {
-      "post1": {
-        "title": "아이언~골드 빠르게 탈출하는 에임 루틴 공유합니다 (2시간/일)",
-        "preview": "매일 2시간씩 3개월 동안 골드 2에서 플래티넘 1까지 올라간 방법을 공유합니다. 에임랩 루틴, 데스매치 활용법 등 실제 경험담과 매뉴얼을 포함하고 있습니다."
-      },
-      "post2": {
-        "title": "[팀원 모집] 5vs5 리그 대회 참가할 팀원 구합니다 — 골드 이상",
-        "preview": "포지션: 정글, 서폿 · 조건: 솔로랭크 골드 이상 · 활동: 주 3회 이상 가능하신 분. 현재 미드, 원딜, 탑은 확정이며 팀워크 위주로 즐겁게 하실 분 찾습니다."
-      },
-      "post3": {
-        "title": "발로란트 신인 오픈컵 S3 참가 후기 — 첫 대회 4강까지 진출했습니다!",
-        "preview": "처음 GAMERS에서 대회를 찾아서 참가했는데 생각보다 운영이 정말 잘 되어있어서 깜짝 놀랐습니다. 브라켓 자동화가 정말 편하더라고요."
-      },
-      "post4": {
-        "title": "GAMERS 플랫폼 쓰면서 달라진 점 — 대회 관리가 이렇게 편할 줄은 몰랐네요",
-        "preview": "디스코드로만 관리하다가 GAMERS로 넘어온 지 두 달째입니다. 특히 자동 브라켓이랑 경기 결과 자동 감지 기능이 혁명적이네요. 주최자분들은 꼭 써보시길."
-      },
-      "post5": {
-        "title": "정글 초반 동선 정리 — 시즌 시작 전 꼭 알아야 할 챔피언 5개",
-        "preview": "그라가스, 비에고, 헤카림 위주로 초반 인베 동선과 갱 타이밍을 공유합니다. 시즌 초반 빠르게 랭크 안정화하고 싶으시면 꼭 정독해주세요."
-      }
-    },
-    "mock_recruitment": {
-      "post1": {
-        "title": "LoL 5vs5 팀원 모집",
-        "tags": "정글 · 서폿 · 골드 이상"
-      },
-      "post2": {
-        "title": "Valorant 듀오 파트너",
-        "tags": "플래티넘 이상 · 주 4회 이상"
-      }
+      "contest_start": "대회 시작"
     }
   },
   "playground": {
+    "title": "플레이그라운드",
+    "subtitle": "PLAYGROUND",
     "tabs": {
       "overview": "개요",
-      "bracket": "대진표",
-      "team": "팀 관리",
-      "members": "멤버 현황",
+      "participants": "참가자",
+      "matches": "대진",
+      "settings": "설정",
       "notice": "안내사항",
-      "withdrawal": "대회 탈퇴"
+      "members": "멤버",
+      "team_manage": "팀 관리",
+      "withdrawal": "참여 취소",
+      "staff": "스태프"
     },
-    "team": {
-      "leader_privilege": "팀장 권한 이전",
-      "current_leader": "현재 팀장",
-      "transfer_desc": "다른 멤버에게 팀장 권한을 이전할 수 있습니다.",
-      "select_member": "멤버 선택",
-      "transfer_button": "권한 이전",
-      "invite_management": "초대 관리",
-      "create_link": "링크 생성",
-      "copy": "복사",
-      "copied": "복사됨",
-      "pending_count": "대기 중 · {{count}}명",
-      "roster_title": "멤버 로스터",
-      "invite_member": "멤버 초대",
-      "accept": "수락",
-      "reject": "거절",
-      "win_rate": "승률",
-      "strategy_notes": "전략 노트",
-      "igl_only": "IGL 전용",
-      "semifinal_strategy": "준결승 전략",
-      "main_picks": "주요 픽",
-      "practice_schedule": "연습 일정",
-      "add_schedule": "일정 추가",
-      "status": {
-        "completed": "완료",
-        "active": "오늘",
-        "pending": "미정"
-      },
-      "stats": {
-        "this_tournament": "이번 대회",
-        "loss": "패배",
-        "current_round": "현재 라운드",
-        "win_rate": "승률",
-        "avg_round": "평균 라운드",
-        "conceded": "실점 평균",
-        "all_wins": "전승"
-      },
-      "info_format": "{{count}}명 · {{game}} · {{desc}}",
-      "ranks": {
-        "dia1": "다이아 1",
-        "dia2": "다이아 2",
-        "plat1": "플래티넘 1",
-        "plat2": "플래티넘 2"
-      },
-      "strategy": {
-        "vs_opponent": "vs {{opponent}}",
-        "attack_desc": "공격: A 사이트 빠른 러시 위주. Reaper 인파이트 진입, AcePlayer 미드 컷 담당.",
-        "defense_desc": "방어: B 사이트 3명 스택. SilverBullet 미드 정보 수집 후 로테.",
-        "semifinal": "준결승 전략"
-      },
-      "schedule": {
-        "match_vs": "준결승 대전 · vs {{opponent}}",
-        "auto_match": "{{time}} — 자동 매치",
-        "final_if_advance": "결승 (진출 시)",
-        "tbd_opponent": "{{time}} — 상대 미정",
-        "internal_practice": "팀 자체 스크림",
-        "internal_desc": "{{time}} — 내부 연습"
-      }
-    },
-    "notice": {
-      "title": "안내사항",
-      "last_updated": "마지막 업데이트: {{date}}",
-      "important": "중요",
-      "new": "새로운"
-    },
-    "bracket": {
-      "title": "대진표"
-    },
-    "rounds": {
-      "round_of_16": "16강",
-      "round_of_8": "8강",
-      "quarterfinals": "8강",
-      "semifinals": "준결승",
-      "finals": "결승",
-      "group_stage": "조별예선"
-    },
-    "team_distribution": {
-      "title": "LoL 팀 배분",
-      "subtitle": "참가자 닉네임을 입력하여 밸런스 있는 팀을 구성하세요.",
-      "parsing": {
-        "title": "닉네임 파싱",
-        "placeholder": "텍스트를 붙여넣으세요. (예: 닉네임#TAG 태그... 또는 채팅 로그)",
-        "parse_button": "파싱하기",
-        "clear_button": "초기화",
-        "parsed_count": "{{count}}명 파싱됨"
-      },
-      "participants": {
-        "title": "참가자 명단 (10명)",
-        "empty_slot": "비어있음",
-        "select_role": "포지션 선택",
-        "select_tier": "티어 선택"
-      },
-      "result": {
-        "title": "배분 결과",
-        "blue_side": "블루 진영",
-        "red_side": "레드 진영",
-        "reroll": "다시 배치",
-        "copy_result": "결과 복사",
-        "new_session": "새 세션"
-      },
-      "start_button": "팀 배분 시작",
-      "roles": {
-        "TOP": "탑",
-        "JG": "정글",
-        "MID": "미드",
-        "ADC": "원딜",
-        "SUP": "서폿"
-      },
-      "tiers": {
-        "IRON": "아이언",
-        "BRONZE": "브론즈",
-        "SILVER": "실버",
-        "GOLD": "골드",
-        "PLATINUM": "플래티넘",
-        "EMERALD": "에메랄드",
-        "DIAMOND": "다이아몬드",
-        "MASTER": "마스터",
-        "GRANDMASTER": "그랜드마스터",
-        "CHALLENGER": "챌린저"
-      }
-    }
-  },
-  "common": {
-    "remaining": "남음",
-    "edit": "수정",
-    "win": "승",
-    "loss": "패",
-    "attack": "공격",
-    "defense": "방어",
-    "today": "오늘",
-    "winning": "우승",
-    "runner_up": "준우승",
-    "eliminated": "탈락",
-    "view_all": "전체 보기",
-    "count_suffix": "개",
-    "status": {
-      "completed": "완료",
-      "active": "진행 중",
-      "pending": "미정",
-      "today": "오늘"
+    "summary": {
+      "title": "설정 요약",
+      "mode": "방식",
+      "teams": "참가 팀",
+      "players": "총 참가 인원",
+      "status": "진행 상태"
     },
     "recent_matches": {
-      "title": "최근 경기 기록",
-      "view_details": "상세보기",
+      "title": "최근 경기",
       "win": "승",
-      "loss": "패"
+      "lose": "패",
+      "no_match": "최근 경기 기록이 없습니다."
     },
-    "bracket": {
-      "title": "대진표 현황",
-      "winner_tbd": "WINNER TBD"
+    "nav": {
+      "back_to_contest": "대회 페이지로",
+      "admin_view": "관리자 뷰",
+      "player_view": "참가자 뷰"
     },
-    "quick_links": {
-      "support": "서포트",
-      "duelist": "듀얼",
-      "initiator": "이니",
-      "controller": "컨트"
-    },
-    "days": {
-      "mon": "월",
-      "tue": "화",
-      "wed": "수",
-      "thu": "목",
-      "fri": "금",
-      "sat": "토",
-      "sun": "일"
-    },
-    "roles": {
-      "support": "서포트",
-      "duelist": "듀얼",
-      "initiator": "이니",
-      "controller": "컨트"
+    "notice": {
+        "title": "안내사항",
+        "desc": "대회 진행 및 운영 관련 안내사항입니다."
     }
   },
-  "auth": {
-    "login_hero": "모든 게이머의 경쟁이\n기억이 되는\n플랫폼",
-    "login_desc": "대회를 만들고, 팀을 꾸리고, 기록을 남기세요.\nGAMERS에서 모든 게 시작됩니다.",
-    "login_title": "로그인",
-    "signup_title": "회원가입"
-  },
-  "mypage": {
-    "title": "마이페이지",
-    "subtitle": "MY PAGE",
-    "edit_profile": "프로필 편집",
-    "points": "포인트",
-    "bio_default": "발로란트를 주로 즐기는 게이머입니다. 팀원 구하는 중!",
-    "member_tag": "멤버",
-    "stats": {
-      "contests": "참가 대회",
-      "win_rate": "승률",
-      "trophies": "우승"
+  "landing": {
+    "hero": {
+      "tag": "E-SPORTS INFRASTRUCTURE FOR EVERYONE",
+      "title": "당신만의\n대회를 완벽하게.",
+      "subtitle": "GAMERS는 대회 생성부터 운영, 팀 모집, 경기 결과 관리까지,\n모든 E-스포츠 프로세스를 자동화하는 올인원 플랫폼입니다.",
+      "primary_cta": "지금 시작하기",
+      "secondary_cta": "데모 체험하기"
     },
-    "contests": {
-      "title": "내 대회",
-      "tabs": {
-        "participating": "참가 중",
-        "completed": "완료",
-        "hosted": "주최"
+    "problem": {
+      "tag": "PAIN POINTS",
+      "title": "대회 운영은 왜\n이토록 힘들까요?",
+      "subtitle": "번거로운 절차도 실수가 용납되지 않는 집계 작업도, 이제 GAMERS에게 맡기세요.",
+      "point_1": "구글 폼, 엑셀, 디스코드 사이의\n수동 데이터 동기화는 이제 그만.",
+      "point_2": "티어 검증부터 본인 인증까지\n번거로운 프로세스를 자동화하여 해결합니다.",
+      "point_3": "결과 집계 오류와 판정 시비를 방지하고\n투명하고 공정한 운영 환경을 제공합니다."
+    },
+    "solution": {
+      "tag": "THE SOLUTION",
+      "title": "복잡한 운영을\n클릭 한 번으로.",
+      "subtitle": "최첨단 자동화 시스템으로 주최자는 대회의 즐거움에만 집중할 수 있습니다.",
+      "card_1": {
+        "title": "자동 대진표 생성",
+        "description": "참가 신청부터 대진표 확정까지 1초면 충분합니다."
       },
-      "view_details": "상세 보기",
-      "no_data": "등록된 대회가 없습니다.",
-      "status": {
-        "ONGOING": "진행 중",
-        "UPCOMING": "예정됨",
-        "ENDED": "종료됨"
-      }
-    },
-    "accounts": {
-      "title": "연동 게임 계정",
-      "not_linked": "계정 미연동",
-      "discord_linked": "계정 연동 완료",
-      "linked": "연동됨",
-      "link": "연동하기",
-      "valorant_status": "플래티넘 2 • ELO 1,253"
-    },
-    "notifications": {
-      "title": "최근 알림",
-      "view_all": "전체 보기",
-      "time": {
-        "hours_ago": "{{count}}시간 전",
-        "days_ago": "{{count}}일 전",
-        "just_now": "방금 전"
+      "card_2": {
+        "title": "팀 관리 시스템",
+        "description": "팀원을 초대하고 역할을 부여하여 완벽한 시너지를 만드세요."
       },
-      "mock": {
-        "notif1": "참가하신 [발로란트 오픈컵] 대진표가 확정되었습니다.",
-        "notif2": "Team Alpha 에서 새로운 멤버 가입 신청이 왔습니다.",
-        "notif3": "GAMERS 플랫폼 업데이트: 개인 프로필 설정 기능이 강화되었습니다."
+      "card_3": {
+        "title": "디스코드 연동",
+        "description": "봇이 모든 채널 관리와 알림을 자동으로 처리합니다."
+      },
+      "card_4": {
+        "title": "관리자 대시보드",
+        "description": "주최자를 위한 정교한 운영 도구를 무료로 제공합니다."
       }
     },
     "cta": {
-      "badge": "당신만의 대회를 열어보세요",
-      "title": "당신만의 대회를 열어보세요",
-      "description": "GAMERS 플랫폼의 강력한 도구들을 사용하여 누구나 쉽게 게임 대회를 개최하고 운영할 수 있습니다. 지금 바로 시작해보세요!",
-      "button": "대회 개최하기",
-      "free_info": "무료로 시작할 수 있습니다"
-    },
-    "mock_data": {
-      "contest1": {
-        "title": "발로란트 신인 오픈컵 시즌 3",
-        "info": "Team Alpha · 4강 진출"
-      },
-      "contest2": {
-        "title": "리그 오브 레전드 커뮤니티 5vs5",
-        "info": "NexusGG · 참가 신청 완료"
-      },
-      "contest3": {
-        "title": "Apex Legends 듀오 챌린지",
-        "info": "ApexDuo · 16강 탈락"
-      }
+      "tag": "READY TO PLAY?",
+      "title": "지금 바로\n시작하세요",
+      "subtitle": "국내 최대 규모의 게이밍 오픈 토너먼트 플랫폼\nGAMERS와 함께 성장을 경험하세요.",
+      "button": "무료로 시작하기"
     }
-  },
-  "admin": {
-    "sidebar": {
-      "dashboard": "대시보드",
-      "members": "멤버 관리",
-      "contests": "대회 관리",
-      "reports": "신고 처리",
-      "settings": "설정",
-      "console": "Admin Console"
-    },
-    "header": {
-      "members_title": "멤버 관리",
-      "total_users": "총 {{count}}명의 등록된 사용자",
-      "search_placeholder": "닉네임, 이메일 검색...",
-      "export": "내보내기"
-    },
-    "members": {
-      "tabs": {
-        "all": "전체",
-        "active": "활성",
-        "banned": "정지",
-        "staff": "운영진",
-        "new": "신규 (7일)"
-      },
-      "table": {
-        "user": "사용자",
-        "role": "역할",
-        "status": "상태",
-        "join_date": "가입일",
-        "last_active": "마지막 활동",
-        "actions": "액션"
-      },
-      "status": {
-        "active": "활성",
-        "banned": "정지",
-        "warning": "경고"
-      }
-    }
-  },
-  "hero": {
-    "tag": "THE NEXT GEN GAMING PLATFORM",
-    "title_1": "모든 경쟁이",
-    "title_2": "기록이 되는 순간",
-    "subtitle": "캐주얼 토너먼트부터 정식 리그까지. \nGAMERS에서 당신의 커리어를 시작하세요.",
-    "cta_join": "대회 참가하기",
-    "cta_create": "대회 개최하기"
-  },
-  "problem": {
-    "tag": "THE CHALLENGE",
-    "title": "무엇이 당신의 경쟁을 방해하나요?",
-    "card_1": {
-      "title": "참여의 어려움",
-      "description": "어디서 신청하고 어떻게 진행해야 할지 막막하셨나요? GAMERS는 클릭 몇 번으로 모든 준비를 끝냅니다."
-    },
-    "card_2": {
-      "title": "부족한 기록",
-      "description": "당신의 멋진 플레이가 휘발되지 않도록. 모든 승리와 기록을 당신의 커리어로 만들어 드립니다."
-    },
-    "card_3": {
-      "title": "불편한 운영",
-      "description": "상대 팀과 연락하고 대진표를 짜는 번거로움. GAMERS의 자동화 시스템이 해결합니다."
-    }
-  },
-  "solution": {
-    "tag": "THE SOLUTION",
-    "title": "게이머를 위한 완벽한 공간",
-    "item_1": {
-      "title": "직관적인 대회 탐색",
-      "description": "당신의 실력과 지역에 맞는 최적의 대회를 AI가 추천합니다."
-    },
-    "item_2": {
-      "title": "실시간 데이터 분석",
-      "description": "경기 결과와 스탯이 자동으로 기록되어 대진표에 즉시 반영됩니다."
-    },
-    "item_3": {
-      "title": "공정한 경쟁 환경",
-      "description": "철저한 본인 인증과 안티치트 연동으로 깨끗한 승부를 보장합니다."
-    }
-  },
-  "features": {
-    "tag": "FEATURES",
-    "title": "강력한 플랫폼의 힘",
-    "card_1": {
-      "title": "자동 대진표 생성",
-      "description": "참가 신청부터 대진표 확정까지 1초면 충분합니다."
-    },
-    "card_2": {
-      "title": "팀 관리 시스템",
-      "description": "팀원을 초대하고 역할을 배정하여 완벽한 시너지를 내세요."
-    },
-    "card_3": {
-      "title": "디스코드 연동",
-      "description": "봇이 모든 채널 관리와 알림을 자동으로 처리합니다."
-    },
-    "card_4": {
-      "title": "관리자 대시보드",
-      "description": "주최자를 위한 정교한 운영 툴을 무료로 제공합니다."
-    }
-  },
-  "cta": {
-    "tag": "READY TO PLAY?",
-    "title": "지금 바로\n시작하세요",
-    "subtitle": "대한민국 최대 게이밍 오픈 토너먼트 플랫폼\nGAMERS와 함께 성장을 경험하세요.",
-    "button": "무료로 시작하기"
   }
 }

@@ -1,0 +1,106 @@
+{
+  "contests": {
+    "list_title": "公開大会一覧",
+    "list_subtitle": "世界中のプレイヤーと競い、優勝賞金を獲得しましょう。",
+    "list_hero_title": "大会を探す",
+    "list_hero_subtitle": "あなたにぴったりの大会を見つけて、実力を証明しましょう。",
+    "list_search_placeholder": "大会名、種目、主催者を検索...",
+    "filter_all": "すべて",
+    "filter_ongoing": "進行中",
+    "filter_upcoming": "予定",
+    "filter_recruiting": "募集中",
+    "filter_ended": "終了",
+    "filter_completed": "完了",
+    "sort_recent": "最新順",
+    "sort_prize": "賞金順",
+    "sort_closing": "締切間近順",
+    "create_contest": "大会を開催する",
+    "no_results": "検索結果がありません。",
+    "apply_now": "参加申込",
+    "view_details": "詳細を見る",
+    "prize_pool": "総賞金",
+    "slots": "募集チーム",
+    "cta_title": "あなただけの大会を開催しましょう",
+    "cta_subtitle": "ゲーマーのための最高の大会を自ら運営し、コミュニティを成長させてください。",
+    "cta_button": "大会を開催する",
+    "card_prize": "総賞金",
+    "card_participants": "参加者",
+    "card_status_closed": "募集終了",
+    "card_apply": "参加申込",
+    "status": {
+      "RECRUITING": "募集中",
+      "OPEN": "受付中",
+      "LIVE": "進行中",
+      "ONGOING": "進行中",
+      "UPCOMING": "予定",
+      "ENDED": "終了",
+      "CLOSED": "終了",
+      "CANCELLED": "キャンセル"
+    },
+    "single": {
+      "hero": {
+        "apply_button": "参加を申し込む",
+        "applied": "申請完了",
+        "apply_sticky": "大会参加申し込み",
+        "deadline": "申請締切",
+        "prize": "総賞金",
+        "breadcrumb": "大会詳細",
+        "discord_link": "公式ディスコード",
+        "format": "進行方式: {{format}}"
+      },
+      "stats": {
+        "prize": "総賞金",
+        "teams": "参加チーム",
+        "start_date": "開始日時",
+        "format": "対戦方式"
+      },
+      "sections": {
+        "intro": "大会紹介",
+        "format": "大会方式",
+        "schedule": "進行スケジュール",
+        "rules": "大会規定および案内"
+      },
+      "tabs": {
+        "overview": "概要",
+        "bracket": "トーナメント表",
+        "teams": "参加チーム",
+        "rules": "規約"
+      },
+      "sidebar": {
+        "bracket_preview": "トーナメント表プレビュー",
+        "recent_teams": "最近の申請チーム",
+        "no_teams": "まだ申請チームはありません。",
+        "bracket": "トーナメント表",
+        "teams": "最近の参加チーム",
+        "total_prize": "総賞金規模",
+        "participants": "参加人数",
+        "status": "進行状態",
+        "hours_ago": "{{count}}時間前",
+        "days_ago": "{{count}}日前"
+      },
+      "footer": {
+        "applied_count": "チーム申請中",
+        "prize_label": "総賞金",
+        "format_label": "大会方式"
+      },
+      "preparing_title": "準備中のセクションです",
+      "preparing_subtitle": "管理者が該当情報を更新しています。",
+      "coming_soon": {
+        "title": "準備中です",
+        "desc": "該当タブの情報は大会開始後に更新されます。"
+      },
+      "intro_title": "大会紹介",
+      "format_title": "大会方式",
+      "schedule_title": "進行スケジュール",
+      "notes_title": "大会案内事項",
+      "bracket_not_ready": "トーナメント表がまだ確定していません",
+      "bracket_ai_desc": "大会開始30分前、参加確定したチームを対象にAIが公正なトーナメント表を自動生成します。",
+      "verified_team": "認証済みチーム",
+      "related_title": "こちらの大会はいかがですか？",
+      "view_all": "すべて見る",
+      "status_open": "募集中",
+      "mock": {
+        "title": "Valorant コミュニティトーナメント",
+        "intro": "GAMERSが主催するValorantコミュニティトーナメントです。実力に関係なく誰でも参加可能で、チームメイトと一緒に楽しい試合を繰り広げてください。",
+        "format": {
+          "single": "シングルエリミネーション",

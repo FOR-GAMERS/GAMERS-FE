@@ -28,22 +28,26 @@ const MOCK_CONTEST_DETAIL = {
   game: 'Valorant',
   creator: 'GMS_Creator',
   date: '2026-04-05',
-  introduction: '발로란트 성인 플레이어를 위한 커뮤니티 오픈 대회입니다. 아이언~골드 티어의 팀만 참가 가능하며, 실력과 관계없이 즐길 수 있는 경쟁의 장을 제공합니다. 모든 경기는 공정한 심관과 함께 진행되며, 결과는 플랫폼에 자동으로 기록됩니다.',
-  formatTags: ['싱글 엘리미네이션', '5 vs 5', '3판 2선승'],
+  introduction: 'contests.single.mock.intro',
+  formatTags: [
+    'contests.single.mock.format.single',
+    'contests.single.mock.format.five_vs_five',
+    'contests.single.mock.format.bo3'
+  ],
   schedule: [
-    { label: '접수', date: '3/28 ~ 4/4', status: 'completed' },
-    { label: '대회', date: '4/5 ~ 4/6', status: 'active' },
-    { label: '결과', date: '4/7', status: 'upcoming' },
+    { label: 'contests.single.mock.schedule.registration', date: '3/28 ~ 4/4', status: 'completed' },
+    { label: 'contests.single.mock.schedule.contest', date: '4/5 ~ 4/6', status: 'active' },
+    { label: 'contests.single.mock.schedule.result', date: '4/7', status: 'upcoming' },
   ],
   notes: [
-    '참가 시 아이언~골드 티어 인증이 필요합니다.',
-    '경기 30분 전까지 Discord 채널에 입장하지 않으면 부전패 처리됩니다.',
-    '비매너 행위 및 핵 사용 시 즉시 실격 처리됩니다.',
+    'contests.single.mock.notes.0',
+    'contests.single.mock.notes.1',
+    'contests.single.mock.notes.2',
   ],
   prizePool: [
-    { rank: '1st', amount: '₩500,000', label: 'prize_first' },
-    { rank: '2nd', amount: '₩200,000', label: 'prize_second' },
-    { rank: '3rd', amount: '₩100,000', label: 'prize_third' },
+    { rank: '1st', amount: '₩500,000', label: 'contests.single.mock.prize.first' },
+    { rank: '2nd', amount: '₩200,000', label: 'contests.single.mock.prize.second' },
+    { rank: '3rd', amount: '₩100,000', label: 'contests.single.mock.prize.third' },
   ],
   sponsors: [
     { name: 'GAMERS Official', logo: 'G' },
@@ -51,17 +55,17 @@ const MOCK_CONTEST_DETAIL = {
   ],
   info: {
     platform: 'PC / Riot Games',
-    region: 'South Korea',
-    format: '토너먼트',
+    region: 'contests.create.basic.preview.asia',
+    format: 'contests.create.basic.preview.tournament',
   },
-  status: 'OPEN',
+  status: 'RECRUITING',
   participants: 18,
   maxParticipants: 32,
   heroImage: 'https://images.unsplash.com/photo-1624138784614-87fd1b6528f2?q=80&w=2000&auto=format&fit=crop',
   recentTeams: [
-    { name: 'Team Alpha', time: '2시간 전', initials: 'TA' },
-    { name: 'NexusGG', time: '5시간 전', initials: 'NX' },
-    { name: 'CyberRift', time: '1일 전', initials: 'CR' },
+    { name: 'Team Alpha', time: 2, type: 'hours_ago', initials: 'TA' },
+    { name: 'NexusGG', time: 5, type: 'hours_ago', initials: 'NX' },
+    { name: 'CyberRift', time: 1, type: 'days_ago', initials: 'CR' },
   ]
 };
 
@@ -70,7 +74,7 @@ const RELATED_MOCK = [
     id: 1,
     game: 'Valorant',
     status: 'OPEN' as const,
-    title: '발로란트 신인 오픈컵 시즌 3',
+    title: 'contests.single.mock.title',
     creator: 'GMS_Creator',
     date: '2026-04-05',
     prize: '₩500,000',
@@ -82,7 +86,7 @@ const RELATED_MOCK = [
     id: 2,
     game: 'League of Legends',
     status: 'LIVE' as const,
-    title: '리그 오브 레전드 커뮤니티 5vs5',
+    title: 'contests.single.mock.related.1',
     creator: 'LOL_Official',
     date: '2026-03-27',
     prize: '₩200,000',
@@ -94,7 +98,7 @@ const RELATED_MOCK = [
     id: 3,
     game: 'CS2',
     status: 'UPCOMING' as const,
-    title: 'CS2 한국 서버 토너먼트',
+    title: 'contests.single.mock.related.2',
     creator: 'KR_Gaming',
     date: '2026-04-12',
     prize: '₩1,000,000',
@@ -155,9 +159,9 @@ export function ContestDetailContent() {
               animate={{ opacity: 1, y: 0 }}
               className="flex items-center gap-4"
             >
-               <span className="text-sm font-black text-[#7A7A85] tracking-[0.2em] uppercase">대회 찾기</span>
+               <span className="text-sm font-black text-[#7A7A85] tracking-[0.2em] uppercase">{t('contests.single.hero.breadcrumb')}</span>
                <ChevronRight className="w-4 h-4 text-[#3A3A45]" />
-               <span className="text-sm font-black text-[#EEEEF0] tracking-tight">{data.title}</span>
+               <span className="text-sm font-black text-[#EEEEF0] tracking-tight">{t(data.title)}</span>
             </motion.div>
 
             <div className="flex flex-col gap-4">
@@ -174,7 +178,7 @@ export function ContestDetailContent() {
                 <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-neon-mint/10 border border-neon-mint/20 backdrop-blur-md shadow-[0_0_15px_rgba(110,231,183,0.1)]">
                   <div className="h-1.5 w-1.5 rounded-full bg-neon-mint animate-pulse shadow-[0_0_8px_rgba(110,231,183,1)]" />
                   <span className="text-[10px] font-black tracking-widest uppercase text-neon-mint">
-                    {t(`contests.detail.status_${data.status.toLowerCase()}`)}
+                    {t(`contests.status.${data.status}`)}
                   </span>
                 </div>
               </motion.div>
@@ -185,7 +189,7 @@ export function ContestDetailContent() {
                 transition={{ delay: 0.1, duration: 0.8 }}
                 className="text-5xl md:text-7xl font-black text-[#EEEEF0] tracking-tight leading-tight max-w-4xl"
               >
-                {data.title}
+                {t(data.title)}
               </motion.h1>
 
               <motion.div 
@@ -196,15 +200,15 @@ export function ContestDetailContent() {
               >
                  <div className="flex items-center gap-2">
                     <div className="w-6 h-6 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-[10px] font-bold text-[#7A7A85]">
-                      {data.creator[0]}
+                       {data.creator[0]}
                     </div>
                     <span className="text-sm font-bold text-[#7A7A85]">{data.creator}</span>
                  </div>
                  <div className="flex items-center gap-2">
                     <div className="w-5 h-5 flex items-center justify-center">
-                      <Share2 className="w-4 h-4 text-[#3A3A45]" />
+                       <Share2 className="w-4 h-4 text-[#3A3A45]" />
                     </div>
-                    <span className="text-sm font-bold text-[#3A3A45]">Discord 연동</span>
+                    <span className="text-sm font-bold text-[#3A3A45]">{t('contests.single.hero.discord_link')}</span>
                  </div>
               </motion.div>
             </div>
@@ -217,22 +221,23 @@ export function ContestDetailContent() {
               className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16 mt-6 max-w-5xl"
             >
               <div className="flex flex-col gap-1.5 group cursor-default">
-                <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#3A3A45] group-hover:text-neon-mint transition-colors">상금</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#3A3A45] group-hover:text-neon-mint transition-colors">{t('contests.single.stats.prize')}</span>
                 <span className="text-3xl md:text-4xl font-black text-[#EEEEF0] font-barlow italic tracking-tighter transition-transform group-hover:scale-105 origin-left">₩500,000</span>
               </div>
               <div className="flex flex-col gap-1.5 group cursor-default">
-                <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#3A3A45] group-hover:text-neon-mint transition-colors">참가팀</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#3A3A45] group-hover:text-neon-mint transition-colors">{t('contests.single.stats.teams')}</span>
                 <span className="text-3xl md:text-4xl font-black text-[#EEEEF0] font-barlow italic tracking-tighter transition-transform group-hover:scale-105 origin-left">18 / 32</span>
               </div>
               <div className="flex flex-col gap-1.5 group cursor-default">
-                <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#3A3A45] group-hover:text-neon-mint transition-colors">시작일</span>
-                <span className="text-3xl md:text-4xl font-black text-[#EEEEF0] font-barlow italic tracking-tighter transition-transform group-hover:scale-105 origin-left">2026-04-05</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#3A3A45] group-hover:text-neon-mint transition-colors">{t('contests.single.stats.start_date')}</span>
+                <span className="text-3xl md:text-4xl font-black text-[#EEEEF0] font-barlow italic tracking-tighter transition-transform group-hover:scale-105 origin-left">{data.date}</span>
               </div>
               <div className="flex flex-col gap-1.5 group cursor-default">
-                <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#3A3A45] group-hover:text-neon-mint transition-colors">방식</span>
-                <span className="text-3xl md:text-4xl font-black text-[#EEEEF0] font-barlow italic tracking-tighter transition-transform group-hover:scale-105 origin-left">토너먼트</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#3A3A45] group-hover:text-neon-mint transition-colors">{t('contests.single.stats.format')}</span>
+                <span className="text-3xl md:text-4xl font-black text-[#EEEEF0] font-barlow italic tracking-tighter transition-transform group-hover:scale-105 origin-left">{t('contests.single.hero.format', { format: t(data.info.format) })}</span>
               </div>
             </motion.div>
+
           </div>
         </div>
       </section>
@@ -273,7 +278,7 @@ export function ContestDetailContent() {
                     <h2 className="text-2xl font-black text-[#EEEEF0] tracking-tight">{t('contests.detail.intro_title')}</h2>
                   </div>
                   <p className="text-[#7A7A85] leading-relaxed text-base font-medium max-w-3xl">
-                    {data.introduction}
+                    {t(data.introduction)}
                   </p>
                 </div>
 
@@ -286,7 +291,7 @@ export function ContestDetailContent() {
                   <div className="flex flex-wrap gap-3">
                     {data.formatTags.map((tag, idx) => (
                       <div key={idx} className="bg-[#141418] px-5 py-3 rounded-xl border border-white/5 text-sm font-bold text-[#EEEEF0] hover:border-neon-mint/30 hover:bg-neon-mint/5 transition-all cursor-default">
-                        {tag}
+                        {t(tag)}
                       </div>
                     ))}
                   </div>
@@ -318,7 +323,7 @@ export function ContestDetailContent() {
                            <span className={cn(
                              "text-xs font-black uppercase tracking-widest mb-1 transition-colors",
                              item.status === 'active' ? "text-neon-mint" : "text-[#7A7A85]"
-                           )}>{item.label}</span>
+                           )}>{t(item.label)}</span>
                            <span className="text-[10px] font-bold text-[#3A3A45] tracking-tight">{item.date}</span>
                         </div>
                         {item.status === 'active' && (
@@ -342,7 +347,7 @@ export function ContestDetailContent() {
                     {data.notes.map((note, idx) => (
                       <li key={idx} className="flex items-start gap-4 p-5 rounded-2xl bg-[#141418]/30 border border-white/5 hover:border-white/10 transition-colors">
                         <div className="mt-1.5 h-2 w-2 rounded-sm bg-neon-mint rotate-45 flex-shrink-0 shadow-[0_0_8px_rgba(110,231,183,0.4)]" />
-                        <span className="text-[15px] text-[#EEEEF0]/80 leading-relaxed font-semibold">{note}</span>
+                        <span className="text-[15px] text-[#EEEEF0]/80 leading-relaxed font-semibold">{t(note)}</span>
                       </li>
                     ))}
                   </ul>
@@ -353,12 +358,12 @@ export function ContestDetailContent() {
             {/* Other tabs placeholders */}
             {(activeTab === 'brackets' || activeTab === 'participants' || activeTab === 'rules') && (
                <div className="flex flex-col items-center justify-center py-32 border border-white/5 border-dashed rounded-3xl bg-[#141418]/30">
-                  <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-6">
-                    <Clock className="w-8 h-8 text-[#3A3A45]" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-[#EEEEF0] mb-2">준비 중인 섹션입니다</h3>
-                  <p className="text-[#7A7A85] font-medium">관리자가 해당 정보를 업데이트하고 있습니다.</p>
-               </div>
+                   <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-6">
+                     <Clock className="w-8 h-8 text-[#3A3A45]" />
+                   </div>
+                   <h3 className="text-2xl font-bold text-[#EEEEF0] mb-2">{t('contests.single.coming_soon.title')}</h3>
+                   <p className="text-[#7A7A85] font-medium">{t('contests.single.coming_soon.desc')}</p>
+                </div>
             )}
           </div>
 
@@ -367,7 +372,7 @@ export function ContestDetailContent() {
             
             {/* Bracket Preview */}
             <div className="flex flex-col gap-6">
-              <h2 className="text-xs font-black text-[#7A7A85] uppercase tracking-[0.3em] font-barlow italic">BRACKET PREVIEW</h2>
+              <h2 className="text-xs font-black text-[#7A7A85] uppercase tracking-[0.3em] font-barlow italic">{t('contests.single.sidebar.bracket')}</h2>
               <div className="group relative bg-[#141418]/40 p-8 rounded-3xl border border-white/5 border-dashed flex flex-col items-center text-center gap-6 overflow-hidden transition-all hover:bg-[#141418]/60 hover:border-neon-mint/30">
                 <div className="absolute inset-0 bg-gradient-to-b from-neon-mint/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -379,7 +384,7 @@ export function ContestDetailContent() {
                 </div>
                 <div className="flex items-center gap-3 bg-white/5 px-5 py-2 rounded-full border border-white/5 relative z-10">
                   <div className="w-1.5 h-1.5 rounded-full bg-neon-mint animate-pulse" />
-                  <span className="text-[11px] font-black text-[#EEEEF0] uppercase tracking-wider">2026.04.05 START</span>
+                  <span className="text-[11px] font-black text-[#EEEEF0] uppercase tracking-wider">2026.04.05 {t('playground.today')}</span>
                 </div>
               </div>
             </div>
@@ -387,7 +392,7 @@ export function ContestDetailContent() {
             {/* Recent Teams */}
             <div className="flex flex-col gap-6">
                <div className="flex items-center justify-between">
-                 <h2 className="text-xs font-black text-[#7A7A85] uppercase tracking-[0.3em] font-barlow italic">RECENT TEAMS</h2>
+                 <h2 className="text-xs font-black text-[#7A7A85] uppercase tracking-[0.3em] font-barlow italic">{t('contests.single.sidebar.teams')}</h2>
                  <span className="text-[10px] font-black text-neon-mint">18/32</span>
                </div>
                <div className="flex flex-col gap-3">
@@ -399,11 +404,11 @@ export function ContestDetailContent() {
                         </div>
                         <div className="flex flex-col gap-0.5">
                           <span className="text-[15px] font-black text-[#EEEEF0] tracking-tight">{team.name}</span>
-                          <span className="text-[10px] font-bold text-[#3A3A45] uppercase tracking-widest">{t('contests.detail.verified_team')}</span>
+                          <span className="text-[10px] font-bold text-[#3A3A45] uppercase tracking-widest">{t('contests.single.verified_team')}</span>
                         </div>
                      </div>
                      <div className="flex flex-col items-end gap-1">
-                       <span className="text-[11px] font-bold text-[#7A7A85]">{team.time}</span>
+                        <span className="text-[11px] font-bold text-[#7A7A85]">{t(`contests.single.sidebar.${team.type}`, { count: team.time })}</span>
                        <ChevronRight className="w-3 h-3 text-[#3A3A45] opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
                      </div>
                    </div>
@@ -419,7 +424,7 @@ export function ContestDetailContent() {
               <div className="flex flex-col gap-3">
                  <div className="flex items-center gap-3">
                     <div className="w-8 h-[2px] bg-neon-mint" />
-                    <span className="text-xs font-black text-neon-mint uppercase tracking-[0.3em] font-barlow italic">MORE CONTESTS</span>
+                    <span className="text-xs font-black text-neon-mint uppercase tracking-[0.3em] font-barlow italic">{t('contests.single.sidebar.teams')}</span>
                  </div>
                  <h2 className="text-5xl font-black text-[#EEEEF0] tracking-tight italic uppercase font-barlow">{t('contests.detail.related_title')}</h2>
               </div>
@@ -433,7 +438,7 @@ export function ContestDetailContent() {
            
            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
              {RELATED_MOCK.map((contest) => (
-                <ContestCard key={contest.id} {...contest} />
+                <ContestCard key={contest.id} {...contest} title={t(contest.title)} />
              ))}
            </div>
         </section>
@@ -454,13 +459,13 @@ export function ContestDetailContent() {
                 <div className="absolute inset-0 bg-gradient-to-r from-neon-mint/5 via-transparent to-transparent opacity-50" />
                 
                 <div className="hidden md:flex items-center gap-12 pl-8 relative z-10">
-                   <div className="flex flex-col gap-0.5">
-                      <span className="text-[10px] font-black text-[#7A7A85] uppercase tracking-[0.2em] font-barlow italic">TOTAL PRIZE</span>
+                  <div className="flex flex-col gap-0.5">
+                      <span className="text-[10px] font-black text-[#7A7A85] uppercase tracking-[0.2em] font-barlow italic">{t('contests.single.sidebar.total_prize')}</span>
                       <span className="text-2xl font-black text-neon-mint font-barlow italic tracking-tight">₩500,000</span>
                    </div>
                    <div className="h-10 w-px bg-white/5" />
                    <div className="flex flex-col gap-0.5">
-                      <span className="text-[10px] font-black text-[#7A7A85] uppercase tracking-[0.2em] font-barlow italic">PARTICIPANTS</span>
+                      <span className="text-[10px] font-black text-[#7A7A85] uppercase tracking-[0.2em] font-barlow italic">{t('contests.single.sidebar.participants')}</span>
                       <div className="flex items-center gap-2">
                         <span className="text-xl font-black text-[#EEEEF0] font-barlow italic">18 / 32</span>
                         <div className="px-2 py-0.5 rounded-full bg-neon-mint/10 border border-neon-mint/20 text-[9px] font-black text-neon-mint font-barlow italic">HOT</div>
@@ -468,10 +473,10 @@ export function ContestDetailContent() {
                    </div>
                    <div className="h-10 w-px bg-white/5" />
                    <div className="flex flex-col gap-0.5">
-                      <span className="text-[10px] font-black text-[#7A7A85] uppercase tracking-[0.2em] font-barlow italic">STATUS</span>
+                      <span className="text-[10px] font-black text-[#7A7A85] uppercase tracking-[0.2em] font-barlow italic">{t('contests.single.sidebar.status')}</span>
                       <div className="flex items-center gap-2">
                          <div className="w-1.5 h-1.5 rounded-full bg-neon-mint animate-pulse shadow-[0_0_8px_rgba(46,255,183,0.8)]" />
-                         <span className="text-[13px] font-black text-[#EEEEF0] font-barlow italic uppercase tracking-wider">{t('contests.detail.status_open')}</span>
+                         <span className="text-[13px] font-black text-[#EEEEF0] font-barlow italic uppercase tracking-wider">{t(`contests.status.${data.status}`)}</span>
                       </div>
                    </div>
                 </div>

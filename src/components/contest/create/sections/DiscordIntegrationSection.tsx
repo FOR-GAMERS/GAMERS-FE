@@ -32,7 +32,7 @@ export function DiscordIntegrationSection() {
         <div className="flex flex-col gap-6 relative z-10">
           <div className="flex items-center gap-3 text-[#5865F2]">
              <MessageSquare className="h-6 w-6" />
-             <span className="text-sm font-black uppercase tracking-widest">Discord Bot Settings</span>
+             <span className="text-sm font-black uppercase tracking-widest">{t('contests.create.discord.bot_settings')}</span>
           </div>
 
           <div className="flex flex-col gap-5">

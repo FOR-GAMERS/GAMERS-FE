@@ -1,7 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
 import { Trophy, Users, Clock, Zap } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 

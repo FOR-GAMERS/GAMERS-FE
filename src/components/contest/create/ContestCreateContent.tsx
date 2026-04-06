@@ -22,7 +22,7 @@ export function ContestCreateContent() {
   const [activeSection, setActiveSection] = useState('basic_info');
   
   const methods = useForm<ContestCreateFormValues>({
-    resolver: zodResolver(contestCreateSchema) as any,
+    resolver: zodResolver(contestCreateSchema),
     defaultValues: {
       name: '',
       description: '',

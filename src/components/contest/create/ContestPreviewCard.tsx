@@ -102,7 +102,7 @@ export function ContestPreviewCard() {
                 {t('contests.create.preview.organizer')}
              </span>
              <span className="opacity-20">•</span>
-             <span>Just now</span>
+             <span>{t('contests.create.preview.just_now')}</span>
            </div>
         </div>
 
@@ -120,7 +120,7 @@ export function ContestPreviewCard() {
             </div>
             <div className="flex flex-col gap-1 items-end">
                <span className="text-[10px] font-black text-[#4A4A55] uppercase tracking-widest">
-                 Slots
+                 {t('contests.create.preview.slots')}
                </span>
                <span className="text-lg font-black text-[#EEEEF0] tabular-nums">0 / {maxTeams}</span>
             </div>

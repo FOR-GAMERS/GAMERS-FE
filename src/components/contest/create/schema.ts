@@ -2,8 +2,8 @@ import { z } from 'zod';
 
 export const contestCreateSchema = z.object({
   // Basic Info
-  name: z.string().min(1, '대회명을 입력해주세요').max(255),
-  description: z.string().min(1, '대회 소개를 입력해주세요'),
+  name: z.string().min(1, 'contests.create.validation.name_required').max(255),
+  description: z.string().min(1, 'contests.create.validation.desc_required'),
   precautions: z.string().optional(),
   
   // Image Settings
@@ -15,28 +15,28 @@ export const contestCreateSchema = z.object({
   
   // Valorant Specific
   valorant: z.object({
-    format: z.enum(['TOURNAMENT', 'LEAGUE']).default('TOURNAMENT'),
-    mapPool: z.array(z.string()).min(1, '최소 하나 이상의 맵을 선택해주세요'),
+    format: z.enum(['TOURNAMENT', 'LEAGUE']),
+    mapPool: z.array(z.string()).min(1, 'contests.create.validation.map_pool_required'),
     agentRestrictions: z.array(z.string()).optional(),
-    roundsPerMatch: z.number().min(1).default(3),
+    roundsPerMatch: z.number().min(1),
   }).optional(),
   
   // LoL Specific
   lol: z.object({
-    format: z.enum(['TOURNAMENT', 'LEAGUE']).default('TOURNAMENT'),
-    patchVersion: z.string().min(1, '패치 버전을 선택해주세요'),
+    format: z.enum(['TOURNAMENT', 'LEAGUE']),
+    patchVersion: z.string().min(1, 'contests.create.validation.patch_required'),
     championRestrictions: z.array(z.string()).optional(),
   }).optional(),
   
   // Team Composition
-  maxTeams: z.number().min(2).max(128).default(32),
-  teamSize: z.number().min(1).max(10).default(5),
-  totalPoints: z.number().min(0).default(100),
+  maxTeams: z.number().min(2).max(128),
+  teamSize: z.number().min(1).max(10),
+  totalPoints: z.number().min(0),
   
   // Schedule Settings
-  startDate: z.string().min(1, '시작일을 선택해주세요'),
-  endDate: z.string().min(1, '종료일을 선택해주세요'),
-  autoStart: z.boolean().default(false),
+  startDate: z.string().min(1, 'contests.create.validation.start_date_required'),
+  endDate: z.string().min(1, 'contests.create.validation.end_date_required'),
+  autoStart: z.boolean(),
   
   // Discord Integration
   discordServerId: z.string().optional(),

@@ -85,7 +85,7 @@ export function ContestCard({
           )}>
             <div className={cn("h-1.5 w-1.5 rounded-full animate-pulse", statusStyle.dot)} />
             <span className={cn("font-barlow text-[11px] font-black tracking-widest", statusStyle.text)}>
-              {status}
+              {t(`contests.status.${status}`)}
             </span>
           </div>
         </div>

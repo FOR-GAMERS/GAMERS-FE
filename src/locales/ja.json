@@ -1,54 +1,88 @@
 {
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "edit": "編集",
+    "confirm": "確認",
+    "back": "戻る",
+    "next": "次へ",
+    "finish": "完了",
+    "submit": "提出",
+    "search": "検索",
+    "filter": "フィルター",
+    "sort": "整列"
+  },
+  "header": {
+    "contests": "大会",
+    "playground": "プレイグラウンド",
+    "community": "コミュニティ",
+    "login": "ログイン",
+    "signup": "会員登録",
+    "mypage": "マイページ",
+    "admin": "管理",
+    "logout": "ログアウト"
+  },
   "contests": {
-    "list_title": "公開大会一覧",
-    "list_subtitle": "世界中のプレイヤーと競い、優勝賞金を獲得しましょう。",
-    "list_search_placeholder": "大会名、種目、主催者を検索...",
-    "filter_all": "すべて",
-    "filter_ongoing": "進行中",
-    "filter_upcoming": "予定",
-    "filter_recruiting": "募集中",
-    "filter_ended": "終了",
-    "filter_completed": "完了",
-    "sort_recent": "最新順",
-    "sort_prize": "賞金順",
-    "sort_closing": "締切間近順",
-    "create_contest": "大会を開催する",
-    "no_results": "検索結果がありません。",
-    "apply_now": "参加申込",
-    "view_details": "詳細を見る",
-    "prize_pool": "総賞金",
-    "slots": "募集チーム",
-    "status": {
-      "RECRUITING": "募集中",
-      "ONGOING": "進行中",
-      "ENDED": "終了",
-      "CANCELLED": "キャンセル"
-    },
-    "single": {
-      "hero": {
-        "apply_button": "参加を申し込む",
-        "applied": "申請完了",
-        "deadline": "申請締切",
-        "prize": "総賞金"
+    "list": {
+      "title": "大会",
+      "subtitle": "進行中または予定されている大会を探索してください。",
+      "search_placeholder": "大会名で検索",
+      "create_btn": "大会を開催する",
+      "filters": {
+        "all": "全体",
+        "recruiting": "募集中",
+        "ongoing": "進行中",
+        "finished": "終了"
       },
+      "empty": "進行中の大会がありません。",
+      "contest4": "Apex Legends デュオチャレンジ",
+      "contest5": "Valorant チャレンジャーズ予選",
+      "contest6": "マルチゲーム バトルロイヤル イン비테이ショナル",
+      "multi_game": "マルチゲーム"
+    },
+    "detail": {
       "tabs": {
         "overview": "概要",
+        "prizes": "賞金・特典",
+        "rules": "ルール",
+        "schedule": "日程",
         "bracket": "トーナメント表",
-        "teams": "参加チーム",
-        "rules": "規約"
+        "recent_matches": "最近の試合"
       },
-      "sidebar": {
-        "bracket_preview": "トーナメント表プレビュー",
-        "recent_teams": "最近の申請チーム",
-        "no_teams": "まだ申請チームはありません。"
+      "hero": {
+        "organizer": "主催者",
+        "prize_pool": "賞金",
+        "entry_fee": "参加費",
+        "free": "無料",
+        "slots": "募集人数",
+        "region": "地域",
+        "asia_pacific": "アジア太平洋"
       },
-      "footer": {
-        "applied_count": "チーム申請中",
-        "prize_label": "総賞金",
-        "format_label": "大会形式"
+      "cta": {
+        "apply": "大会に申し込む",
+        "already_applied": "申し込み済み",
+        "closed": "申し込み終了",
+        "recruiting": "募集中",
+        "ongoing": "進行中",
+        "finished": "終了",
+        "bracket_link": "トーナメント表を見る",
+        "days_left": "あと {{count}} 日",
+        "share": "共有",
+        "bookmark": "ブックマーク"
+      },
+      "status": {
+        "DRAFT": "下書き",
+        "UPCOMING": "予定",
+        "RECRUITING": "募集中",
+        "CLOSED": "締め切り",
+        "ACTIVE": "進行中",
+        "COMPLETED": "終了",
+        "CANCELLED": "キャンセル"
       }
     },
-    "verified_team": "認証済みチーム",
     "create": {
       "title": "大会開催",
       "subtitle": "あなただけのリーグを始めましょう",
@@ -58,6 +92,7 @@
       "sections_completed": "{{count}} / 6 セクション完了",
       "success_alert": "大会が正常に作成されました！",
       "save_alert": "一時保存しました。",
+      "auto_save_done": "自動保存完了",
       "sections": {
         "basic_info": "基本情報",
         "image_settings": "画像設定",
@@ -66,89 +101,60 @@
         "schedule_settings": "日程設定",
         "discord_integration": "Discord連携"
       },
-      "steps": {
-        "basic": "基本情報",
-        "format": "大会形式",
-        "schedule": "日程設定",
-        "discord": "Discord連携",
-        "preview": "プレビュー"
-      },
       "basic": {
         "title": "大会タイトル",
         "title_placeholder": "例：Valorant 新人オープンカップ",
-        "game_settings": {
-          "desc": "大会で進行するゲームの詳細ルールを設定します。",
-          "valorant_sub": "5:5 タクティカルシューター",
-          "lol_sub": "5:5 MOBA"
-        },
-        "preview": {
-          "title": "大会プレビュー",
-          "live": "ライブプレビュー",
-          "draft": "下書き",
-          "thumbnail_preview": "サムネイルプレビュー",
-          "desc": "設定された情報で生成される大会の姿です。",
-          "status": "受付中",
-          "slots": "名残り",
-          "organizer": "主催者",
-          "entry_fee": "参加費",
-          "free": "無料",
-          "apply": "大会に申し込む",
-          "summary": "方式の要約",
-          "mode": "進行方式",
-          "tournament": "トーナメント",
-          "league": "リーグ",
-          "region": "地域",
-          "asia": "アジア"
-        },
-        "game": "ゲーム種目",
-        "game_placeholder": "ゲームを選択",
-        "description": "大会説明",
-        "description_placeholder": "大会ルールや詳細内容を入力してください。"
+        "description": "大会紹介",
+        "description_placeholder": "大会ルールや詳細内容をMDX形式で入力してください。",
+        "precautions": "注意事項",
+        "precautions_placeholder": "参加者が必ず確認すべき内容を入力してください。",
+        "subtitle": "大会の最も基本的な情報を入力します。",
+        "required": "必須",
+        "edit": "編集",
+        "preview": "プレビュー",
+        "preview_empty": "内容を入力するとプレビューが生成されます。"
       },
-      "format": {
-        "type": "トーナメント方式",
-        "single": "シングルエリミネーション",
-        "double": "ダブルエリミネーション",
-        "league": "リーグ戦",
-        "max_teams": "最大参加チーム数",
-        "team_size": "チーム人数",
-        "total_points": "総ポイント量",
-        "settings_desc": "大会で進行するゲームの詳細ルールを設定します。",
+      "image": {
+        "thumbnail": "サムネイル画像",
+        "banner": "ヘッダーバナー画像",
+        "click_to_upload": "クリックしてアップロード",
+        "upload_desc": "推奨: 400x400 (1:1)",
+        "banner_upload_desc": "推奨: 1200x400 (3:1)",
+        "replace": "切り替える"
+      },
+      "game": {
+        "select_game": "ゲーム選択",
+        "valorant_settings": "VALORANT設定",
+        "lol_settings": "LoL設定",
+        "format": "進行方式",
+        "format_tournament": "トーナメント",
+        "format_league": "リーグ",
+        "map_pool": "マッププール",
+        "agent_restrictions": "エージェント制限",
+        "champion_restrictions": "チャンピオン制限",
+        "placeholder_agent": "エージェント名で検索...",
+        "placeholder_champion": "チャンピオン名で検索...",
+        "rounds_per_match": "試合ごとのラウンド数",
+        "patch_version": "パッチバージョン",
+        "latest": "(最新)",
+        "pro_patch": "LCPプロパッチ",
+        "win_condition": "{{count}}本先取"
+      },
+      "game_settings": {
+        "desc": "大会で使用するゲームと詳細ルールを設定します。",
+        "valorant_sub": "5v5キャラクターベースのタクティカルシューター",
+        "lol_sub": "戦略的なチームバトルMOBAゲーム",
+        "valorant": {
+          "tournament_desc": "トーナメント：段階別の脱落方式です。最後の1チームが優勝します。",
+          "league_desc": "リーグ：すべての対象と試合し、勝ち点によって順位が決定されます。"
+        },
         "lol": {
-          "tournament_desc": "トーナメント：ドラフトピックルールが適用される多段階トーナメントです。",
-          "league_desc": "リーグ：総当たり方式ですべてのチームと対戦します。",
-          "search_results": "検索結果: {{count}}個",
+          "tournament_desc": "トーナメント：段階別の脱落方式です。",
+          "league_desc": "リーグ：すべての対象と試合し、勝ち点によって順位が決定されます。",
+          "search_results": "検索結果: {{count}}名",
           "restricted_champions": "制限されたチャンピオン: {{count}}名"
         }
       },
-      "schedule": {
-        "start_date": "大会開始日",
-        "end_date": "大会終了日",
-        "auto_start": "自動開始",
-        "auto_start_desc": "開始日になると大会を自動的にACTIVE状態に切り替えます",
-        "desc": "大会の進行スケジュールを設定します。タイムゾーンは現在のブラウザ基準(KST)です。"
-      },
-      "discord": {
-        "integration": "Discord連携 (任意)",
-        "integration_desc": "Discordサーバーと連携すると、大会通知や入場管理などを自動化できます。",
-        "server_id": "DiscordサーバーID",
-        "server_id_help": "Discordの開発者モードをオンにし、サーバーを右クリックしてIDをコピーしてください。",
-        "channel_id": "通知チャンネルID",
-        "notification_types": "通知タイプ",
-        "invite_bot": "ボットを招待する",
-        "bot_permissions": "GAMERS Bot 権限設定",
-        "auto_channel": "参加者専用チャンネルの自動生成",
-        "realtime_notif": "試合結果のリアルタイム通知",
-        "staff_support": "スタッフ呼び出し・サポート管理"
-      },
-      "preview": {
-        "title": "プレビュー",
-        "summary_title": "設定要約",
-        "placeholder_title": "大会名を入力してください"
-      },
-      "cancel": "キャンセル",
-      "save_draft": "下書き保存",
-      "publish": "公開する",
       "validation": {
         "name_required": "大会名を入力してください",
         "desc_required": "大会紹介を入力してください",
@@ -156,20 +162,67 @@
         "patch_required": "パッチバージョンを選択してください",
         "start_date_required": "開始日を選択してください",
         "end_date_required": "終了日を選択してください"
-      }
-    },
-    "mock": {
-      "contest1": "Valorant 新人オープンカップ シーズン3",
-      "contest2": "LoL コミュニティ 5vs5",
-      "contest3": "CS2 韓国サーバー トーナメント",
-      "contest4": "Apex Legends デュオチャレンジ",
-      "contest5": "Valorant チャレンジャーズ予選",
-      "contest6": "マルチゲーム バトルロイヤル インビテーショナル",
-      "multi_game": "マルチゲーム"
+      },
+      "team": {
+        "title": "チーム構成",
+        "desc": "参加チームの構成と規模を設定します。",
+        "max_teams": "最大参加チーム数",
+        "max_teams_help": "最小2チームから最大128チームまで設定可能です。",
+        "team_size": "チームあたりの人数",
+        "team_size_help": "1チームあたりの参加人数です（補欠選手は含みません）。",
+        "total_points": "ポイント合計制限",
+        "points_desc": "チームロースターの合計ポイントを制限します（0は制限なし）。",
+        "unlimited": "0 (制限なし)"
+      },
+      "schedule": {
+        "title": "日程設定",
+        "start_date": "大会開始日",
+        "end_date": "大会終了日",
+        "auto_start": "自動開始",
+        "auto_start_desc": "開始日になると大会を自動的にACTIVE状態に切り替えます",
+        "desc": "大会の進行スケジュールを設定します。タイムゾーンは現在のブラウザ基準(KST)です。"
+      },
+      "discord": {
+        "title": "Discord連携",
+        "desc": "Discordサーバーと連携すると、大会通知や入場管理などを自動化できます。",
+        "integration_desc": "Discordサーバーと連動して大会運営を自動化してください。",
+        "bot_settings": "Discord Bot設定",
+        "server_id": "DiscordサーバーID",
+        "server_id_help": "Discordの開発者モードをオンにし、サーバーを右クリックしてIDをコピーしてください。",
+        "channel_id": "通知チャンネルID",
+        "bot_permissions": "GAMERS Bot 権限設定",
+        "auto_channel": "参加者専用チャンネルの自動生成",
+        "realtime_notif": "試合結果のリアルタイム通知",
+        "staff_support": "スタッフ呼び出し・サポート管理",
+        "invite_bot": "ボットを招待する"
+      },
+      "preview": {
+        "title": "大会プレビュー",
+        "live": "ライブプレビュー",
+        "draft": "下書き",
+        "thumbnail_preview": "サムネイルプレビュー",
+        "desc": "設定された情報で生成される大会の姿です。",
+        "status": "受付中",
+        "slots": "募集人数",
+        "organizer": "主催者",
+        "just_now": "たった今",
+        "entry_fee": "参加費",
+        "free": "無料",
+        "apply": "大会に申し込む",
+        "summary": "方式要約",
+        "mode": "方式",
+        "tournament": "トーナメント",
+        "league": "リーグ",
+        "region": "地域",
+        "asia": "アジア"
+      },
+      "cancel": "キャンセル",
+      "save_draft": "下書き保存",
+      "publish": "公開する"
     }
   },
   "my_contests": {
-    "title": "マイ大会",
+    "title": "内大会",
     "subtitle": "MY CONTESTS",
     "summary": {
       "participating": "参加中",
@@ -181,430 +234,98 @@
     },
     "card": {
       "my_team": "マイチーム",
-      "members_participating": "{{count}}名参加",
-      "next_match": "次戦",
-      "no_record": "試合結果なし",
+      "members_participating": "{{count}}人参加",
+      "next_match": "次の試合",
+      "no_record": "試合記録なし",
       "my_record": "マイ戦績",
       "hours_after": "{{count}}時間後",
       "unbeatable": "無敗",
       "participants_status": "参加状況",
       "team_suffix": "チーム",
-      "full": "締切",
+      "full": "満員",
       "no_info": "情報なし",
-      "contest_start": "大会開始",
-      "prize": "賞金",
-      "prize_earned": "獲得賞金",
-      "view_details": "大会詳細を見る",
-      "enter_stadium": "スタジアム入場",
-      "team_distribution": "チーム分け",
-      "rank_suffix": "位",
-      "completed_suffix": "完了",
-      "final_rank": "最終順位",
-      "total_record": "全体戦績",
-      "view_results": "結果を確認"
-    },
-    "mock": {
-      "contest1": "Valorant 新人オープンカップ シーズン4 by GMS_Creator",
-      "contest1_status": "ベスト8 進行中",
-      "contest1_format": "トーナメント · 5v5",
-      "contest2": "LoL コミュニティ 5vs5 by LOL_Official",
-      "contest2_status": "受付中",
-      "contest2_format": "リーグ · 5v5",
-      "contest3": "Valorant 新人オープンカップ シーズン3",
-      "contest4": "LoL 5vs5 Winter",
-      "contest5": "CS2 韓国サーバー トーナメント"
-    }
-  },
-  "navbar": {
-    "contests": "大会一覧",
-    "find_contests": "大会を探す",
-    "my_contests": "参加中",
-    "community": "コミュニティ",
-    "my_page": "マイページ",
-    "login": "ログイン",
-    "signup": "始める",
-    "get_started": "始める",
-    "logout": "ログアウト"
-  },
-  "footer": {
-    "product": "プロダクト",
-    "find_contests": "大会を探す",
-    "create_contest": "大会開催",
-    "community": "コミュニティ",
-    "company": "会社",
-    "about": "紹介",
-    "blog": "ブログ",
-    "jobs": "採用",
-    "legal": "法的通知",
-    "terms": "利用規約",
-    "privacy": "プライバシーポリシー",
-    "description": "カジュアルから公式リーグまで。あなただけの舞台で競いましょう。\nすべての競争が記録され、記憶される国内最大級のゲーミングプラットフォーム GAMERS。",
-    "rights": "© 2026 GAMERS Inc. All rights reserved."
-  },
-  "community": {
-    "title": "コミュニティ",
-    "subtitle": "ゲーマーと情報を共有し、チームメイトを探しましょう。",
-    "write_post": "投稿する",
-    "categories": {
-      "all": "すべて",
-      "free": "フリートーク",
-      "tips": "攻略/ヒント",
-      "recruiting": "チーム募集",
-      "reviews": "大会レビュー"
-    },
-    "post": {
-      "hot": "HOT",
-      "recruiting_status": "募集中",
-      "views": "閲覧",
-      "comments": "コメント",
-      "likes": "いいね",
-      "time_ago": {
-        "hours": "{{count}}時間前",
-        "days": "{{count}}日前"
-      }
-    },
-    "sidebar": {
-      "popular_posts": "人気の投稿",
-      "team_recruiting": "チーム募集中",
-      "cta": {
-        "title": "チームメイトが必要ですか？",
-        "subtitle": "募集投稿を作成しましょう。",
-        "button": "投稿作成"
-      }
-    },
-    "mock_posts": {
-      "post1": {
-        "title": "アイアン〜ゴールドを最速脱出するエイムルーティンを共有します (2時間/日)",
-        "preview": "毎日2時間、3ヶ月間ゴールド2からプラチナ1まで上げた方法を共有します。Aim Labルーティン、デスマッチ活用法など実体験に基づいたマニュアルです。"
-      },
-      "post2": {
-        "title": "【チーム募集】5vs5リーグ大会に参加するメンバー募集 — ゴールド以上",
-        "preview": "ポジション：ジャングル、サポート · 条件：ソロランク ゴールド以上 · 活動：週3回以上可能な方。現在ミッド、ADC、トップは確定しており、チームワーク重視で楽しくプレイできる方を探しています。"
-      },
-      "post3": {
-        "title": "Valorant 新人カップ S3 参加レポート — 初大会でベスト4まで進出しました！",
-        "preview": "初めてGAMERSで大会を見つけて参加しましたが、想定以上に運営がしっかりしていて驚きました。トーナメント表の自動化が本当に便利です。"
-      },
-      "post4": {
-        "title": "GAMERSを使ってみて変わったこと — 大会管理がこんなに楽だとは",
-        "preview": "Discordだけで管理していましたが、GAMERSに移行して2ヶ月目です。特に自動トーナメント表と試合結果の自動検知機能が革命的ですね。主催者の方はぜひ使ってみてください。"
-      },
-      "post5": {
-        "title": "ジャングル序盤ルートまとめ — シーズン開始前に知っておくべきチャンピオン5選",
-        "preview": "グレイブス、ヴィエゴ、ヘカリムを中心に序盤のインベードルートとガンクタイミングを共有します。シーズン序盤に素早くランクを上げたい方は必読です。"
-      }
-    },
-    "mock_recruitment": {
-      "post1": {
-        "title": "LoL 5vs5 メンバー募集",
-        "tags": "Jungle · Support · Gold以上"
-      },
-      "post2": {
-        "title": "Valorant デュオパートナー",
-        "tags": "プラチナ以上 · 週4回以上"
-      }
+      "contest_start": "大会開始"
     }
   },
   "playground": {
+    "title": "プレイグラウンド",
+    "subtitle": "PLAYGROUND",
     "tabs": {
       "overview": "概要",
-      "bracket": "トーナメント表",
-      "team": "チーム管理",
-      "members": "メンバー状況",
+      "participants": "参加者",
+      "matches": "対戦",
+      "settings": "設定",
       "notice": "案内事項",
-      "withdrawal": "大会辞退"
+      "members": "メンバー",
+      "team_manage": "チーム管理",
+      "withdrawal": "出場のキャンセル",
+      "staff": "スタッフ"
     },
-    "team": {
-      "leader_privilege": "リーダー権限譲渡",
-      "current_leader": "現在のリーダー",
-      "transfer_desc": "他のメンバーにリーダー権限を譲渡できます。",
-      "select_member": "メンバーを選択",
-      "transfer_button": "権限譲渡",
-      "invite_management": "招待管理",
-      "create_link": "リンク作成",
-      "copy": "コピー",
-      "copied": "コピー済み",
-      "pending_count": "待機中 · {{count}}名",
-      "roster_title": "メンバーロースター",
-      "invite_member": "メンバー招待",
-      "accept": "承認",
-      "reject": "辞退",
-      "win_rate": "勝率",
-      "strategy_notes": "戦略ノート",
-      "igl_only": "IGL専用",
-      "semifinal_strategy": "準決勝戦略",
-      "main_picks": "メインキャラ",
-      "practice_schedule": "練習スケジュール",
-      "add_schedule": "予定を追加",
-      "status": {
-        "completed": "完了",
-        "active": "今日",
-        "pending": "未定"
-      },
-      "stats": {
-        "this_tournament": "今大会",
-        "loss": "敗北",
-        "current_round": "現在のラウンド",
-        "win_rate": "勝率",
-        "avg_round": "平均ラウンド",
-        "conceded": "平均失点",
-        "all_wins": "全勝"
-      },
-      "info_format": "{{count}}名 · {{game}} · {{desc}}",
-      "ranks": {
-        "dia1": "ダイヤ 1",
-        "dia2": "ダイヤ 2",
-        "plat1": "プラチナ 1",
-        "plat2": "プラチナ 2"
-      },
-      "strategy": {
-        "vs_opponent": "vs {{opponent}}",
-        "attack_desc": "攻撃：Aサイトへの早いラッシュ中心。Reaperがエントリー、AcePlayerがミッドカット担当。",
-        "defense_desc": "防御：Bサイト3名スタック。SilverBulletがミッド情報収集後にローテーション。",
-        "semifinal": "準決勝戦略"
-      },
-      "schedule": {
-        "match_vs": "準決勝 · vs {{opponent}}",
-        "auto_match": "{{time}} — 自動マッチ",
-        "final_if_advance": "決勝 (進出時)",
-        "tbd_opponent": "{{time}} — 対戦相手未定",
-        "internal_practice": "チーム内スクリム",
-        "internal_desc": "{{time}} — 内部練習"
-      }
-    },
-    "notice": {
-      "title": "案内事項",
-      "last_updated": "最終更新: {{date}}",
-      "important": "重要",
-      "new": "NEW"
-    },
-    "bracket": {
-       "title": "トーナメント表"
-    },
-    "rounds": {
-      "round_of_16": "ベスト16",
-      "round_of_8": "ベスト8",
-      "quarterfinals": "準々決勝",
-      "semifinals": "準決勝",
-      "finals": "決勝",
-      "group_stage": "予選リーグ"
-    }
-  },
-  "common": {
-    "remaining": "残り",
-    "edit": "編集",
-    "win": "勝",
-    "loss": "敗",
-    "attack": "攻撃",
-    "defense": "防御",
-    "today": "今日",
-    "winning": "優勝",
-    "runner_up": "準優勝",
-    "eliminated": "敗退",
-    "view_all": "すべて見る",
-    "count_suffix": "個",
-    "status": {
-      "completed": "完了",
-      "active": "進行中",
-      "pending": "未定",
-      "today": "今日"
+    "summary": {
+      "title": "設定まとめ",
+      "mode": "方式",
+      "teams": "参加チーム",
+      "players": "総参加人数",
+      "status": "進行状態"
     },
     "recent_matches": {
-      "title": "最近の対戦記録",
-      "view_details": "詳細を見る",
+      "title": "最近の試合",
       "win": "勝",
-      "loss": "敗"
+      "lose": "負",
+      "no_match": "最近の試合はありません。"
     },
-    "bracket": {
-      "title": "トーナメント状況",
-      "winner_tbd": "WINNER TBD"
+    "nav": {
+      "back_to_contest": "大会ページへ",
+      "admin_view": "管理者ビュー",
+      "player_view": "参加者ビュー"
     },
-    "quick_links": {
-      "support": "サポート",
-      "duelist": "デュエル",
-      "initiator": "イニシ",
-      "controller": "コントロ"
+    "notice": {
+        "title": "案内事項",
+        "desc": "大会の進行に関する案内事項です。"
+    }
+  },
+  "landing": {
+    "hero": {
+      "tag": "E-SPORTS INFRASTRUCTURE FOR EVERYONE",
+      "title": "自分だけの\n大会を完璧に。",
+      "subtitle": "GAMERSは大会作成から運営、チーム募集、試合結果の管理まで、\nすべてのE-Sportsプロセスを自動化するオールインワン・プラットフォームです。",
+      "primary_cta": "今すぐ始めましょう",
+      "secondary_cta": "デモを体験する"
     },
-    "days": {
-      "mon": "月",
-      "tue": "火",
-      "wed": "水",
-      "thu": "木",
-      "fri": "金",
-      "sat": "土",
-      "sun": "日"
+    "problem": {
+      "tag": "PAIN POINTS",
+      "title": "大会運営は、なぜ\nこれほど大変なのでしょうか？",
+      "subtitle": "面倒な手続きもミスできない集計作業も、すべてGAMERSにお任せください。",
+      "point_1": "Googleフォーム、Excel、Discord間の\n手動データの同期はもう不要です。",
+      "point_2": "ティアの検証や本人確認のための\n面倒なプロセスから解放。GAMERSが自動で行います。",
+      "point_3": "結果の集計ミスや判定トラブルを防止。\n透明で公正な運営環境を提供します。"
     },
-    "mypage": {
-      "profile": {
-        "member_tag": "メンバー",
-        "edit_profile": "プロフィール編集",
-        "followers": "フォロワー",
-        "following": "フォロー中"
+    "solution": {
+      "tag": "THE SOLUTION",
+      "title": "複雑な運営を\nワンクリックで。",
+      "subtitle": "最先端の自動化システムで、主催者は大会の楽しさにだけ集中できます。",
+      "card_1": {
+        "title": "自動トーナメント表生成",
+        "description": "参加申込からトーナメント表確定まで1秒で十分です。"
       },
-      "tabs": {
-        "overview": "概要",
-        "contests": "大会履歴",
-        "accounts": "ゲームアカウント",
-        "settings": "設定"
+      "card_2": {
+        "title": "チーム管理システム",
+        "description": "チームメイトを招待し役割を割り当てて、完璧なシナジーを生み出しましょう。"
       },
-      "history": {
-        "title": "大会参加履歴",
-        "empty": "参加した大会がありません。",
-        "status": {
-          "ONGOING": "開催中",
-          "UPCOMING": "予定",
-          "ENDED": "終了"
-        }
+      "card_3": {
+        "title": "Discord連携",
+        "description": "ボットがすべてのチャンネル管理と通知を自動的に処理します。"
       },
-      "accounts": {
-        "title": "メインアカウント",
-        "link_account": "アカウント連携",
-        "verified": "認証済み",
-        "unverified": "未認証"
-      },
-      "notifications": {
-        "title": "最近の通知",
-        "view_all": "すべて見る",
-        "types": {
-          "CONTEST_START": "大会開始",
-          "TEAM_INVITE": "チーム招待",
-          "NEW_FOLLOWER": "新しいフォロワー"
-        },
-        "time": {
-          "seconds": "{{count}}秒前",
-          "minutes": "{{count}}分前",
-          "hours": "{{count}}時間前",
-          "days": "{{count}}日前"
-        }
-      },
-      "cta": {
-        "badge": "自分だけの大会を開催",
-        "title": "自分だけの大会を開催しましょう",
-        "button": "大会作成",
-        "free_info": "無料で開始できます"
+      "card_4": {
+        "title": "管理者ダッシュボード",
+        "description": "主催者のための洗練された運営ツールを無料で提供します。"
       }
     },
-    "roles": {
-      "support": "サポート",
-      "duelist": "デュエル",
-      "initiator": "イニシ",
-      "controller": "コントロ"
+    "cta": {
+      "tag": "READY TO PLAY?",
+      "title": "今すぐ\n始めましょう",
+      "subtitle": "日本最大級のゲーミングオープン・トーナメントプラットフォーム\nGAMERSと共に成長を体験してください。",
+      "button": "無料で始める"
     }
-  },
-  "auth": {
-    "login_hero": "すべてのゲーマーの競争が\n記憶になる\nプラットフォーム",
-    "login_desc": "大会を開き、チームを組み、記録を残しましょう。\nGAMERSですべてが始まります。",
-    "login_title": "ログイン",
-    "signup_title": "新規登録"
-  },
-  "mypage": {
-    "title": "マイページ",
-    "subtitle": "MY PAGE",
-    "edit_profile": "プロフィール編集",
-    "points": "ポイント",
-    "bio_default": "Valorantを主に楽しんでいるゲーマーです。チームメイト募集中！",
-    "stats": {
-      "contests": "参加大会",
-      "win_rate": "勝率",
-      "trophies": "優勝"
-    },
-    "contests": {
-      "title": "参加大会",
-      "tabs": {
-        "participating": "参加中",
-        "completed": "完了",
-        "hosted": "主催"
-      },
-      "view_details": "詳細を見る",
-      "no_data": "登録された大会がありません。"
-    },
-    "accounts": {
-      "title": "連携済みゲームアカウント",
-      "not_linked": "未連携",
-      "discord_linked": "連携完了",
-      "linked": "連携済み",
-      "link": "連携する",
-      "valorant_status": "プラチナ 2 • ELO 1,253"
-    },
-    "mock_data": {
-      "contest1": {
-        "title": "Valorant 新人オープンカップ シーズン3",
-        "info": "Team Alpha · ベ스트4進出"
-      },
-      "contest2": {
-        "title": "LoL コミュニティ 5vs5",
-        "info": "NexusGG · 参加申込完了"
-      },
-      "contest3": {
-        "title": "Apex Legends デュオチャレンジ",
-        "info": "ApexDuo · ベスト16敗退"
-      }
-    }
-  },
-  "hero": {
-    "tag": "THE NEXT GEN GAMING PLATFORM",
-    "title_1": "すべての競争が",
-    "title_2": "記録になる瞬間",
-    "subtitle": "カジュアルトーナメントからプロリーグまで。 \nGAMERSであなたのキャリアを始めましょう。",
-    "cta_join": "大会に参加する",
-    "cta_create": "大会を開催する"
-  },
-  "problem": {
-    "tag": "THE CHALLENGE",
-    "title": "何があなたの競争を妨げていますか？",
-    "card_1": {
-      "title": "参加の難しさ",
-      "description": "どこで申し込み、どう進めればいいか分かりませんでしたか？GAMERSは数クリックですべての準備を完了します。"
-    },
-    "card_2": {
-      "title": "不足している記録",
-      "description": "あなたの素晴らしいプレイが消えてしまわないように。すべての勝利と記録をあなたのキャリアにします。"
-    },
-    "card_3": {
-      "title": "不便な運営",
-      "description": "相手チームとの連絡やトーナメント表作成の煩わしさ。GAMERSの自動化システムが解決します。"
-    }
-  },
-  "solution": {
-    "tag": "THE SOLUTION",
-    "title": "ゲーマーのための完璧な空間",
-    "item_1": {
-      "title": "直感的な大会探索",
-      "description": "あなたの実力と地域に合わせた最適な大会をAIが推薦します。"
-    },
-    "item_2": {
-      "title": "リアルタイムデータ分析",
-      "description": "試合結果と統計が自動的に記録され、トーナメント表に即座に反映されます。"
-    },
-    "item_3": {
-      "title": "公正な競技環境",
-      "description": "徹底した本人認証とアンチチート連携により、クリーンな勝負を保証します。"
-    }
-  },
-  "features": {
-    "tag": "FEATURES",
-    "title": "強力なプラットフォームの力",
-    "card_1": {
-      "title": "自動トーナメント表生成",
-      "description": "参加申込からトーナメント表確定まで1秒で十分です。"
-    },
-    "card_2": {
-      "title": "チーム管理システム",
-      "description": "チームメイトを招待し役割を割り当てて、完璧なシナジーを生み出しましょう。"
-    },
-    "card_3": {
-      "title": "Discord連携",
-      "description": "ボットがすべてのチャンネル管理と通知を自動的に処理します。"
-    },
-    "card_4": {
-      "title": "管理者ダッシュボード",
-      "description": "主催者のための洗練された運営ツールを無料で提供します。"
-    }
-  },
-  "cta": {
-    "tag": "READY TO PLAY?",
-    "title": "今すぐ\n始めましょう",
-    "subtitle": "日本最大級のゲーミングオー픈トーナメントプラットフォーム\nGAMERSと共に成長を体験してください。",
-    "button": "無料で始める"
   }
 }

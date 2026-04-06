@@ -83,10 +83,10 @@ export function LoLSettings() {
             onChange={(e) => setValue('lol.patchVersion', e.target.value)}
             className="w-full bg-[#141418] border border-white/5 rounded-xl px-4 py-2.5 text-xs font-medium focus:outline-none focus:border-neon-mint transition-all appearance-none cursor-pointer"
           >
-            <option value="14.6">14.6 (Latest)</option>
+            <option value="14.6">14.6 {t('contests.create.game.latest')}</option>
             <option value="14.5">14.5</option>
             <option value="14.4">14.4</option>
-            <option value="Pro-14.2">LCP Pro Patch (14.2)</option>
+            <option value="Pro-14.2">{t('contests.create.game.pro_patch')} (14.2)</option>
           </select>
         </div>
 

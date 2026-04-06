@@ -1,8 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Share2, Users, FileText, Layout, ChevronRight } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import { useTranslation } from 'react-i18next';
 
 interface QuickLinkProps {

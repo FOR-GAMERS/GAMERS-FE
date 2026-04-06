@@ -59,7 +59,7 @@ export function ImageSettingsSection() {
                   <img src={thumbPreview} alt="Thumbnail Preview" className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
                     <Camera className="h-6 w-6 text-white" />
-                    <span className="text-[11px] font-black text-white uppercase">교체하기</span>
+                    <span className="text-[11px] font-black text-white uppercase">{t('contests.create.image.replace')}</span>
                   </div>
                 </>
               ) : (
@@ -101,7 +101,7 @@ export function ImageSettingsSection() {
                   <img src={bannerPreview} alt="Banner Preview" className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
                     <Camera className="h-8 w-8 text-white" />
-                    <span className="text-xs font-black text-white uppercase tracking-wider">교체하기</span>
+                    <span className="text-xs font-black text-white uppercase tracking-wider">{t('contests.create.image.replace')}</span>
                   </div>
                 </>
               ) : (

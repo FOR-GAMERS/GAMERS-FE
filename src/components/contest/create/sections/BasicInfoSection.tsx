@@ -24,22 +24,24 @@ export function BasicInfoSection() {
             <span className="w-2 h-2 rounded-full bg-neon-mint" />
             {t('contests.create.sections.basic_info')}
           </h2>
-          <p className="text-sm text-[#7A7A85]">{t('contests.create.basic_info_subtitle', '대회의 가장 기본적인 정보를 입력합니다.')}</p>
+          <p className="text-sm text-[#7A7A85]">{t('contests.create.basic.subtitle')}</p>
         </div>
-        <span className="text-[10px] font-black uppercase text-[#7A7A85] bg-[#1C1C21] px-2 py-1 rounded-md border border-white/5">필수</span>
+        <span className="text-[10px] font-black uppercase text-[#7A7A85] bg-[#1C1C21] px-2 py-1 rounded-md border border-white/5">
+          {t('contests.create.basic.required')}
+        </span>
       </div>
 
       <div className="flex flex-col gap-6">
         {/* Contest Name */}
         <div className="flex flex-col gap-3">
           <label className="text-[13px] font-bold text-[#BBBBCB] flex items-center gap-1.5">
-            {t('contests.create.basic.contest_name')}
+            {t('contests.create.basic.title')}
             <span className="text-neon-mint">*</span>
           </label>
           <div className="relative group">
             <Input
               {...register('name')}
-              placeholder={t('contests.create.basic.placeholder_name')}
+              placeholder={t('contests.create.basic.title_placeholder')}
               className={cn(
                 "bg-[#0C0C0F] border-[#242428] hover:border-[#383840] focus:border-neon-mint h-14 font-medium transition-all group-hover:bg-[#111115]",
                 errors.name && "border-red-500/50"
@@ -61,7 +63,7 @@ export function BasicInfoSection() {
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
             <label className="text-[13px] font-bold text-[#BBBBCB] flex items-center gap-1.5">
-              {t('contests.create.basic.contest_intro')}
+              {t('contests.create.basic.description')}
               <span className="text-neon-mint">*</span>
               <span className="ml-2 text-[11px] font-black text-[#7A7A85] uppercase tracking-wider bg-[#1C1C21] px-2 py-0.5 rounded border border-white/5">MDX</span>
             </label>
@@ -74,7 +76,7 @@ export function BasicInfoSection() {
                   !isPreview ? "bg-[#1C1C21] text-neon-mint shadow-md" : "text-[#7A7A85] hover:text-[#EEEEF0]"
                 )}
               >
-                편집
+                {t('contests.create.basic.edit')}
               </button>
               <button
                 type="button"
@@ -85,7 +87,7 @@ export function BasicInfoSection() {
                 )}
               >
                 <Eye className="h-3 w-3" />
-                미리보기
+                {t('contests.create.basic.preview')}
               </button>
             </div>
           </div>
@@ -105,7 +107,9 @@ export function BasicInfoSection() {
                 <button type="button" className="p-1.5 rounded-md text-[#7A7A85] hover:bg-white/5 hover:text-white transition-colors"><LinkIcon className="h-4 w-4" /></button>
                 <button type="button" className="p-1.5 rounded-md text-[#7A7A85] hover:bg-white/5 hover:text-white transition-colors"><ImageIcon className="h-4 w-4" /></button>
                 <div className="ml-auto flex items-center gap-2 pr-2">
-                  <span className="text-[10px] font-black text-neon-mint/50 animate-pulse">자동저장 완료</span>
+                  <span className="text-[10px] font-black text-neon-mint/50 animate-pulse">
+                    {t('contests.create.auto_save_done')}
+                  </span>
                 </div>
               </div>
             )}
@@ -114,7 +118,7 @@ export function BasicInfoSection() {
               {!isPreview ? (
                 <textarea
                   {...register('description')}
-                  placeholder={t('contests.create.basic.placeholder_intro')}
+                  placeholder={t('contests.create.basic.description_placeholder')}
                   className="w-full h-full min-h-[300px] p-6 bg-transparent text-[#EEEEF0] text-sm font-medium resize-none focus:outline-none placeholder:text-[#7A7A85] leading-relaxed"
                 />
               ) : (
@@ -122,7 +126,9 @@ export function BasicInfoSection() {
                   {description ? (
                     <ReactMarkdown>{description}</ReactMarkdown>
                   ) : (
-                    <span className="text-[#4A4A55] font-medium leading-relaxed italic">내용을 입력하면 미리보기가 생성됩니다.</span>
+                    <span className="text-[#4A4A55] font-medium leading-relaxed italic">
+                      {t('contests.create.basic.preview_empty')}
+                    </span>
                   )}
                 </div>
               )}
@@ -148,7 +154,7 @@ export function BasicInfoSection() {
           </label>
           <textarea
             {...register('precautions')}
-            placeholder={t('contests.create.basic.placeholder_precautions')}
+            placeholder={t('contests.create.basic.precautions_placeholder')}
             className="w-full min-h-[100px] rounded-xl border border-[#242428] bg-[#0C0C0F] p-4 text-sm text-[#EEEEF0] font-medium focus:outline-none focus:border-neon-mint hover:bg-[#111115] transition-all resize-none placeholder:text-[#7A7A85] leading-relaxed"
           />
         </div>
