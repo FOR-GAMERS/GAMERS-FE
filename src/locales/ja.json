@@ -40,7 +40,7 @@
       "empty": "進行中の大会がありません。",
       "contest4": "Apex Legends デュオチャレンジ",
       "contest5": "Valorant チャレンジャーズ予選",
-      "contest6": "マルチゲーム バトルロイヤル イン비테이ショナル",
+      "contest6": "マルチゲーム バトルロイヤル インビテーショナル",
       "multi_game": "マルチゲーム"
     },
     "detail": {
@@ -105,7 +105,7 @@
         "title": "大会タイトル",
         "title_placeholder": "例：Valorant 新人オープンカップ",
         "description": "大会紹介",
-        "description_placeholder": "大会ルールや詳細内容をMDX形式で入力してください。",
+        "description_placeholder": "大会ルールや詳細 내용をMDX形式で入力してください。",
         "precautions": "注意事項",
         "precautions_placeholder": "参加者が必ず確認すべき内容を入力してください。",
         "subtitle": "大会の最も基本的な情報を入力します。",
@@ -146,7 +146,7 @@
         "lol_sub": "戦略的なチームバトルMOBAゲーム",
         "valorant": {
           "tournament_desc": "トーナメント：段階別の脱落方式です。最後の1チームが優勝します。",
-          "league_desc": "リーグ：すべての対象と試合し、勝ち点によって順位が決定されます。"
+          "league_desc": "リーグ：すべての対象と試合し、勝ち点によって順위が決定されます。"
         },
         "lol": {
           "tournament_desc": "トーナメント：段階別の脱落方式です。",
@@ -167,7 +167,7 @@
         "title": "チーム構成",
         "desc": "参加チームの構成と規模を設定します。",
         "max_teams": "最大参加チーム数",
-        "max_teams_help": "最小2チームから最大128チームまで設定可能です。",
+        "max_teams_help": "最小2팀から最大128チームまで設定可能です。",
         "team_size": "チームあたりの人数",
         "team_size_help": "1チームあたりの参加人数です（補欠選手は含みません）。",
         "total_points": "ポイント合計制限",
@@ -214,7 +214,7 @@
         "tournament": "トーナメント",
         "league": "リーグ",
         "region": "地域",
-        "asia": "アジア"
+        "asia": "アシア"
       },
       "cancel": "キャンセル",
       "save_draft": "下書き保存",
@@ -266,13 +266,27 @@
       "mode": "方式",
       "teams": "参加チーム",
       "players": "総参加人数",
-      "status": "進行状態"
+      "status": "進行状態",
+      "current_round": "現在のラウンド",
+      "semi_final": "準決勝",
+      "quarter_final_done": "準々決勝完了",
+      "team_performance": "チーム成績",
+      "stats_format": "{{win}}勝 {{loss}}敗",
+      "win_rate_format": "勝率 {{rate}}% (平均 {{rounds}}R)",
+      "next_match": "次の試合",
+      "next_match_format": "vs {{opponent}}",
+      "next_match_time": "今日 {{time}} 予定",
+      "team_readiness": "チーム準備状況",
+      "readiness_format": "{{count}} / {{total}}名 準備完了",
+      "all_ready": "全員準備完了"
     },
     "recent_matches": {
       "title": "最近の試合",
       "win": "勝",
       "lose": "負",
-      "no_match": "最近の試合はありません。"
+      "no_match": "最近の試合はありません。",
+      "view_details": "詳細を見る",
+      "vs": "vs "
     },
     "nav": {
       "back_to_contest": "大会ページへ",
@@ -280,8 +294,187 @@
       "player_view": "参加者ビュー"
     },
     "notice": {
-        "title": "案内事項",
-        "desc": "大会の進行に関する案内事項です。"
+      "title": "案内事項",
+      "desc": "大会の進行に関する案内事項です。",
+      "notice_count": "{{count}}件の通知",
+      "rules_title": "大会ルール",
+      "schedule_title": "今日の日程",
+      "faq_title": "よくある質問",
+      "host_label": "ホスト: ",
+      "mock": {
+        "notices": [
+          {
+            "id": 1,
+            "title": "決勝戦の時間変更のご案内",
+            "content": "従来の20:00から21:00に変更されました。すべての選手は20:30までに待機してください。",
+            "date": "1時間前",
+            "host": "GAMERS Admin"
+          },
+          {
+            "id": 2,
+            "title": "サーバーメンテナンスのお知らせ",
+            "content": "安定した競技環境のため、午前4時から6時まで定期メンテナンスが行われます。",
+            "date": "3時間前",
+            "host": "System Manager"
+          }
+        ],
+        "rules": [
+          "すべての試合は最新のパッチバージョンで進行されます。",
+          "試合開始15分前までにロビーへの入場を完了する必要があります。",
+          "人種差別、誹謗中傷などの不正行為が発覚した場合、直ちに失格処分となります。",
+          "一時停止は各チーム1回、最大5分まで許可されます。"
+        ],
+        "schedule": [
+          {
+            "id": 1,
+            "title": "準々決勝 A組",
+            "time": "14:00",
+            "desc": "第1試合",
+            "status": "completed"
+          },
+          {
+            "id": 2,
+            "title": "準々決勝 B組",
+            "time": "15:30",
+            "desc": "第2試合",
+            "status": "completed"
+          },
+          {
+            "id": 3,
+            "title": "準決勝",
+            "time": "20:00",
+            "desc": "BO3",
+            "status": "active",
+            "badge": "LIVE"
+          },
+          {
+            "id": 4,
+            "title": "表彰式および閉幕",
+            "time": "22:00",
+            "status": "pending"
+          }
+        ],
+        "faqs": [
+          {
+            "q": "試合中にピングが高くなったらどうすればいいですか？",
+            "a": "直ちに管理者に連絡し、スタッフの指示に従ってください。"
+          },
+          {
+            "q": "交代選手は何人まで登録可能ですか？",
+            "a": "1チームにつき最大2人の控え選手を登録できます。"
+          },
+          {
+            "q": "大会賞金はいつ支払われますか？",
+            "a": "大会終了後、営業日基準で7日以内に支払われます。"
+          }
+        ]
+      }
+    },
+    "team": {
+      "current_leader": "現在のリーダー",
+      "transfer_desc": "リーダー権限を委譲できます。",
+      "me": "(自分)"
+    },
+    "ranks": {
+      "diamond": "ダイヤ {{level}}",
+      "platinum": "プラチナ {{level}}"
+    },
+    "rounds": {
+      "quarter_final": "準々決勝",
+      "group": "グループ"
+    }
+  },
+  "admin": {
+    "contest": {
+      "management": "大会管理",
+      "force_end": "大会強制終了",
+      "edit": "大会修正"
+    },
+    "member": {
+      "title": "メンバー管理",
+      "total_users": "合計 <1>{{count}}</1> 名の登録ユーザー",
+      "search_placeholder": "ニックネーム、メールアドレスで検索...",
+      "export": "エクスポート",
+      "tabs": {
+        "all": "すべて",
+        "active": "アクティブ",
+        "banned": "停止",
+        "staff": "運営陣",
+        "new": "新規 (7日)"
+      },
+      "table": {
+        "user": "ユーザー",
+        "role": "役割",
+        "status": "状態",
+        "join_date": "加入日",
+        "last_active": "最終活動",
+        "action": "アクション",
+        "role_labels": {
+          "staff": "運営陣",
+          "manager": "マネージャー",
+          "user": "一般"
+        }
+      },
+      "status": {
+        "active": "有効",
+        "banned": "停止",
+        "warning": "警告"
+      },
+      "pagination": {
+        "range": "<1>{{start}}-{{end}}</1> / {{total}}名"
+      },
+      "time": {
+        "just_now": "たった今",
+        "3_days_ago": "3日前",
+        "1_hour_ago": "1時間前",
+        "5_mins_ago": "5分前",
+        "32_mins_ago": "32分前",
+        "2_days_ago": "2日前"
+      }
+    },
+    "contest_detail": {
+      "tabs": {
+        "overview": "概要",
+        "members": "メンバー管理",
+        "applications": "申請書処理",
+        "teams": "チーム配分",
+        "brackets": "トーナメント表",
+        "notices": "お知らせ",
+        "settings": "設定"
+      },
+      "hero": {
+        "host": "主催",
+        "staff": "スタッフ",
+        "staff_count": "{{count}}名",
+        "total_participants": "総参加者",
+        "teams": "チーム",
+        "current_round": "現在のラウンド"
+      },
+      "sidebar": {
+        "quick_actions": "クイックアクション",
+        "add_participant": "参加者の直接追加",
+        "auto_team": "チーム自動配分",
+        "match_result": "試合結果の入力",
+        "export": "参加者リストの出力",
+        "status": "参加者の状況",
+        "participant_count": "{{current}} / {{max}}名",
+        "view_more": "+ {{count}}名もっと見る"
+      },
+      "overview": {
+        "round_management": "ラウンド管理",
+        "round_desc": "大会の進行段階を制御します",
+        "round_status": "Round {{round}} 進行中",
+        "round_confirm": "次ラウンド開始時に<1>現在進行中のマッチが確定</1>されます",
+        "next_round": "次のラウンドへ",
+        "pending_applications": "待機中の申請書",
+        "pending_count": "{{count}}件待機",
+        "accept": "受諾",
+        "reject": "拒絶",
+        "notices": "お知らせ",
+        "create_notice": "お知らせ作成",
+        "mock_notice_title": "第3ラウンド日程のご案内",
+        "mock_notice_content": "第3ラウンドは4月2日午後8時開始予定です。チームリーダーは必ずDiscordチャンネルを確認してください。"
+      }
     }
   },
   "landing": {
@@ -290,7 +483,7 @@
       "title": "自分だけの\n大会を完璧に。",
       "subtitle": "GAMERSは大会作成から運営、チーム募集、試合結果の管理まで、\nすべてのE-Sportsプロセスを自動化するオールインワン・プラットフォームです。",
       "primary_cta": "今すぐ始めましょう",
-      "secondary_cta": "デモを体験する"
+      "secondary_cta": "데모를 체험하기"
     },
     "problem": {
       "tag": "PAIN POINTS",

@@ -45,6 +45,7 @@ function SectionHeader({ title, icon: Icon, extra }: { title: string; icon: Reac
 }
 
 function NoticeCard({ notice }: { notice: Notice }) {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-2 p-5 rounded-xl bg-white/[0.03] border border-white/[0.05] hover:border-white/[0.1] transition-all group">
       <h3 className="text-[14px] font-bold text-[#EEEEF0] group-hover:text-neon-mint transition-colors tracking-tight">
@@ -56,7 +57,7 @@ function NoticeCard({ notice }: { notice: Notice }) {
       <div className="flex items-center gap-2 mt-1 text-[11px] font-medium text-[#3A3A45]">
         <span>{notice.date}</span>
         <span className="w-0.5 h-0.5 rounded-full bg-[#3A3A45]" />
-        <span>호스트: {notice.host}</span>
+        <span>{t('playground.notice.host_label')}{notice.host}</span>
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ export function TeamLeaderPrivilegeBar() {
         </div>
         <div className="flex flex-col">
           <span className="text-[14px] font-black text-[#EEEEF0]">{t('playground.team.leader_privilege')}</span>
-          <span className="text-[11px] text-[#5A5A65]">{t('playground.team.current_leader')}: Antigravity (나) · {t('playground.team.transfer_desc')}</span>
+          <span className="text-[11px] text-[#5A5A65]">{t('playground.team.current_leader')}: Antigravity {t('playground.team.me')} · {t('playground.team.transfer_desc')}</span>
         </div>
       </div>
 

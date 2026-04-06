@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface AdminContestHeroProps {
   title: string;
@@ -8,6 +9,8 @@ interface AdminContestHeroProps {
 }
 
 export function AdminContestHero({ title, status }: AdminContestHeroProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-[#141418] border border-white/5 rounded-3xl p-8 flex items-center justify-between glass-card relative overflow-hidden group">
       {/* Background Glow */}
@@ -33,9 +36,9 @@ export function AdminContestHero({ title, status }: AdminContestHeroProps) {
           <div className="flex items-center gap-4 text-sm font-semibold text-[#7A7A85] tracking-tight">
             <span>2025.03.10 — 2025.04.20</span>
             <span className="w-1 h-1 rounded-full bg-white/10" />
-            <span>주최: <span className="text-[#EEEEF0]">박도현 (MANAGER)</span></span>
+            <span>{t('admin.contest_detail.hero.host')}: <span className="text-[#EEEEF0]">박도현 (MANAGER)</span></span>
             <span className="w-1 h-1 rounded-full bg-white/10" />
-            <span>스태프: <span className="text-[#EEEEF0]">3명</span></span>
+            <span>{t('admin.contest_detail.hero.staff')}: <span className="text-[#EEEEF0]">{t('admin.contest_detail.hero.staff_count', { count: 3 })}</span></span>
           </div>
         </div>
       </div>
@@ -44,17 +47,17 @@ export function AdminContestHero({ title, status }: AdminContestHeroProps) {
       <div className="flex items-center gap-16 relative z-10 px-8 border-l border-white/5">
         <div className="flex flex-col items-center gap-1">
           <span className="text-4xl font-black text-white font-outfit tracking-tighter uppercase leading-none group-hover:text-neon-mint transition-colors">48</span>
-          <span className="text-[11px] font-bold text-[#7A7A85] tracking-widest uppercase opacity-60">총 참가자</span>
+          <span className="text-[11px] font-bold text-[#7A7A85] tracking-widest uppercase opacity-60">{t('admin.contest_detail.hero.total_participants')}</span>
         </div>
         
         <div className="flex flex-col items-center gap-1">
           <span className="text-4xl font-black text-white font-outfit tracking-tighter uppercase leading-none group-hover:text-neon-purple transition-colors">6</span>
-          <span className="text-[11px] font-bold text-[#7A7A85] tracking-widest uppercase opacity-60">팀</span>
+          <span className="text-[11px] font-bold text-[#7A7A85] tracking-widest uppercase opacity-60">{t('admin.contest_detail.hero.teams')}</span>
         </div>
         
         <div className="flex flex-col items-center gap-1">
           <span className="text-4xl font-black text-neon-purple font-outfit tracking-tighter uppercase leading-none drop-shadow-[0_0_15px_rgba(192,132,252,0.3)]">3R</span>
-          <span className="text-[11px] font-bold text-neon-purple tracking-widest uppercase opacity-80">현재 라운드</span>
+          <span className="text-[11px] font-bold text-neon-purple tracking-widest uppercase opacity-80">{t('admin.contest_detail.hero.current_round')}</span>
         </div>
       </div>
     </div>

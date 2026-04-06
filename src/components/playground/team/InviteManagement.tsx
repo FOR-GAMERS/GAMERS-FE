@@ -7,8 +7,8 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const PENDING_INVITES = [
-  { name: 'NightFox', rank: '다이아 2', initials: 'NX', color: 'bg-indigo-500' },
-  { name: 'Blaze', rank: '플래티넘 2', initials: 'BZ', color: 'bg-orange-500' },
+  { name: 'NightFox', rankType: 'diamond', level: 2, initials: 'NX', color: 'bg-indigo-500' },
+  { name: 'Blaze', rankType: 'platinum', level: 2, initials: 'BZ', color: 'bg-orange-500' },
 ];
 
 export function InviteManagement() {
@@ -54,7 +54,9 @@ export function InviteManagement() {
                </div>
                <div className="flex flex-col">
                  <span className="text-[13px] font-black text-[#EEEEF0] leading-none">{invite.name}</span>
-                 <span className="text-[10px] font-bold text-[#5A5A65] mt-1">{invite.rank}</span>
+                 <span className="text-[10px] font-bold text-[#5A5A65] mt-1">
+                   {t(`playground.ranks.${invite.rankType}`, { level: invite.level })}
+                 </span>
                </div>
             </div>
             <div className="flex items-center gap-2">

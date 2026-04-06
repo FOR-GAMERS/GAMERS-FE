@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { 
   Edit3, 
   MoreHorizontal, 
@@ -14,6 +14,7 @@ import {
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationEllipsis } from '@/components/ui/pagination';
+import { useTranslation, Trans } from 'react-i18next';
 
 type Role = 'STAFF' | 'USER' | 'MANAGER';
 type Status = 'ACTIVE' | 'BANNED' | 'WARNING';
@@ -39,7 +40,7 @@ const mockMembers: Member[] = [
     role: 'STAFF',
     status: 'ACTIVE',
     joinDate: '2024.08.14',
-    lastActive: '방금 전',
+    lastActive: 'just_now',
     avatarColor: 'bg-blue-600',
   },
   {
@@ -50,7 +51,7 @@ const mockMembers: Member[] = [
     role: 'USER',
     status: 'BANNED',
     joinDate: '2024.11.02',
-    lastActive: '3일 전',
+    lastActive: '3_days_ago',
     avatarColor: 'bg-gray-600',
   },
   {
@@ -61,7 +62,7 @@ const mockMembers: Member[] = [
     role: 'MANAGER',
     status: 'ACTIVE',
     joinDate: '2024.03.27',
-    lastActive: '1시간 전',
+    lastActive: '1_hour_ago',
     avatarColor: 'bg-emerald-600',
   },
   {
@@ -72,7 +73,7 @@ const mockMembers: Member[] = [
     role: 'USER',
     status: 'ACTIVE',
     joinDate: '2025.01.09',
-    lastActive: '5분 전',
+    lastActive: '5_mins_ago',
     avatarColor: 'bg-orange-600',
   },
   {
@@ -83,7 +84,7 @@ const mockMembers: Member[] = [
     role: 'STAFF',
     status: 'ACTIVE',
     joinDate: '2024.06.18',
-    lastActive: '32분 전',
+    lastActive: '32_mins_ago',
     avatarColor: 'bg-indigo-600',
   },
   {
@@ -94,22 +95,23 @@ const mockMembers: Member[] = [
     role: 'USER',
     status: 'WARNING',
     joinDate: '2025.02.14',
-    lastActive: '2일 전',
+    lastActive: '2_days_ago',
     avatarColor: 'bg-slate-600',
   },
 ];
 
-const tabs = [
-  { id: 'all', label: '전체' },
-  { id: 'active', label: '활성' },
-  { id: 'banned', label: '정지' },
-  { id: 'staff', label: '운영진' },
-  { id: 'new', label: '신규 (7일)' },
-];
-
 export function MemberTable() {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('all');
   const [selectedMembers, setSelectedMembers] = useState<string[]>([]);
+
+  const tabs = useMemo(() => [
+    { id: 'all', label: t('admin.member.tabs.all') },
+    { id: 'active', label: t('admin.member.tabs.active') },
+    { id: 'banned', label: t('admin.member.tabs.banned') },
+    { id: 'staff', label: t('admin.member.tabs.staff') },
+    { id: 'new', label: t('admin.member.tabs.new') },
+  ], [t]);
 
   const toggleSelectAll = () => {
     if (selectedMembers.length === mockMembers.length) {
@@ -130,19 +132,19 @@ export function MemberTable() {
       case 'STAFF':
         return (
           <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-neon-purple/10 text-neon-purple border border-neon-purple/20">
-            STAFF
+            {t('admin.member.table.role_labels.staff')}
           </span>
         );
       case 'MANAGER':
         return (
           <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-neon-amber/10 text-neon-amber border border-neon-amber/20">
-            MANAGER
+            {t('admin.member.table.role_labels.manager')}
           </span>
         );
       default:
         return (
           <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-white/5 text-[#7A7A85] border border-white/10">
-            USER
+            {t('admin.member.table.role_labels.user')}
           </span>
         );
     }
@@ -154,21 +156,21 @@ export function MemberTable() {
         return (
           <div className="flex items-center gap-1.5">
             <div className="w-1.5 h-1.5 rounded-full bg-neon-mint shadow-[0_0_8px_rgba(0,212,122,0.4)]" />
-            <span className="text-sm font-semibold text-neon-mint tracking-tight">활성</span>
+            <span className="text-sm font-semibold text-neon-mint tracking-tight">{t('admin.member.status.active')}</span>
           </div>
         );
       case 'BANNED':
         return (
           <div className="flex items-center gap-1.5">
             <div className="w-1.5 h-1.5 rounded-full bg-neon-red shadow-[0_0_8px_rgba(224,92,92,0.4)]" />
-            <span className="text-sm font-semibold text-neon-red tracking-tight">정지</span>
+            <span className="text-sm font-semibold text-neon-red tracking-tight">{t('admin.member.status.banned')}</span>
           </div>
         );
       case 'WARNING':
         return (
           <div className="flex items-center gap-1.5">
             <div className="w-1.5 h-1.5 rounded-full bg-neon-amber shadow-[0_0_8px_rgba(255,183,0,0.4)]" />
-            <span className="text-sm font-semibold text-neon-amber tracking-tight">경고</span>
+            <span className="text-sm font-semibold text-neon-amber tracking-tight">{t('admin.member.status.warning')}</span>
           </div>
         );
     }
@@ -210,12 +212,12 @@ export function MemberTable() {
                   className="w-4 h-4 rounded border-white/10 bg-white/5 text-neon-cyan focus:ring-neon-cyan/30"
                 />
               </th>
-              <th className="px-6 py-5 text-xs font-bold text-[#7A7A85] uppercase tracking-widest">사용자</th>
-              <th className="px-6 py-5 text-xs font-bold text-[#7A7A85] uppercase tracking-widest">역할</th>
-              <th className="px-6 py-5 text-xs font-bold text-[#7A7A85] uppercase tracking-widest">상태</th>
-              <th className="px-6 py-5 text-xs font-bold text-[#7A7A85] uppercase tracking-widest">가입일</th>
-              <th className="px-6 py-5 text-xs font-bold text-[#7A7A85] uppercase tracking-widest">마지막 활동</th>
-              <th className="px-6 py-5 text-xs font-bold text-[#7A7A85] uppercase tracking-widest text-right">액션</th>
+              <th className="px-6 py-5 text-xs font-bold text-[#7A7A85] uppercase tracking-widest">{t('admin.member.table.user')}</th>
+              <th className="px-6 py-5 text-xs font-bold text-[#7A7A85] uppercase tracking-widest">{t('admin.member.table.role')}</th>
+              <th className="px-6 py-5 text-xs font-bold text-[#7A7A85] uppercase tracking-widest">{t('admin.member.table.status')}</th>
+              <th className="px-6 py-5 text-xs font-bold text-[#7A7A85] uppercase tracking-widest">{t('admin.member.table.join_date')}</th>
+              <th className="px-6 py-5 text-xs font-bold text-[#7A7A85] uppercase tracking-widest">{t('admin.member.table.last_active')}</th>
+              <th className="px-6 py-5 text-xs font-bold text-[#7A7A85] uppercase tracking-widest text-right">{t('admin.member.table.action')}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-white/5">
@@ -260,7 +262,7 @@ export function MemberTable() {
                   <span className="text-sm font-semibold text-[#7A7A85] tracking-tight">{member.joinDate}</span>
                 </td>
                 <td className="px-6 py-4">
-                  <span className="text-sm font-semibold text-[#7A7A85] tracking-tight">{member.lastActive}</span>
+                  <span className="text-sm font-semibold text-[#7A7A85] tracking-tight">{t(`admin.member.time.${member.lastActive}`, { defaultValue: member.lastActive })}</span>
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center justify-end gap-2">
@@ -281,7 +283,10 @@ export function MemberTable() {
       {/* Pagination */}
       <div className="flex items-center justify-between mt-4">
         <p className="text-[#7A7A85] text-xs font-semibold tracking-tight">
-          6-10 / 2,841명
+          <Trans 
+            i18nKey="admin.member.pagination.range" 
+            values={{ start: 6, end: 10, total: '2,841' }}
+          />
         </p>
         <Pagination className="justify-end w-auto mx-0">
           <PaginationContent className="gap-2">

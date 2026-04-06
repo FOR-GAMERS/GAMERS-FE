@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 interface AdminContestTabsProps {
   activeTab: string;
@@ -9,16 +10,18 @@ interface AdminContestTabsProps {
 }
 
 const tabs = [
-  { id: 'overview', label: '개요' },
-  { id: 'members', label: '멤버 관리' },
-  { id: 'applications', label: '신청서 처리', badge: 7 },
-  { id: 'teams', label: '팀 배분' },
-  { id: 'brackets', label: '대진표' },
-  { id: 'notices', label: '안내사항' },
-  { id: 'settings', label: '설정' },
+  { id: 'overview' },
+  { id: 'members' },
+  { id: 'applications', badge: 7 },
+  { id: 'teams' },
+  { id: 'brackets' },
+  { id: 'notices' },
+  { id: 'settings' },
 ];
 
 export function AdminContestTabs({ activeTab, onTabChange }: AdminContestTabsProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="flex items-center gap-1 border-b border-white/5 py-4 relative z-20">
       {tabs.map((tab) => (
@@ -32,7 +35,7 @@ export function AdminContestTabs({ activeTab, onTabChange }: AdminContestTabsPro
               : "text-[#7A7A85] hover:text-white"
           )}
         >
-          {tab.label}
+          {t(`admin.contest_detail.tabs.${tab.id}`)}
           {tab.badge && (
             <span className={cn(
               "px-1.5 py-0.5 rounded-md text-[10px] font-black tracking-tighter opacity-100",

@@ -267,13 +267,27 @@
       "mode": "방식",
       "teams": "참가 팀",
       "players": "총 참가 인원",
-      "status": "진행 상태"
+      "status": "진행 상태",
+      "current_round": "현재 라운드",
+      "semi_final": "준결승",
+      "quarter_final_done": "8강 완료",
+      "team_performance": "팀 성적",
+      "stats_format": "{{win}}승 {{loss}}패",
+      "win_rate_format": "승률 {{rate}}% (평균 {{rounds}}R)",
+      "next_match": "다음 경기",
+      "next_match_format": "vs {{opponent}}",
+      "next_match_time": "오늘 {{time}} 예정",
+      "team_readiness": "팀 준비 상태",
+      "readiness_format": "{{count}} / {{total}}명 준비 완료",
+      "all_ready": "모두 준비됨"
     },
     "recent_matches": {
       "title": "최근 경기",
       "win": "승",
       "lose": "패",
-      "no_match": "최근 경기 기록이 없습니다."
+      "no_match": "최근 경기 기록이 없습니다.",
+      "view_details": "상세 보기",
+      "vs": "vs "
     },
     "nav": {
       "back_to_contest": "대회 페이지로",
@@ -282,7 +296,141 @@
     },
     "notice": {
         "title": "안내사항",
-        "desc": "대회 진행 및 운영 관련 안내사항입니다."
+        "desc": "대회 진행 및 운영 관련 안내사항입니다.",
+        "notice_count": "{{count}}개의 공지",
+        "rules_title": "대회 규칙",
+        "schedule_title": "오늘의 일정",
+        "faq_title": "자주 묻는 질문",
+        "host_label": "호스트: ",
+        "mock": {
+          "notices": [
+            { "id": 1, "title": "결승전 시간 변경 안내", "content": "기존 20:00에서 21:00로 변경되었습니다. 모든 선수들은 20:30까지 대기해주세요.", "date": "1시간 전", "host": "GAMERS Admin" },
+            { "id": 2, "title": "서버 점검 공지", "content": "안정적인 경기 환경을 위해 오전 4시부터 6시까지 정기 점검이 진행됩니다.", "date": "3시간 전", "host": "System Manager" }
+          ],
+          "rules": [
+            "모든 경기는 최신 패치 버전으로 진행됩니다.",
+            "경기 시작 15분 전까지 로비 입장을 완료해야 합니다.",
+            "인종차별, 비하 발언 등 부정행위 적발 시 즉시 실격 처리됩니다.",
+            "일시 중지는 각 팀당 1회, 최대 5분까지 허용됩니다."
+          ],
+          "schedule": [
+            { "id": 1, "title": "8강 A조 경기", "time": "14:00", "desc": "1경기", "status": "completed" },
+            { "id": 2, "title": "8강 B조 경기", "time": "15:30", "desc": "2경기", "status": "completed" },
+            { "id": 3, "title": "준결승전", "time": "20:00", "desc": "BO3", "status": "active", "badge": "LIVE" },
+            { "id": 4, "title": "시상식 및 폐막", "time": "22:00", "status": "pending" }
+          ],
+          "faqs": [
+            { "q": "경기 중 핑이 높으면 어떻게 하나요?", "a": "즉시 관리자에게 알리고 스태프의 지시에 따르시기 바랍니다." },
+            { "q": "팀 교체 선수는 몇 명까지 가능한가요?", "a": "한 팀당 최대 2명의 후보 선수를 등록할 수 있습니다." },
+            { "q": "대회 상금은 언제 지급되나요?", "a": "대회 종료 후 영업일 기준 7일 이내에 지급됩니다." }
+          ]
+        }
+    },
+    "rounds": {
+      "quarter_final": "8강",
+      "group": "그룹"
+    },
+    "team": {
+        "current_leader": "현재 리더",
+        "transfer_desc": "리더 권한을 위임할 수 있습니다.",
+        "me": "(나)"
+    },
+    "ranks": {
+        "diamond": "다이아 {{level}}",
+        "platinum": "플래티넘 {{level}}"
+    }
+  },
+  "admin": {
+    "contest": {
+      "management": "대회 관리",
+      "force_end": "대회 강제 종료",
+      "edit": "대회 수정"
+    },
+    "member": {
+      "title": "멤버 관리",
+      "total_users": "총 <1>{{count}}</1>명의 등록된 사용자",
+      "search_placeholder": "닉네임, 이메일 검색...",
+      "export": "내보내기",
+      "tabs": {
+        "all": "전체",
+        "active": "활성",
+        "banned": "정지",
+        "staff": "운영진",
+        "new": "신규 (7일)"
+      },
+      "table": {
+        "user": "사용자",
+        "role": "역할",
+        "status": "상태",
+        "join_date": "가입일",
+        "last_active": "마지막 활동",
+        "action": "액션",
+        "role_labels": {
+          "staff": "운영진",
+          "manager": "매니저",
+          "user": "일반"
+        }
+      },
+      "status": {
+        "active": "활성",
+        "banned": "정지",
+        "warning": "경고"
+      },
+      "pagination": {
+        "range": "<1>{{start}}-{{end}}</1> / {{total}}명"
+      },
+      "time": {
+        "just_now": "방금 전",
+        "3_days_ago": "3일 전",
+        "1_hour_ago": "1시간 전",
+        "5_mins_ago": "5분 전",
+        "32_mins_ago": "32분 전",
+        "2_days_ago": "2일 전"
+      }
+    },
+    "contest_detail": {
+      "tabs": {
+        "overview": "개요",
+        "members": "멤버 관리",
+        "applications": "신청서 처리",
+        "teams": "팀 배분",
+        "brackets": "대진표",
+        "notices": "안내사항",
+        "settings": "설정"
+      },
+      "hero": {
+        "host": "주최",
+        "staff": "스태프",
+        "staff_count": "{{count}}명",
+        "total_participants": "총 참가자",
+        "teams": "팀",
+        "current_round": "현재 라운드"
+      },
+      "sidebar": {
+        "quick_actions": "빠른 액션",
+        "add_participant": "참가자 직접 추가",
+        "auto_team": "팀 자동 배분",
+        "match_result": "경기 결과 입력",
+        "export": "참가자 명단 내보내기",
+        "status": "참가자 현황",
+        "participant_count": "{{current}} / {{max}}명",
+        "view_more": "+ {{count}}명 더 보기"
+      },
+      "overview": {
+        "round_management": "라운드 관리",
+        "round_desc": "대회 진행 단계를 제어합니다",
+        "round_status": "Round {{round}} 진행 중",
+        "round_confirm": "다음 라운드 시작 시 <1>현재 진행 중인 매치가 확정</1>됩니다",
+        "next_round": "다음 라운드로",
+        "pending_applications": "대기 중인 신청서",
+        "pending_count": "{{count}}건 대기",
+        "accept": "수락",
+        "reject": "거절",
+        "notices": "공지사항",
+        "create_notice": "공지 작성",
+        "mock_notice_title": "3라운드 일정 안내",
+        "mock_notice_content": "3라운드는 4월 2일 오후 8시 시작 예정입니다. 팀장은 반드시 디스코드 채널을 확인해주세요."
+      }
     }
   },
   "landing": {

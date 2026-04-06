@@ -37,7 +37,7 @@ export function PlaygroundRecentMatches() {
               </div>
               <div className="flex flex-col">
                 <span className="text-[15px] font-black text-[#EEEEF0] leading-none mb-1">
-                  vs {match.opponent}
+                  {t('playground.recent_matches.vs')}{match.opponent}
                 </span>
                 <span className="text-[11px] font-bold text-[#5A5A65] tracking-tight uppercase tracking-[0.1em]">
                   {match.map} · {match.date}
