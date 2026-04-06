@@ -20,7 +20,7 @@ export function ContestsListContent() {
       id: 1,
       game: 'Valorant',
       status: 'OPEN' as const,
-      title: t('contests.mock.contest1'),
+      title: t('contests.list.mock.contest1'),
       creator: 'GMS_Creator',
       date: '2026-04-05',
       prize: '₩500,000',
@@ -32,7 +32,7 @@ export function ContestsListContent() {
       id: 2,
       game: 'LoL',
       status: 'LIVE' as const,
-      title: t('contests.mock.contest2'),
+      title: t('contests.list.mock.contest2'),
       creator: 'LOL_Official',
       date: '2026-03-27',
       prize: '₩200,000',
@@ -44,7 +44,7 @@ export function ContestsListContent() {
       id: 3,
       game: 'CS2',
       status: 'UPCOMING' as const,
-      title: t('contests.mock.contest3'),
+      title: t('contests.list.mock.contest3'),
       creator: 'KR_Gaming',
       date: '2026-04-12',
       prize: '₩1,000,000',
@@ -56,7 +56,7 @@ export function ContestsListContent() {
       id: 4,
       game: 'Apex',
       status: 'OPEN' as const,
-      title: t('contests.mock.contest4'),
+      title: t('contests.list.mock.contest4'),
       creator: 'ApexKR',
       date: '2026-04-10',
       prize: '₩150,000',
@@ -68,7 +68,7 @@ export function ContestsListContent() {
       id: 5,
       game: 'Valorant',
       status: 'UPCOMING' as const,
-      title: t('contests.mock.contest5'),
+      title: t('contests.list.mock.contest5'),
       creator: 'VCT_KR',
       date: '2026-04-20',
       prize: '₩3,000,000',
@@ -78,9 +78,9 @@ export function ContestsListContent() {
     },
     {
       id: 6,
-      game: t('contests.mock.multi_game'),
+      game: t('contests.list.mock.multi_game'),
       status: 'OPEN' as const,
-      title: t('contests.mock.contest6'),
+      title: t('contests.list.mock.contest6'),
       creator: 'GMS_Creator',
       date: '2026-04-08',
       prize: '₩750,000',
@@ -91,10 +91,10 @@ export function ContestsListContent() {
   ];
 
   const STATUSES = [
-    { key: 'All', label: t('contests.filter_all') },
-    { key: 'ONGOING', label: t('contests.filter_ongoing') },
-    { key: 'UPCOMING', label: t('contests.filter_upcoming') },
-    { key: 'COMPLETED', label: t('contests.filter_completed') },
+    { key: 'All', label: t('contests.list.filters.all') },
+    { key: 'ONGOING', label: t('contests.list.filters.ongoing') },
+    { key: 'UPCOMING', label: t('contests.list.filters.recruiting') },
+    { key: 'COMPLETED', label: t('contests.list.filters.finished') },
   ];
 
   return (
@@ -115,7 +115,7 @@ export function ContestsListContent() {
                     : "text-[#7A7A85] hover:text-[#EEEEF0]"
                 )}
               >
-                {game === 'All' ? t('contests.filter_all') : game}
+                {game === 'All' ? t('contests.list.filters.all') : game}
               </button>
             ))}
           </div>
@@ -144,14 +144,14 @@ export function ContestsListContent() {
 
           {/* Sort Dropdown */}
           <div className="flex items-center gap-2 rounded-xl bg-[#141418] px-5 py-2.5 border border-white/5 cursor-pointer hover:bg-[#1C1C21] transition-all group shadow-lg">
-            <span className="text-[13px] font-bold text-[#EEEEF0]">{t('contests.sort_recent')}</span>
+            <span className="text-[13px] font-bold text-[#EEEEF0]">{t('contests.list.sort.recent')}</span>
             <ChevronDown className="h-4 w-4 text-[#7A7A85] group-hover:text-neon-mint transition-colors" />
           </div>
 
           {/* Result Count */}
           <div className="ml-auto flex items-center gap-2">
             <span className="text-[13px] font-medium text-[#7A7A85]">
-              <span className="text-neon-mint font-bold">{MOCK_CONTESTS.length}</span>{t('common.count_suffix')}
+              <span className="text-neon-mint font-bold">{MOCK_CONTESTS.length}</span>{t('common.count_suffix', {defaultValue: '건'})}
             </span>
           </div>
         </div>
@@ -177,10 +177,10 @@ export function ContestsListContent() {
         
         <div className="flex flex-col gap-2 relative z-10 mb-8 md:mb-0">
           <h2 className="font-barlow text-3xl font-black italic tracking-tight text-[#EEEEF0] md:text-4xl">
-            {t('contests.cta_title')}
+            {t('contests.list.cta.title')}
           </h2>
           <p className="text-[#7A7A85] font-medium">
-            {t('contests.cta_subtitle')}
+            {t('contests.list.cta.subtitle')}
           </p>
         </div>
 
@@ -190,7 +190,7 @@ export function ContestsListContent() {
             size="xl"
             className="group flex items-center gap-3 bg-transparent border-2 border-neon-mint text-neon-mint hover:bg-neon-mint hover:text-black transition-all duration-300 shadow-none h-14"
           >
-            {t('contests.cta_button')}
+            {t('contests.list.cta.button')}
             <PlusCircle className="h-5 w-5 transition-transform group-hover:rotate-90" />
           </Button>
         </motion.div>

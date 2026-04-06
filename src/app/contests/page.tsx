@@ -23,10 +23,10 @@ export default function ContestsPage() {
             className="flex flex-col md:flex-row md:items-baseline gap-6"
           >
             <h1 className="font-barlow text-6xl font-black italic tracking-tighter text-[#EEEEF0] md:text-8xl">
-              {t('contests.list_hero_title')}
+              {t('contests.list.title')}
             </h1>
             <p className="font-inter text-lg text-[#7A7A85] md:text-xl font-medium">
-              {t('contests.list_hero_subtitle')}
+              {t('contests.list.subtitle')}
             </p>
           </motion.div>
         </div>

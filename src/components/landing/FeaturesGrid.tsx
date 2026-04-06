@@ -36,7 +36,7 @@ export function FeaturesGrid() {
             viewport={{ once: true }}
             className="text-xs font-bold uppercase tracking-widest text-neon-mint"
           >
-            {t('features.tag')}
+            {t('landing.features.tag')}
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
@@ -45,7 +45,7 @@ export function FeaturesGrid() {
             transition={{ delay: 0.1 }}
             className="mt-4 font-barlow text-4xl font-black italic tracking-tight sm:text-5xl md:text-6xl"
           >
-            {t('features.title')}
+            {t('landing.features.title')}
           </motion.h2>
         </div>
 
@@ -63,10 +63,10 @@ export function FeaturesGrid() {
                 <feature.icon className="h-6 w-6" />
               </div>
               <h3 className="mb-3 text-lg font-bold tracking-tight text-foreground">
-                {t(`features.${feature.key}.title`)}
+                {t(`landing.features.${feature.key}.title`)}
               </h3>
               <p className="text-sm leading-relaxed text-muted-gray">
-                {t(`features.${feature.key}.description`)}
+                {t(`landing.features.${feature.key}.description`)}
               </p>
             </motion.div>
           ))}

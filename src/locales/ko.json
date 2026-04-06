@@ -37,11 +37,31 @@
         "ongoing": "진행 중",
         "finished": "종료"
       },
+      "sort": {
+        "recent": "최신순",
+        "popular": "인기순"
+      },
+      "cta": {
+        "title": "직접 대회를 개최해보세요",
+        "subtitle": "GAMERS의 강력한 운영 도구와 함께 당신만의 토너먼트를 시작하세요.",
+        "button": "대회 만들기"
+      },
       "empty": "진행 중인 대회가 없습니다.",
-      "contest4": "Apex Legends 듀오 챌린지",
-      "contest5": "발로란트 챌린저스 예선",
-      "contest6": "멀티 게임 배틀로얄 인비테이셔널",
-      "multi_game": "멀티 게임"
+      "mock": {
+        "contest1": "발로란트 커뮤니티 오픈컵",
+        "contest2": "LoL 아카데미 리그 시즌 4",
+        "contest3": "CS2 한일 교류전",
+        "contest4": "Apex Legends 듀오 챌린지",
+        "contest5": "발로란트 챌린저스 예선",
+        "contest6": "멀티 게임 배틀로얄 인비테이셔널",
+        "multi_game": "멀티 게임"
+      }
+    },
+    "card": {
+      "prize": "상금",
+      "participants": "참가자",
+      "apply": "신청하기",
+      "status_closed": "신청 마감"
     },
     "detail": {
       "tabs": {
@@ -77,8 +97,10 @@
         "DRAFT": "초안",
         "UPCOMING": "예정",
         "RECRUITING": "모집 중",
+        "OPEN": "모집 중",
         "CLOSED": "마감",
         "ACTIVE": "진행 중",
+        "LIVE": "진행 중",
         "COMPLETED": "종료",
         "CANCELLED": "취소"
       }

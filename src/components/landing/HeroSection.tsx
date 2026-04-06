@@ -22,7 +22,7 @@ export function HeroSection() {
       >
         <div className="h-1.5 w-1.5 rounded-full bg-neon-mint animate-pulse" />
         <span className="text-xs font-medium text-muted-gray tracking-wide uppercase">
-          {t('hero.tag')}
+          {t('landing.hero.tag')}
         </span>
       </motion.div>
 
@@ -33,8 +33,8 @@ export function HeroSection() {
         className="text-center"
       >
         <h1 className="font-barlow text-6xl font-[900] leading-[1.1] tracking-tighter sm:text-8xl md:text-9xl uppercase italic">
-          <span className="text-foreground block">{t('hero.title_1')}</span>
-          <span className="text-neon-mint text-glow-mint block">{t('hero.title_2')}</span>
+          <span className="text-foreground block">{t('landing.hero.title_1')}</span>
+          <span className="text-neon-mint text-glow-mint block">{t('landing.hero.title_2')}</span>
         </h1>
       </motion.div>
 
@@ -44,7 +44,7 @@ export function HeroSection() {
         transition={{ duration: 0.6, delay: 0.4 }}
         className="mt-8 max-w-[620px] text-center text-lg leading-relaxed text-muted-gray md:text-xl whitespace-pre-line"
       >
-        {t('hero.subtitle')}
+        {t('landing.hero.subtitle')}
       </motion.p>
 
       <motion.div
@@ -55,11 +55,11 @@ export function HeroSection() {
       >
         <Button variant="neon" size="xl" className="group">
           <Trophy className="mr-2 h-5 w-5" />
-          {t('hero.cta_join')}
+          {t('landing.hero.cta_join')}
           <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
         </Button>
         <Button variant="outline" size="xl" className="border-white/10 text-foreground hover:bg-white/5">
-          {t('hero.cta_create')}
+          {t('landing.hero.cta_create')}
         </Button>
       </motion.div>
       

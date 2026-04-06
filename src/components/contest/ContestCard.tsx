@@ -85,7 +85,7 @@ export function ContestCard({
           )}>
             <div className={cn("h-1.5 w-1.5 rounded-full animate-pulse", statusStyle.dot)} />
             <span className={cn("font-barlow text-[11px] font-black tracking-widest", statusStyle.text)}>
-              {t(`contests.status.${status}`)}
+              {t(`contests.detail.status.${status}`)}
             </span>
           </div>
         </div>
@@ -107,11 +107,11 @@ export function ContestCard({
         {/* Stats */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex flex-col gap-0.5">
-            <span className="text-[11px] font-bold uppercase tracking-widest text-[#7A7A85]">{t('contests.card_prize')}</span>
+            <span className="text-[11px] font-bold uppercase tracking-widest text-[#7A7A85]">{t('contests.card.prize')}</span>
             <span className="font-barlow text-2xl font-bold text-[#EEEEF0]">{prize}</span>
           </div>
           <div className="flex flex-col items-end gap-0.5">
-            <span className="text-[11px] font-bold uppercase tracking-widest text-[#7A7A85]">{t('contests.card_participants')}</span>
+            <span className="text-[11px] font-bold uppercase tracking-widest text-[#7A7A85]">{t('contests.card.participants')}</span>
             <span className="font-barlow text-2xl font-bold text-[#EEEEF0]">
               {participants} / {maxParticipants}
             </span>
@@ -141,7 +141,7 @@ export function ContestCard({
               : "bg-neon-mint text-deep-black group-hover:bg-neon-mint/90 active:scale-[0.98] shadow-[0_0_20px_rgba(110,231,183,0.2)]"
           )}
         >
-          {status === 'CLOSED' || status === 'LIVE' ? t('contests.card_status_closed') : t('contests.card_apply')}
+          {status === 'CLOSED' || status === 'LIVE' ? t('contests.card.status_closed') : t('contests.card.apply')}
         </div>
       </motion.div>
     </Link>

@@ -38,7 +38,7 @@ export function ProblemSection() {
             viewport={{ once: true }}
             className="text-xs font-bold uppercase tracking-widest text-neon-mint"
           >
-            {t('problem.tag')}
+            {t('landing.problem.tag')}
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
@@ -47,7 +47,7 @@ export function ProblemSection() {
             transition={{ delay: 0.1 }}
             className="mt-4 font-barlow text-4xl font-black italic tracking-tight sm:text-5xl md:text-6xl"
           >
-            {t('problem.title')}
+            {t('landing.problem.title')}
           </motion.h2>
         </div>
 
@@ -65,10 +65,10 @@ export function ProblemSection() {
                 <problem.icon className={`h-6 w-6 ${problem.color}`} />
               </div>
               <h3 className="mb-3 text-xl font-bold tracking-tight text-foreground">
-                {t(`problem.${problem.key}.title`)}
+                {t(`landing.problem.${problem.key}.title`)}
               </h3>
               <p className="text-sm leading-relaxed text-muted-gray">
-                {t(`problem.${problem.key}.description`)}
+                {t(`landing.problem.${problem.key}.description`)}
               </p>
             </motion.div>
           ))}

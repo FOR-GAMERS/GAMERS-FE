@@ -46,6 +46,7 @@ export function Footer() {
                 width={120}
                 height={32}
                 className="h-8 w-auto object-contain brightness-110"
+                priority
               />
             </Link>
             <p className="text-sm whitespace-pre-line leading-relaxed text-muted-gray">

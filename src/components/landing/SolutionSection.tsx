@@ -35,7 +35,7 @@ export function SolutionSection() {
             viewport={{ once: true }}
             className="text-xs font-bold uppercase tracking-widest text-neon-mint"
           >
-            {t('solution.tag')}
+            {t('landing.solution.tag')}
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
@@ -44,7 +44,7 @@ export function SolutionSection() {
             transition={{ delay: 0.1 }}
             className="mt-4 font-barlow text-4xl font-black italic tracking-tight sm:text-5xl md:text-6xl"
           >
-            {t('solution.title')}
+            {t('landing.solution.title')}
           </motion.h2>
         </div>
 
@@ -69,10 +69,10 @@ export function SolutionSection() {
               </div>
               <div className="flex-1 space-y-4 text-center md:w-1/2 md:text-left">
                 <h3 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-                  {t(`solution.${sol.key}.title`)}
+                  {t(`landing.solution.${sol.key}.title`)}
                 </h3>
                 <p className="max-w-[420px] text-lg leading-relaxed text-muted-gray mx-auto md:mx-0">
-                  {t(`solution.${sol.key}.description`)}
+                  {t(`landing.solution.${sol.key}.description`)}
                 </p>
               </div>
             </motion.div>

@@ -21,7 +21,7 @@ export function CTASection() {
            className="mb-8 inline-flex items-center gap-2 rounded-full border border-neon-mint/20 bg-neon-mint/5 py-1 px-4 text-xs font-bold uppercase tracking-widest text-neon-mint"
         >
           <Sparkles className="h-3 w-3" />
-          {t('cta.tag')}
+          {t('landing.cta.tag')}
         </motion.div>
 
         <motion.h2
@@ -31,7 +31,7 @@ export function CTASection() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="font-barlow text-5xl font-black italic tracking-tighter sm:text-6xl md:text-8xl lg:text-9xl uppercase"
         >
-          {t('cta.title')}
+          {t('landing.cta.title')}
         </motion.h2>
 
         <motion.p
@@ -41,7 +41,7 @@ export function CTASection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-8 text-lg font-medium text-muted-gray md:text-xl"
         >
-          {t('cta.subtitle')}
+          {t('landing.cta.subtitle')}
         </motion.p>
 
         <motion.div
@@ -52,7 +52,7 @@ export function CTASection() {
           className="mt-12"
         >
           <Button variant="neon" size="xl" className="h-16 px-12 text-lg shadow-[0_0_40px_rgba(110,231,183,0.3)]">
-            {t('cta.button')}
+            {t('landing.cta.button')}
           </Button>
         </motion.div>
       </div>

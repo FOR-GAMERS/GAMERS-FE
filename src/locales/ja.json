@@ -37,11 +37,31 @@
         "ongoing": "進行中",
         "finished": "終了"
       },
+      "sort": {
+        "recent": "最新順",
+        "popular": "人気順"
+      },
+      "cta": {
+        "title": "自分で大会を開催してみましょう",
+        "subtitle": "GAMERSの強力な運営ツールと一緒に、自分だけのトーナメントを始めてください。",
+        "button": "大会を作成する"
+      },
       "empty": "進行中の大会がありません。",
-      "contest4": "Apex Legends デュオチャレンジ",
-      "contest5": "Valorant チャレンジャーズ予選",
-      "contest6": "マルチゲーム バトルロイヤル インビテーショナル",
-      "multi_game": "マルチゲーム"
+      "mock": {
+        "contest1": "VALORANTコミュニティオープンカップ",
+        "contest2": "LoLアカデミーリーグ シーズン4",
+        "contest3": "CS2日韓交流戦",
+        "contest4": "Apex Legends デュオチャレンジ",
+        "contest5": "Valorant チャレンジャーズ予選",
+        "contest6": "マルチゲーム バトルロイヤル インビテーショナル",
+        "multi_game": "マルチゲーム"
+      }
+    },
+    "card": {
+      "prize": "賞金",
+      "participants": "参加者",
+      "apply": "申し込む",
+      "status_closed": "募集終了"
     },
     "detail": {
       "tabs": {
@@ -77,8 +97,10 @@
         "DRAFT": "下書き",
         "UPCOMING": "予定",
         "RECRUITING": "募集中",
+        "OPEN": "募集中",
         "CLOSED": "締め切り",
         "ACTIVE": "進行中",
+        "LIVE": "進行中",
         "COMPLETED": "終了",
         "CANCELLED": "キャンセル"
       }
