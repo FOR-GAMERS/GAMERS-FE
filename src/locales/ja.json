@@ -1,492 +1,447 @@
 {
   "common": {
-    "loading": "隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ...",
-    "error": "繧ｨ繝ｩ繝ｼ縺檎匱逕溘＠縺ｾ縺励◆",
-    "save": "菫晏ｭ�",
-    "cancel": "繧ｭ繝｣繝ｳ繧ｻ繝ｫ",
-    "delete": "蜑企勁",
-    "edit": "邱ｨ髮�",
-    "confirm": "遒ｺ隱�",
-    "back": "謌ｻ繧�",
-    "next": "谺｡縺ｸ",
-    "finish": "螳御ｺ�",
-    "submit": "謠仙�",
-    "search": "讀懃ｴ｢",
-    "filter": "繝輔ぅ繝ｫ繧ｿ繝ｼ",
-    "sort": "謨ｴ蛻�",
-    "winning": "蜆ｪ蜍�",
-    "runner_up": "貅門━蜍�",
-    "count_suffix": "莉ｶ",
-    "view_all": "縺吶∋縺ｦ陦ｨ遉ｺ",
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "edit": "編集",
+    "confirm": "確認",
+    "back": "戻る",
+    "next": "次へ",
+    "finish": "完了",
+    "submit": "提出",
+    "search": "検索",
+    "filter": "フィルター",
+    "sort": "整列",
+    "winning": "優勝",
+    "runner_up": "準優勝",
+    "count_suffix": "件",
+    "view_all": "すべて表示",
     "games": {
       "valorant": "Valorant",
       "lol": "LoL"
     }
   },
   "navbar": {
-    "find_contests": "螟ｧ莨壹ｒ謗｢縺�",
-    "my_contests": "閾ｪ蛻��螟ｧ莨�",
-    "community": "繧ｳ繝溘Η繝九ユ繧｣",
-    "login": "繝ｭ繧ｰ繧､繝ｳ",
-    "get_started": "蟋九ａ繧�",
-    "language": "險隱櫁ｨｭ螳�"
+    "find_contests": "大会を探す",
+    "my_contests": "自分の大会",
+    "community": "コミュニティ",
+    "login": "ログイン",
+    "get_started": "始める",
+    "language": "言語設定"
   },
   "footer": {
-    "product": "陬ｽ蜩�",
-    "company": "莨夂､ｾ",
-    "legal": "豕慕噪騾夂衍",
-    "find_contests": "螟ｧ莨壹ｒ謗｢縺�",
-    "create_contest": "螟ｧ莨壹ｒ髢句ぎ",
-    "community": "繧ｳ繝溘Η繝九ユ繧｣",
-    "about": "邏ｹ莉�",
-    "blog": "繝悶Ο繧ｰ",
-    "jobs": "謗｡逕ｨ",
-    "terms": "蛻ｩ逕ｨ隕冗ｴ�",
-    "privacy": "繝励Λ繧､繝舌す繝ｼ繝昴Μ繧ｷ繝ｼ",
-    "description": "蝗ｽ蜀�怙螟ｧ邏壹�繝ｪ繧｢繝ｫ繧ｿ繧､繝�E-Sports繝医�繝翫Γ繝ｳ繝磯°逕ｨ繝励Λ繝�ヨ繝輔か繝ｼ繝�\n縺吶∋縺ｦ縺ｮ繧ｲ繝ｼ繝槭�縺ｮ縺溘ａ縺ｮ繧､繝ｳ繝輔Λ縲；AMERS縲�",
-    "rights": "ﾂｩ 2026 GAMERS. All rights reserved."
+    "product": "製品",
+    "company": "会社",
+    "legal": "法的通知",
+    "find_contests": "大会を探す",
+    "create_contest": "大会を開催",
+    "community": "コミュニティ",
+    "about": "紹介",
+    "blog": "ブログ",
+    "jobs": "採用",
+    "terms": "利用規約",
+    "privacy": "プライバシーポリシー",
+    "description": "国内最大級のリアルタイムE-Sportsトーナメント運用プラットフォーム\nすべてのゲーマーのためのインフラ、GAMERS。",
+    "rights": "© 2026 GAMERS. All rights reserved."
   },
   "header": {
-    "contests": "螟ｧ莨�",
-    "playground": "繝励Ξ繧､繧ｰ繝ｩ繧ｦ繝ｳ繝�",
-    "community": "繧ｳ繝溘Η繝九ユ繧｣",
-    "login": "繝ｭ繧ｰ繧､繝ｳ",
-    "signup": "莨壼藤逋ｻ骭ｲ",
-    "mypage": "繝槭う繝壹�繧ｸ",
-    "admin": "邂｡逅�",
-    "logout": "繝ｭ繧ｰ繧｢繧ｦ繝�"
+    "contests": "大会",
+    "playground": "プレイグラウンド",
+    "community": "コミュニティ",
+    "login": "ログイン",
+    "signup": "会員登録",
+    "mypage": "マイページ",
+    "admin": "管理",
+    "logout": "ログアウト"
   },
   "contests": {
     "list": {
-      "title": "螟ｧ莨�",
-      "subtitle": "騾ｲ陦御ｸｭ縺ｾ縺溘�莠亥ｮ壹＆繧後※縺�ｋ螟ｧ莨壹ｒ謗｢邏｢縺励※縺上□縺輔＞縲�",
-      "search_placeholder": "螟ｧ莨壼錐縺ｧ讀懃ｴ｢",
-      "create_btn": "螟ｧ莨壹ｒ髢句ぎ縺吶ｋ",
+      "title": "大会",
+      "subtitle": "進行中または予定されている大会を探索してください。",
+      "search_placeholder": "大会名で検索",
+      "create_btn": "大会を開催する",
       "filters": {
-        "all": "蜈ｨ菴�",
-        "recruiting": "蜍滄寔荳ｭ",
-        "ongoing": "騾ｲ陦御ｸｭ",
-        "finished": "邨ゆｺ�"
+        "all": "全体",
+        "recruiting": "募集中",
+        "ongoing": "進行中",
+        "finished": "終了"
       },
       "sort": {
-        "recent": "譛譁ｰ鬆�",
-        "popular": "莠ｺ豌鈴��"
+        "recent": "最新順",
+        "popular": "人気順"
       },
       "cta": {
-        "title": "閾ｪ蛻�〒螟ｧ莨壹ｒ髢句ぎ縺励※縺ｿ縺ｾ縺励ｇ縺�",
-        "subtitle": "GAMERS縺ｮ蠑ｷ蜉帙↑驕句霧繝��繝ｫ縺ｨ荳邱偵↓縲∬�蛻�□縺代�繝医�繝翫Γ繝ｳ繝医ｒ蟋九ａ縺ｦ縺上□縺輔＞縲�",
-        "button": "螟ｧ莨壹ｒ菴懈�縺吶ｋ"
+        "title": "自分で大会を開催してみましょう",
+        "subtitle": "GAMERSの強力な運営ツールと一緒に、自分だけのトーナメントを始めてください。",
+        "button": "大会を作成する"
       },
-      "empty": "騾ｲ陦御ｸｭ縺ｮ螟ｧ莨壹′縺ゅｊ縺ｾ縺帙ｓ縲�",
+      "empty": "進行中の大会がありません。",
       "mock": {
-        "contest1": "VALORANT繧ｳ繝溘Η繝九ユ繧｣繧ｪ繝ｼ繝励Φ繧ｫ繝��",
-        "contest2": "LoL繧｢繧ｫ繝�Α繝ｼ繝ｪ繝ｼ繧ｰ 繧ｷ繝ｼ繧ｺ繝ｳ4",
-        "contest3": "Valorant 繝√Ε繝ｬ繝ｳ繧ｸ繝｣繝ｼ繧ｺ莠磯∈",
-        "contest4": "繝槭Ν繝√ご繝ｼ繝� 繝舌ヨ繝ｫ繝ｭ繧､繝､繝ｫ 繧､繝ｳ繝薙ユ繝ｼ繧ｷ繝ｧ繝翫Ν",
-        "multi_game": "繝槭Ν繝√ご繝ｼ繝�"
+        "contest1": "VALORANTコミュニティオープンカップ",
+        "contest2": "LoLアカデミーリーグ シーズン4",
+        "contest3": "Valorant チャレンジャーズ予選",
+        "contest4": "マルチゲーム バトルロイヤル インビテーショナル",
+        "multi_game": "マルチゲーム"
       }
     },
     "card": {
-      "prize": "雉樣≡",
-      "participants": "蜿ょ刈閠�",
-      "apply": "逕ｳ縺苓ｾｼ繧",
-      "status_closed": "蜍滄寔邨ゆｺ�"
+      "prize": "賞金",
+      "participants": "参加者",
+      "apply": "申し込む",
+      "status_closed": "募集終了"
     },
     "detail": {
       "tabs": {
-        "overview": "讎りｦ�",
-        "prizes": "雉樣≡繝ｻ迚ｹ蜈ｸ",
-        "rules": "繝ｫ繝ｼ繝ｫ",
-        "schedule": "譌･遞�",
-        "bracket": "繝医�繝翫Γ繝ｳ繝郁｡ｨ",
-        "recent_matches": "譛霑代�隧ｦ蜷�"
+        "overview": "概要",
+        "prizes": "賞金・特典",
+        "rules": "ルール",
+        "schedule": "日程",
+        "bracket": "トーナメント表",
+        "recent_matches": "最近の試合"
       },
       "hero": {
-        "organizer": "荳ｻ蛯ｬ閠�",
-        "prize_pool": "雉樣≡",
-        "entry_fee": "蜿ょ刈雋ｻ",
-        "free": "辟｡譁�",
-        "slots": "蜍滄寔莠ｺ謨ｰ",
-        "region": "蝨ｰ蝓�",
-        "asia_pacific": "繧｢繧ｸ繧｢螟ｪ蟷ｳ豢�"
+        "organizer": "主催者",
+        "prize_pool": "賞金",
+        "entry_fee": "参加費",
+        "free": "無料",
+        "slots": "募集人数",
+        "region": "地域",
+        "asia_pacific": "アジア太平洋"
       },
       "cta": {
-        "apply": "螟ｧ莨壹↓逕ｳ縺苓ｾｼ繧",
-        "already_applied": "逕ｳ縺苓ｾｼ縺ｿ貂医∩",
-        "closed": "逕ｳ縺苓ｾｼ縺ｿ邨ゆｺ�",
-        "recruiting": "蜍滄寔荳ｭ",
-        "ongoing": "騾ｲ陦御ｸｭ",
-        "finished": "邨ゆｺ�",
-        "bracket_link": "繝医�繝翫Γ繝ｳ繝郁｡ｨ繧定ｦ九ｋ",
-        "days_left": "縺ゅ→ {{count}} 譌･",
-        "share": "蜈ｱ譛�",
-        "bookmark": "繝悶ャ繧ｯ繝槭�繧ｯ"
+        "apply": "大会に申し込む",
+        "already_applied": "申し込み済み",
+        "closed": "申し込み終了",
+        "recruiting": "募集中",
+        "ongoing": "進行中",
+        "finished": "終了",
+        "bracket_link": "トーナメント表を見る",
+        "days_left": "あと {{count}} 日",
+        "share": "共有",
+        "bookmark": "ブックマーク"
       },
       "status": {
-        "PENDING": "蜍滄寔荳ｭ",
-        "ACTIVE": "騾ｲ陦御ｸｭ",
-        "FINISHED": "邨ゆｺ�",
-        "CANCELLED": "繧ｭ繝｣繝ｳ繧ｻ繝ｫ"
+        "PENDING": "募集中",
+        "ACTIVE": "進行中",
+        "FINISHED": "終了",
+        "CANCELLED": "キャンセル"
       },
-      "brackets": "繝医�繝翫Γ繝ｳ繝郁｡ｨ",
-      "participants": "蜿ょ刈閠�",
-      "rules": "繝ｫ繝ｼ繝ｫ",
-      "comments": "繧ｳ繝｡繝ｳ繝�"
+      "brackets": "トーナメント表",
+      "participants": "参加者",
+      "rules": "ルール",
+      "comments": "コメント"
     },
     "single": {
-      "no_rules": "逋ｻ骭ｲ縺輔ｌ縺溘Ν繝ｼ繝ｫ縺後≠繧翫∪縺帙ｓ縲�",
-      "no_participants": "蜿ょ刈閠�′縺�∪縺帙ｓ縲�",
-      "no_comments": "繧ｳ繝｡繝ｳ繝医′縺ゅｊ縺ｾ縺帙ｓ縲よ怙蛻昴�繧ｳ繝｡繝ｳ繝医ｒ谿九＠縺ｦ縺ｿ縺ｾ縺励ｇ縺�ｼ�",
-      "comment_placeholder": "繧ｳ繝｡繝ｳ繝医ｒ蜈･蜉帙＠縺ｦ縺上□縺輔＞...",
-      "post_comment": "繧ｳ繝｡繝ｳ繝域兜遞ｿ",
-      "apply_success": "豁｣蟶ｸ縺ｫ逕ｳ縺苓ｾｼ縺ｾ繧後∪縺励◆縲�",
-      "cancel_success": "逕ｳ縺苓ｾｼ縺ｿ縺後く繝｣繝ｳ繧ｻ繝ｫ縺輔ｌ縺ｾ縺励◆縲�",
+      "no_rules": "登録されたルールがありません。",
+      "no_participants": "参加者がいません。",
+      "no_comments": "コメントがありません。最初のコメントを残してみましょう！",
+      "comment_placeholder": "コメントを入力してください...",
+      "post_comment": "コメント投稿",
+      "apply_success": "正常に申し込まれました。",
+      "cancel_success": "申し込みがキャンセルされました。",
       "coming_soon": {
-        "title": "貅門ｙ荳ｭ縺ｧ縺�",
-        "desc": "霑第律蜈ｬ髢倶ｺ亥ｮ壹〒縺吶ょｰ代�♀蠕�■縺上□縺輔＞��"
+        "title": "準備中です",
+        "desc": "近日公開予定です。少々お待ちください！"
       },
       "type": {
-        "TOURNAMENT": "繝医�繝翫Γ繝ｳ繝�",
-        "LEAGUE": "繝ｪ繝ｼ繧ｰ"
+        "TOURNAMENT": "トーナメント",
+        "LEAGUE": "リーグ"
       },
       "stats": {
-        "points": "繝昴う繝ｳ繝�",
-        "prize": "雉樣≡",
-        "teams": "繝√�繝�謨ｰ",
-        "start_date": "髢句ｧ区律",
-        "format": "騾ｲ陦梧婿蠑�"
+        "points": "ポイント",
+        "prize": "賞金",
+        "teams": "チーム数",
+        "start_date": "開始日",
+        "format": "進行方式"
       },
       "hero": {
-        "breadcrumb": "螟ｧ莨壹Μ繧ｹ繝�",
-        "discord_link": "Discord騾｣謳ｺ"
+        "breadcrumb": "大会リスト",
+        "discord_link": "Discord連携"
       },
-      "no_description": "隱ｬ譏弱′縺ゅｊ縺ｾ縺帙ｓ縲�",
-      "auto_start": "閾ｪ蜍暮幕蟋�",
-      "manual_start": "謇句虚髢句ｧ�"
+      "no_description": "説明がありません。",
+      "auto_start": "自動開始",
+      "manual_start": "手動開始"
     },
     "create": {
-      "title": "螟ｧ莨夐幕蛯ｬ",
-      "subtitle": "縺ゅ↑縺溘□縺代�繝ｪ繝ｼ繧ｰ繧貞ｧ九ａ縺ｾ縺励ｇ縺�",
-      "save_draft_auto_info": "蜈･蜉帛�螳ｹ縺ｯ荳譎ゆｿ晏ｭ倥＆繧後∪縺吶よ怙邨よ署蜃ｺ縺ｾ縺ｧ蜈ｬ髢九＆繧後∪縺帙ｓ縲�",
-      "section_label": "繧ｻ繧ｯ繧ｷ繝ｧ繝ｳ",
-      "progress_label": "騾ｲ陦檎憾豕�",
-      "sections_completed": "{{count}} / 6 繧ｻ繧ｯ繧ｷ繝ｧ繝ｳ螳御ｺ�",
-      "success_alert": "螟ｧ莨壹′豁｣蟶ｸ縺ｫ菴懈�縺輔ｌ縺ｾ縺励◆��",
-      "save_alert": "荳譎ゆｿ晏ｭ倥＠縺ｾ縺励◆縲�",
-      "auto_save_done": "閾ｪ蜍穂ｿ晏ｭ伜ｮ御ｺ�",
+      "title": "大会開催",
+      "subtitle": "あなただけのリーグを始めましょう",
+      "save_draft_auto_info": "入力内容は一時保存されます。最終提出まで公開されません。",
+      "section_label": "セクション",
+      "progress_label": "進行状況",
+      "sections_completed": "{{count}} / 6 セクション完了",
+      "success_alert": "大会が正常に作成されました！",
+      "save_alert": "一時保存しました。",
+      "auto_save_done": "自動保存完了",
       "sections": {
-        "basic_info": "蝓ｺ譛ｬ諠��ｱ",
-        "image_settings": "逕ｻ蜒剰ｨｭ螳�",
-        "game_settings": "繧ｲ繝ｼ繝�險ｭ螳�",
-        "team_composition": "繝√�繝�讒区�",
-        "schedule_settings": "譌･遞玖ｨｭ螳�",
-        "discord_integration": "Discord騾｣謳ｺ"
+        "basic_info": "基本情報",
+        "image_settings": "画像設定",
+        "game_settings": "ゲーム設定",
+        "team_composition": "チーム構成",
+        "schedule_settings": "日程設定",
+        "discord_integration": "Discord連携"
       },
       "basic": {
-        "title": "螟ｧ莨壹ち繧､繝医Ν",
-        "title_placeholder": "萓具ｼ啖alorant 譁ｰ莠ｺ繧ｪ繝ｼ繝励Φ繧ｫ繝��",
-        "description": "螟ｧ莨夂ｴｹ莉�",
-        "description_placeholder": "螟ｧ莨壹Ν繝ｼ繝ｫ繧�ｩｳ邏ｰ蜀�ｮｹ繧樽DX蠖｢蠑上〒蜈･蜉帙＠縺ｦ縺上□縺輔＞縲�",
-        "precautions": "豕ｨ諢丈ｺ矩��",
-        "precautions_placeholder": "蜿ょ刈閠�′蠢�★遒ｺ隱阪☆縺ｹ縺榊�螳ｹ繧貞�蜉帙＠縺ｦ縺上□縺輔＞縲�",
-        "subtitle": "螟ｧ莨壹�譛繧ょ渕譛ｬ逧�↑諠��ｱ繧貞�蜉帙＠縺ｾ縺吶�",
-        "required": "蠢���",
-        "edit": "邱ｨ髮�",
-        "preview": "繝励Ξ繝薙Η繝ｼ",
-        "preview_empty": "蜀�ｮｹ繧貞�蜉帙☆繧九→繝励Ξ繝薙Η繝ｼ縺檎函謌舌＆繧後∪縺吶�"
+        "title": "大会タイトル",
+        "title_placeholder": "例：Valorant 新人オープンカップ",
+        "description": "大会紹介",
+        "description_placeholder": "大会ルールや詳細内容をMDX形式で入力してください。",
+        "precautions": "注意事項",
+        "precautions_placeholder": "参加者が必ず確認すべき内容を入力してください。",
+        "subtitle": "大会の最も基本的な情報を入力します。",
+        "required": "必須",
+        "edit": "編集",
+        "preview": "プレビュー",
+        "preview_empty": "内容を入力するとプレビューが生成されます。"
       },
       "image": {
-        "thumbnail": "繧ｵ繝�繝阪う繝ｫ逕ｻ蜒�",
-        "banner": "繝倥ャ繝繝ｼ繝舌リ繝ｼ逕ｻ蜒�",
-        "click_to_upload": "繧ｯ繝ｪ繝�け縺励※繧｢繝��繝ｭ繝ｼ繝�",
-        "upload_desc": "謗ｨ螂ｨ: 400x400 (1:1)",
-        "banner_upload_desc": "謗ｨ螂ｨ: 1200x400 (3:1)",
-        "replace": "蛻�ｊ譖ｿ縺医ｋ"
+        "thumbnail": "サムネイル画像",
+        "banner": "ヘッダーバナー画像",
+        "click_to_upload": "クリックしてアップロード",
+        "upload_desc": "推奨: 400x400 (1:1)",
+        "banner_upload_desc": "推奨: 1200x400 (3:1)",
+        "replace": "切り替える"
       },
       "game": {
-        "select_game": "繧ｲ繝ｼ繝�驕ｸ謚�",
-        "valorant_settings": "VALORANT險ｭ螳�",
-        "lol_settings": "LoL險ｭ螳�",
-        "format": "騾ｲ陦梧婿蠑�",
-        "format_tournament": "繝医�繝翫Γ繝ｳ繝�",
-        "format_league": "繝ｪ繝ｼ繧ｰ",
-        "map_pool": "繝槭ャ繝励�繝ｼ繝ｫ",
-        "agent_restrictions": "繧ｨ繝ｼ繧ｸ繧ｧ繝ｳ繝亥宛髯�",
-        "champion_restrictions": "繝√Ε繝ｳ繝斐が繝ｳ蛻ｶ髯�",
-        "placeholder_agent": "繧ｨ繝ｼ繧ｸ繧ｧ繝ｳ繝亥錐縺ｧ讀懃ｴ｢...",
-        "placeholder_champion": "繝√Ε繝ｳ繝斐が繝ｳ蜷阪〒讀懃ｴ｢...",
-        "rounds_per_match": "隧ｦ蜷医＃縺ｨ縺ｮ繝ｩ繧ｦ繝ｳ繝画焚",
-        "patch_version": "繝代ャ繝√ヰ繝ｼ繧ｸ繝ｧ繝ｳ",
-        "latest": "(譛譁ｰ)",
-        "pro_patch": "LCP繝励Ο繝代ャ繝�",
-        "win_condition": "{{count}}譛ｬ蜈亥叙"
+        "select_game": "ゲーム選択",
+        "valorant_settings": "VALORANT設定",
+        "lol_settings": "LoL設定",
+        "format": "進行方式",
+        "format_tournament": "トーナメント",
+        "format_league": "リーグ",
+        "map_pool": "マッププール",
+        "agent_restrictions": "エージェント制限",
+        "champion_restrictions": "チャンピオン制限",
+        "placeholder_agent": "エージェント名で検索...",
+        "placeholder_champion": "チャンピオン名で検索...",
+        "rounds_per_match": "試合ごとのラウンド数",
+        "patch_version": "パッチバージョン",
+        "latest": "(最新)",
+        "pro_patch": "LCPプロパッチ",
+        "win_condition": "{{count}}本先取"
       },
       "game_settings": {
-        "desc": "螟ｧ莨壹〒菴ｿ逕ｨ縺吶ｋ繧ｲ繝ｼ繝�縺ｨ隧ｳ邏ｰ繝ｫ繝ｼ繝ｫ繧定ｨｭ螳壹＠縺ｾ縺吶�",
-        "valorant_sub": "5v5繧ｭ繝｣繝ｩ繧ｯ繧ｿ繝ｼ繝吶�繧ｹ縺ｮ繧ｿ繧ｯ繝�ぅ繧ｫ繝ｫ繧ｷ繝･繝ｼ繧ｿ繝ｼ",
-        "lol_sub": "謌ｦ逡･逧�↑繝√�繝�繝舌ヨ繝ｫMOBA繧ｲ繝ｼ繝�",
+        "desc": "大会で使用するゲームと詳細ルールを設定します。",
+        "valorant_sub": "5v5キャラクターベースのタクティカルシューター",
+        "lol_sub": "戦略的なチームバトルMOBAゲーム",
         "valorant": {
-          "tournament_desc": "繝医�繝翫Γ繝ｳ繝茨ｼ壽ｮｵ髫主挨縺ｮ閼ｱ關ｽ譁ｹ蠑上〒縺吶よ怙蠕後�1繝√�繝�縺悟━蜍昴＠縺ｾ縺吶�",
-          "league_desc": "繝ｪ繝ｼ繧ｰ�壹☆縺ｹ縺ｦ縺ｮ蟇ｾ雎｡縺ｨ隧ｦ蜷医＠縲∝享縺｡轤ｹ縺ｫ繧医▲縺ｦ鬆�ｽ阪′豎ｺ螳壹＆繧後∪縺吶�"
+          "tournament_desc": "トーナメント：段階別の脱落方式です。最後の1チームが優勝します。",
+          "league_desc": "リーグ：すべての対象と試合し、勝ち点によって順位が決定されます。"
         },
         "lol": {
-          "tournament_desc": "繝医�繝翫Γ繝ｳ繝茨ｼ壽ｮｵ髫主挨縺ｮ閼ｱ關ｽ譁ｹ蠑上〒縺吶�",
-          "league_desc": "繝ｪ繝ｼ繧ｰ�壹☆縺ｹ縺ｦ縺ｮ蟇ｾ雎｡縺ｨ隧ｦ蜷医＠縲∝享縺｡轤ｹ縺ｫ繧医▲縺ｦ鬆�ｽ阪′豎ｺ螳壹＆繧後∪縺吶�",
-          "search_results": "讀懃ｴ｢邨先棡: {{count}}蜷�",
-          "restricted_champions": "蛻ｶ髯舌＆繧後◆繝√Ε繝ｳ繝斐が繝ｳ: {{count}}蜷�"
+          "tournament_desc": "トーナメント：段階別の脱落方式です。",
+          "league_desc": "リーグ：すべての対象と試合し、勝ち点によって順位が決定されます。",
+          "search_results": "検索結果: {{count}}名",
+          "restricted_champions": "制限されたチャンピオン: {{count}}名"
         }
       },
       "validation": {
-        "name_required": "螟ｧ莨壼錐繧貞�蜉帙＠縺ｦ縺上□縺輔＞",
-        "desc_required": "螟ｧ莨夂ｴｹ莉九ｒ蜈･蜉帙＠縺ｦ縺上□縺輔＞",
-        "map_pool_required": "蟆代↑縺上→繧�1縺､莉･荳翫�繝槭ャ繝励ｒ驕ｸ謚槭＠縺ｦ縺上□縺輔＞",
-        "patch_required": "繝代ャ繝√ヰ繝ｼ繧ｸ繝ｧ繝ｳ繧帝∈謚槭＠縺ｦ縺上□縺輔＞",
-        "start_date_required": "髢句ｧ区律繧帝∈謚槭＠縺ｦ縺上□縺輔＞",
-        "end_date_required": "邨ゆｺ�律繧帝∈謚槭＠縺ｦ縺上□縺輔＞"
+        "name_required": "大会名を入力してください",
+        "desc_required": "大会紹介を入力してください",
+        "map_pool_required": "少なくとも1つ以上のマップを選択してください",
+        "patch_required": "パッチバージョンを選択してください",
+        "start_date_required": "開始日を選択してください",
+        "end_date_required": "終了日を選択してください"
       },
       "team": {
-        "title": "繝√�繝�讒区�",
-        "desc": "蜿ょ刈繝√�繝�縺ｮ讒区�縺ｨ隕乗ｨ｡繧定ｨｭ螳壹＠縺ｾ縺吶�",
-        "max_teams": "譛螟ｧ蜿ょ刈繝√�繝�謨ｰ",
-        "max_teams_help": "譛蟆�2繝√�繝�縺九ｉ譛螟ｧ128繝√�繝�縺ｾ縺ｧ險ｭ螳壼庄閭ｽ縺ｧ縺吶�",
-        "team_size": "繝√�繝�縺ゅ◆繧翫�莠ｺ謨ｰ",
-        "team_size_help": "1繝√�繝�縺ゅ◆繧翫�蜿ょ刈莠ｺ謨ｰ縺ｧ縺呻ｼ郁｣懈ｬ�驕ｸ謇九�蜷ｫ縺ｿ縺ｾ縺帙ｓ�峨�",
-        "total_points": "繝昴う繝ｳ繝亥粋險亥宛髯�",
-        "points_desc": "繝√�繝�繝ｭ繝ｼ繧ｹ繧ｿ繝ｼ縺ｮ蜷郁ｨ医�繧､繝ｳ繝医ｒ蛻ｶ髯舌＠縺ｾ縺呻ｼ�0縺ｯ蛻ｶ髯舌↑縺暦ｼ峨�",
-        "unlimited": "0 (蛻ｶ髯舌↑縺�)"
+        "title": "チーム構成",
+        "desc": "参加チームの構成と規模を設定します。",
+        "max_teams": "最大参加チーム数",
+        "max_teams_help": "最小2チームから最大128チームまで設定可能です。",
+        "team_size": "チームあたりの人数",
+        "team_size_help": "1チームあたりの参加人数です（補欠選手は含みません）。",
+        "total_points": "ポイント合計制限",
+        "points_desc": "チームロースターの合計ポイントを制限します（0は制限なし）。",
+        "unlimited": "0 (制限なし)"
       },
       "schedule": {
-        "title": "譌･遞玖ｨｭ螳�",
-        "start_date": "螟ｧ莨夐幕蟋区律",
-        "end_date": "螟ｧ莨夂ｵゆｺ�攵",
-        "auto_start": "閾ｪ蜍暮幕蟋�",
-        "auto_start_desc": "髢句ｧ区律縺ｫ縺ｪ繧九→螟ｧ莨壹ｒ閾ｪ蜍慕噪縺ｫACTIVE迥ｶ諷九↓蛻�ｊ譖ｿ縺医∪縺�",
-        "desc": "螟ｧ莨壹�騾ｲ陦後せ繧ｱ繧ｸ繝･繝ｼ繝ｫ繧定ｨｭ螳壹＠縺ｾ縺吶ゅち繧､繝�繧ｾ繝ｼ繝ｳ縺ｯ迴ｾ蝨ｨ縺ｮ繝悶Λ繧ｦ繧ｶ蝓ｺ貅�(KST)��笈�､縲�"
+        "title": "日程設定",
+        "start_date": "大会開始日",
+        "end_date": "大会終了일",
+        "auto_start": "自動開始",
+        "auto_start_desc": "開始日になると大会を自動的にACTIVE状態に切り替えます",
+        "desc": "大会の進行スケジュールを設定します。タイムゾーンは現在のブラウザ基準(KST)입니다。"
       },
       "discord": {
-        "title": "Discord騾｣謳ｺ",
-        "desc": "Discord繧ｵ繝ｼ繝舌�縺ｨ騾｣謳ｺ縺吶ｋ縺ｨ縲∝､ｧ莨夐夂衍繧��蝣ｴ邂｡逅�↑縺ｩ繧定�蜍募喧縺ｧ縺阪∪縺吶�",
-        "integration_desc": "Discord繧ｵ繝ｼ繝舌�縺ｨ騾｣蜍輔＠縺ｦ螟ｧ莨夐°蝟ｶ繧定�蜍募喧縺励※縺上□縺輔＞縲�",
-        "bot_settings": "Discord Bot險ｭ螳�",
-        "server_id": "Discord繧ｵ繝ｼ繝舌�ID",
-        "server_id_help": "Discord縺ｮ髢狗匱閠�Δ繝ｼ繝峨ｒ繧ｪ繝ｳ縺ｫ縺励√し繝ｼ繝舌�繧貞承繧ｯ繝ｪ繝�け縺励※ID繧偵さ繝斐�縺励※縺上□縺輔＞縲�",
-        "channel_id": "騾夂衍繝√Ε繝ｳ繝阪ΝID",
-        "bot_permissions": "GAMERS Bot 讓ｩ髯占ｨｭ螳�",
-        "auto_channel": "蜿ょ刈閠�ｰら畑繝√Ε繝ｳ繝阪Ν縺ｮ閾ｪ蜍慕函謌�",
-        "realtime_notif": "隧ｦ蜷育ｵ先棡縺ｮ繝ｪ繧｢繝ｫ繧ｿ繧､繝�騾夂衍",
-        "staff_support": "繧ｹ繧ｿ繝�ヵ蜻ｼ縺ｳ蜃ｺ縺励�繧ｵ繝昴�繝育ｮ｡逅�",
-        "invite_bot": "繝懊ャ繝医ｒ諡帛ｾ�☆繧�"
+        "title": "Discord連携",
+        "desc": "Discordサーバーと連携すると、大会通知や入場管理などを自動化できます。",
+        "integration_desc": "Discordサーバーと連動して大会運営を自動化してください。",
+        "bot_settings": "Discord Bot設定",
+        "server_id": "DiscordサーバーID",
+        "server_id_help": "Discordの開発者モードをオンにし、サーバーを右クリックしてIDをコピーしてください。",
+        "channel_id": "通知チャンネルID",
+        "bot_permissions": "GAMERS Bot 権限設定",
+        "auto_channel": "参加者専用チャンネルの自動生成",
+        "realtime_notif": "試合結果のリアルタイム通知",
+        "staff_support": "スタッフ呼び出し・サポート管理",
+        "invite_bot": "ボットを招待する"
       },
       "preview": {
-        "title": "螟ｧ莨壹�繝ｬ繝薙Η繝ｼ",
-        "live": "繝ｩ繧､繝悶�繝ｬ繝薙Η繝ｼ",
-        "draft": "荳区嶌縺�",
-        "thumbnail_preview": "繧ｵ繝�繝阪う繝ｫ繝励Ξ繝薙Η繝ｼ",
-        "desc": "險ｭ螳壹＆繧後◆諠��ｱ縺ｧ逕滓�縺輔ｌ繧句､ｧ莨壹�蟋ｿ縺ｧ縺吶�",
-        "status": "蜿嶺ｻ倅ｸｭ",
-        "slots": "蜍滄寔莠ｺ謨ｰ",
-        "organizer": "荳ｻ蛯ｬ閠�",
-        "just_now": "縺溘▲縺滉ｻ�",
-        "entry_fee": "蜿ょ刈雋ｻ",
-        "free": "辟｡譁�",
-        "apply": "螟ｧ莨壹↓逕ｳ縺苓ｾｼ繧",
-        "summary": "譁ｹ蠑剰ｦ∫ｴ�",
-        "mode": "譁ｹ蠑�",
-        "tournament": "繝医�繝翫Γ繝ｳ繝�",
-        "league": "繝ｪ繝ｼ繧ｰ",
-        "region": "蝨ｰ蝓�",
-        "asia": "繧｢繧ｸ繧｢"
+        "title": "大会プレビュー",
+        "live": "ライブプレビュー",
+        "draft": "下書き",
+        "thumbnail_preview": "サムネイルプレビュー",
+        "desc": "設定された情報で生成される大会の姿です。",
+        "status": "受付中",
+        "slots": "募集人数",
+        "organizer": "主催者",
+        "just_now": "たった今",
+        "entry_fee": "参加費",
+        "free": "無料",
+        "apply": "大会に申し込む",
+        "summary": "方式要約",
+        "mode": "方式",
+        "tournament": "トーナメント",
+        "league": "リーグ",
+        "region": "地域",
+        "asia": "アジア"
       },
-      "cancel": "繧ｭ繝｣繝ｳ繧ｻ繝ｫ",
-      "save_draft": "荳区嶌縺堺ｿ晏ｭ�",
-      "publish": "蜈ｬ髢九☆繧�"
+      "cancel": "キャンセル",
+      "save_draft": "下書き保存",
+      "publish": "公開する"
     }
   },
   "my_contests": {
-    "title": "閾ｪ蛻��螟ｧ莨�",
+    "title": "自分の大会",
     "subtitle": "MY CONTESTS",
     "summary": {
-      "participating": "蜿ょ刈荳ｭ",
-      "completed": "螳御ｺ�"
+      "participating": "参加中",
+      "completed": "完了"
     },
     "tabs": {
-      "participating": "蜿ょ刈荳ｭ縺ｮ螟ｧ莨�",
-      "completed": "蜿ょ刈螳御ｺ�＠縺溷､ｧ莨�"
+      "participating": "参加中の大会",
+      "completed": "参加完了した大会"
     },
     "card": {
-      "my_team": "繝槭う繝√�繝�",
-      "members_participating": "{{count}}莠ｺ蜿ょ刈",
-      "next_match": "谺｡縺ｮ隧ｦ蜷�",
-      "no_record": "隧ｦ蜷郁ｨ倬鹸縺ｪ縺�",
-      "my_record": "繝槭う謌ｦ邵ｾ",
-      "hours_after": "{{count}}譎る俣蠕�",
-      "unbeatable": "辟｡謨�",
-      "participants_status": "蜿ょ刈迥ｶ豕�",
-      "team_suffix": "繝√�繝�",
-      "full": "貅蜩｡",
-      "no_info": "諠��ｱ縺ｪ縺�",
-      "contest_start": "螟ｧ莨夐幕蟋�",
-      "prize_earned": "迯ｲ蠕苓ｳ樣≡",
-      "rank_suffix": "菴�",
-      "completed_suffix": "邨ゆｺ�",
-      "final_rank": "譛邨る��ｽ�",
-      "total_record": "騾夂ｮ玲姶邵ｾ",
-      "view_results": "邨先棡繧定ｦ九ｋ",
-      "view_details": "隧ｳ邏ｰ繧定ｦ九ｋ",
-      "enter_stadium": "莨壼�ｴ縺ｫ蜈･蝣ｴ",
-      "team_distribution": "繝√�繝  "admin": {
-    "sidebar": {
-      "dashboard": "繝繝�す繝･繝懊�繝�",
-      "members": "繝｡繝ｳ繝舌�邂｡逅�",
-      "contests": "螟ｧ莨夂ｮ｡逅�",
-      "reports": "騾壼�ｱ邂｡逅�",
-      "settings": "繧ｷ繧ｹ繝�Β險ｭ螳�",
-      "console": "邂｡逅��さ繝ｳ繧ｽ繝ｼ繝ｫ"
+      "my_team": "マイチーム",
+      "members_participating": "{{count}}人参加",
+      "next_match": "次の試合",
+      "no_record": "試合記録なし",
+      "my_record": "マイ戦績",
+      "hours_after": "{{count}}時間後",
+      "unbeatable": "無敗",
+      "participants_status": "参加状況",
+      "team_suffix": "チーム",
+      "full": "満員",
+      "no_info": "情報なし",
+      "contest_start": "大会開始",
+      "prize_earned": "獲得賞金",
+      "rank_suffix": "位",
+      "completed_suffix": "終了",
+      "final_rank": "最終順位",
+      "total_record": "通算戦績",
+      "view_results": "結果を見る",
+      "view_details": "詳細を見る",
+      "enter_stadium": "会場に入場",
+      "team_distribution": "チーム編成を確認"
     },
-    "login": {
-      "title": "縺翫°縺医ｊ縺ｪ縺輔＞",
-      "subtitle": "邂｡逅��ヱ繝阪Ν縺ｫ繧｢繧ｯ繧ｻ繧ｹ縺吶ｋ縺ｫ縺ｯ縲√い繧ｫ繧ｦ繝ｳ繝域ュ蝣ｱ繧貞�蜉帙＠縺ｦ縺上□縺輔＞縲�",
-      "fields": {
-        "email_label": "繝｡繝ｼ繝ｫ繧｢繝峨Ξ繧ｹ",
-        "email_placeholder": "admin@gamers.com",
-        "password_label": "繝代せ繝ｯ繝ｼ繝�",
-        "password_placeholder": "窶｢窶｢窶｢窶｢窶｢窶｢窶｢窶｢窶｢窶｢窶｢窶｢",
-        "find_password": "繝代せ繝ｯ繝ｼ繝雅･ｼ 蠢倥ｌ縺ｾ縺励◆縺具ｼ�",
-        "remember_me": "縺薙�繝�ヰ繧､繧ｹ繧定ｨ俶�縺吶ｋ"
-      },
-      "submit_btn": "繝ｭ繧ｰ繧､繝ｳ",
-      "footer": {
-        "not_admin": "邂｡逅��〒縺ｯ縺ゅｊ縺ｾ縺帙ｓ縺具ｼ�",
-        "return_link": "繝励Λ繝�ヨ繝輔か繝ｼ繝�縺ｫ謌ｻ繧�"
-      }
-    },
-    "contest": {
-      "management": "螟ｧ莨夂ｮ｡逅�",
-      "force_end": "螟ｧ莨壼ｼｷ蛻ｶ邨ゆｺ�",
-      "edit": "螟ｧ莨壻ｿｮ豁｣"
-    },
-    "member": {
-      "title": "繝｡繝ｳ繝舌�邂｡逅�",
-      "total_users": "蜷郁ｨ� <1>{{count}}</1> 蜷阪�逋ｻ骭ｲ繝ｦ繝ｼ繧ｶ繝ｼ",
-      "search_placeholder": "繝九ャ繧ｯ繝阪�繝�縲√Γ繝ｼ繝ｫ繧｢繝峨Ξ繧ｹ縺ｧ讀懃ｴ｢...",
-      "export": "繧ｨ繧ｯ繧ｹ繝昴�繝�",
-      "tabs": {
-        "all": "縺吶∋縺ｦ",
-        "active": "繧｢繧ｯ繝�ぅ繝�",
-        "banned": "蛛懈ｭ｢",
-        "staff": "驕句霧髯｣",
-        "new": "譁ｰ隕� (7譌･)"
-      },
-      "table": {
-        "user": "繝ｦ繝ｼ繧ｶ繝ｼ",
-        "role": "蠖ｹ蜑ｲ",
-        "status": "迥ｶ諷�",
-        "join_date": "蜉�蜈･譌･",
-        "last_active": "譛邨よｴｻ蜍�",
-        "action": "繧｢繧ｯ繧ｷ繝ｧ繝ｳ",
-        "role_labels": {
-          "staff": "驕句霧髯｣",
-          "manager": "繝槭ロ繝ｼ繧ｸ繝｣繝ｼ",
-          "user": "荳闊ｬ"
-        }
-      },
-      "status": {
-        "active": "譛牙柑",
-        "banned": "蛛懈ｭ｢",
-        "warning": "隴ｦ蜻�"
-      },
-      "pagination": {
-        "range": "<1>{{start}}-{{end}}</1> / {{total}}蜷�"
-      },
-      "time": {
-        "just_now": "縺溘▲縺滉ｻ�",
-        "3_days_ago": "3譌･蜑�",
-        "1_hour_ago": "1譎る俣蜑�",
-        "5_mins_ago": "5蛻�燕",
-        "32_mins_ago": "32蛻�燕",
-        "2_days_ago": "2譌･蜑�"
-      }
-    },
-    "contest_detail": {
-      "tabs": {
-        "overview": "讎りｦ�",
-        "members": "繝｡繝ｳ繝舌�邂｡逅�",
-        "applications": "逕ｳ隲区嶌蜃ｦ逅�",
-        "teams": "繝√�繝�驟榊�",
-        "brackets": "繝医�繝翫Γ繝ｳ繝郁｡ｨ",
-        "notices": "縺顔衍繧峨○",
-        "settings": "險ｭ螳�"
-      },
-      "hero": {
-        "host": "荳ｻ蛯ｬ",
-        "staff": "繧ｹ繧ｿ繝�ヵ",
-        "staff_count": "{{count}}蜷�",
-        "total_participants": "邱丞盾蜉�閠�",
-        "teams": "繝√�繝�",
-        "current_round": "迴ｾ蝨ｨ縺ｮ繝ｩ繧ｦ繝ｳ繝�"
-      },
-      "sidebar": {
-        "quick_actions": "繧ｯ繧､繝�け繧｢繧ｯ繧ｷ繝ｧ繝ｳ",
-        "add_participant": "蜿ょ刈閠��逶ｴ謗･霑ｽ蜉�",
-        "auto_team": "繝√�繝�閾ｪ蜍暮�蛻�",
-        "match_result": "隧ｦ蜷育ｵ先棡縺ｮ蜈･蜉�",
-        "export": "蜿ょ刈閠�Μ繧ｹ繝医�蜃ｺ蜉�",
-        "status": "蜿ょ刈閠��迥ｶ豕�",
-        "participant_count": "{{current}} / {{max}}��",
-        "view_more": "+ {{count}}蜷阪ｂ縺｣縺ｨ隕九ｋ"
-      },
-      "overview": {
-        "round_management": "繝ｩ繧ｦ繝ｳ繝臥ｮ｡逅�",
-        "round_desc": "螟ｧ莨壹�騾ｲ陦梧ｮｵ髫弱ｒ蛻ｶ蠕｡縺励∪縺�",
-        "round_status": "Round {{round}} 騾ｲ陦御ｸｭ",
-        "round_confirm": "谺｡繝ｩ繧ｦ繝ｳ繝蛾幕蟋区凾縺ｫ<1>迴ｾ蝨ｨ騾ｲ陦御ｸｭ縺ｮ繝槭ャ繝√′遒ｺ螳�</1>縺輔ｌ縺ｾ縺�",
-        "next_round": "谺｡縺ｮ繝ｩ繧ｦ繝ｳ繝峨∈",
-        "pending_applications": "蠕�ｩ滉ｸｭ縺ｮ逕ｳ隲区嶌",
-        "pending_count": "{{count}}莉ｶ蠕�ｩ�",
-        "accept": "蜿苓ｫｾ",
-        "reject": "諡堤ｵｶ",
-        "notices": "縺顔衍繧峨○",
-        "create_notice": "縺顔衍繧峨○菴懈�",
-        "mock_notice_title": "隨ｬ3繝ｩ繧ｦ繝ｳ繝画律遞九�縺疲｡亥�",
-        "mock_notice_content": "隨ｬ3繝ｩ繧ｦ繝ｳ繝峨�4譛�2譌･蜊亥ｾ�8譎る幕蟋倶ｺ亥ｮ壹〒縺�. 繝√�繝�繝ｪ繝ｼ繝繝ｼ縺ｯ蠢�★Discord繝√Ε繝ｳ繝阪Ν繧堤｢ｺ隱阪＠縺ｦ縺上□縺輔＞縲�"
-      }
+    "mock": {
+      "contest1": "VALORANTコミュニティオープンカップ",
+      "contest1_status": "進行中",
+      "contest1_format": "5v5 トーナメント",
+      "contest2": "LoLアカデミーリーグ シーズン4",
+      "contest2_status": "募集中",
+      "contest2_format": "5v5 リーグ",
+      "contest3": "Valorant チャレンジャーズ予選",
+      "contest4": "LoL チャンピオンズ・コリア"
     }
-  },nt": "蠕捺擂縺ｮ20:00縺九ｉ21:00縺ｫ螟画峩縺輔ｌ縺ｾ縺励◆縲ゅ☆縺ｹ縺ｦ縺ｮ驕ｸ謇九�20:30縺ｾ縺ｧ縺ｫ蠕�ｩ溘＠縺ｦ縺上□縺輔＞縲�",
-            "date": "1譎る俣蜑�",
+  },
+  "playground": {
+    "title": "プレイグラウンド",
+    "subtitle": "PLAYGROUND",
+    "tabs": {
+      "overview": "概要",
+      "participants": "参加者",
+      "matches": "対戦",
+      "settings": "設定",
+      "notice": "案内事項",
+      "members": "メンバー",
+      "team_manage": "チーム管理",
+      "withdrawal": "出場のキャンセル",
+      "staff": "スタッフ"
+    },
+    "summary": {
+      "title": "設定まとめ",
+      "mode": "方式",
+      "teams": "参加チーム",
+      "players": "総参加人数",
+      "status": "進行状態",
+      "current_round": "現在のラウンド",
+      "semi_final": "準決勝",
+      "quarter_final_done": "準々決勝完了",
+      "team_performance": "チーム成績",
+      "stats_format": "{{win}}勝 {{loss}}敗",
+      "win_rate_format": "勝率 {{rate}}% (平均 {{rounds}}R)",
+      "next_match": "次の試合",
+      "next_match_format": "vs {{opponent}}",
+      "next_match_time": "今日 {{time}} 予定",
+      "team_readiness": "チーム準備状況",
+      "readiness_format": "{{count}} / {{total}}名 準備完了",
+      "all_ready": "全員準備完了"
+    },
+    "recent_matches": {
+      "title": "最近の試合",
+      "win": "勝",
+      "lose": "負",
+      "no_match": "最近の試合はありません。",
+      "view_details": "詳細を見る",
+      "vs": "vs "
+    },
+    "nav": {
+      "back_to_contest": "大会ページへ",
+      "admin_view": "管理者ビュー",
+      "player_view": "参加者ビュー"
+    },
+    "notice": {
+      "title": "案内事項",
+      "desc": "大会の進行に関する案内事項です。",
+      "notice_count": "{{count}}件の通知",
+      "rules_title": "大会ルール",
+      "schedule_title": "今日の日程",
+      "faq_title": "よくある質問",
+      "host_label": "ホスト: ",
+      "mock": {
+        "notices": [
+          {
+            "id": 1,
+            "title": "決勝戦の時間変更のご案内",
+            "content": "従来の20:00から21:00に変更されました。すべての選手は20:30までに待機してください。",
+            "date": "1時間前",
             "host": "GAMERS Admin"
           },
           {
             "id": 2,
-            "title": "繧ｵ繝ｼ繝舌�繝｡繝ｳ繝�リ繝ｳ繧ｹ縺ｮ縺顔衍繧峨○",
-            "content": "螳牙ｮ壹＠縺溽ｫｶ謚迺ｰ蠅��縺溘ａ縲∝壕蜑�4譎ゅ°繧�6譎ゅ∪縺ｧ螳壽悄繝｡繝ｳ繝�リ繝ｳ繧ｹ縺瑚｡後ｏ繧後∪縺吶�",
-            "date": "3譎る俣蜑�",
+            "title": "サーバーメンテナンスのお知らせ",
+            "content": "安定した競技環境のため、午前4時から6時まで定期メンテナンスが行われます。",
+            "date": "3時間前",
             "host": "System Manager"
           }
         ],
         "rules": [
-          "縺吶∋縺ｦ縺ｮ隧ｦ蜷医�譛譁ｰ縺ｮ繝代ャ繝√ヰ繝ｼ繧ｸ繝ｧ繝ｳ縺ｧ騾ｲ陦後＆繧後∪縺吶�",
-          "隧ｦ蜷磯幕蟋�15蛻�燕縺ｾ縺ｧ縺ｫ繝ｭ繝薙�縺ｸ縺ｮ蜈･蝣ｴ繧貞ｮ御ｺ�☆繧句ｿ�ｦ√′縺ゅｊ縺ｾ縺吶�",
-          "莠ｺ遞ｮ蟾ｮ蛻･縲∬ｪｹ隰嶺ｸｭ蛯ｷ縺ｪ縺ｩ縺ｮ荳肴ｭ｣陦檎ぜ縺檎匱隕壹＠縺溷�ｴ蜷医∫峩縺｡縺ｫ螟ｱ譬ｼ蜃ｦ蛻�→縺ｪ繧翫∪縺吶�",
-          "荳譎ょ●豁｢縺ｯ蜷�メ繝ｼ繝�1蝗槭∵怙螟ｧ5蛻�∪縺ｧ險ｱ蜿ｯ縺輔ｌ縺ｾ縺吶�"
+          "すべての試合は最新のパッチバージョンで進行されます。",
+          "試合開始15分前までにロビーへの入場を完了する必要があります。",
+          "人種差別、誹謗中傷などの不正行為が発覚した場合、直ちに失格処分となります。",
+          "一時停止は各チーム1回、最大5分まで許可されます。"
         ],
         "schedule": [
           {
             "id": 1,
-            "title": "貅悶�ｱｺ蜍� A邨�",
+            "title": "準々決勝 A組",
             "time": "14:00",
-            "desc": "隨ｬ1隧ｦ蜷�",
+            "desc": "第1試合",
             "status": "completed"
           },
           {
             "id": 2,
-            "title": "貅悶�ｱｺ蜍� B邨�",
+            "title": "準々決勝 B組",
             "time": "15:30",
-            "desc": "隨ｬ2隧ｦ蜷�",
+            "desc": "第2試合",
             "status": "completed"
           },
           {
             "id": 3,
-            "title": "貅匁ｱｺ蜍�",
+            "title": "準決勝",
             "time": "20:00",
             "desc": "BO3",
             "status": "active",
@@ -494,325 +449,399 @@
           },
           {
             "id": 4,
-            "title": "陦ｨ蠖ｰ蠑上♀繧医�髢牙ｹ�",
+            "title": "表彰式および閉幕",
             "time": "22:00",
             "status": "pending"
           }
         ],
         "faqs": [
           {
-            "q": "隧ｦ蜷井ｸｭ縺ｫ繝斐Φ繧ｰ縺碁ｫ倥￥縺ｪ縺｣縺溘ｉ縺ｩ縺�☆繧後�縺�＞縺ｧ縺吶°��",
-            "a": "逶ｴ縺｡縺ｫ邂｡逅��↓騾｣邨｡縺励√せ繧ｿ繝�ヵ縺ｮ謖�､ｺ縺ｫ蠕薙▲縺ｦ縺上□縺輔＞縲�"
+            "q": "試合中にピングが高くなったらどうすればいいですか？",
+            "a": "直ちに管理者に連絡し、スタッフの指示に従ってください。"
           },
           {
-            "q": "莠､莉｣驕ｸ謇九�菴穂ｺｺ縺ｾ縺ｧ逋ｻ骭ｲ蜿ｯ閭ｽ縺ｧ縺吶°��",
-            "a": "1繝√�繝�縺ｫ縺､縺肴怙螟ｧ2莠ｺ縺ｮ謗ｧ縺磯∈謇九ｒ逋ｻ骭ｲ縺ｧ縺阪∪縺吶�"
+            "q": "交代選手は何人まで登録可能ですか？",
+            "a": "1チームにつき最大2人の控え選手を登録できます。"
           },
           {
-            "q": "螟ｧ莨夊ｳ樣≡縺ｯ縺�▽謾ｯ謇輔ｏ繧後∪縺吶°��",
-            "a": "螟ｧ莨夂ｵゆｺ�ｾ後∝霧讌ｭ譌･蝓ｺ貅悶〒7譌･莉･蜀�↓謾ｯ謇輔ｏ繧後∪縺吶�"
+            "q": "大会賞金はいつ支払われますか？",
+            "a": "大会終了後、営業日基準で7日以内に支払われます。"
           }
         ]
       }
     },
     "rounds": {
-      "quarter_final": "貅悶�ｱｺ蜍�",
-      "group": "繧ｰ繝ｫ繝ｼ繝�"
+      "quarter_final": "準々決勝",
+      "group": "グループ"
     },
     "team": {
-      "current_leader": "迴ｾ蝨ｨ縺ｮ繝ｪ繝ｼ繝繝ｼ",
-      "transfer_desc": "繝ｪ繝ｼ繝繝ｼ讓ｩ髯舌ｒ蟋碑ｭｲ縺ｧ縺阪∪縺吶�",
-      "me": "(閾ｪ蛻�)"
+      "current_leader": "現在のリーダー",
+      "transfer_desc": "リーダー権限を委譲できます。",
+      "me": "(自分)"
     },
     "ranks": {
-      "diamond": "繝繧､繝､ {{level}}",
-      "platinum": "繝励Λ繝√リ {{level}}"
+      "diamond": "ダイヤ {{level}}",
+      "platinum": "プラチナ {{level}}"
     }
   },
   "admin": {
     "contest": {
-      "management": "螟ｧ莨夂ｮ｡逅�",
-      "force_end": "螟ｧ莨壼ｼｷ蛻ｶ邨ゆｺ�",
-      "edit": "螟ｧ莨壻ｿｮ豁｣"
+      "management": "大会管理",
+      "force_end": "大会強制終了",
+      "edit": "大会修正"
     },
     "member": {
-      "title": "繝｡繝ｳ繝舌�邂｡逅�",
-      "total_users": "蜷郁ｨ� <1>{{count}}</1> 蜷阪�逋ｻ骭ｲ繝ｦ繝ｼ繧ｶ繝ｼ",
-      "search_placeholder": "繝九ャ繧ｯ繝阪�繝�縲√Γ繝ｼ繝ｫ繧｢繝峨Ξ繧ｹ縺ｧ讀懃ｴ｢...",
-      "export": "繧ｨ繧ｯ繧ｹ繝昴�繝�",
+      "title": "メンバー管理",
+      "total_users": "合計 <1>{{count}}</1> 名の登録ユーザー",
+      "search_placeholder": "ニックネーム、メールアドレスで検索...",
+      "export": "エクスポート",
       "tabs": {
-        "all": "縺吶∋縺ｦ",
-        "active": "繧｢繧ｯ繝�ぅ繝�",
-        "banned": "蛛懈ｭ｢",
-        "staff": "驕句霧髯｣",
-        "new": "譁ｰ隕� (7譌･)"
+        "all": "すべて",
+        "active": "アクティブ",
+        "banned": "停止",
+        "staff": "運営陣",
+        "new": "新規 (7日)"
       },
       "table": {
-        "user": "繝ｦ繝ｼ繧ｶ繝ｼ",
-        "role": "蠖ｹ蜑ｲ",
-        "status": "迥ｶ諷�",
-        "join_date": "蜉�蜈･譌･",
-        "last_active": "譛邨よｴｻ蜍�",
-        "action": "繧｢繧ｯ繧ｷ繝ｧ繝ｳ",
+        "user": "ユーザー",
+        "role": "役割",
+        "status": "状態",
+        "join_date": "加入日",
+        "last_active": "最終活動",
+        "action": "アクション",
         "role_labels": {
-          "staff": "驕句霧髯｣",
-          "manager": "繝槭ロ繝ｼ繧ｸ繝｣繝ｼ",
-          "user": "荳闊ｬ"
+          "staff": "運営陣",
+          "manager": "マネージャー",
+          "user": "一般"
         }
       },
       "status": {
-        "active": "譛牙柑",
-        "banned": "蛛懈ｭ｢",
-        "warning": "隴ｦ蜻�"
+        "active": "有効",
+        "banned": "停止",
+        "warning": "警告"
       },
       "pagination": {
-        "range": "<1>{{start}}-{{end}}</1> / {{total}}蜷�"
+        "range": "<1>{{start}}-{{end}}</1> / {{total}}名"
       },
       "time": {
-        "just_now": "縺溘▲縺滉ｻ�",
-        "3_days_ago": "3譌･蜑�",
-        "1_hour_ago": "1譎る俣蜑�",
-        "5_mins_ago": "5蛻�燕",
-        "32_mins_ago": "32蛻�燕",
-        "2_days_ago": "2譌･蜑�"
+        "just_now": "たった今",
+        "3_days_ago": "3日前",
+        "1_hour_ago": "1時間前",
+        "5_mins_ago": "5分前",
+        "32_mins_ago": "32分前",
+        "2_days_ago": "2日前"
       }
     },
     "contest_detail": {
       "tabs": {
-        "overview": "讎りｦ�",
-        "members": "繝｡繝ｳ繝舌�邂｡逅�",
-        "applications": "逕ｳ隲区嶌蜃ｦ逅�",
-        "teams": "繝√�繝�驟榊�",
-        "brackets": "繝医�繝翫Γ繝ｳ繝郁｡ｨ",
-        "notices": "縺顔衍繧峨○",
-        "settings": "險ｭ螳�"
+        "overview": "概要",
+        "members": "メンバー管理",
+        "applications": "申請書処理",
+        "teams": "チーム配分",
+        "brackets": "トーナメント表",
+        "notices": "お知らせ",
+        "settings": "設定"
       },
       "hero": {
-        "host": "荳ｻ蛯ｬ",
-        "staff": "繧ｹ繧ｿ繝�ヵ",
-        "staff_count": "{{count}}蜷�",
-        "total_participants": "邱丞盾蜉�閠�",
-        "teams": "繝√�繝�",
-        "current_round": "迴ｾ蝨ｨ縺ｮ繝ｩ繧ｦ繝ｳ繝�"
+        "host": "主催",
+        "staff": "スタッフ",
+        "staff_count": "{{count}}名",
+        "total_participants": "総参加者",
+        "teams": "チーム",
+        "current_round": "現在のラウンド"
       },
       "sidebar": {
-        "quick_actions": "繧ｯ繧､繝�け繧｢繧ｯ繧ｷ繝ｧ繝ｳ",
-        "add_participant": "蜿ょ刈閠��逶ｴ謗･霑ｽ蜉�",
-        "auto_team": "繝√�繝�閾ｪ蜍暮�蛻�",
-        "match_result": "隧ｦ蜷育ｵ先棡縺ｮ蜈･蜉�",
-        "export": "蜿ょ刈閠�Μ繧ｹ繝医�蜃ｺ蜉�",
-        "status": "蜿ょ刈閠��迥ｶ豕�",
-        "participant_count": "{{current}} / {{max}}蜷�",
-        "view_more": "+ {{count}}蜷阪ｂ縺｣縺ｨ隕九ｋ"
+        "quick_actions": "クイックアクション",
+        "add_participant": "参加者の直接追加",
+        "auto_team": "チーム自動配分",
+        "match_result": "試合結果の入力",
+        "export": "参加者リストの出力",
+        "status": "参加者の状況",
+        "participant_count": "{{current}} / {{max}}名",
+        "view_more": "+ {{count}}名もっと見る"
       },
       "overview": {
-        "round_management": "繝ｩ繧ｦ繝ｳ繝臥ｮ｡逅�",
-        "round_desc": "螟ｧ莨壹�騾ｲ陦梧ｮｵ髫弱ｒ蛻ｶ蠕｡縺励∪縺�",
-        "round_status": "Round {{round}} 騾ｲ陦御ｸｭ",
-        "round_confirm": "谺｡繝ｩ繧ｦ繝ｳ繝蛾幕蟋区凾縺ｫ<1>迴ｾ蝨ｨ騾ｲ陦御ｸｭ縺ｮ繝槭ャ繝√′遒ｺ螳�</1>縺輔ｌ縺ｾ縺�",
-        "next_round": "谺｡縺ｮ繝ｩ繧ｦ繝ｳ繝峨∈",
-        "pending_applications": "蠕�ｩ滉ｸｭ縺ｮ逕ｳ隲区嶌",
-        "pending_count": "{{count}}莉ｶ蠕�ｩ�",
-        "accept": "蜿苓ｫｾ",
-        "reject": "諡堤ｵｶ",
-        "notices": "縺顔衍繧峨○",
-        "create_notice": "縺顔衍繧峨○菴懈�",
-        "mock_notice_title": "隨ｬ3繝ｩ繧ｦ繝ｳ繝画律遞九�縺疲｡亥�",
-        "mock_notice_content": "隨ｬ3繝ｩ繧ｦ繝ｳ繝峨�4譛�2譌･蜊亥ｾ�8譎る幕蟋倶ｺ亥ｮ壹〒縺吶ゅメ繝ｼ繝�繝ｪ繝ｼ繝繝ｼ縺ｯ蠢�★Discord繝√Ε繝ｳ繝阪Ν繧堤｢ｺ隱阪＠縺ｦ縺上□縺輔＞縲�"
+        "round_management": "ラウンド管理",
+        "round_desc": "大会の進行段階を制御します",
+        "round_status": "Round {{round}} 進行中",
+        "round_confirm": "次ラウンド開始時に<1>現在進行中のマッチが確定</1>されます",
+        "next_round": "次のラウンドへ",
+        "pending_applications": "待機中の申請書",
+        "pending_count": "{{count}}件待機",
+        "accept": "受諾",
+        "reject": "拒絶",
+        "notices": "お知らせ",
+        "create_notice": "お知らせ作成",
+        "mock_notice_title": "第3ラウンド日程のご案内",
+        "mock_notice_content": "第3ラウンドは4月2日午後8時開始予定です。チームリーダーは必ずDiscordチャンネルを確認してください。"
       }
     }
   },
   "auth": {
     "common": {
-      "divider_or": "縺ｾ縺溘�",
+      "divider_or": "または",
       "discord": "Discord"
     },
     "layout": {
-      "back_to_home": "繝ｩ繝ｳ繝�ぅ繝ｳ繧ｰ繝壹�繧ｸ縺ｸ"
+      "back_to_home": "ランディングページへ"
     },
     "hero": {
-      "title_1": "縺ゅ↑縺溘□縺代�",
-      "title_2": "繧ｲ繝ｼ繝溘Φ繧ｰ繧､繝ｳ繝輔Λ",
+      "title_1": "あなただけの",
+      "title_2": "ゲーミングインフラ",
       "title_3": "GAMERS",
-      "description": "蝗ｽ蜀�怙螟ｧ邏壹�繝ｪ繧｢繝ｫ繧ｿ繧､繝�E-Sports繝医�繝翫Γ繝ｳ繝磯°逕ｨ繝励Λ繝�ヨ繝輔か繝ｼ繝�縲ゅ☆縺ｹ縺ｦ縺ｮ繧ｲ繝ｼ繝槭�縺ｮ縺溘ａ縺ｮ繧､繝ｳ繝輔Λ縲；AMERS縲�"
+      "description": "国内最大級のリアルタイムE-Sportsトーナメント運用プラットフォーム。すべてのゲーマーのためのインフラ、GAMERS。"
     },
     "login": {
-      "title": "縺翫°縺壱ｦｬ縺ｪ縺輔＞",
-      "subtitle": "GAMERS縺ｫ繝ｭ繧ｰ繧､繝ｳ縺励※縺上□縺輔＞",
+      "title": "おかえ리なさい",
+      "subtitle": "GAMERSにログインしてください",
       "fields": {
-        "email_label": "繝｡繝ｼ繝ｫ繧｢繝峨Ξ繧ｹ",
+        "email_label": "メールアドレス",
         "email_placeholder": "name@example.com",
-        "password_label": "繝代せ繝ｯ繝ｼ繝�",
-        "password_placeholder": "窶｢窶｢窶｢窶｢窶｢窶｢窶｢窶｢",
-        "find_password": "繝代せ繝ｯ繝ｼ繝峨ｒ蠢倥ｌ縺溷�ｴ蜷�"
+        "password_label": "パスワード",
+        "password_placeholder": "••••••••",
+        "find_password": "パスワードを忘れた場合"
       },
       "validation": {
-        "email_invalid": "譛牙柑縺ｪ繝｡繝ｼ繝ｫ繧｢繝峨Ξ繧ｹ繧貞�蜉帙＠縺ｦ縺上□縺輔＞縲�",
-        "password_required": "繝代せ繝ｯ繝ｼ繝峨ｒ蜈･蜉帙＠縺ｦ縺上□縺輔＞縲�"
+        "email_invalid": "有効なメールアドレスを入力してください。",
+        "password_required": "パスワードを入力してください。"
       },
-      "error_failed": "繝ｭ繧ｰ繧､繝ｳ縺ｫ螟ｱ謨励＠縺ｾ縺励◆縲�",
-      "submit_btn": "繝ｭ繧ｰ繧､繝ｳ",
+      "error_failed": "ログインに失敗しました。",
+      "submit_btn": "ログイン",
       "footer": {
-        "no_account": "繧｢繧ｫ繧ｦ繝ｳ繝医ｒ縺頑戟縺｡縺ｧ縺ｪ縺�〒縺吶°��",
-        "signup_link": "莨壼藤逋ｻ骭ｲ"
+        "no_account": "アカウントをお持ちでないですか？",
+        "signup_link": "会員登録"
       }
     },
     "signup": {
-      "title": "GAMERS縺ｫ\n蜿ょ刈縺励∪縺励ｇ縺�",
-      "subtitle": "繧ｲ繝ｼ繝槭�縺ｨ縺励※縺ｮ譛蛻昴�險俶�繧貞ｧ九ａ縺ｾ縺励ｇ縺�",
+      "title": "GAMERSに\n参加しましょう",
+      "subtitle": "ゲーマーとしての最初の記憶を始めましょう",
       "fields": {
-        "username_label": "繝九ャ繧ｯ繝阪�繝�",
+        "username_label": "ニックネーム",
         "username_placeholder": "GamerPro",
-        "email_label": "繝｡繝ｼ繝ｫ繧｢繝峨Ξ繧ｹ",
+        "email_label": "メールアドレス",
         "email_placeholder": "name@example.com",
-        "password_label": "繝代せ繝ｯ繝ｼ繝�",
-        "password_placeholder": "窶｢窶｢窶｢窶｢窶｢窶｢窶｢窶｢"
+        "password_label": "パスワード",
+        "password_placeholder": "••••••••"
       },
       "validation": {
-        "username_min": "繝九ャ繧ｯ繝阪�繝�縺ｯ蟆代↑縺上→繧�2譁�ｭ嶺ｻ･荳翫〒縺ゅｋ蠢�ｦ√′縺ゅｊ縺ｾ縺吶�",
-        "email_invalid": "譛牙柑縺ｪ繝｡繝ｼ繝ｫ繧｢繝峨Ξ繧ｹ繧貞�蜉帙＠縺ｦ縺上□縺輔＞縲�",
-        "password_min": "繝代せ繝ｯ繝ｼ繝峨�蟆代↑縺上→繧�8譁�ｭ嶺ｻ･荳翫〒縺ゅｋ蠢�ｦ√′縺ゅｊ縺ｾ縺吶�"
+        "username_min": "ニックネームは少なくとも2文字以上である必要があります。",
+        "email_invalid": "有効なメールアドレスを入力してください。",
+        "password_min": "パスワードは少なくとも8文字以上である必要があります。"
       },
-      "error_failed": "莨壼藤逋ｻ骭ｲ縺ｫ螟ｱ謨励＠縺ｾ縺励◆縲�",
-      "submit_btn": "莨壼藤逋ｻ骭ｲ",
+      "error_failed": "会員登録に失敗しました。",
+      "submit_btn": "会員登録",
       "social": {
-        "discord_continue": "Discord縺ｧ邯咏ｶ�"
+        "discord_continue": "Discordで継続"
       },
       "footer": {
-        "has_account": "縺吶〒縺ｫ繧｢繧ｫ繧ｦ繝ｳ繝医ｒ縺頑戟縺｡縺ｧ縺吶°��",
-        "login_link": "繝ｭ繧ｰ繧､繝ｳ"
+        "has_account": "すでにアカウントをお持ちですか？",
+        "login_link": "ログイン"
       }
     }
   },
   "landing": {
     "hero": {
       "tag": "GAMERS: E-SPORTS INFRASTRUCTURE FOR EVERYONE",
-      "title_1": "閾ｪ蛻�□縺代�",
-      "title_2": "螟ｧ莨壹ｒ螳檎挑縺ｫ縲�",
-      "subtitle": "GAMERS縺ｯ螟ｧ莨壻ｽ懈�縺九ｉ驕句霧縲√メ繝ｼ繝�蜍滄寔縲∬ｩｦ蜷育ｵ先棡縺ｮ邂｡逅�∪縺ｧ縲―n縺吶∋縺ｦ縺ｮE-Sports繝励Ο繧ｻ繧ｹ繧定�蜍募喧縺吶ｋ繧ｪ繝ｼ繝ｫ繧､繝ｳ繝ｯ繝ｳ繝ｻ繝励Λ繝�ヨ繝輔か繝ｼ繝�縺ｧ縺吶�",
-      "cta_join": "螟ｧ莨壹↓逕ｳ縺苓ｾｼ繧",
-      "cta_create": "螟ｧ莨壹ｒ髢句ぎ縺吶ｋ"
+      "title_1": "自分だけの",
+      "title_2": "大会を完璧に。",
+      "subtitle": "GAMERSは大会作成から運営、チーム募集、試合結果の管理まで、\nすべてのE-Sportsプロセスを自動化するオールインワン・プラットフォームです。",
+      "cta_join": "大会に申し込む",
+      "cta_create": "大会を開催する"
     },
     "problem": {
       "tag": "PAIN POINTS",
-      "title": "螟ｧ莨夐°蝟ｶ縺ｯ縲√↑縺彌n縺薙ｌ縺ｻ縺ｩ螟ｧ螟峨↑縺ｮ縺ｧ縺励ｇ縺�°��",
+      "title": "大会運営は、なぜ\nこれほど大変なのでしょうか？",
       "card_1": {
-        "title": "謇句虚繝��繧ｿ邂｡逅�",
-        "description": "Google繝輔か繝ｼ繝�縲・xcel縲．iscord髢薙�謇句虚繝��繧ｿ縺ｮ蜷梧悄縺ｯ繧ゅ≧荳崎ｦ√〒縺吶�"
+        "title": "手動データ管理",
+        "description": "Googleフォーム、Excel、Discord間の手動データの同期はもう不要です。"
       },
       "card_2": {
-        "title": "髱｢蛟偵↑讀懆ｨｼ繝励Ο繧ｻ繧ｹ",
-        "description": "繝�ぅ繧｢縺ｮ讀懆ｨｼ繧�悽莠ｺ遒ｺ隱阪�縺溘ａ縺ｮ髱｢蛟偵↑繝励Ο繧ｻ繧ｹ縺九ｉ隗｣謾ｾ縲�AMERS縺瑚�蜍輔〒陦後＞縺ｾ縺吶�"
+        "title": "面倒な検証プロセス",
+        "description": "ティアの検証や本人確認のための面倒なプロセスから解放。GAMERSが自動で行います。"
       },
       "card_3": {
-        "title": "驕句霧縺ｮ荳埼乗�諤ｧ",
-        "description": "邨先棡縺ｮ髮�ｨ医Α繧ｹ繧�愛螳壹ヨ繝ｩ繝悶Ν繧帝亟豁｢縲る乗�縺ｧ蜈ｬ豁｣縺ｪ驕句霧迺ｰ蠅�ｒ謠蝉ｾ帙＠縺ｾ縺吶�"
+        "title": "運営の不透明性",
+        "description": "結果の集計ミスや判定トラブルを防止。透明で公正な運営環境を提供します。"
       }
     },
     "solution": {
       "tag": "THE SOLUTION",
-      "title": "隍�尅縺ｪ驕句霧繧箪n繝ｯ繝ｳ繧ｯ繝ｪ繝�け縺ｧ縲�",
+      "title": "複雑な運営を\nワンクリックで。",
       "item_1": {
-        "title": "閾ｪ蜍輔ヨ繝ｼ繝翫Γ繝ｳ繝郁｡ｨ逕滓�",
-        "description": "蜿ょ刈逕ｳ霎ｼ縺九ｉ繝医�繝翫Γ繝ｳ繝郁｡ｨ遒ｺ螳壹∪縺ｧ1遘偵〒蜊∝�縺ｧ縺吶�"
+        "title": "自動トーナメント表生成",
+        "description": "参加申込からトーナメント表確定まで1秒で十分です。"
       },
       "item_2": {
-        "title": "繝ｪ繧｢繝ｫ繧ｿ繧､繝�縺ｮ繝√�繝�繝槭ャ繝√Φ繧ｰ",
-        "description": "繝√�繝�繝｡繧､繝医ｒ諡帛ｾ�＠蠖ｹ蜑ｲ繧貞牡繧雁ｽ薙※縺ｦ縲∝ｮ檎挑縺ｪ繧ｷ繝翫ず繝ｼ繧堤函縺ｿ蜃ｺ縺励∪縺励ｇ縺��"
+        "title": "リアルタイムのチームマッチング",
+        "description": "チームメイトを招待し役割を割り当てて、完璧なシナジーを生み出しましょう。"
       },
       "item_3": {
-        "title": "Discord繝懊ャ繝磯｣謳ｺ",
-        "description": "繝懊ャ繝医′縺吶∋縺ｦ縺ｮ繝√Ε繝ｳ繝阪Ν邂｡逅�→騾夂衍繧定�蜍慕噪縺ｫ蜃ｦ逅�＠縺ｾ縺吶�"
+        "title": "Discordボット連携",
+        "description": "ボットがすべてのチャンネル管理と通知を自動的に処理します。"
       }
     },
     "features": {
       "tag": "POWERFUL FEATURES",
-      "title": "縺吶∋縺ｦ縺瑚�蜍募喧縺輔ｌ縺溷茜萓ｿ諤ｧ",
+      "title": "すべてが自動化された利便性",
       "card_1": {
-        "title": "閾ｪ蜍輔ヨ繝ｼ繝翫Γ繝ｳ繝郁｡ｨ",
-        "description": "螟壽ｧ倥↑繝医�繝翫Γ繝ｳ繝亥ｽ｢蠑上↓蜷医ｏ縺帙◆鬮伜ｺｦ縺ｪ蟇ｾ謌ｦ逕滓�繧偵し繝昴�繝医＠縺ｾ縺吶�"
+        "title": "自動トーナメント表",
+        "description": "多様なトーナメント形式に合わせた高度な対戦生成をサポートします。"
       },
       "card_2": {
-        "title": "蜿ょ刈閠��讀懆ｨｼ",
-        "description": "繝ｪ繧｢繝ｫ繧ｿ繧､繝�縺ｮAPI騾｣謳ｺ縺ｫ繧医ｊ縲∵ｭ｣遒ｺ縺ｪ繧ｲ繝ｼ繝�蜀�ョ繝ｼ繧ｿ縺ｮ讀懆ｨｼ縺悟庄閭ｽ縺ｧ縺吶�"
+        "title": "参加者の検証",
+        "description": "リアルタイムのAPI連携により、正確なゲーム内データの検証が可能です。"
       },
       "card_3": {
-        "title": "邨ｱ蜷磯夂衍",
-        "description": "驥崎ｦ√↑譌･遞九ｄ邨先棡諠��ｱ繧偵Μ繧｢繝ｫ繧ｿ繧､繝�縺ｧ蜿ょ刈閠�↓莨昴∴縺ｾ縺吶�"
+        "title": "統合通知",
+        "description": "重要な日程や結果情報をリアルタイムで参加者に伝えます。"
       },
       "card_4": {
-        "title": "邂｡逅��ム繝�す繝･繝懊�繝�",
-        "description": "荳逶ｮ縺ｧ繧上°繧九ョ繝ｼ繧ｿ縺ｧ縲∝､ｧ莨壹�騾ｲ陦檎憾豕√ｒ繝ｪ繧｢繝ｫ繧ｿ繧､繝�縺ｧ邂｡逅�＠縺ｾ縺励ｇ縺��"
+        "title": "管理者ダッシュボード",
+        "description": "一目でわかるデータで、大会の進行状況をリアルタイムで管理しましょう。"
       }
     },
     "cta": {
       "tag": "READY TO PLAY?",
-      "title": "莉翫☆縺申n蟋九ａ縺ｾ縺励ｇ縺�",
-      "subtitle": "譌･譛ｬ譛螟ｧ邏壹�繧ｲ繝ｼ繝溘Φ繧ｰ繧ｪ繝ｼ繝励Φ繝ｻ繝医�繝翫Γ繝ｳ繝医�繝ｩ繝�ヨ繝輔か繝ｼ繝�\nGAMERS縺ｨ蜈ｱ縺ｫ謌宣聞繧剃ｽ馴ｨ薙＠縺ｦ縺上□縺輔＞縲�",
-      "button": "辟｡譁吶〒蟋九ａ繧�"
+      "title": "今すぐ\n始めましょう",
+      "subtitle": "日本最大級のゲーミングオープン・トーナメントプラットフォーム\nGAMERSと共に成長を体験してください。",
+      "button": "無料で始める"
     }
   },
   "community": {
-    "title": "繧ｳ繝溘Η繝駈恐",
-    "subtitle": "荳也阜荳ｭ縺ｮ繧ｲ繝ｼ繝槭�縺ｨ諠��ｱ繧貞�譛峨＠縲―n蜈ｱ縺ｫ謌宣聞縺吶ｋ繝√�繝�繝｡繧､繝医ｒ隕九▽縺代∪縺励ｇ縺��",
-    "write_post": "謚慕ｨｿ縺吶ｋ",
+    "title": "コミュニ티",
+    "subtitle": "世界中のゲーマーと情報を共有し、\n共に成長するチームメイトを見つけましょう。",
+    "write_post": "投稿する",
     "categories": {
-      "all": "縺吶∋縺ｦ",
-      "free": "閾ｪ逕ｱ謗ｲ遉ｺ譚ｿ",
-      "tips": "謾ｻ逡･ & 繝√ャ繝励せ",
-      "recruiting": "繝｡繝ｳ繝仙供髮�",
-      "reviews": "讖滓攝 & 繝ｬ繝薙Η繝ｼ"
+      "all": "すべて",
+      "free": "自由掲示板",
+      "tips": "攻略 & チップス",
+      "recruiting": "メンバ募集",
+      "reviews": "機材 & レビュー"
     },
     "post": {
-      "recruiting_status": "蜍滄寔荳ｭ",
+      "recruiting_status": "募集中",
       "hot": "HOT",
-      "views": "髢ｲ隕ｧ",
-      "comments": "繧ｳ繝｡繝ｳ繝�",
-      "likes": "縺翫☆縺吶ａ",
+      "views": "閲覧",
+      "comments": "コメント",
+      "likes": "おすすめ",
       "time_ago": {
-        "hours": "{{count}}譎る俣蜑�",
-        "days": "{{count}}譌･蜑�"
+        "hours": "{{count}}時間前",
+        "days": "{{count}}日前"
       }
     },
     "sidebar": {
-      "popular_posts": "莉願ｩｱ鬘後�謚慕ｨｿ",
-      "team_recruiting": "譁ｰ隕上Γ繝ｳ繝舌�蜍滄寔",
+      "popular_posts": "今話題の投稿",
+      "team_recruiting": "新規メンバー募集",
       "cta": {
-        "title": "繧ゅ▲縺ｨ蠎�＞荳也阜縺ｸ\n雕上∩蜃ｺ縺励∪縺励ｇ縺�",
-        "subtitle": "莉翫☆縺仙盾蜉�縺励※縲∽ｸ也阜荳ｭ縺ｮ繧ｲ繝ｼ繝槭�縺ｨ莠､豬√ｒ蟋九ａ縺ｾ縺励ｇ縺��",
-        "button": "繧ｳ繝溘Η繝九ユ繧｣縺ｫ蜿ょ刈"
+        "title": "もっと広い世界へ\n踏み出しましょう",
+        "subtitle": "今すぐ参加して、世界中のゲーマーと交流を始めましょう。",
+        "button": "コミュニティに参加"
       }
     },
     "mock_posts": {
       "post1": {
-        "title": "譁ｰ繝代ャ繝∝ｾ後�VALORANT繧ｨ繝ｳ繝医Μ繝ｼ1繝�ぅ繧｢縺ｾ縺ｨ繧�",
-        "preview": "莉雁屓縺ｮ8.0繝代ャ繝∽ｻ･髯阪∵欠讓吶′諤･荳頑�縺励◆繧ｨ繝ｳ繝医Μ繝ｼ繧ｨ繝ｼ繧ｸ繧ｧ繝ｳ繝医↓縺､縺�※蛻�梵縺励∪縺励◆縲ら音縺ｫ繝ｬ繧､繧ｺ縺ｮ蠑ｷ蛹悶′..."
+        "title": "新パッチ後のVALORANTエントリー1ティアまとめ",
+        "preview": "今回の8.0パッチ以降、指標が急上昇したエントリーエージェントについて分析しました。特にレイズの強化が..."
       },
       "post2": {
-        "title": "LoL繧｢繧ｫ繝�Α繝ｼ繝ｪ繝ｼ繧ｰ 繧ｷ繝ｼ繧ｺ繝ｳ4 蜿ょ刈繝｡繝ｳ繝舌�蜍滄寔 (ADC/SUP)",
-        "preview": "蟷ｳ蝮�ム繧､繝､1繝�ぅ繧｢莉･荳翫�繝√�繝�縺ｧ縺吶る聞譛溽噪縺ｫ騾｣謳ｺ繧呈ｷｱ繧√↑縺後ｉ謌宣聞縺励◆縺�婿縺ｮ騾｣邨｡繧偵♀蠕�■縺励※縺�∪縺吶�"
+        "title": "LoLアカデミーリーグ シーズン4 参加メンバー募集 (ADC/SUP)",
+        "preview": "平均ダイヤ1ティア以上のチームです。長期的に連携を深めながら成長したい方の連絡をお待ちしています。"
       },
       "post3": {
-        "title": "VALORANT繝√Ε繝ｬ繝ｳ繧ｸ繝｣繝ｼ繧ｺ莠磯∈ 3縺､縺ｮ豕ｨ逶ｮ繝昴う繝ｳ繝�",
-        "preview": "莉企ｱ譛ｫ縺ｫ陦後ｏ繧後ｋ繝√Ε繝ｬ繝ｳ繧ｸ繝｣繝ｼ繧ｺ莠磯∈縺ｧ豕ｨ逶ｮ縺吶∋縺肴姶逡･逧��繧､繝ｳ繝医→荳ｻ隕√↑莠､謌ｦ繧ｨ繝ｪ繧｢繧偵∪縺ｨ繧√∪縺励◆縲�"
+        "title": "VALORANTチャレンジャーズ予選 3つの注目ポイント",
+        "preview": "今週末に行われるチャレンジャーズ予選で注目すべき戦略的ポイントと主要な交戦エリアをまとめました。"
       },
       "post4": {
-        "title": "縲舌♀遏･繧峨○縲賎AMERS繧ｳ繝溘Η繝九ユ繧｣蛻ｩ逕ｨ隕丞ｮ壹�縺疲｡亥� (蠢�ｪｭ)",
-        "preview": "蛛･蜈ｨ縺ｪ繧ｳ繝溘Η繝九ユ繧｣譁�喧縺ｮ縺溘ａ縺ｫ縲√Θ繝ｼ繧ｶ繝ｼ縺ｮ逧�ｧ倥′螳医ｋ縺ｹ縺崎ｦ丞ｮ壹ｒ縺ｾ縺ｨ繧√∪縺励◆縲る＆蜿肴凾縺ｫ縺ｯ..."
+        "title": "【お知らせ】GAMERSコミュニティ利用規定のご案内 (必読)",
+        "preview": "健全なコミュニティ文化のために、ユーザーの皆様が守るべき規定をまとめました。違反時には..."
       },
       "post5": {
-        "title": "繧ｸ繝｣繝ｳ繧ｰ繝ｩ繝ｼ縺ｮ縺溘ａ縺ｮ蜍慕ｷ壽怙驕ｩ蛹悶ぎ繧､繝� (14.6繝代ャ繝∝渕貅�)",
-        "preview": "蠎冗乢縺ｮ繧ｹ繧ｫ繝医Ν謌ｦ縺ｧ蜆ｪ菴阪↓遶九▽縺溘ａ縺ｮ譛譁ｰ繝ｫ繝ｼ繝医→繧ｬ繝ｳ繧ｯ繧ｿ繧､繝溘Φ繧ｰ縺ｫ縺､縺�※隧ｳ邏ｰ縺ｫ隗｣隱ｬ縺励∪縺吶�"
+        "title": "ジャングラーのための動線最適化ガイド (14.6パッチ基準)",
+        "preview": "序盤のスカトル戦で優位に立つための最新ルートとガンクタイミングについて詳細に解説します。"
       }
     },
     "mock_recruitment": {
       "post1": {
-        "title": "縲新ALORANT縲代う繝｢繝ｼ繧ｿ繝ｫ莉･荳翫せ繧ｯ繝ｪ繝�繝｡繝ｳ繝舌�蜍滄寔",
-        "tags": "#繧ｨ繝ｳ繝医Μ繝ｼ #繧､繝九す繧ｨ繝ｼ繧ｿ繝ｼ #邱ｴ鄙帝㍼菫晁ｨｼ"
+        "title": "【VALORANT】イモータル以上スクリムメンバー募集",
+        "tags": "#エントリー #イニシエーター #練習量保証"
       },
       "post2": {
-        "title": "縲伸oL縲代Λ繝ｳ繧ｯ & Clash 荳邱偵↓繧�ｊ縺ｾ縺励ｇ縺�ｼ�",
-        "tags": "#繝励Λ繝√リ #繧ｨ繝ｳ繧ｸ繝ｧ繧､ #繝槭う繧ｯ蠢���"
+        "title": "【LoL】ランク & Clash 一緒にやりましょう！",
+        "tags": "#プラチナ #エンジョイ #マイク必須"
+      }
+    }
+  },
+  "admin": {
+    "sidebar": {
+      "dashboard": "ダッシュボード",
+      "members": "メンバー管理",
+      "contests": "大会管理",
+      "reports": "通報管理",
+      "settings": "システム設定",
+      "console": "管理者コンソール"
+    },
+    "login": {
+      "title": "おかえりなさい",
+      "subtitle": "管理者パネルにアクセスするには、アカウント情報を入力してください。",
+      "fields": {
+        "email_label": "メールアドレス",
+        "email_placeholder": "admin@gamers.com",
+        "password_label": "パスワード",
+        "password_placeholder": "••••••••••••",
+        "find_password": "パスワードを忘れたましたか？",
+        "remember_me": "このデバイスを記憶する"
+      },
+      "submit_btn": "ログイン",
+      "footer": {
+        "not_admin": "管理者ではありませんか？",
+        "return_link": "プラットフォームに戻る"
+      }
+    },
+    "contest": {
+      "management": "大会管理",
+      "force_end": "大会強制終了",
+      "edit": "大会修正"
+    },
+    "member": {
+      "title": "メンバー管理",
+      "total_users": "合計 <1>{{count}}</1> 名の登録ユーザー",
+      "search_placeholder": "ニックネーム、メールアドレスで検索...",
+      "export": "エクスポート",
+      "tabs": {
+        "all": "すべて",
+        "active": "アクティブ",
+        "banned": "停止",
+        "staff": "運営陣",
+        "new": "新規 (7日)"
+      },
+      "table": {
+        "user": "ユーザー",
+        "role": "役割",
+        "status": "状態",
+        "join_date": "加入日",
+        "last_active": "最終活動",
+        "action": "アクション",
+        "role_labels": {
+          "staff": "運営陣",
+          "manager": "マネージャー",
+          "user": "一般"
+        }
+      },
+      "status": {
+        "active": "有効",
+        "banned": "停止",
+        "warning": "警告"
+      },
+      "pagination": {
+        "range": "<1>{{start}}-{{end}}</1> / {{total}}名"
+      },
+      "time": {
+        "just_now": "たった今",
+        "3_days_ago": "3日前",
+        "1_hour_ago": "1時間前",
+        "5_mins_ago": "5分前",
+        "32_mins_ago": "32分前",
+        "2_days_ago": "2日前"
       }
     }
   }
