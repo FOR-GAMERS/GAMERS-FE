@@ -573,6 +573,68 @@
       }
     }
   },
+  "auth": {
+    "common": {
+      "divider_or": "または",
+      "discord": "Discord"
+    },
+    "layout": {
+      "back_to_home": "ランディングページへ"
+    },
+    "hero": {
+      "title_1": "あなただけの",
+      "title_2": "ゲーミングインフラ",
+      "title_3": "GAMERS",
+      "description": "国内最大級のリアルタイムE-Sportsトーナメント運用プラットフォーム。すべてのゲーマーのためのインフラ、GAMERS。"
+    },
+    "login": {
+      "title": "おかえ리なさい",
+      "subtitle": "GAMERSにログインしてください",
+      "fields": {
+        "email_label": "メールアドレス",
+        "email_placeholder": "name@example.com",
+        "password_label": "パスワード",
+        "password_placeholder": "••••••••",
+        "find_password": "パスワードを忘れた場合"
+      },
+      "validation": {
+        "email_invalid": "有効なメールアドレスを入力してください。",
+        "password_required": "パスワードを入力してください。"
+      },
+      "error_failed": "ログインに失敗しました。",
+      "submit_btn": "ログイン",
+      "footer": {
+        "no_account": "アカウントをお持ちでないですか？",
+        "signup_link": "会員登録"
+      }
+    },
+    "signup": {
+      "title": "GAMERSに\n参加しましょう",
+      "subtitle": "ゲーマーとしての最初の記憶を始めましょう",
+      "fields": {
+        "username_label": "ニックネーム",
+        "username_placeholder": "GamerPro",
+        "email_label": "メールアドレス",
+        "email_placeholder": "name@example.com",
+        "password_label": "パスワード",
+        "password_placeholder": "••••••••"
+      },
+      "validation": {
+        "username_min": "ニックネームは少なくとも2文字以上である必要があります。",
+        "email_invalid": "有効なメールアドレスを入力してください。",
+        "password_min": "パスワードは少なくとも8文字以上である必要があります。"
+      },
+      "error_failed": "会員登録に失敗しました。",
+      "submit_btn": "会員登録",
+      "social": {
+        "discord_continue": "Discordで継続"
+      },
+      "footer": {
+        "has_account": "すでにアカウントをお持ちですか？",
+        "login_link": "ログイン"
+      }
+    }
+  },
   "landing": {
     "hero": {
       "tag": "E-SPORTS INFRASTRUCTURE FOR EVERYONE",

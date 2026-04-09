@@ -1,13 +1,18 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { AuthSidePanel } from '@/components/auth/AuthSidePanel';
 import { ChevronLeft } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { t } = useTranslation();
+
   return (
     <div className="flex min-h-screen bg-[#0C0C0F] items-stretch overflow-hidden">
       {/* Visual Side Panel */}
@@ -24,7 +29,7 @@ export default function AuthLayout({
             <div className="w-8 h-8 rounded-full bg-[#1A1A20] flex items-center justify-center group-hover:bg-[#24242B] transition-colors">
               <ChevronLeft className="w-4 h-4" />
             </div>
-            <span className="font-inter text-sm font-bold uppercase tracking-wider">랜딩 페이지로</span>
+            <span className="font-inter text-sm font-bold uppercase tracking-wider">{t('auth.layout.back_to_home')}</span>
           </Link>
         </div>
         {/* Decorative Grid Background */}

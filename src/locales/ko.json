@@ -574,6 +574,68 @@
       }
     }
   },
+  "auth": {
+    "common": {
+      "divider_or": "또는",
+      "discord": "Discord"
+    },
+    "layout": {
+      "back_to_home": "랜딩 페이지로"
+    },
+    "hero": {
+      "title_1": "당신만의",
+      "title_2": "게이밍 인프라",
+      "title_3": "GAMERS",
+      "description": "국내 최대 실시간 E-스포츠 토너먼트 운영 플랫폼. 모든 게이머를 위한 인프라, GAMERS."
+    },
+    "login": {
+      "title": "다시 만나서\n반가워요",
+      "subtitle": "GAMERS에 로그인하세요",
+      "fields": {
+        "email_label": "이메일 주소",
+        "email_placeholder": "name@example.com",
+        "password_label": "비밀번호",
+        "password_placeholder": "••••••••",
+        "find_password": "비밀번호 찾기"
+      },
+      "validation": {
+        "email_invalid": "올바른 이메일 형식이 아닙니다.",
+        "password_required": "비밀번호를 입력해주세요."
+      },
+      "error_failed": "로그인에 실패했습니다.",
+      "submit_btn": "로그인",
+      "footer": {
+        "no_account": "계정이 없으신가요?",
+        "signup_link": "회원가입"
+      }
+    },
+    "signup": {
+      "title": "GAMERS에\n합류하세요",
+      "subtitle": "게이머로서의 첫 기억을 시작하세요",
+      "fields": {
+        "username_label": "닉네임",
+        "username_placeholder": "GamerPro",
+        "email_label": "이메일 주소",
+        "email_placeholder": "name@example.com",
+        "password_label": "비밀번호",
+        "password_placeholder": "••••••••"
+      },
+      "validation": {
+        "username_min": "닉네임은 최소 2자 이상이어야 합니다.",
+        "email_invalid": "올바른 이메일 형식이 아닙니다.",
+        "password_min": "비밀번호는 최소 8자 이상이어야 합니다."
+      },
+      "error_failed": "회원가입에 실패했습니다.",
+      "submit_btn": "회원가입",
+      "social": {
+        "discord_continue": "Discord로 계속하기"
+      },
+      "footer": {
+        "has_account": "이미 계정이 있으신가요?",
+        "login_link": "로그인"
+      }
+    }
+  },
   "landing": {
     "hero": {
       "tag": "E-SPORTS INFRASTRUCTURE FOR EVERYONE",

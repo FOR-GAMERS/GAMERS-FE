@@ -29,12 +29,7 @@ export function AuthSidePanel() {
 
       {/* Top Section: Logo */}
       <div className="flex items-center gap-4 relative z-10 group cursor-default">
-        <div className="flex items-center justify-center rounded-xl bg-[#6EE7B7] w-12 h-12 shadow-[0_0_20px_rgba(110,231,183,0.4)] group-hover:shadow-[0_0_30px_rgba(110,231,183,0.6)] transition-all duration-500">
-          <svg width="24" height="24" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3.5 4.5h11M3.5 9h8M3.5 13.5h6" stroke="#0C0C0F" strokeWidth="2.5" strokeLinecap="round" />
-          </svg>
-        </div>
-        <div className="tracking-[0.1em] text-[#EEEEF0] font-barlow font-black text-3xl uppercase">
+        <div className="font-koulen text-4xl font-normal tracking-tight text-[#EEEEF0] uppercase italic text-glow-mint leading-none">
           GAMERS
         </div>
       </div>
