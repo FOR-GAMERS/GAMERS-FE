@@ -128,7 +128,7 @@ export function AdminSidebar() {
           <div className="flex flex-col overflow-hidden">
             <span className="text-sm font-bold text-white truncate">super_admin</span>
             <span className="text-[10px] font-medium text-[#7A7A85] uppercase tracking-widest leading-none mt-0.5">
-              Super Admin
+              {t('admin.member.table.role_labels.staff')}
             </span>
           </div>
         </div>

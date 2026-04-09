@@ -34,6 +34,7 @@ export function HeroSection() {
         className="text-center"
       >
         <h1 className="font-barlow text-6xl font-[900] leading-[1.1] tracking-tighter sm:text-8xl md:text-9xl uppercase italic">
+          <span className="sr-only">GAMERS: </span>
           <span className="text-foreground block">{t('landing.hero.title_1')}</span>
           <span className="text-neon-mint text-glow-mint block">{t('landing.hero.title_2')}</span>
         </h1>

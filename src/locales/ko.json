@@ -486,6 +486,31 @@
     }
   },
   "admin": {
+    "sidebar": {
+      "dashboard": "대시보드",
+      "members": "멤버 관리",
+      "contests": "대회 관리",
+      "reports": "신고 관리",
+      "settings": "시스템 설정",
+      "console": "관리자 콘솔"
+    },
+    "login": {
+      "title": "다시 어서오세요",
+      "subtitle": "관리자 패널에 접속하기 위해 계정 정보를 입력해주세요.",
+      "fields": {
+        "email_label": "이메일 주소",
+        "email_placeholder": "admin@gamers.com",
+        "password_label": "비밀번호",
+        "password_placeholder": "••••••••••••",
+        "find_password": "비밀번호를 잊으셨나요?",
+        "remember_me": "이 기기 기억하기"
+      },
+      "submit_btn": "로그인",
+      "footer": {
+        "not_admin": "관리자가 아니신가요?",
+        "return_link": "플랫폼으로 돌아가기"
+      }
+    },
     "contest": {
       "management": "대회 관리",
       "force_end": "대회 강제 종료",
@@ -642,7 +667,7 @@
   },
   "landing": {
     "hero": {
-      "tag": "E-SPORTS INFRASTRUCTURE FOR EVERYONE",
+      "tag": "GAMERS: E-SPORTS INFRASTRUCTURE FOR EVERYONE",
       "title_1": "당신만의",
       "title_2": "대회를 완벽하게.",
       "subtitle": "GAMERS는 대회 생성부터 운영, 팀 모집, 경기 결과 관리까지,\n모든 E-스포츠 프로세스를 자동화하는 올인원 플랫폼입니다.",

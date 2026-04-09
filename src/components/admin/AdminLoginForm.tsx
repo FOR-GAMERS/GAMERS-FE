@@ -9,8 +9,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { adminLoginSchema, type AdminLoginFormValues } from '@/lib/validations/admin-schema';
 import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
+import Link from 'next/link';
 
 export function AdminLoginForm() {
+  const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,7 +36,7 @@ export function AdminLoginForm() {
     console.log('Admin Login Data:', data);
     await new Promise((resolve) => setTimeout(resolve, 2000));
     setIsLoading(false);
-    alert('Admin Login Attempted (Check console)');
+    // alert('Admin Login Attempted (Check console)');
   };
 
   return (
@@ -44,11 +47,11 @@ export function AdminLoginForm() {
         transition={{ duration: 0.5 }}
         className="mb-10"
       >
-        <h1 className="text-4xl font-bold text-white mb-3 tracking-tight font-outfit">
-          Welcome Back
+        <h1 className="text-4xl font-bold text-white mb-3 tracking-tight font-outfit whitespace-pre-line">
+          {t('admin.login.title')}
         </h1>
         <p className="text-[#7A7A85] text-lg">
-          Please enter your credentials to access the admin panel.
+          {t('admin.login.subtitle')}
         </p>
       </motion.div>
 
@@ -56,7 +59,7 @@ export function AdminLoginForm() {
         {/* Email Field */}
         <div className="space-y-2">
           <label className="text-sm font-medium text-white/70 ml-1">
-            Email Address
+            {t('admin.login.fields.email_label')}
           </label>
           <div className="relative group">
             <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[#7A7A85] group-focus-within:text-neon-cyan transition-colors">
@@ -65,7 +68,7 @@ export function AdminLoginForm() {
             <Input
               {...register('email')}
               type="email"
-              placeholder="admin@gamers.com"
+              placeholder={t('admin.login.fields.email_placeholder')}
               className={cn(
                 "pl-12 bg-white/5 border-white/10 focus:border-neon-cyan/50 focus:ring-neon-cyan/20 h-14 text-base",
                 errors.email && "border-red-500/50 focus:border-red-500/50 focus:ring-red-500/20"
@@ -81,13 +84,13 @@ export function AdminLoginForm() {
         <div className="space-y-2">
           <div className="flex justify-between items-center ml-1">
             <label className="text-sm font-medium text-white/70">
-              Password
+              {t('admin.login.fields.password_label')}
             </label>
             <button 
               type="button" 
               className="text-xs font-semibold text-neon-cyan hover:text-white transition-colors"
             >
-              Forgot password?
+              {t('admin.login.fields.find_password')}
             </button>
           </div>
           <div className="relative group">
@@ -97,7 +100,7 @@ export function AdminLoginForm() {
             <Input
               {...register('password')}
               type={showPassword ? 'text' : 'password'}
-              placeholder="••••••••••••"
+              placeholder={t('admin.login.fields.password_placeholder')}
               className={cn(
                 "pl-12 pr-12 bg-white/5 border-white/10 focus:border-neon-cyan/50 focus:ring-neon-cyan/20 h-14 text-base",
                 errors.password && "border-red-500/50 focus:border-red-500/50 focus:ring-red-500/20"
@@ -125,7 +128,7 @@ export function AdminLoginForm() {
             className="w-4 h-4 rounded border-white/20 bg-white/5 text-neon-cyan focus:ring-neon-cyan focus:ring-offset-0"
           />
           <label htmlFor="rememberMe" className="text-sm text-[#7A7A85] cursor-pointer select-none">
-            Remember this device
+            {t('admin.login.fields.remember_me')}
           </label>
         </div>
 
@@ -139,7 +142,7 @@ export function AdminLoginForm() {
             <div className="w-6 h-6 border-2 border-black/30 border-t-black rounded-full animate-spin" />
           ) : (
             <div className="flex items-center justify-center gap-2">
-              Sign In
+              {t('admin.login.submit_btn')}
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </div>
           )}
@@ -148,10 +151,10 @@ export function AdminLoginForm() {
 
       <div className="mt-10 text-center">
         <p className="text-[#7A7A85] text-sm">
-          Not an admin?{' '}
-          <button className="text-neon-cyan font-semibold hover:underline">
-            Return to platform
-          </button>
+          {t('admin.login.footer.not_admin')}{' '}
+          <Link href="/" className="text-neon-cyan font-semibold hover:underline">
+            {t('admin.login.footer.return_link')}
+          </Link>
         </p>
       </div>
     </div>
