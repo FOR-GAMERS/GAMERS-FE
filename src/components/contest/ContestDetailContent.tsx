@@ -22,7 +22,6 @@ import {
   Trash2,
   Play,
   Square,
-  MoreVertical,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -656,7 +655,7 @@ export function ContestDetailContent() {
                            </div>
 
                            {/* Member Management Actions */}
-                           {isLeader && member.user_id !== contest.contest_id && member.leader_type !== LeaderType.LEADER && (
+                           {isLeader && member.leader_type !== LeaderType.LEADER && (
                              <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                <Button 
                                  variant="ghost" 

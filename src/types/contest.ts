@@ -101,6 +101,7 @@ export interface CreateContestRequest {
   discord_guild_id?: string;
   discord_text_channel_id?: string;
   thumbnail?: string;
+  precautions?: string;
 }
 
 export interface UpdateContestRequest {
@@ -119,6 +120,7 @@ export interface UpdateContestRequest {
   discord_guild_id?: string;
   discord_text_channel_id?: string;
   thumbnail?: string;
+  precautions?: string;
 }
 
 export interface RequestParticipateRequest {

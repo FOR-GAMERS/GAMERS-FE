@@ -28,6 +28,9 @@ export const contestCreateSchema = z.object({
   // Discord Integration
   discord_guild_id: z.string().optional(),
   discord_text_channel_id: z.string().optional(),
+  
+  // Custom
+  precautions: z.string().optional(),
 }).refine((data) => {
   if (data.started_at && data.ended_at) {
     return new Date(data.started_at) < new Date(data.ended_at);

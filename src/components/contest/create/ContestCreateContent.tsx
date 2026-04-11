@@ -163,7 +163,7 @@ export function ContestCreateContent() {
           onCancel={() => window.history.back()}
           onSaveDraft={() => {}}
           onPublish={() => handleSubmit(onSubmit)()}
-          isLoading={isSubmitting}
+          isSubmitting={isSubmitting}
         />
       </form>
     </FormProvider>
