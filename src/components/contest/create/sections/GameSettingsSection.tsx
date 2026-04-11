@@ -6,6 +6,7 @@ import { ContestCreateFormValues } from '../schema';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { ContestType } from '@/types/contest';
+import { GameType } from '@/types/enums';
 
 export function GameSettingsSection() {
   const { t } = useTranslation();
@@ -14,7 +15,7 @@ export function GameSettingsSection() {
   const selectedGame = watch('game_type');
   const selectedFormat = watch('contest_type');
 
-  const games = [
+  const games: { id: GameType; name: string; color: string }[] = [
     { id: 'VALORANT', name: 'VALORANT', color: 'text-[#FF4655]' },
     { id: 'LOL', name: 'League of Legends', color: 'text-[#0BC6E3]' },
   ];

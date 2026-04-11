@@ -11,23 +11,37 @@ export const contestCreateSchema = z.object({
   thumbnail_file: z.any().optional(), // For internal use
   
   // Settings
-  contest_type: z.nativeEnum(ContestType).default(ContestType.TOURNAMENT),
-  game_type: z.string().default('VALORANT'),
+  contest_type: z.enum(['TOURNAMENT', 'LEAGUE', 'CASUAL']),
+  game_type: z.enum(['VALORANT', 'LOL']),
   game_point_table_id: z.number().optional(),
   
   // Team Composition
-  max_team_count: z.number().min(1).default(16),
-  total_team_member: z.number().min(1).default(5),
-  total_point: z.number().min(0).default(100),
+  max_team_count: z.number().min(1),
+  total_team_member: z.number().min(1),
+  total_point: z.number().min(0),
   
   // Schedule Settings
   started_at: z.string().min(1, 'contests.create.validation.start_date_required'),
   ended_at: z.string().min(1, 'contests.create.validation.end_date_required'),
-  auto_start: z.boolean().default(false),
+  auto_start: z.boolean(),
   
   // Discord Integration
   discord_guild_id: z.string().optional(),
   discord_text_channel_id: z.string().optional(),
+  
+  // Game Specific Settings
+  valorant: z.object({
+    format: z.enum(['TOURNAMENT', 'LEAGUE']),
+    mapPool: z.array(z.string()),
+    agentRestrictions: z.array(z.string()),
+    roundsPerMatch: z.number(),
+  }).optional(),
+  
+  lol: z.object({
+    format: z.enum(['TOURNAMENT', 'LEAGUE']),
+    patchVersion: z.string(),
+    championRestrictions: z.array(z.string()),
+  }).optional(),
   
   // Custom
   precautions: z.string().optional(),

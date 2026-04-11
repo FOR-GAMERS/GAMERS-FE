@@ -4,11 +4,11 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
-import { ContestStatus } from '@/types/contest';
+import { ContestStatus, GameType } from '@/types/contest';
 
 interface ContestCardProps {
   id: number | string;
-  game: string;
+  game: GameType | string;
   status: ContestStatus;
   title: string;
   creator: string;

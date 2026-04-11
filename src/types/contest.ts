@@ -1,43 +1,22 @@
-export enum ContestStatus {
-  PENDING = 'PENDING',
-  ACTIVE = 'ACTIVE',
-  FINISHED = 'FINISHED',
-  CANCELLED = 'CANCELLED',
-}
+import { 
+  ContestStatus, 
+  ContestType, 
+  MemberType, 
+  LeaderType, 
+  GameType, 
+  ValorantRole, 
+  ApplicationStatus 
+} from './enums';
 
-export enum ContestType {
-  TOURNAMENT = 'TOURNAMENT',
-  LEAGUE = 'LEAGUE',
-  CASUAL = 'CASUAL',
-}
-
-export enum MemberType {
-  STAFF = 'STAFF',
-  NORMAL = 'NORMAL',
-}
-
-export enum LeaderType {
-  LEADER = 'LEADER',
-  MEMBER = 'MEMBER',
-}
-
-export enum GameType {
-  VALORANT = 'VALORANT',
-  LOL = 'LOL',
-}
-
-export enum ValorantRole {
-  DUELIST = 'DUELIST',
-  INITIATOR = 'INITIATOR',
-  CONTROLLER = 'CONTROLLER',
-  SENTINEL = 'SENTINEL',
-}
-
-export enum ApplicationStatus {
-  PENDING = 'PENDING',
-  ACCEPTED = 'ACCEPTED',
-  REJECTED = 'REJECTED',
-}
+export { 
+  ContestStatus, 
+  ContestType, 
+  MemberType, 
+  LeaderType, 
+  GameType, 
+  ValorantRole, 
+  ApplicationStatus 
+};
 
 export interface ContestResponse {
   contest_id: number;
@@ -50,7 +29,7 @@ export interface ContestResponse {
   started_at: string;
   ended_at: string;
   auto_start: boolean;
-  game_type: string | null;
+  game_type: GameType | null;
   game_point_table_id: number | null;
   total_team_member: number;
   discord_guild_id: string | null;
@@ -95,7 +74,7 @@ export interface CreateContestRequest {
   started_at?: string;
   ended_at?: string;
   auto_start?: boolean;
-  game_type?: string;
+  game_type?: GameType;
   game_point_table_id?: number;
   total_team_member?: number;
   discord_guild_id?: string;
@@ -114,7 +93,7 @@ export interface UpdateContestRequest {
   started_at?: string;
   ended_at?: string;
   auto_start?: boolean;
-  game_type?: string;
+  game_type?: GameType;
   game_point_table_id?: number;
   total_team_member?: number;
   discord_guild_id?: string;
@@ -197,6 +176,7 @@ export interface ContestMemberListResponse extends PaginationMeta {
 }
 
 export interface GetContestsParams {
+  [key: string]: string | number | boolean | undefined;
   page?: number;
   page_size?: number;
   sort_by?: string;
@@ -242,7 +222,7 @@ export interface RoundResult {
 export interface ContestResult {
   contest_id: number;
   title: string;
-  contest_status: string;
+  contest_status: ContestStatus;
   total_rounds: number;
   rounds: RoundResult[];
   champion?: TeamSummary;

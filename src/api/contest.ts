@@ -125,7 +125,7 @@ export const contestApi = {
   /**
    * Get all members of a contest
    */
-  getContestMembers: (contestId: number, params?: { page?: number; page_size?: number; sort_by?: string; order?: string }) => {
+  getContestMembers: (contestId: number, params?: { [key: string]: any; page?: number; page_size?: number; sort_by?: string; order?: string }) => {
     return apiClient.get<ApiResponse<ContestMemberListResponse>>(`/api/contests/${contestId}/members`, { params });
   },
 
@@ -150,7 +150,7 @@ export const contestApi = {
   /**
    * Get all comments for a contest
    */
-  getContestComments: (contestId: number, params?: { page?: number; page_size?: number; sort_by?: string; order?: string }) => {
+  getContestComments: (contestId: number, params?: { [key: string]: any; page?: number; page_size?: number; sort_by?: string; order?: string }) => {
     return apiClient.get<ApiResponse<ContestCommentListResponse>>(`/api/contests/${contestId}/comments`, { params });
   },
 

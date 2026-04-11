@@ -41,6 +41,17 @@ export function ContestCreateContent() {
       started_at: '',
       ended_at: '',
       auto_start: false,
+      valorant: {
+        format: 'TOURNAMENT',
+        mapPool: [],
+        agentRestrictions: [],
+        roundsPerMatch: 3,
+      },
+      lol: {
+        format: 'TOURNAMENT',
+        patchVersion: '14.6',
+        championRestrictions: [],
+      },
     },
   });
 

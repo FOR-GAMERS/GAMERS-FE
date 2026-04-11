@@ -4,7 +4,7 @@ import { ApiResponse, ApiError } from '@/types/api';
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.gamers.io.kr';
 
 interface RequestOptions extends RequestInit {
-  params?: Record<string, string>;
+  params?: Record<string, string | number | boolean | undefined>;
 }
 
 export async function request<T>(
@@ -15,8 +15,16 @@ export async function request<T>(
 
   let url = `${BASE_URL}${endpoint}`;
   if (params) {
-    const searchParams = new URLSearchParams(params);
-    url += `?${searchParams.toString()}`;
+    const searchParams = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        searchParams.append(key, String(value));
+      }
+    });
+    const queryString = searchParams.toString();
+    if (queryString) {
+      url += `?${queryString}`;
+    }
   }
 
   const accessToken = Cookies.get('access_token');

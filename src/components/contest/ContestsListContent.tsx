@@ -33,7 +33,7 @@ export function ContestsListContent() {
   ];
 
   // Helper to get game color and label
-  const getGameInfo = (gameType: GameType) => {
+  const getGameInfo = (gameType: GameType | null) => {
     switch (gameType) {
       case GameType.VALORANT:
         return {
@@ -47,7 +47,7 @@ export function ContestsListContent() {
         };
       default:
         return {
-          label: gameType,
+          label: gameType || 'General',
           color: 'bg-purple-500/10 text-purple-500 border-purple-500/20'
         };
     }

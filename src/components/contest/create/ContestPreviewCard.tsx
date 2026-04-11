@@ -11,9 +11,9 @@ export function ContestPreviewCard() {
   const { t } = useTranslation();
   const { watch } = useFormContext<ContestCreateFormValues>();
 
-  const title = watch('name') || t('contests.create.basic.title_placeholder');
-  const game = watch('game') || 'VALORANT';
-  const maxTeams = watch('maxTeams') || 16;
+  const title = watch('title') || t('contests.create.basic.title_placeholder');
+  const game = watch('game_type') || 'VALORANT';
+  const maxTeams = watch('max_team_count') || 16;
   const thumbnail = watch('thumbnail');
   
   // For preview, we use a fixed status
